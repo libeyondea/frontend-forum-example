@@ -1,0 +1,138 @@
+import React from 'react';
+import { useRouter } from 'next/router';
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux';
+import InputForm from 'components/Form/InputForm';
+import SelectForm from 'components/Form/SelectForm';
+import { updateUserRequestedAction } from 'redux/actions/userAction';
+
+const SettingsForm = () => {
+	const dispatch = useDispatch();
+	const router = useRouter();
+	const singleUser = useSelector((state) => state.users.single_user);
+	const updateUser = useSelector((state) => state.users.update_user);
+
+	const initialValues = {
+		first_name: singleUser.user.first_name,
+		last_name: singleUser.user.last_name,
+		user_name: singleUser.user.user_name,
+		email: singleUser.user.email,
+		phone_number: singleUser.user.phone_number,
+		address: singleUser.user.address,
+		gender: singleUser.user.gender,
+		avatar: singleUser.user.avatar
+	};
+	const validationSchema = Yup.object({
+		first_name: Yup.string()
+			.min(1, 'Fisrt name must be at least 1 characters')
+			.max(16, 'Fisrt name must be at most 16 characters')
+			.required('First name is required'),
+		last_name: Yup.string()
+			.min(1, 'Last name must be at least 1 characters')
+			.max(16, 'Last name must be at most 16 characters')
+			.required('Last name is required'),
+		user_name: Yup.string()
+			.min(6, 'User name must be at least 6 characters')
+			.max(16, 'User name must be at most 16 characters')
+			.matches(/^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, 'User name invalid')
+			.required('User name is required'),
+		email: Yup.string()
+			.matches(
+				/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+				'Email invalid'
+			)
+			.required('Email is required'),
+		phone_number: Yup.string()
+			.min(10, 'Phone number must be at least 10 characters')
+			.matches(/^[0-9]+$/, 'Phone number invalid'),
+		address: Yup.string()
+			.min(6, 'Address must be at least 6 characters')
+			.max(66, 'Address must be at most 66 characters'),
+		avatar: Yup.string().max(300, 'Image must be at most 300 characters'),
+		gender: Yup.string().oneOf(['male', 'female', 'orther'], 'Gender invalid').required('Select gender')
+	});
+	const onSubmit = (values) => {
+		const user = {
+			first_name: values.first_name,
+			last_name: values.last_name,
+			user_name: values.user_name,
+			email: values.email,
+			phone_number: values.phone_number,
+			address: values.address,
+			gender: values.gender,
+			avatar: values.avatar
+		};
+		dispatch(updateUserRequestedAction(singleUser.user.user_name, user, router));
+	};
+
+	return (
+		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+			<Form>
+				<div className="form-group">
+					<InputForm label="First name" placeholder="First name" id="first_name" name="first_name" type="text" />
+				</div>
+				<div className="form-group">
+					<InputForm label="Last name" placeholder="Last name" id="last_name" name="last_name" type="text" />
+				</div>
+				<div className="form-group">
+					<InputForm
+						label="User name"
+						placeholder="User name"
+						id="user_name"
+						name="user_name"
+						type="text"
+						errors={updateUser.errors?.user_name}
+					/>
+				</div>
+				<div className="form-group">
+					<InputForm
+						label="Email"
+						placeholder="Email"
+						id="email"
+						name="email"
+						type="text"
+						errors={updateUser.errors?.email}
+					/>
+				</div>
+				<div className="form-group">
+					<InputForm
+						label="Phone number"
+						placeholder="84 336 077 131"
+						id="phone_number"
+						name="phone_number"
+						type="text"
+					/>
+				</div>
+				<div className="form-group">
+					<InputForm label="Address" placeholder="Address" id="address" name="address" type="text" />
+				</div>
+				<div className="form-group">
+					<SelectForm label="Gender" name="gender">
+						<option value="">Select gender</option>
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+						<option value="orther">Other</option>
+					</SelectForm>
+				</div>
+				<div className="form-group">
+					<InputForm label="Image" placeholder="Avatar" id="avatar" name="avatar" type="text" />
+				</div>
+				<div className="text-left">
+					{updateUser.is_loading ? (
+						<button type="submit" className="btn btn-primary" disabled>
+							<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+							Update
+						</button>
+					) : (
+						<button type="submit" className="btn btn-primary">
+							Update
+						</button>
+					)}
+				</div>
+			</Form>
+		</Formik>
+	);
+};
+
+export default SettingsForm;
