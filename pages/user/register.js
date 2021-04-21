@@ -10,7 +10,7 @@ const Register = () => (
 			<title>Register | De4th Zone</title>
 		</Head>
 		<Layout>
-			<div className="container">
+			<div className="container my-5">
 				<Breadcrumb
 					items={[
 						{

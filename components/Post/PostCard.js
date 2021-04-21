@@ -14,9 +14,11 @@ const PostCard = ({ post }) => {
 				</div>
 				<div className="col-9 col-sm-10">
 					<div className="card-block pl-2 mt-2">
-						<CustomLink href="/post/[pid]" as={`/post/${post.slug}`} className="text-decoration-none">
-							<h5 className="card-title mb-1 mt-1">{post.title}</h5>
-						</CustomLink>
+						<h5 className="card-title mb-1 mt-1">
+							<CustomLink href="/post/[pid]" as={`/post/${post.slug}`} className="text-decoration-none">
+								{post.title}
+							</CustomLink>
+						</h5>
 						<p className="card-text mb-2">{post.excerpt}</p>
 					</div>
 					<div className="clearfix">

@@ -27,7 +27,7 @@ const Tag = () => {
 
 	return (
 		<Layout>
-			<div className="container">
+			<div className="container my-5">
 				<MayBeSpinner test={singleTag.is_loading || !singleTag.tag} spinner={<>Loading...</>}>
 					<Breadcrumb
 						items={[

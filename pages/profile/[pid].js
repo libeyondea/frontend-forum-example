@@ -31,7 +31,7 @@ const Profile = ({}) => {
 
 	return (
 		<Layout>
-			<div className="container">
+			<div className="container my-5">
 				<MayBeSpinner test={singleUser.is_loading || !singleUser.user} spinner={<>Loading...</>}>
 					<Breadcrumb
 						items={[

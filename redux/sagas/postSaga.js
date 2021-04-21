@@ -13,7 +13,7 @@ import axios from 'axios';
 
 const listPostApi = async (page) => {
 	const { data } = await axios.get(
-		`${process.env.NEXT_PUBLIC_API_URL}/posts`,
+		`${process.env.API_URL}/posts`,
 		{
 			params: {
 				limit: 20,

@@ -29,7 +29,6 @@ const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
 	const lastIndex = lastIndexWithTotal(total);
 
 	const pages = total > 0 ? getRange(firstPage, lastPage) : [];
-	console.log(firstPage);
 
 	return (
 		<div className="col-12">
