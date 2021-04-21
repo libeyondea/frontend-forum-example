@@ -1,5 +1,5 @@
 function Error({ statusCode }) {
-	return <p>{statusCode ? `An error ${statusCode} occurred on server` : 'An error occurred on client'}</p>;
+	return <div>{statusCode ? `An error ${statusCode} occurred on server` : 'An error occurred on client'}</div>;
 }
 
 Error.getInitialProps = ({ res, err }) => {
