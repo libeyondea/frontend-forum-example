@@ -15,7 +15,7 @@ const CommentInput = () => {
 				<CustomLink href="/user/register" as="/user/register">
 					Register
 				</CustomLink>
-				&nbsp;to add comments on this article.
+				&nbsp;to add comments on this post.
 			</div>
 		);
 	}

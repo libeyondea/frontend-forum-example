@@ -59,12 +59,14 @@ function* registerUser(action) {
 
 function* currentUser() {
 	try {
-		const res = yield call(userAPI.current);
-		if (res.success) {
-			yield put(loginUserSucceedAction(res.data));
-		} else {
-			window.localStorage.removeItem('token');
-			yield put(logoutUserSucceedAction());
+		if (window.localStorage.getItem('token')) {
+			const res = yield call(userAPI.current);
+			if (res.success) {
+				yield put(loginUserSucceedAction(res.data));
+			} else {
+				window.localStorage.removeItem('token');
+				yield put(logoutUserSucceedAction());
+			}
 		}
 	} catch (err) {
 		window.localStorage.removeItem('token');

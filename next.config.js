@@ -3,13 +3,13 @@ module.exports = (phase, { defaultConfig }) => {
 		env: {
 			APP_NAME: 'De4thZone',
 			LIMIT_PAGE: {
-				LIST_POST_HOME: 20,
-				LIST_POST_TAG: 20,
-				LIST_POST_CATEGORY: 20,
+				LIST_POST_HOME: 10,
+				LIST_POST_TAG: 10,
+				LIST_POST_CATEGORY: 10,
 				LIST_POST_USER: 20,
-				LIST_POST_FAVORITED: 20,
+				LIST_POST_FAVORITED: 10,
 				LIST_TAG: 20,
-				LIST_COMMENT: 20
+				LIST_COMMENT: 10
 			},
 			REQUEST: {
 				TIMEOUT: 30000
