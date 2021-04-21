@@ -1,64 +1,179 @@
-# ![Next.js + SWR Example App](project-logo.png)
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
 
-> ### Next.js + SWR codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld-example-apps) spec and API.
+[![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://github.com/de4th-zone/frontend-forum-example/graphs/contributors/)
+[![GitHub issues](https://img.shields.io/github/issues/Naereen/StrapDown.js.svg)](https://github.com/de4th-zone/frontend-forum-example/issues/)
+[![GitHub version](https://badge.fury.io/gh/Naereen%2FStrapDown.js.svg)](https://github.com/de4th-zone/frontend-forum-example)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
-### [Demo](https://next-realworld.now.sh/)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
-
-Originally created for this [GH issue](https://github.com/gothinkster/realworld/issues/336). The codebase is now feature complete; please submit bug fixes via pull requests & feedback via issues.
-
-We're currently working on some docs for the codebase (explaining where functionality is located, how it works, etc) but most things should be self explanatory if you have a minimal understanding of Next.js/SWR.
-
-## Getting started
-
-You can view a live demo over at [https://next-realworld.now.sh/](https://next-realworld.now.sh/)
-
-To get the frontend running locally:
-
-- Clone this repo
-- `npm install` to install all dependencies
-- `npm run dev` to start the local server
-
-### Making requests to the backend API
-
-For convenience, we have a live API server running at `https://conduit.productionready.io/api` for the application to make requests against. You can view [the API spec here](https://github.com/GoThinkster/productionready/blob/master/api) which contains all routes & responses for the server.
-
-The source code for the backend server (available for Node, Rails and Django) can be found in the [main RealWorld repo](https://github.com/gothinkster/realworld).
-
-If you want to change the API URL to a local server, simply edit `lib/utils/constant.js` and change `SERVER_BASE_URL` to the local server's URL (i.e. `localhost:3000/api`)
-
-## Functionality overview
-
-The example application is a social blogging site (i.e. a Medium.com clone) called "Conduit". It uses a custom API for all requests, including authentication. You can view a live demo over at [https://next-realworld.now.sh/](https://next-realworld.now.sh/)
-
-**General functionality:**
-
-- Authenticate users via JWT (login/register pages + logout button on settings page)
-- CRU\* users (sign up & settings page - no deleting required)
-- CRUD Articles
-- CR\*D Comments on articles (no updating required)
-- GET and display paginated lists of articles
-- Favorite articles
-- Follow other users
-
-**The general page breakdown looks like this:**
-
-- Home page (URL: /)
-  - List of tags
-  - List of articles pulled from either Feed, Global, or by Tag
-  - Pagination for list of articles
-- Sign in/Sign up pages (URL: /user/login, /user/register)
-  - Use JWT (store the token in localStorage)
-- Settings page (URL: /user/settings )
-- Editor page to create/edit articles (URL: /editor/new, /editor/article-slug-here)
-- Article page (URL: /article/article-slug-here)
-  - Delete article button (only shown to article's author)
-  - Render markdown from server client side
-  - Comments section at bottom of page
-  - Delete comment button (only shown to comment's author)
-- Profile page (URL: /profile/username-here, /profile/username-here?favorite=true)
-  - Show basic user info
-  - List of articles populated from author's created articles or author's favorited articles
-
+<!-- PROJECT LOGO -->
 <br />
+<p align="center">
+  <a href="https://github.com/de4th-zone/frontend-forum-example">
+    <img style="border-radius: 50%;" src="https://i.imgur.com/6jxXR32.jpg" alt="De4thZone" width="166" height="166">
+  </a>
+  <h3 align="center">Frontend Forum Examples</h3>
+  <p align="center">
+    <a href="https://github.com/de4th-zone/frontend-forum-example"><strong>Explore the docs »</strong></a>
+    <br />
+    <a href="https://de4thzone.com" target="_blank" rel="noopener noreferrer">View Demo</a>
+    ·
+    <a href="https://github.com/de4th-zone/frontend-forum-example/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/de4th-zone/frontend-forum-example/issues">Request Feature</a>
+  </p>
+</p>
 
-[![Brought to you by Thinkster](https://raw.githubusercontent.com/gothinkster/realworld/master/media/end.png)](https://thinkster.io)
+<!-- TABLE OF CONTENTS -->
+
+## Table of Contents
+
+- [About the Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
+
+<!-- ABOUT THE PROJECT -->
+
+## About The Project
+
+<!--[![Product Name Screen Shot][product-screenshot]](https://github.com/de4th-zone/frontend-forum-example)-->
+
+**Libraries used in the project**
+
+### Built With
+
+- [Next](https://github.com/vercel/next.js)
+- [Reux-Saga](https://github.com/redux-saga/redux-saga)
+- [React Bootstrap](https://github.com/react-bootstrap/react-bootstrap)
+- ...
+
+<!-- GETTING STARTED -->
+
+## Getting Started
+
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites
+
+- npm v6.14.9
+
+- node v14.15.3
+
+- composer v2.0.12
+
+- php v7.4.9
+
+### Installation
+
+1. Open cmd
+
+2. Clone the repo
+
+```sh
+git clone https://github.com/de4th-zone/frontend-forum-example.git
+```
+
+3. Open folder
+
+```sh
+cd frontend-forum-example-master
+```
+
+4. Install packages
+
+```sh
+npm install
+```
+
+4. Run project
+
+Run frontend-forum-example.bat file
+
+or
+
+```sh
+npm run dev
+```
+
+<!-- USAGE EXAMPLES -->
+
+## Usage
+
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+_For more examples, please refer to the [Documentation](https://github.com/de4th-zone/frontend-forum-example)_
+
+<!-- ROADMAP -->
+
+## Roadmap
+
+See the [open issues](https://github.com/de4th-zone/frontend-forum-example/issues) for a list of proposed features (and known issues).
+
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<!-- LICENSE -->
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+<!-- CONTACT -->
+
+## Contact
+
+Twitter - [@de4th_zone](https://twitter.com/de4th_zone)
+
+Facebook - [Nguyễn Thức](https://www.facebook.com/d4z.d4z.d4z.d4z)
+
+Email - nguyenthucofficial@gmail.com
+
+Other Project: [https://github.com/de4th-zone](https://github.com/de4th-zone)
+
+<!-- ACKNOWLEDGEMENTS -->
+
+## Acknowledgements
+
+- []()
+- []()
+- []()
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo.svg?style=flat-square
+[contributors-url]: https://github.com/github_username/repo/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/github_username/repo.svg?style=flat-square
+[forks-url]: https://github.com/github_username/repo/network/members
+[stars-shield]: https://img.shields.io/github/stars/github_username/repo.svg?style=flat-square
+[stars-url]: https://github.com/github_username/repo/stargazers
+[issues-shield]: https://img.shields.io/github/issues/github_username/repo.svg?style=flat-square
+[issues-url]: https://github.com/github_username/repo/issues
+[license-shield]: https://img.shields.io/github/license/github_username/repo.svg?style=flat-square
+[license-url]: https://github.com/github_username/repo/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/github_username
+[product-screenshot]: images/screenshot.png
