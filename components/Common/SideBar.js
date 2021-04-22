@@ -31,7 +31,7 @@ const SideBar = (props) => {
 					</li>
 				</div>
 			</div>
-			<div className="bg-light rounded-lg shadow-sm pt-2 border">
+			<div className="bg-light rounded-lg shadow-sm pt-2 border mb-4">
 				<h4 className="mx-3">Top tags</h4>
 				<div className="px-3 mb-1 pt-3 border-top">
 					<MayBeSpinner test={listTag.is_loading} spinner={<>Loading...</>}>

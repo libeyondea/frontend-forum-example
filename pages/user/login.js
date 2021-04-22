@@ -10,7 +10,7 @@ const Login = () => (
 			<title>Login | De4th Zone</title>
 		</Head>
 		<Layout>
-			<div className="container my-5">
+			<div className="container my-4">
 				<Breadcrumb
 					items={[
 						{

@@ -31,7 +31,7 @@ const Profile = ({}) => {
 
 	return (
 		<Layout>
-			<div className="container my-5">
+			<div className="container my-4">
 				<MayBeSpinner test={singleUser.is_loading || !singleUser.user} spinner={<>Loading...</>}>
 					<Breadcrumb
 						items={[
@@ -49,7 +49,7 @@ const Profile = ({}) => {
 						]}
 					/>
 					<div className="row">
-						<div className="col-sm-3">
+						<div className="col-lg-3 mb-4">
 							<div className="text-center bg-light rounded-lg shadow-sm mb-4 p-4">
 								<h3>{singleUser.user?.user_name}</h3>
 								<CustomImage
@@ -123,7 +123,7 @@ const Profile = ({}) => {
 								</div>
 							</div>
 						</div>
-						<div className="col-sm-9">
+						<div className="col-lg-9">
 							<Tab.Container id="profile-tabs" defaultActiveKey="notification">
 								<Nav as="nav" className="nav-tabs">
 									<Nav.Item as="li">

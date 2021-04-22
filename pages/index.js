@@ -34,16 +34,16 @@ const Index = () => {
 				<div className="container my-5">
 					<h2 className="mb-4">Trending posts</h2>
 					<div className="row">
-						<div className="col-12 col-md-6 col-lg-4 mb-4">
+						<div className="col-12 col-md-6 mb-4">
 							<PostCard post={listPost.posts[0]} />
 						</div>
-						<div className="col-12 col-md-6 col-lg-4 mb-4">
+						<div className="col-12 col-md-6 mb-4">
 							<PostCard post={listPost.posts[1]} />
 						</div>
-						<div className="col-12 col-md-6 col-lg-4 mb-4">
+						<div className="col-12 col-md-6 mb-4">
 							<PostCard post={listPost.posts[2]} />
 						</div>
-						<div className="col-12 col-md-6 col-lg-4 mb-4">
+						<div className="col-12 col-md-6 mb-4">
 							<PostCard post={listPost.posts[4]} />
 						</div>
 					</div>

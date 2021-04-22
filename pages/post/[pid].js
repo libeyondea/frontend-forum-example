@@ -13,7 +13,7 @@ const SinglePost = (props) => {
 	const singlePost = useSelector((state) => state.posts.single_post);
 	return (
 		<Layout>
-			<div className="container my-5">
+			<div className="container my-4">
 				<MayBeSpinner test={singlePost.is_loading || !singlePost.post} spinner={<>Loading...</>}>
 					{console.log(singlePost)}
 					<Breadcrumb
@@ -28,7 +28,7 @@ const SinglePost = (props) => {
 						]}
 					/>
 					<div className="row">
-						<div className="col-lg-9">
+						<div className="col-lg-9 mb-4">
 							<article className="bg-light p-4 rounded-lg shadow-sm">
 								<div className="mb-3">
 									<h1 className="mb-3">{singlePost.post?.title}</h1>

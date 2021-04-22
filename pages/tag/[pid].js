@@ -22,12 +22,15 @@ const Tag = () => {
 
 	useEffect(() => {
 		dispatch(singleTagRequestedAction(pid));
+	}, [pid]);
+
+	useEffect(() => {
 		dispatch(listPostTagRequestedAction(pid, pageNum));
-	}, [pid, pageNum]);
+	}, [pageNum]);
 
 	return (
 		<Layout>
-			<div className="container my-5">
+			<div className="container my-4">
 				<MayBeSpinner test={singleTag.is_loading || !singleTag.tag} spinner={<>Loading...</>}>
 					<Breadcrumb
 						items={[
