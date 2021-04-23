@@ -14,21 +14,20 @@ const SinglePost = (props) => {
 	return (
 		<Layout>
 			<div className="container my-4">
-				<MayBeSpinner test={singlePost.is_loading || !singlePost.post} spinner={<>Loading...</>}>
-					{console.log(singlePost)}
-					<Breadcrumb
-						items={[
-							{
-								title: 'Home',
-								href: '/'
-							},
-							{
-								title: singlePost.post?.title
-							}
-						]}
-					/>
-					<div className="row">
-						<div className="col-lg-9 mb-4">
+				<div className="row">
+					<div className="col-lg-9 mb-4">
+						<MayBeSpinner test={singlePost.is_loading || !singlePost.post} spinner={<>Loading...</>}>
+							<Breadcrumb
+								items={[
+									{
+										title: 'Home',
+										href: '/'
+									},
+									{
+										title: singlePost.post?.title
+									}
+								]}
+							/>
 							<article className="bg-light p-4 rounded-lg shadow-sm">
 								<div className="mb-3">
 									<h1 className="mb-3">{singlePost.post?.title}</h1>
@@ -52,12 +51,12 @@ const SinglePost = (props) => {
 								<hr />
 								<CommentList postSlug={singlePost.post?.slug} />
 							</article>
-						</div>
-						<div className="col-lg-3">
-							<SideBar />
-						</div>
+						</MayBeSpinner>
 					</div>
-				</MayBeSpinner>
+					<div className="col-lg-3">
+						<SideBar />
+					</div>
+				</div>
 			</div>
 		</Layout>
 	);

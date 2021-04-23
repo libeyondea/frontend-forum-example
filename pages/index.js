@@ -26,7 +26,7 @@ const Index = () => {
 	return (
 		<>
 			<Head>
-				<title>HOME | De4th Zone</title>
+				<title>Home | De4th Zone</title>
 				<meta name="description" content="De4th Zone" />
 			</Head>
 			<Layout>

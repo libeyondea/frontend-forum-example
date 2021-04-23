@@ -26,29 +26,29 @@ const Tag = () => {
 
 	useEffect(() => {
 		dispatch(listPostTagRequestedAction(pid, pageNum));
-	}, [pageNum]);
+	}, [pid, pageNum]);
 
 	return (
 		<Layout>
 			<div className="container my-4">
-				<MayBeSpinner test={singleTag.is_loading || !singleTag.tag} spinner={<>Loading...</>}>
-					<Breadcrumb
-						items={[
-							{
-								title: 'Home',
-								href: '/'
-							},
-							{
-								title: 'Tag',
-								href: '/'
-							},
-							{
-								title: singleTag.tag?.title
-							}
-						]}
-					/>
-					<div className="row">
-						<div className="col-lg-9">
+				<div className="row">
+					<div className="col-lg-9">
+						<MayBeSpinner test={singleTag.is_loading || !singleTag.tag} spinner={<>Loading...</>}>
+							<Breadcrumb
+								items={[
+									{
+										title: 'Home',
+										href: '/'
+									},
+									{
+										title: 'Tag',
+										href: '/'
+									},
+									{
+										title: singleTag.tag?.title
+									}
+								]}
+							/>
 							<h1 className="mb-4">{singleTag.tag?.title}</h1>
 							<MayBeSpinner test={listPostTag.is_loading || listPostTag.posts.length === 0} spinner={<>Loading...</>}>
 								<div className="row">
@@ -64,12 +64,12 @@ const Tag = () => {
 									/>
 								</div>
 							</MayBeSpinner>
-						</div>
-						<div className="col-lg-3">
-							<SideBar />
-						</div>
+						</MayBeSpinner>
 					</div>
-				</MayBeSpinner>
+					<div className="col-lg-3">
+						<SideBar />
+					</div>
+				</div>
 			</div>
 		</Layout>
 	);
