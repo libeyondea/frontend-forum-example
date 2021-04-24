@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginUserRequestedAction } from 'redux/actions/userAction';
 import CustomLink from 'components/Common/CustomLink';
 import InputForm from 'components/Form/InputForm';
+import FacebookLogin from 'react-facebook-login';
 
 const LoginForm = () => {
 	const dispatch = useDispatch();
@@ -24,6 +25,14 @@ const LoginForm = () => {
 		const user = {
 			user_name: values.user_name,
 			password: values.password
+		};
+		dispatch(loginUserRequestedAction(user, router));
+	};
+	const responseFacebook = (response) => {
+		console.log(response);
+		const user = {
+			access_token: response.accessToken,
+			provider: 'facebook'
 		};
 		dispatch(loginUserRequestedAction(user, router));
 	};
@@ -80,9 +89,15 @@ const LoginForm = () => {
 						</CustomLink>
 					</p>
 					<p>or sign in with:</p>
-					<a href="#!" className="btn-floating btn-fb btn-sm mr-1">
-						<i className="fa fa-facebook" />
-					</a>
+					<div className="mb-3">
+						<FacebookLogin
+							appId="765638147489641"
+							autoLoad={false}
+							fields="name,email,picture"
+							size="small"
+							callback={responseFacebook}
+						/>
+					</div>
 					<a href="#!" className="btn-floating btn-tw btn-sm mr-1">
 						<i className="fa fa-twitter" />
 					</a>
