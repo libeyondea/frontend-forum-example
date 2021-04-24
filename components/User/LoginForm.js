@@ -95,6 +95,7 @@ const LoginForm = () => {
 							autoLoad={false}
 							fields="name,email,picture"
 							size="small"
+							isMobile={false}
 							callback={responseFacebook}
 						/>
 					</div>
