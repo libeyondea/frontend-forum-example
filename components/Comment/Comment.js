@@ -27,7 +27,7 @@ const Comment = ({ comment }) => {
 						</CustomLink>
 						<small className="mx-0 my-0">{new Date(comment.created_at).toDateString()}</small>
 					</div>
-					{comment.body}
+					{comment.content}
 				</div>
 				<CommentMeta comment={comment} />
 			</div>
