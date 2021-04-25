@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginUserRequestedAction } from 'redux/actions/userAction';
 import CustomLink from 'components/Common/CustomLink';
 import InputForm from 'components/Form/InputForm';
-import FacebookLogin from 'react-facebook-login';
+import FacebookLoginButton from 'components/Common/FacebookLoginButton';
+import GoogleLoginButton from 'components/Common/GoogleLoginButton';
 
 const LoginForm = () => {
 	const dispatch = useDispatch();
@@ -33,6 +34,14 @@ const LoginForm = () => {
 		const user = {
 			access_token: response.accessToken,
 			provider: 'facebook'
+		};
+		dispatch(loginUserRequestedAction(user, router));
+	};
+	const responseGoogle = (response) => {
+		console.log(response);
+		const user = {
+			access_token: response.tokenId,
+			provider: 'google'
 		};
 		dispatch(loginUserRequestedAction(user, router));
 	};
@@ -90,14 +99,10 @@ const LoginForm = () => {
 					</p>
 					<p>or sign in with:</p>
 					<div className="mb-3">
-						<FacebookLogin
-							appId="765638147489641"
-							autoLoad={false}
-							fields="name,email,picture"
-							size="small"
-							isMobile={false}
-							callback={responseFacebook}
-						/>
+						<FacebookLoginButton responseFacebook={responseFacebook} />
+					</div>
+					<div className="mb-3">
+						<GoogleLoginButton responseGoogle={responseGoogle} />
 					</div>
 					<a href="#!" className="btn-floating btn-tw btn-sm mr-1">
 						<i className="fa fa-twitter" />

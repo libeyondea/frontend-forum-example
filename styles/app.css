@@ -200,3 +200,45 @@ body {
 .notfound .errorcode {
 	color: white;
 }
+
+.kep-login-facebook-custom.small,
+.kep-login-google-custom.small {
+	padding: calc(0.34435vw + 3.38843px) calc(0.34435vw + 8.38843px);
+}
+
+.kep-login-facebook-custom .fa,
+.kep-login-google-custom .fa {
+	margin-right: calc(0.34435vw + 3.38843px);
+}
+
+.kep-login-facebook-custom {
+	font-family: Helvetica, sans-serif;
+	font-weight: 700;
+	-webkit-font-smoothing: antialiased;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-size: calc(0.27548vw + 12.71074px);
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color 0.3s, border-color 0.3s;
+	background-color: #4c69ba;
+	border: calc(0.06887vw + 0.67769px) solid #4c69ba;
+	padding: calc(0.34435vw + 13.38843px) calc(0.34435vw + 18.38843px);
+}
+
+.kep-login-google-custom {
+	font-family: Helvetica, sans-serif;
+	font-weight: 700;
+	-webkit-font-smoothing: antialiased;
+	color: rgb(126, 126, 126);
+	cursor: pointer;
+	display: inline-block;
+	font-size: calc(0.27548vw + 12.71074px);
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color 0.3s, border-color 0.3s;
+	background-color: #ffffff;
+	border: calc(0.06887vw + 0.67769px) solid #d3d3d3;
+	padding: calc(0.34435vw + 13.38843px) calc(0.34435vw + 18.38843px);
+}

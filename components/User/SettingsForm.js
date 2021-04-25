@@ -34,7 +34,7 @@ const SettingsForm = () => {
 			.required('Last name is required'),
 		user_name: Yup.string()
 			.min(6, 'User name must be at least 6 characters')
-			.max(16, 'User name must be at most 16 characters')
+			.max(20, 'User name must be at most 20 characters')
 			.matches(/^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, 'User name invalid')
 			.required('User name is required'),
 		email: Yup.string()
@@ -45,12 +45,14 @@ const SettingsForm = () => {
 			.required('Email is required'),
 		phone_number: Yup.string()
 			.min(10, 'Phone number must be at least 10 characters')
-			.matches(/^[0-9]+$/, 'Phone number invalid'),
+			.matches(/^[0-9]+$/, 'Phone number invalid')
+			.nullable(),
 		address: Yup.string()
 			.min(6, 'Address must be at least 6 characters')
-			.max(66, 'Address must be at most 66 characters'),
+			.max(66, 'Address must be at most 66 characters')
+			.nullable(),
 		avatar: Yup.string().max(300, 'Image must be at most 300 characters'),
-		gender: Yup.string().oneOf(['male', 'female', 'orther'], 'Gender invalid').required('Select gender')
+		gender: Yup.string().oneOf(['male', 'female', 'orther', null], 'Gender invalid').nullable()
 	});
 	const onSubmit = (values) => {
 		const user = {
@@ -63,8 +65,11 @@ const SettingsForm = () => {
 			gender: values.gender,
 			avatar: values.avatar
 		};
-		dispatch(updateUserRequestedAction(singleUser.user.user_name, user, router));
+		console.log(user);
+		//dispatch(updateUserRequestedAction(singleUser.user.user_name, user, router));
 	};
+
+	const gender = ['', 'male', 'female', 'orther'];
 
 	return (
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
@@ -109,10 +114,10 @@ const SettingsForm = () => {
 				</div>
 				<div className="form-group">
 					<SelectForm label="Gender" name="gender">
-						<option value="">Select gender</option>
-						<option value="male">Male</option>
-						<option value="female">Female</option>
-						<option value="orther">Other</option>
+						<option value={gender[0]}>Select gender</option>
+						<option value={gender[1]}>Male</option>
+						<option value={gender[2]}>Female</option>
+						<option value={gender[3]}>Other</option>
 					</SelectForm>
 				</div>
 				<div className="form-group">
