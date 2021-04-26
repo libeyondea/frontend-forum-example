@@ -34,7 +34,7 @@ const SettingsForm = () => {
 			.required('Last name is required'),
 		user_name: Yup.string()
 			.min(6, 'User name must be at least 6 characters')
-			.max(20, 'User name must be at most 20 characters')
+			.max(66, 'User name must be at most 66 characters')
 			.matches(/^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, 'User name invalid')
 			.required('User name is required'),
 		email: Yup.string()

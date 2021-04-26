@@ -11,6 +11,7 @@ import Layout from 'components/Common/Layout';
 import Breadcrumb from 'components/Common/Breadcrumb';
 import Maybe from 'components/Common/Maybe';
 import MayBeSpinner from 'components/Common/MayBeSpinner';
+import withAuth from 'lib/hoc/withAuth';
 
 const Profile = ({}) => {
 	const dispatch = useDispatch();
@@ -51,7 +52,7 @@ const Profile = ({}) => {
 					<div className="row">
 						<div className="col-lg-3 mb-4">
 							<div className="text-center bg-light rounded-lg shadow-sm mb-4 p-4">
-								<h3>{singleUser.user?.user_name}</h3>
+								<h3 className="text-break">{singleUser.user?.user_name}</h3>
 								<CustomImage
 									src={singleUser.user?.avatar}
 									alt={singleUser.user?.user_name}
@@ -156,4 +157,4 @@ const Profile = ({}) => {
 	);
 };
 
-export default Profile;
+export default withAuth(Profile);

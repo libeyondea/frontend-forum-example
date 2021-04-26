@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Layout from 'components/Common/Layout';
 import RegisterForm from 'components/User/RegisterForm';
 import Breadcrumb from 'components/Common/Breadcrumb';
+import withAuth from 'lib/hoc/withAuth';
 
 const Register = () => (
 	<>
@@ -32,4 +33,4 @@ const Register = () => (
 	</>
 );
 
-export default Register;
+export default withAuth(Register);

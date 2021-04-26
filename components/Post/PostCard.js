@@ -31,7 +31,7 @@ const PostCard = ({ post }) => {
 									onClick={(e) => e.stopPropagation()}
 									className="badge badge-light p-2 mb-2 mr-2"
 								>
-									<span>{tag.slug}</span>
+									<span>#{tag.slug}</span>
 								</CustomLink>
 							))}
 						</div>
@@ -46,13 +46,16 @@ const PostCard = ({ post }) => {
 							</CustomLink>
 						</div>
 					</div>
-					<div className="d-flex justify-content-end mb-3">
+					<div className="d-flex justify-content-end mb-3 mt-2">
+						<a href="#!" className="text-decoration-none text-secondary mr-2">
+							<i className="fa fa-comment-o fa-sm" /> 666 comments
+						</a>
 						<a
 							href="#!"
-							className={`text-decoration-none ${post.favorited ? 'text-danger' : 'text-secondary'}`}
+							className={`text-decoration-none ${true ? 'text-danger' : 'text-secondary'}`}
 							onClick={() => handleClickFavorite(post.slug)}
 						>
-							<i className={`fa ${post.favorited ? 'fa-heart' : 'fa-heart-o'} fa-lg`} /> {post.favoritesCount}
+							<i className={`fa ${true ? 'fa-heart' : 'fa-heart-o'} fa-sm`} /> 666 likes
 						</a>
 					</div>
 				</div>

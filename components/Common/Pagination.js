@@ -4,10 +4,6 @@ import Link from 'next/link';
 import Maybe from './Maybe';
 import { getRange, getPageInfo } from 'lib/utils/calculatePagination';
 
-const lastIndexWithTotal = (postsCount) => {
-	return postsCount > 480 ? Math.ceil(postsCount / 20) : Math.ceil(postsCount / 20) - 1;
-};
-
 const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
 	if (total <= 20) return null;
 	const router = useRouter();
@@ -26,7 +22,7 @@ const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
 		page: currentPage
 	});
 
-	const lastIndex = lastIndexWithTotal(total);
+	const lastIndex = total > 480 ? Math.ceil(total / limit) : Math.ceil(total / limit) - 1;
 
 	const pages = total > 0 ? getRange(firstPage, lastPage) : [];
 

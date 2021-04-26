@@ -4,7 +4,6 @@ import { END } from 'redux-saga';
 import { wrapper } from '../redux/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'styles/app.css';
-import Layout from 'components/Common/Layout';
 
 if (typeof window !== 'undefined') {
 	require('lazysizes/plugins/attrchange/ls.attrchange.js');

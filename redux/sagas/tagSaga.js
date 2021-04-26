@@ -1,5 +1,4 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import axios from 'axios';
 import { SINGLE_TAG_REQUESTED, LIST_TAG_REQUESTED } from '../constants';
 import {
 	singleTagSucceedAction,

@@ -9,15 +9,21 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import NavItem from 'react-bootstrap/NavItem';
 import NavLink from 'react-bootstrap/NavLink';
 import CustomImage from 'components/Common/CustomImage';
+import CustomLink from 'components/Common/CustomLink';
 import { currentUserRequestedAction, logoutUserRequestedAction } from 'redux/actions/userAction';
+import { listCategoryRequestedAction } from 'redux/actions/categoryAction';
+import Maybe from './Maybe';
+import MayBeSpinner from './MayBeSpinner';
 
 const NavBar = () => {
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const login = useSelector((state) => state.users.login);
+	const listCategory = useSelector((state) => state.categories.list_category);
 
 	useEffect(() => {
-		dispatch(currentUserRequestedAction());
+		//dispatch(currentUserRequestedAction());
+		dispatch(listCategoryRequestedAction(1));
 	}, []);
 
 	const handleLogoutUser = (e) => {
@@ -54,52 +60,58 @@ const NavBar = () => {
 									Categories
 								</Dropdown.Toggle>
 								<Dropdown.Menu align="right">
-									<Link href={`/categories/666/PPP`} passHref>
-										<Dropdown.Item eventKey="1">Test</Dropdown.Item>
-									</Link>
+									<MayBeSpinner test={listCategory.is_loading} spinner={<>Loading...</>}>
+										{listCategory.categories?.map((category) => (
+											<CustomLink
+												key={category.id}
+												href={`/category/[pid]`}
+												as={`/category/${category.slug}`}
+												className="dropdown-item"
+											>
+												{category.title}
+											</CustomLink>
+										))}
+									</MayBeSpinner>
 								</Dropdown.Menu>
 							</Dropdown>
-							{login.is_authenticated ? (
-								<>
-									<Nav.Item>
-										<Link href="/editor/new" as="/editor/new" passHref>
-											<Nav.Link>New Post</Nav.Link>
+							<Maybe test={login.is_authenticated}>
+								<Nav.Item>
+									<Link href="/editor/new" as="/editor/new" passHref>
+										<Nav.Link>New Post</Nav.Link>
+									</Link>
+								</Nav.Item>
+								<Dropdown as={NavItem}>
+									<Dropdown.Toggle as={NavLink} id="dropdown-custom-2" className="d-flex align-items-center">
+										<CustomImage
+											className="rounded-circle mr-2"
+											src={login.user?.avatar}
+											width={35}
+											height={35}
+											alt={login.user?.user_name}
+										/>
+										{login.user?.user_name}
+									</Dropdown.Toggle>
+									<Dropdown.Menu align="right">
+										<Link href={`/profile/[pid]`} as={`/profile/${login.user.user_name}`} passHref>
+											<Dropdown.Item>Profile</Dropdown.Item>
 										</Link>
-									</Nav.Item>
-									<Dropdown as={NavItem}>
-										<Dropdown.Toggle as={NavLink} id="dropdown-custom-2" className="d-flex align-items-center">
-											<CustomImage
-												className="rounded-circle mr-2"
-												src={login.user?.avatar}
-												width={35}
-												height={35}
-												alt={login.user?.user_name}
-											/>
-											{login.user?.user_name}
-										</Dropdown.Toggle>
-										<Dropdown.Menu align="right">
-											<Link href={`/profile/[pid]`} as={`/profile/${login.user.user_name}`} passHref>
-												<Dropdown.Item>Profile</Dropdown.Item>
-											</Link>
-											<Dropdown.Divider />
-											<Dropdown.Item onClick={handleLogoutUser}>Logout</Dropdown.Item>
-										</Dropdown.Menu>
-									</Dropdown>
-								</>
-							) : (
-								<>
-									<Nav.Item>
-										<Link href="/user/register" passHref>
-											<Nav.Link>Register</Nav.Link>
-										</Link>
-									</Nav.Item>
-									<Nav.Item>
-										<Link href="/user/login" passHref>
-											<Nav.Link>Login</Nav.Link>
-										</Link>
-									</Nav.Item>
-								</>
-							)}
+										<Dropdown.Divider />
+										<Dropdown.Item onClick={handleLogoutUser}>Logout</Dropdown.Item>
+									</Dropdown.Menu>
+								</Dropdown>
+							</Maybe>
+							<Maybe test={!login.is_authenticated}>
+								<Nav.Item>
+									<Link href="/user/register" passHref>
+										<Nav.Link>Register</Nav.Link>
+									</Link>
+								</Nav.Item>
+								<Nav.Item>
+									<Link href="/user/login" passHref>
+										<Nav.Link>Login</Nav.Link>
+									</Link>
+								</Nav.Item>
+							</Maybe>
 						</Nav>
 					</Navbar.Collapse>
 				</Container>

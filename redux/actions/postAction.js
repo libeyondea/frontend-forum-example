@@ -5,6 +5,9 @@ import {
 	LIST_POST_TAG_REQUESTED,
 	LIST_POST_TAG_SUCCEED,
 	LIST_POST_TAG_FAILED,
+	LIST_POST_CATEGORY_REQUESTED,
+	LIST_POST_CATEGORY_SUCCEED,
+	LIST_POST_CATEGORY_FAILED,
 	SINGLE_POST_REQUESTED,
 	SINGLE_POST_SUCCEED,
 	SINGLE_POST_FAILED
@@ -46,6 +49,27 @@ export const listPostTagSucceedAction = (posts, posts_count) => ({
 });
 export const listPostTagFailedAction = (errors) => ({
 	type: LIST_POST_TAG_FAILED,
+	payload: {
+		errors: errors
+	}
+});
+//
+export const listPostCategoryRequestedAction = (category_slug, page) => ({
+	type: LIST_POST_CATEGORY_REQUESTED,
+	payload: {
+		category_slug: category_slug,
+		page: page
+	}
+});
+export const listPostCategorySucceedAction = (posts, posts_count) => ({
+	type: LIST_POST_CATEGORY_SUCCEED,
+	payload: {
+		posts: posts,
+		posts_count: posts_count
+	}
+});
+export const listPostCategoryFailedAction = (errors) => ({
+	type: LIST_POST_CATEGORY_FAILED,
 	payload: {
 		errors: errors
 	}

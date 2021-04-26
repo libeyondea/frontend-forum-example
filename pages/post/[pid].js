@@ -8,6 +8,7 @@ import CommentList from 'components/Comment/CommentList';
 import Layout from 'components/Common/Layout';
 import Breadcrumb from 'components/Common/Breadcrumb';
 import MayBeSpinner from 'components/Common/MayBeSpinner';
+import withAuth from 'lib/hoc/withAuth';
 
 const SinglePost = (props) => {
 	const singlePost = useSelector((state) => state.posts.single_post);
@@ -38,7 +39,7 @@ const SinglePost = (props) => {
 											as={`/tag/${tag.slug}`}
 											className="badge badge-light p-2 mb-2 mr-2"
 										>
-											<span>{tag.slug}</span>
+											<span>#{tag.slug}</span>
 										</CustomLink>
 									))}
 								</div>
@@ -67,4 +68,4 @@ SinglePost.getInitialProps = async ({ store, query }) => {
 	store.dispatch(singlePostRequestedAction(pid));
 };
 
-export default SinglePost;
+export default withAuth(SinglePost);

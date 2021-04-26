@@ -8,6 +8,7 @@ import CustomLink from 'components/Common/CustomLink';
 import InputForm from 'components/Form/InputForm';
 import FacebookLoginButton from 'components/Common/FacebookLoginButton';
 import GoogleLoginButton from 'components/Common/GoogleLoginButton';
+import GithubLoginButton from 'components/Common/GithubLoginButton';
 
 const LoginForm = () => {
 	const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const LoginForm = () => {
 		user_name: Yup.string().required('User name is required'),
 		password: Yup.string().required('Password is required')
 	});
+
 	const onSubmit = (values) => {
 		const user = {
 			user_name: values.user_name,
@@ -29,21 +31,18 @@ const LoginForm = () => {
 		};
 		dispatch(loginUserRequestedAction(user, router));
 	};
-	const responseFacebook = (response) => {
-		console.log(response);
+
+	const handleSocialLogin = (res) => {
+		console.log(res);
 		const user = {
-			access_token: response.accessToken,
-			provider: 'facebook'
+			access_token: res._token.accessToken,
+			provider: res._provider
 		};
 		dispatch(loginUserRequestedAction(user, router));
 	};
-	const responseGoogle = (response) => {
-		console.log(response);
-		const user = {
-			access_token: response.tokenId,
-			provider: 'google'
-		};
-		dispatch(loginUserRequestedAction(user, router));
+
+	const handleSocialLoginFailure = (err) => {
+		console.error(err);
 	};
 	return (
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
@@ -97,22 +96,22 @@ const LoginForm = () => {
 							Need an account?
 						</CustomLink>
 					</p>
-					<p>or sign in with:</p>
-					<div className="mb-3">
-						<FacebookLoginButton responseFacebook={responseFacebook} />
+					<p>or login in with:</p>
+					<div>
+						<FacebookLoginButton
+							handleSocialLogin={handleSocialLogin}
+							handleSocialLoginFailure={handleSocialLoginFailure}
+						/>
 					</div>
-					<div className="mb-3">
-						<GoogleLoginButton responseGoogle={responseGoogle} />
+					<div>
+						<GoogleLoginButton
+							handleSocialLogin={handleSocialLogin}
+							handleSocialLoginFailure={handleSocialLoginFailure}
+						/>
 					</div>
-					<a href="#!" className="btn-floating btn-tw btn-sm mr-1">
-						<i className="fa fa-twitter" />
-					</a>
-					<a href="#!" className="btn-floating btn-li btn-sm mr-1">
-						<i className="fa fa-linkedin"></i>
-					</a>
-					<a href="#!" className="btn-floating btn-git btn-sm">
-						<i className="fa fa-github" />
-					</a>
+					<div>
+						<GithubLoginButton />
+					</div>
 				</div>
 			</Form>
 		</Formik>

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Layout from 'components/Common/Layout';
 import LoginForm from 'components/User/LoginForm';
 import Breadcrumb from 'components/Common/Breadcrumb';
+import withAuth from 'lib/hoc/withAuth';
 
 const Login = () => (
 	<>
@@ -32,4 +33,4 @@ const Login = () => (
 	</>
 );
 
-export default Login;
+export default withAuth(Login);

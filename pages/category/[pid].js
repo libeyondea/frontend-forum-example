@@ -7,14 +7,14 @@ import SideBar from 'components/Common/SideBar';
 import Breadcrumb from 'components/Common/Breadcrumb';
 import MayBeSpinner from 'components/Common/MayBeSpinner';
 import Layout from 'components/Common/Layout';
-import { singleTagRequestedAction } from 'redux/actions/tagAction';
-import { listPostTagRequestedAction } from 'redux/actions/postAction';
+import { singleCategoryRequestedAction } from 'redux/actions/categoryAction';
+import { listPostCategoryRequestedAction } from 'redux/actions/postAction';
 import withAuth from 'lib/hoc/withAuth';
 
-const SingleTag = () => {
+const SingleCategory = () => {
 	const dispatch = useDispatch();
-	const singleTag = useSelector((state) => state.tags.single_tag);
-	const listPostTag = useSelector((state) => state.posts.list_post_tag);
+	const singleCategory = useSelector((state) => state.categories.single_category);
+	const listPostCategory = useSelector((state) => state.posts.list_post_category);
 	const router = useRouter();
 	const {
 		query: { page, pid }
@@ -22,11 +22,11 @@ const SingleTag = () => {
 	let pageNum = parseInt(page || 1);
 
 	useEffect(() => {
-		dispatch(singleTagRequestedAction(pid));
+		dispatch(singleCategoryRequestedAction(pid));
 	}, [pid]);
 
 	useEffect(() => {
-		dispatch(listPostTagRequestedAction(pid, pageNum));
+		dispatch(listPostCategoryRequestedAction(pid, pageNum));
 	}, [pid, pageNum]);
 
 	return (
@@ -34,7 +34,7 @@ const SingleTag = () => {
 			<div className="container my-4">
 				<div className="row">
 					<div className="col-lg-9">
-						<MayBeSpinner test={singleTag.is_loading || !singleTag.tag} spinner={<>Loading...</>}>
+						<MayBeSpinner test={singleCategory.is_loading || !singleCategory.category} spinner={<>Loading...</>}>
 							<Breadcrumb
 								items={[
 									{
@@ -42,26 +42,29 @@ const SingleTag = () => {
 										href: '/'
 									},
 									{
-										title: 'Tag',
+										title: 'Category',
 										href: '/'
 									},
 									{
-										title: singleTag.tag?.title
+										title: singleCategory.category?.title
 									}
 								]}
 							/>
-							<h1 className="mb-4">{singleTag.tag?.title}</h1>
-							<MayBeSpinner test={listPostTag.is_loading || listPostTag.posts.length === 0} spinner={<>Loading...</>}>
+							<h1 className="mb-4">{singleCategory.category?.title}</h1>
+							<MayBeSpinner
+								test={listPostCategory.is_loading || listPostCategory.posts.length === 0}
+								spinner={<>Loading...</>}
+							>
 								<div className="row">
-									{listPostTag.posts.map((post) => (
+									{listPostCategory.posts.map((post) => (
 										<div className="col-12 mb-4" key={post.id}>
 											<PostCard post={post} />
 										</div>
 									))}
 									<Pagination
-										total={listPostTag.posts_count}
-										limit={process.env.LIMIT_PAGE.LIST_POST_TAG}
-										asUrl={`/tag/${pid}`}
+										total={listPostCategory.posts_count}
+										limit={process.env.LIMIT_PAGE.LIST_POST_CATEGORY}
+										asUrl={`/category/${pid}`}
 									/>
 								</div>
 							</MayBeSpinner>
@@ -76,4 +79,4 @@ const SingleTag = () => {
 	);
 };
 
-export default withAuth(SingleTag);
+export default withAuth(SingleCategory);

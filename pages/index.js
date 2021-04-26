@@ -9,11 +9,14 @@ import Pagination from 'components/Common/Pagination';
 import MayBeSpinner from '../components/Common/MayBeSpinner';
 import PostCard from 'components/Post/PostCard';
 import Layout from 'components/Common/Layout';
+import withAuth from 'lib/hoc/withAuth';
+import { listTagRequestedAction } from 'redux/actions/tagAction';
 
 const Index = () => {
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const listPost = useSelector((state) => state.posts.list_post);
+	const listTag = useSelector((state) => state.tags.list_tag);
 	const {
 		query: { page }
 	} = router;
@@ -22,6 +25,10 @@ const Index = () => {
 	useEffect(() => {
 		dispatch(listPostRequestedAction(pageNum));
 	}, [pageNum]);
+
+	useEffect(() => {
+		dispatch(listTagRequestedAction(1));
+	}, []);
 
 	return (
 		<>
@@ -49,7 +56,7 @@ const Index = () => {
 					</div>
 					<div className="row">
 						<div className="col-lg-3 order-lg-2">
-							<SideBar />
+							<SideBar listTag={listTag} />
 						</div>
 						<div className="col-lg-9 order-lg-1">
 							<h2 className="mb-4">New posts</h2>
@@ -71,4 +78,4 @@ const Index = () => {
 	);
 };
 
-export default Index;
+export default withAuth(Index);

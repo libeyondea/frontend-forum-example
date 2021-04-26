@@ -19,7 +19,8 @@ import {
 	LOGOUT_USER_REQUESTED,
 	UPDATE_USER_REQUESTED
 } from '../constants';
-import userAPI from '../../lib/api/user';
+import userAPI from 'lib/api/user';
+import { setCookie, getCookie, removeCookie } from 'lib/utils/session';
 
 function* loginUser(action) {
 	try {
@@ -31,7 +32,8 @@ function* loginUser(action) {
 				user_name: res.data.user_name,
 				avatar: res.data.avatar
 			};
-			window.localStorage.setItem('token', res.data.access_token);
+			setCookie('token', res.data.access_token);
+			//window.localStorage.setItem('token', res.data.access_token);
 			yield put(loginUserSucceedAction(user));
 			router.push('/');
 		} else {
@@ -59,17 +61,19 @@ function* registerUser(action) {
 
 function* currentUser() {
 	try {
-		if (window.localStorage.getItem('token')) {
+		if (getCookie('token')) {
 			const res = yield call(userAPI.current);
 			if (res.success) {
 				yield put(loginUserSucceedAction(res.data));
 			} else {
-				window.localStorage.removeItem('token');
+				removeCookie('token');
+				//window.localStorage.removeItem('token');
 				yield put(logoutUserSucceedAction());
 			}
 		}
 	} catch (err) {
-		window.localStorage.removeItem('token');
+		removeCookie('token');
+		//window.localStorage.removeItem('token');
 		yield put(logoutUserSucceedAction());
 		yield put(loginUserFailedAction(err.message));
 	}
@@ -80,7 +84,8 @@ function* logoutUser(action) {
 		const { router } = action.payload;
 		const res = yield call(userAPI.logout);
 		if (res.success) {
-			window.localStorage.removeItem('token');
+			removeCookie('token');
+			//window.localStorage.removeItem('token');
 			yield put(logoutUserSucceedAction());
 			router.push('/user/login');
 		}
@@ -107,7 +112,8 @@ function* updateUser(action) {
 		const res = yield call(userAPI.update, user_name, user);
 		if (res.success) {
 			yield put(updateUserSucceedAction(res.result));
-			window.localStorage.removeItem('token');
+			removeCookie('token');
+			//window.localStorage.removeItem('token');
 			window.location.reload();
 		}
 	} catch (err) {

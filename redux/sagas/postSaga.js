@@ -1,34 +1,21 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { LIST_POST_REQUESTED, LIST_POST_TAG_REQUESTED, SINGLE_POST_REQUESTED } from '../constants';
+import {
+	LIST_POST_REQUESTED,
+	LIST_POST_TAG_REQUESTED,
+	LIST_POST_CATEGORY_REQUESTED,
+	SINGLE_POST_REQUESTED
+} from '../constants';
 import {
 	listPostSucceedAction,
 	listPostFailedAction,
 	listPostTagSucceedAction,
 	listPostTagFailedAction,
+	listPostCategorySucceedAction,
+	listPostCategoryFailedAction,
 	singlePostSucceedAction,
 	singlePostFailedAction
 } from '../actions/postAction';
 import postAPI from '../../lib/api/post';
-import axios from 'axios';
-
-const listPostApi = async (page) => {
-	const { data } = await axios.get(
-		`${process.env.API_URL}/posts`,
-		{
-			params: {
-				limit: 20,
-				offset: page * 20
-			}
-		},
-		{
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json'
-			}
-		}
-	);
-	return data;
-};
 
 function* listPost(action) {
 	try {
@@ -54,6 +41,18 @@ function* listPostTag(action) {
 	}
 }
 
+function* listPostCategory(action) {
+	try {
+		const { category_slug, page } = action.payload;
+		const res = yield call(postAPI.listByCategory, category_slug, page);
+		if (res.success) {
+			yield put(listPostCategorySucceedAction(res.data, res.meta.posts_count));
+		}
+	} catch (err) {
+		yield put(listPostCategoryFailedAction(err.message));
+	}
+}
+
 function* singlePost(action) {
 	try {
 		const { slug } = action.payload;
@@ -72,6 +71,10 @@ export function* listPostWatcher() {
 
 export function* listPostTagWatcher() {
 	yield takeLatest(LIST_POST_TAG_REQUESTED, listPostTag);
+}
+
+export function* listPostCategoryWatcher() {
+	yield takeLatest(LIST_POST_CATEGORY_REQUESTED, listPostCategory);
 }
 
 export function* singlePostWatcher() {
