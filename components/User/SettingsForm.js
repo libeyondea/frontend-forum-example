@@ -51,7 +51,7 @@ const SettingsForm = () => {
 			.min(6, 'Address must be at least 6 characters')
 			.max(66, 'Address must be at most 66 characters')
 			.nullable(),
-		avatar: Yup.string().max(300, 'Image must be at most 300 characters'),
+		avatar: Yup.string().max(666, 'Image must be at most 666 characters'),
 		gender: Yup.string().oneOf(['male', 'female', 'orther', null], 'Gender invalid').nullable()
 	});
 	const onSubmit = (values) => {

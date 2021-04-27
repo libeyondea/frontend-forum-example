@@ -57,7 +57,7 @@ const RegisterForm = () => {
 		address: Yup.string()
 			.min(6, 'Address must be at least 6 characters')
 			.max(66, 'Address must be at most 66 characters'),
-		avatar: Yup.string().max(300, 'Image must be at most 300 characters'),
+		avatar: Yup.string().max(666, 'Image must be at most 666 characters'),
 		gender: Yup.string().oneOf(['male', 'female', 'orther'], 'Gender invalid').required('Select gender'),
 		agreeterms: Yup.boolean().oneOf([true], 'You must agree to terms of service').required('Required')
 	});
