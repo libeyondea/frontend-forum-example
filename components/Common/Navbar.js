@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import Container from 'react-bootstrap/Container';
-import Dropdown from 'react-bootstrap/Dropdown';
-import NavItem from 'react-bootstrap/NavItem';
-import NavLink from 'react-bootstrap/NavLink';
 import CustomImage from 'components/Common/CustomImage';
 import CustomLink from 'components/Common/CustomLink';
-import { currentUserRequestedAction, logoutUserRequestedAction } from 'redux/actions/userAction';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import Container from 'react-bootstrap/Container';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavItem from 'react-bootstrap/NavItem';
+import NavLink from 'react-bootstrap/NavLink';
+import { useDispatch, useSelector } from 'react-redux';
 import { listCategoryRequestedAction } from 'redux/actions/categoryAction';
+import { logoutUserRequestedAction } from 'redux/actions/userAction';
+
 import Maybe from './Maybe';
 import MayBeSpinner from './MayBeSpinner';
 
@@ -22,9 +23,8 @@ const NavBar = () => {
 	const listCategory = useSelector((state) => state.categories.list_category);
 
 	useEffect(() => {
-		//dispatch(currentUserRequestedAction());
 		dispatch(listCategoryRequestedAction(1));
-	}, []);
+	}, [dispatch]);
 
 	const handleLogoutUser = (e) => {
 		e.preventDefault();

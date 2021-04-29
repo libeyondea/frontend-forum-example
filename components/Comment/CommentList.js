@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { listCommentRequestedAction } from 'redux/actions/commentAction';
 import Comment from 'components/Comment/Comment';
 import CommentInput from 'components/Comment/CommentInput';
 import MayBeSpinner from 'components/Common/MayBeSpinner';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { listCommentRequestedAction } from 'redux/actions/commentAction';
 
 const CommentList = ({ postSlug }) => {
 	const dispatch = useDispatch();

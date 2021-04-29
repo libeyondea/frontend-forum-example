@@ -31,7 +31,6 @@ module.exports = (phase) => {
 			LIST_POST_HOME: 10,
 			LIST_POST_TAG: 10,
 			LIST_POST_CATEGORY: 10,
-			LIST_POST_CATEGORY: 10,
 			LIST_POST_USER: 10,
 			LIST_POST_FAVORITED: 10,
 			LIST_TAG: 20,

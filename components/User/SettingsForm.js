@@ -1,11 +1,11 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import { useSelector, useDispatch } from 'react-redux';
 import InputForm from 'components/Form/InputForm';
 import SelectForm from 'components/Form/SelectForm';
+import { Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateUserRequestedAction } from 'redux/actions/userAction';
+import * as Yup from 'yup';
 
 const SettingsForm = () => {
 	const dispatch = useDispatch();

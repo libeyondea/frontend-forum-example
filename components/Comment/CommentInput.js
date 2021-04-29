@@ -1,7 +1,7 @@
+import CustomImage from 'components/Common/CustomImage';
+import CustomLink from 'components/Common/CustomLink';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import CustomLink from 'components/Common/CustomLink';
-import CustomImage from 'components/Common/CustomImage';
 
 const CommentInput = () => {
 	const login = useSelector((state) => state.users.login);

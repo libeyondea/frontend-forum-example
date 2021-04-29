@@ -1,4 +1,4 @@
-import { LIST_COMMENT_REQUESTED, LIST_COMMENT_SUCCEED, LIST_COMMENT_FAILED } from '../constants';
+import { LIST_COMMENT_FAILED, LIST_COMMENT_REQUESTED, LIST_COMMENT_SUCCEED } from '../constants';
 
 export const listCommentRequestedAction = (post_slug, page) => ({
 	type: LIST_COMMENT_REQUESTED,

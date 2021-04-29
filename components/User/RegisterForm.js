@@ -1,13 +1,13 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import { useSelector, useDispatch } from 'react-redux';
-import { registerUserRequestedAction } from 'redux/actions/userAction';
 import CustomLink from 'components/Common/CustomLink';
+import CheckBoxForm from 'components/Form/CheckBoxForm';
 import InputForm from 'components/Form/InputForm';
 import SelectForm from 'components/Form/SelectForm';
-import CheckBoxForm from 'components/Form/CheckBoxForm';
+import { Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUserRequestedAction } from 'redux/actions/userAction';
+import * as Yup from 'yup';
 
 const RegisterForm = () => {
 	const dispatch = useDispatch();

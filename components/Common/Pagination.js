@@ -1,12 +1,13 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import { getPageInfo, getRange } from 'lib/utils/calculatePagination';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
+
 import Maybe from './Maybe';
-import { getRange, getPageInfo } from 'lib/utils/calculatePagination';
 
 const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
-	if (total <= 20) return null;
 	const router = useRouter();
+	if (total <= 20) return null;
 	const {
 		pathname,
 		query: { page }

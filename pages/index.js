@@ -1,15 +1,15 @@
-import Head from 'next/head';
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
-import { listPostRequestedAction } from '../redux/actions/postAction';
-import Banner from 'components/Home/Banner';
-import SideBar from 'components/Common/SideBar';
-import Pagination from 'components/Common/Pagination';
-import MayBeSpinner from '../components/Common/MayBeSpinner';
-import PostCard from 'components/Post/PostCard';
 import Layout from 'components/Common/Layout';
+import MayBeSpinner from 'components/Common/MayBeSpinner';
+import Pagination from 'components/Common/Pagination';
+import SideBar from 'components/Common/SideBar';
+import Banner from 'components/Home/Banner';
+import PostCard from 'components/Post/PostCard';
 import withAuth from 'lib/hoc/withAuth';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { listPostRequestedAction } from 'redux/actions/postAction';
 import { listTagRequestedAction } from 'redux/actions/tagAction';
 
 const Index = () => {
@@ -24,11 +24,11 @@ const Index = () => {
 
 	useEffect(() => {
 		dispatch(listPostRequestedAction(pageNum));
-	}, [pageNum]);
+	}, [dispatch, pageNum]);
 
 	useEffect(() => {
 		dispatch(listTagRequestedAction(1));
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<>

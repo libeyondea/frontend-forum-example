@@ -1,11 +1,9 @@
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
 
 const CustomLink = ({ className, href, as, onClick, children }) => (
-	<Link href={href} as={as} passHref>
-		<a className={className || ''} onClick={onClick}>
-			{children}
-		</a>
+	<Link href={href} as={as} onClick={onClick} passHref>
+		<a className={className || ''}>{children}</a>
 	</Link>
 );
 

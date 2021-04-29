@@ -1,7 +1,7 @@
-import React from 'react';
-import CustomLink from 'components/Common/CustomLink';
-import CustomImage from 'components/Common/CustomImage';
 import CommentMeta from 'components/Comment/CommentMeta';
+import CustomImage from 'components/Common/CustomImage';
+import CustomLink from 'components/Common/CustomLink';
+import React from 'react';
 
 const Comment = ({ comment }) => {
 	return (

@@ -1,9 +1,10 @@
-import React from 'react';
-import Head from 'next/head';
-import { END } from 'redux-saga';
-import { wrapper } from '../redux/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'styles/app.css';
+
+import Head from 'next/head';
+import React from 'react';
+import { wrapper } from 'redux/store';
+import { END } from 'redux-saga';
 
 if (typeof window !== 'undefined') {
 	require('lazysizes/plugins/attrchange/ls.attrchange.js');

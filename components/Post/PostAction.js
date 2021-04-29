@@ -1,6 +1,6 @@
+import CustomLink from 'components/Common/CustomLink';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import CustomLink from 'components/Common/CustomLink';
 
 const PostAction = ({ post }) => {
 	const login = useSelector((state) => state.users.login);

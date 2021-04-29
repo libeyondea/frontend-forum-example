@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useSelector, useDispatch } from 'react-redux';
-import PostCard from 'components/Post/PostCard';
+import Breadcrumb from 'components/Common/Breadcrumb';
+import Layout from 'components/Common/Layout';
+import MayBeSpinner from 'components/Common/MayBeSpinner';
 import Pagination from 'components/Common/Pagination';
 import SideBar from 'components/Common/SideBar';
-import Breadcrumb from 'components/Common/Breadcrumb';
-import MayBeSpinner from 'components/Common/MayBeSpinner';
-import Layout from 'components/Common/Layout';
-import { singleTagRequestedAction } from 'redux/actions/tagAction';
-import { listPostTagRequestedAction } from 'redux/actions/postAction';
+import PostCard from 'components/Post/PostCard';
 import withAuth from 'lib/hoc/withAuth';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { listPostTagRequestedAction } from 'redux/actions/postAction';
+import { singleTagRequestedAction } from 'redux/actions/tagAction';
 
 const SingleTag = () => {
 	const dispatch = useDispatch();

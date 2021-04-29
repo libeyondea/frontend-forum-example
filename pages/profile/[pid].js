@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useSelector, useDispatch } from 'react-redux';
-import Nav from 'react-bootstrap/Nav';
-import Tab from 'react-bootstrap/Tab';
-import { singleUserRequestedAction } from 'redux/actions/userAction';
-import CustomImage from 'components/Common/CustomImage';
-import FollowUserButton from 'components/User/FollowUserButton';
-import SettingsForm from 'components/User/SettingsForm';
-import Layout from 'components/Common/Layout';
 import Breadcrumb from 'components/Common/Breadcrumb';
+import CustomImage from 'components/Common/CustomImage';
+import Layout from 'components/Common/Layout';
 import Maybe from 'components/Common/Maybe';
 import MayBeSpinner from 'components/Common/MayBeSpinner';
+import FollowUserButton from 'components/User/FollowUserButton';
+import SettingsForm from 'components/User/SettingsForm';
 import withAuth from 'lib/hoc/withAuth';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import Nav from 'react-bootstrap/Nav';
+import Tab from 'react-bootstrap/Tab';
+import { useDispatch, useSelector } from 'react-redux';
+import { singleUserRequestedAction } from 'redux/actions/userAction';
 
-const Profile = ({}) => {
+const Profile = () => {
 	const dispatch = useDispatch();
 	const login = useSelector((state) => state.users.login);
 	const singleUser = useSelector((state) => state.users.single_user);
@@ -24,7 +24,7 @@ const Profile = ({}) => {
 
 	useEffect(() => {
 		dispatch(singleUserRequestedAction(pid));
-	}, [pid]);
+	}, [dispatch, pid]);
 
 	const handleFollow = async () => {};
 

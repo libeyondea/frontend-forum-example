@@ -1,6 +1,6 @@
-import React from 'react';
 import classnames from 'classnames';
 import { useField } from 'formik';
+import React from 'react';
 
 const InuputForm = ({ errors, label, ...props }) => {
 	const [field, meta] = useField(props);

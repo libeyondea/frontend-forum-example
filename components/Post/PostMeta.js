@@ -1,7 +1,7 @@
-import React from 'react';
-import PostAction from 'components/Post/PostAction';
 import CustomImage from 'components/Common/CustomImage';
 import CustomLink from 'components/Common/CustomLink';
+import PostAction from 'components/Post/PostAction';
+import React from 'react';
 
 const PostMeta = ({ post }) => {
 	if (!post) return null;

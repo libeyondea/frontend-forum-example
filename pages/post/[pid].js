@@ -1,16 +1,16 @@
+import CommentList from 'components/Comment/CommentList';
+import Breadcrumb from 'components/Common/Breadcrumb';
+import CustomLink from 'components/Common/CustomLink';
+import Layout from 'components/Common/Layout';
+import MayBeSpinner from 'components/Common/MayBeSpinner';
+import SideBar from 'components/Common/SideBar';
+import PostMeta from 'components/Post/PostMeta';
+import withAuth from 'lib/hoc/withAuth';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { singlePostRequestedAction } from 'redux/actions/postAction';
-import SideBar from 'components/Common/SideBar';
-import CustomLink from 'components/Common/CustomLink';
-import PostMeta from 'components/Post/PostMeta';
-import CommentList from 'components/Comment/CommentList';
-import Layout from 'components/Common/Layout';
-import Breadcrumb from 'components/Common/Breadcrumb';
-import MayBeSpinner from 'components/Common/MayBeSpinner';
-import withAuth from 'lib/hoc/withAuth';
 
-const SinglePost = (props) => {
+const SinglePost = () => {
 	const singlePost = useSelector((state) => state.posts.single_post);
 	return (
 		<Layout>

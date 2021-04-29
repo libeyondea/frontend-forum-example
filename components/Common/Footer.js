@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = (props) => {
+const Footer = () => {
 	return (
 		<footer className="py-5 bg-custom">
 			<div className="container">
