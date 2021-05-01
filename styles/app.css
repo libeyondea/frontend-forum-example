@@ -218,3 +218,17 @@ body {
 .dropdown-divider {
 	margin: 0;
 }
+
+/*  */
+
+@media (max-width: 576px) {
+	.media {
+		align-items: initial;
+		flex-direction: column;
+	}
+}
+
+a.disabled {
+	pointer-events: none;
+	opacity: 0.65;
+}

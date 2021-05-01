@@ -25,13 +25,13 @@ const CommentInput = () => {
 		content: Yup.string().required('Content is required')
 	});
 
-	const onSubmit = (values) => {
+	const onSubmit = (values, { resetForm }) => {
 		const comment = {
 			post_slug: pid,
 			content: values.content
 		};
-		console.log(comment);
 		dispatch(createCommentRequestedAction(comment));
+		resetForm();
 	};
 
 	if (!login.is_authenticated) {
@@ -56,7 +56,7 @@ const CommentInput = () => {
 					height="50"
 					src={login.user?.avatar}
 					alt={login.user?.user_name}
-					className="d-flex mr-3 rounded-circle"
+					className="d-flex mr-3 mb-3 rounded-circle"
 				/>
 			</CustomLink>
 			<div className="media-body">
@@ -65,7 +65,6 @@ const CommentInput = () => {
 						<div className="form-group">
 							<TextForm rows={3} placeholder="Write a comment..." id="content" name="content" />
 						</div>
-
 						{createComment.is_loading ? (
 							<button type="submit" className="btn btn-primary" disabled>
 								<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />

@@ -13,11 +13,11 @@ const Comment = ({ comment }) => {
 					height="50"
 					src={comment.user?.avatar}
 					alt={comment.user?.user_name}
-					className="d-flex mr-3 rounded-circle"
+					className="d-flex mr-3 mb-3 rounded-circle"
 				/>
 			</CustomLink>
 			<div className="media-body">
-				<div className="border p-3 bg-white">
+				<div className="border p-3 bg-white text-break">
 					<div className="mb-2">
 						<CustomLink
 							href="/profile/[pid]"

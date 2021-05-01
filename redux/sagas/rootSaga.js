@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 
 import { listCategoryWatcher, singleCategoryWatcher } from '@/redux/sagas/categorySaga';
-import { createCommentWatcher, listCommentWatcher } from '@/redux/sagas/commentSaga';
+import { createCommentWatcher, deleteCommentWatcher, listCommentWatcher } from '@/redux/sagas/commentSaga';
 import {
 	listPostCategoryWatcher,
 	listPostTagWatcher,
@@ -35,7 +35,8 @@ function* rootSaga() {
 		singleUserWatcher(),
 		updateUserWatcher(),
 		listCommentWatcher(),
-		createCommentWatcher()
+		createCommentWatcher(),
+		deleteCommentWatcher()
 	]);
 }
 
