@@ -1,12 +1,11 @@
-import CustomLink from 'components/Common/CustomLink';
 import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listTagRequestedAction } from 'redux/actions/tagAction';
 
-import MayBeSpinner from './MayBeSpinner';
+import CustomLink from '@/components/Common/CustomLink';
+import MayBeSpinner from '@/components/Common/MayBeSpinner';
+import { listTagRequestedAction } from '@/redux/actions/tagAction';
 
 const SideBar = () => {
-	console.log('render');
 	const dispatch = useDispatch();
 	const listTag = useSelector((state) => state.tags.list_tag);
 	const listCategory = useSelector((state) => state.categories.list_category);

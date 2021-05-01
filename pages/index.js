@@ -1,22 +1,21 @@
-import Layout from 'components/Common/Layout';
-import MayBeSpinner from 'components/Common/MayBeSpinner';
-import Pagination from 'components/Common/Pagination';
-import SideBar from 'components/Common/SideBar';
-import Banner from 'components/Home/Banner';
-import PostCard from 'components/Post/PostCard';
-import withAuth from 'lib/hoc/withAuth';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listPostRequestedAction } from 'redux/actions/postAction';
-import { listTagRequestedAction } from 'redux/actions/tagAction';
+
+import Layout from '@/components/Common/Layout';
+import MayBeSpinner from '@/components/Common/MayBeSpinner';
+import Pagination from '@/components/Common/Pagination';
+import SideBar from '@/components/Common/SideBar';
+import Banner from '@/components/Home/Banner';
+import PostCard from '@/components/Post/PostCard';
+import { listPostRequestedAction } from '@/redux/actions/postAction';
 
 const Index = () => {
 	const dispatch = useDispatch();
-	const router = useRouter();
 	const listPost = useSelector((state) => state.posts.list_post);
-	const listTag = useSelector((state) => state.tags.list_tag);
+	const router = useRouter();
+
 	const {
 		query: { page }
 	} = router;
@@ -25,10 +24,6 @@ const Index = () => {
 	useEffect(() => {
 		dispatch(listPostRequestedAction(pageNum));
 	}, [dispatch, pageNum]);
-
-	useEffect(() => {
-		dispatch(listTagRequestedAction(1));
-	}, [dispatch]);
 
 	return (
 		<>
@@ -56,7 +51,7 @@ const Index = () => {
 					</div>
 					<div className="row">
 						<div className="col-lg-3 order-lg-2">
-							<SideBar listTag={listTag} />
+							<SideBar />
 						</div>
 						<div className="col-lg-9 order-lg-1">
 							<h2 className="mb-4">New posts</h2>
@@ -78,4 +73,4 @@ const Index = () => {
 	);
 };
 
-export default withAuth(Index);
+export default Index;

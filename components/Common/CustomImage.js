@@ -1,4 +1,4 @@
-import handleBrokenImage from 'lib/utils/handleBrokenImage';
+import handleBrokenImage from '@/lib/utils/handleBrokenImage';
 
 const CustomImage = ({ src, alt, className, ...props }) => (
 	<img

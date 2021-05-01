@@ -1,10 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'styles/app.css';
+import '@/styles/app.css';
+import 'nprogress/nprogress.css';
 
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import React from 'react';
-import { wrapper } from 'redux/store';
-import { END } from 'redux-saga';
+
+import { wrapper } from '@/redux/store';
 
 if (typeof window !== 'undefined') {
 	require('lazysizes/plugins/attrchange/ls.attrchange.js');
@@ -12,31 +14,36 @@ if (typeof window !== 'undefined') {
 	require('lazysizes');
 }
 
+const TopProgressBar = dynamic(
+	() => {
+		return import('@/components/Common/TopProgressBar');
+	},
+	{ ssr: false }
+);
+
 const App = ({ Component, pageProps }) => {
 	return (
 		<>
 			<Head>
 				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 			</Head>
+			<TopProgressBar />
 			<Component {...pageProps} />
 		</>
 	);
 };
 
-App.getInitialProps = async ({ Component, ctx }) => {
-	// 1. Wait for all page actions to dispatch
+/* App.getInitialProps = async ({ Component, ctx }) => {
 	const pageProps = {
 		...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {})
 	};
-	// 2. Stop the saga if on server
 	if (ctx.req) {
 		ctx.store.dispatch(END);
 		await ctx.store.sagaTask.toPromise();
 	}
-	// 3. Return props
 	return {
 		pageProps
 	};
-};
+}; */
 
 export default wrapper.withRedux(App);

@@ -1,15 +1,15 @@
-import Breadcrumb from 'components/Common/Breadcrumb';
-import Layout from 'components/Common/Layout';
-import MayBeSpinner from 'components/Common/MayBeSpinner';
-import Pagination from 'components/Common/Pagination';
-import SideBar from 'components/Common/SideBar';
-import PostCard from 'components/Post/PostCard';
-import withAuth from 'lib/hoc/withAuth';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { singleCategoryRequestedAction } from 'redux/actions/categoryAction';
-import { listPostCategoryRequestedAction } from 'redux/actions/postAction';
+
+import Breadcrumb from '@/components/Common/Breadcrumb';
+import Layout from '@/components/Common/Layout';
+import MayBeSpinner from '@/components/Common/MayBeSpinner';
+import Pagination from '@/components/Common/Pagination';
+import SideBar from '@/components/Common/SideBar';
+import PostCard from '@/components/Post/PostCard';
+import { singleCategoryRequestedAction } from '@/redux/actions/categoryAction';
+import { listPostCategoryRequestedAction } from '@/redux/actions/postAction';
 
 const SingleCategory = () => {
 	const dispatch = useDispatch();
@@ -17,17 +17,16 @@ const SingleCategory = () => {
 	const listPostCategory = useSelector((state) => state.posts.list_post_category);
 	const router = useRouter();
 	const {
-		query: { page, pid }
+		query: { pid, page }
 	} = router;
-	let pageNum = parseInt(page || 1);
 
 	useEffect(() => {
 		dispatch(singleCategoryRequestedAction(pid));
 	}, [dispatch, pid]);
 
 	useEffect(() => {
-		dispatch(listPostCategoryRequestedAction(pid, pageNum));
-	}, [pid, pageNum, dispatch]);
+		dispatch(listPostCategoryRequestedAction(pid, page));
+	}, [dispatch, pid, page]);
 
 	return (
 		<Layout>
@@ -79,4 +78,4 @@ const SingleCategory = () => {
 	);
 };
 
-export default withAuth(SingleCategory);
+export default SingleCategory;

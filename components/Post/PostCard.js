@@ -1,6 +1,7 @@
-import CustomImage from 'components/Common/CustomImage';
-import CustomLink from 'components/Common/CustomLink';
 import React from 'react';
+
+import CustomImage from '@/components/Common/CustomImage';
+import CustomLink from '@/components/Common/CustomLink';
 
 const PostCard = ({ post }) => {
 	if (!post) return null;

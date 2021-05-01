@@ -21,6 +21,7 @@
 		"moment": "^2.29.1",
 		"next": "^10.1.3",
 		"next-redux-wrapper": "^6.0.2",
+		"nprogress": "^0.2.0",
 		"qs": "^6.10.1",
 		"react": "^17.0.2",
 		"react-bootstrap": "^1.5.2",

@@ -1,12 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { SINGLE_CATEGORY_REQUESTED, LIST_CATEGORY_REQUESTED } from '../constants';
+
+import categoryAPI from '@/lib/api/category';
 import {
-	singleCategorySucceedAction,
-	singleCategoryFailedAction,
+	listCategoryFailedAction,
 	listCategorySucceedAction,
-	listCategoryFailedAction
-} from '../actions/categoryAction';
-import categoryAPI from '../../lib/api/category';
+	singleCategoryFailedAction,
+	singleCategorySucceedAction
+} from '@/redux/actions/categoryAction';
+import { LIST_CATEGORY_REQUESTED, SINGLE_CATEGORY_REQUESTED } from '@/redux/constants';
 
 function* listCategory(action) {
 	const { page } = action.payload;

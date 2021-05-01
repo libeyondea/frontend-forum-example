@@ -1,4 +1,11 @@
-import { LIST_COMMENT_FAILED, LIST_COMMENT_REQUESTED, LIST_COMMENT_SUCCEED } from '../constants';
+import {
+	CREATE_COMMENT_FAILED,
+	CREATE_COMMENT_REQUESTED,
+	CREATE_COMMENT_SUCCEED,
+	LIST_COMMENT_FAILED,
+	LIST_COMMENT_REQUESTED,
+	LIST_COMMENT_SUCCEED
+} from '@/redux/constants';
 
 export const listCommentRequestedAction = (post_slug, page) => ({
 	type: LIST_COMMENT_REQUESTED,
@@ -16,6 +23,25 @@ export const listCommentSucceedAction = (comments, comments_count) => ({
 });
 export const listCommentFailedAction = (errors) => ({
 	type: LIST_COMMENT_FAILED,
+	payload: {
+		errors: errors
+	}
+});
+//
+export const createCommentRequestedAction = (comment) => ({
+	type: CREATE_COMMENT_REQUESTED,
+	payload: {
+		comment: comment
+	}
+});
+export const createCommentSucceedAction = (comment) => ({
+	type: CREATE_COMMENT_SUCCEED,
+	payload: {
+		comment: comment
+	}
+});
+export const createCommentFailedAction = (errors) => ({
+	type: CREATE_COMMENT_FAILED,
 	payload: {
 		errors: errors
 	}

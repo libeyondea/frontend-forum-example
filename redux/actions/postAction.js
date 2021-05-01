@@ -11,7 +11,7 @@ import {
 	SINGLE_POST_FAILED,
 	SINGLE_POST_REQUESTED,
 	SINGLE_POST_SUCCEED
-} from '../constants';
+} from '@/redux/constants';
 
 export const listPostRequestedAction = (page) => ({
 	type: LIST_POST_REQUESTED,

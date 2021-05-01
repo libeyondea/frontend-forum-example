@@ -1,14 +1,15 @@
-import CustomLink from 'components/Common/CustomLink';
-import FacebookLoginButton from 'components/Common/FacebookLoginButton';
-import GithubLoginButton from 'components/Common/GithubLoginButton';
-import GoogleLoginButton from 'components/Common/GoogleLoginButton';
-import InputForm from 'components/Form/InputForm';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUserRequestedAction } from 'redux/actions/userAction';
 import * as Yup from 'yup';
+
+import CustomLink from '@/components/Common/CustomLink';
+import FacebookLoginButton from '@/components/Common/FacebookLoginButton';
+import GithubLoginButton from '@/components/Common/GithubLoginButton';
+import GoogleLoginButton from '@/components/Common/GoogleLoginButton';
+import InputForm from '@/components/Form/InputForm';
+import { loginUserRequestedAction } from '@/redux/actions/userAction';
 
 const LoginForm = () => {
 	const dispatch = useDispatch();

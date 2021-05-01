@@ -1,15 +1,15 @@
-import InputForm from 'components/Form/InputForm';
-import SelectForm from 'components/Form/SelectForm';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUserRequestedAction } from 'redux/actions/userAction';
 import * as Yup from 'yup';
+
+import InputForm from '@/components/Form/InputForm';
+import SelectForm from '@/components/Form/SelectForm';
+import { updateUserRequestedAction } from '@/redux/actions/userAction';
 
 const SettingsForm = () => {
 	const dispatch = useDispatch();
-	const router = useRouter();
 	const singleUser = useSelector((state) => state.users.single_user);
 	const updateUser = useSelector((state) => state.users.update_user);
 
@@ -65,8 +65,7 @@ const SettingsForm = () => {
 			gender: values.gender,
 			avatar: values.avatar
 		};
-		console.log(user);
-		//dispatch(updateUserRequestedAction(singleUser.user.user_name, user, router));
+		dispatch(updateUserRequestedAction(user));
 	};
 
 	const gender = ['', 'male', 'female', 'orther'];

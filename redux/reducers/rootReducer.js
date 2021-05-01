@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
-import postReducer from './postReducer';
-import tagReducer from './tagReducer';
-import categoryReducer from './categoryReducer';
-import userReducer from './userReducer';
-import commentReducer from './commentReducer';
+
+import categoryReducer from '@/redux/reducers/categoryReducer';
+import commentReducer from '@/redux/reducers/commentReducer';
+import postReducer from '@/redux/reducers/postReducer';
+import tagReducer from '@/redux/reducers/tagReducer';
+import userReducer from '@/redux/reducers/userReducer';
 
 const rootReducer = combineReducers({
 	users: userReducer,

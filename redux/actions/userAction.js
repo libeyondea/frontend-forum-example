@@ -1,21 +1,21 @@
 import {
+	CURRENT_USER_REQUESTED,
+	LOGIN_USER_FAILED,
 	LOGIN_USER_REQUESTED,
 	LOGIN_USER_SUCCEED,
-	LOGIN_USER_FAILED,
-	CURRENT_USER_REQUESTED,
-	REGISTER_USER_REQUESTED,
-	REGISTER_USER_SUCCEED,
-	REGISTER_USER_FAILED,
+	LOGOUT_USER_FAILED,
 	LOGOUT_USER_REQUESTED,
 	LOGOUT_USER_SUCCEED,
-	LOGOUT_USER_FAILED,
+	REGISTER_USER_FAILED,
+	REGISTER_USER_REQUESTED,
+	REGISTER_USER_SUCCEED,
+	SINGLE_USER_FAILED,
 	SINGLE_USER_REQUESTED,
 	SINGLE_USER_SUCCEED,
-	SINGLE_USER_FAILED,
+	UPDATE_USER_FAILED,
 	UPDATE_USER_REQUESTED,
-	UPDATE_USER_SUCCEED,
-	UPDATE_USER_FAILED
-} from '../constants';
+	UPDATE_USER_SUCCEED
+} from '@/redux/constants';
 
 export const loginUserRequestedAction = (user, router) => ({
 	type: LOGIN_USER_REQUESTED,
@@ -96,12 +96,10 @@ export const singleUserFailedAction = (errors) => ({
 	}
 });
 //
-export const updateUserRequestedAction = (user_name, user, router) => ({
+export const updateUserRequestedAction = (user) => ({
 	type: UPDATE_USER_REQUESTED,
 	payload: {
-		user_name: user_name,
-		user: user,
-		router: router
+		user: user
 	}
 });
 export const updateUserSucceedAction = (user) => ({

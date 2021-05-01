@@ -1,12 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { SINGLE_TAG_REQUESTED, LIST_TAG_REQUESTED } from '../constants';
+
+import tagAPI from '@/lib/api/tag';
 import {
-	singleTagSucceedAction,
-	singleTagFailedAction,
+	listTagFailedAction,
 	listTagSucceedAction,
-	listTagFailedAction
-} from '../actions/tagAction';
-import tagAPI from '../../lib/api/tag';
+	singleTagFailedAction,
+	singleTagSucceedAction
+} from '@/redux/actions/tagAction';
+import { LIST_TAG_REQUESTED, SINGLE_TAG_REQUESTED } from '@/redux/constants';
 
 function* listTag(action) {
 	const { page } = action.payload;

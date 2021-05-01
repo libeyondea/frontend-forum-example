@@ -1,13 +1,14 @@
-import CustomLink from 'components/Common/CustomLink';
-import CheckBoxForm from 'components/Form/CheckBoxForm';
-import InputForm from 'components/Form/InputForm';
-import SelectForm from 'components/Form/SelectForm';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUserRequestedAction } from 'redux/actions/userAction';
 import * as Yup from 'yup';
+
+import CustomLink from '@/components/Common/CustomLink';
+import CheckBoxForm from '@/components/Form/CheckBoxForm';
+import InputForm from '@/components/Form/InputForm';
+import SelectForm from '@/components/Form/SelectForm';
+import { registerUserRequestedAction } from '@/redux/actions/userAction';
 
 const RegisterForm = () => {
 	const dispatch = useDispatch();
@@ -58,7 +59,7 @@ const RegisterForm = () => {
 			.min(6, 'Address must be at least 6 characters')
 			.max(66, 'Address must be at most 66 characters'),
 		avatar: Yup.string().max(666, 'Image must be at most 666 characters'),
-		gender: Yup.string().oneOf(['male', 'female', 'orther'], 'Gender invalid').required('Select gender'),
+		gender: Yup.string().oneOf(['male', 'female', 'orther', null], 'Gender invalid').nullable(),
 		agreeterms: Yup.boolean().oneOf([true], 'You must agree to terms of service').required('Required')
 	});
 	const onSubmit = (values) => {
@@ -75,6 +76,9 @@ const RegisterForm = () => {
 		};
 		dispatch(registerUserRequestedAction(user, router));
 	};
+
+	const gender = ['', 'male', 'female', 'orther'];
+
 	return (
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 			<Form>
@@ -131,10 +135,10 @@ const RegisterForm = () => {
 				</div>
 				<div className="form-group">
 					<SelectForm label="Gender" name="gender">
-						<option value="">Select gender</option>
-						<option value="male">Male</option>
-						<option value="female">Female</option>
-						<option value="orther">Other</option>
+						<option value={gender[0]}>Select gender</option>
+						<option value={gender[1]}>Male</option>
+						<option value={gender[2]}>Female</option>
+						<option value={gender[3]}>Other</option>
 					</SelectForm>
 				</div>
 				<div className="form-group">

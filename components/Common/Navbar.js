@@ -1,5 +1,3 @@
-import CustomImage from 'components/Common/CustomImage';
-import CustomLink from 'components/Common/CustomLink';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
@@ -10,11 +8,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavItem from 'react-bootstrap/NavItem';
 import NavLink from 'react-bootstrap/NavLink';
 import { useDispatch, useSelector } from 'react-redux';
-import { listCategoryRequestedAction } from 'redux/actions/categoryAction';
-import { logoutUserRequestedAction } from 'redux/actions/userAction';
 
-import Maybe from './Maybe';
-import MayBeSpinner from './MayBeSpinner';
+import CustomImage from '@/components/Common/CustomImage';
+import CustomLink from '@/components/Common/CustomLink';
+import Maybe from '@/components/Common/Maybe';
+import MayBeSpinner from '@/components/Common/MayBeSpinner';
+import { listCategoryRequestedAction } from '@/redux/actions/categoryAction';
+import { logoutUserRequestedAction } from '@/redux/actions/userAction';
 
 const NavBar = () => {
 	const dispatch = useDispatch();

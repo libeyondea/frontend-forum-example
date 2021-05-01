@@ -1,15 +1,15 @@
-import Breadcrumb from 'components/Common/Breadcrumb';
-import Layout from 'components/Common/Layout';
-import MayBeSpinner from 'components/Common/MayBeSpinner';
-import Pagination from 'components/Common/Pagination';
-import SideBar from 'components/Common/SideBar';
-import PostCard from 'components/Post/PostCard';
-import withAuth from 'lib/hoc/withAuth';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listPostTagRequestedAction } from 'redux/actions/postAction';
-import { singleTagRequestedAction } from 'redux/actions/tagAction';
+
+import Breadcrumb from '@/components/Common/Breadcrumb';
+import Layout from '@/components/Common/Layout';
+import MayBeSpinner from '@/components/Common/MayBeSpinner';
+import Pagination from '@/components/Common/Pagination';
+import SideBar from '@/components/Common/SideBar';
+import PostCard from '@/components/Post/PostCard';
+import { listPostTagRequestedAction } from '@/redux/actions/postAction';
+import { singleTagRequestedAction } from '@/redux/actions/tagAction';
 
 const SingleTag = () => {
 	const dispatch = useDispatch();
@@ -17,17 +17,16 @@ const SingleTag = () => {
 	const listPostTag = useSelector((state) => state.posts.list_post_tag);
 	const router = useRouter();
 	const {
-		query: { page, pid }
+		query: { pid, page }
 	} = router;
-	let pageNum = parseInt(page || 1);
 
 	useEffect(() => {
 		dispatch(singleTagRequestedAction(pid));
-	}, [pid]);
+	}, [dispatch, pid]);
 
 	useEffect(() => {
-		dispatch(listPostTagRequestedAction(pid, pageNum));
-	}, [pid, pageNum]);
+		dispatch(listPostTagRequestedAction(pid, page));
+	}, [dispatch, pid, page]);
 
 	return (
 		<Layout>
@@ -76,4 +75,4 @@ const SingleTag = () => {
 	);
 };
 
-export default withAuth(SingleTag);
+export default SingleTag;

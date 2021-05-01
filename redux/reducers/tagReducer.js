@@ -1,11 +1,11 @@
 import {
+	LIST_TAG_FAILED,
 	LIST_TAG_REQUESTED,
 	LIST_TAG_SUCCEED,
-	LIST_TAG_FAILED,
+	SINGLE_TAG_FAILED,
 	SINGLE_TAG_REQUESTED,
-	SINGLE_TAG_SUCCEED,
-	SINGLE_TAG_FAILED
-} from '../constants';
+	SINGLE_TAG_SUCCEED
+} from '@/redux/constants';
 
 const initialState = {
 	list_tag: {

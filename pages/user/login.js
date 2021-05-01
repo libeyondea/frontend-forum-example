@@ -1,9 +1,9 @@
-import Breadcrumb from 'components/Common/Breadcrumb';
-import Layout from 'components/Common/Layout';
-import LoginForm from 'components/User/LoginForm';
-import withAuth from 'lib/hoc/withAuth';
 import Head from 'next/head';
 import React from 'react';
+
+import Breadcrumb from '@/components/Common/Breadcrumb';
+import Layout from '@/components/Common/Layout';
+import LoginForm from '@/components/User/LoginForm';
 
 const Login = () => (
 	<>
@@ -33,4 +33,4 @@ const Login = () => (
 	</>
 );
 
-export default withAuth(Login);
+export default Login;

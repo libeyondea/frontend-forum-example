@@ -1,21 +1,22 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
+
+import postAPI from '@/lib/api/post';
 import {
+	listPostCategoryFailedAction,
+	listPostCategorySucceedAction,
+	listPostFailedAction,
+	listPostSucceedAction,
+	listPostTagFailedAction,
+	listPostTagSucceedAction,
+	singlePostFailedAction,
+	singlePostSucceedAction
+} from '@/redux/actions/postAction';
+import {
+	LIST_POST_CATEGORY_REQUESTED,
 	LIST_POST_REQUESTED,
 	LIST_POST_TAG_REQUESTED,
-	LIST_POST_CATEGORY_REQUESTED,
 	SINGLE_POST_REQUESTED
-} from '../constants';
-import {
-	listPostSucceedAction,
-	listPostFailedAction,
-	listPostTagSucceedAction,
-	listPostTagFailedAction,
-	listPostCategorySucceedAction,
-	listPostCategoryFailedAction,
-	singlePostSucceedAction,
-	singlePostFailedAction
-} from '../actions/postAction';
-import postAPI from '../../lib/api/post';
+} from '@/redux/constants';
 
 function* listPost(action) {
 	try {

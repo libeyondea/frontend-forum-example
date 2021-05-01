@@ -1,5 +1,6 @@
-import SocialButton from 'components/Common/SocialButton';
 import React from 'react';
+
+import SocialButton from '@/components/Common/SocialButton';
 
 const FacebookLoginButton = ({ handleSocialLogin, handleSocialLoginFailure }) => {
 	return (

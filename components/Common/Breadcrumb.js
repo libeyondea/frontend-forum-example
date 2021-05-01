@@ -1,4 +1,4 @@
-import CustomLink from 'components/Common/CustomLink';
+import CustomLink from '@/components/Common/CustomLink';
 
 const Breadcrumb = ({ items = [] }) => {
 	let countArr = items.length - 1;

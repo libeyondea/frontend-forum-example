@@ -1,14 +1,16 @@
-import CommentList from 'components/Comment/CommentList';
-import Breadcrumb from 'components/Common/Breadcrumb';
-import CustomLink from 'components/Common/CustomLink';
-import Layout from 'components/Common/Layout';
-import MayBeSpinner from 'components/Common/MayBeSpinner';
-import SideBar from 'components/Common/SideBar';
-import PostMeta from 'components/Post/PostMeta';
-import withAuth from 'lib/hoc/withAuth';
+import { END } from '@redux-saga/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { singlePostRequestedAction } from 'redux/actions/postAction';
+
+import CommentList from '@/components/Comment/CommentList';
+import Breadcrumb from '@/components/Common/Breadcrumb';
+import CustomLink from '@/components/Common/CustomLink';
+import Layout from '@/components/Common/Layout';
+import MayBeSpinner from '@/components/Common/MayBeSpinner';
+import SideBar from '@/components/Common/SideBar';
+import PostMeta from '@/components/Post/PostMeta';
+import { singlePostRequestedAction } from '@/redux/actions/postAction';
+import { wrapper } from '@/redux/store';
 
 const SinglePost = () => {
 	const singlePost = useSelector((state) => state.posts.single_post);
@@ -63,9 +65,11 @@ const SinglePost = () => {
 	);
 };
 
-SinglePost.getInitialProps = async ({ store, query }) => {
+export const getServerSideProps = wrapper.getServerSideProps(async ({ store, query }) => {
 	const { pid } = query;
 	store.dispatch(singlePostRequestedAction(pid));
-};
+	store.dispatch(END);
+	await store.sagaTask.toPromise();
+});
 
-export default withAuth(SinglePost);
+export default SinglePost;

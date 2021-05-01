@@ -1,17 +1,17 @@
-import Breadcrumb from 'components/Common/Breadcrumb';
-import CustomImage from 'components/Common/CustomImage';
-import Layout from 'components/Common/Layout';
-import Maybe from 'components/Common/Maybe';
-import MayBeSpinner from 'components/Common/MayBeSpinner';
-import FollowUserButton from 'components/User/FollowUserButton';
-import SettingsForm from 'components/User/SettingsForm';
-import withAuth from 'lib/hoc/withAuth';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import { useDispatch, useSelector } from 'react-redux';
-import { singleUserRequestedAction } from 'redux/actions/userAction';
+
+import Breadcrumb from '@/components/Common/Breadcrumb';
+import CustomImage from '@/components/Common/CustomImage';
+import Layout from '@/components/Common/Layout';
+import Maybe from '@/components/Common/Maybe';
+import MayBeSpinner from '@/components/Common/MayBeSpinner';
+import FollowUserButton from '@/components/User/FollowUserButton';
+import SettingsForm from '@/components/User/SettingsForm';
+import { singleUserRequestedAction } from '@/redux/actions/userAction';
 
 const Profile = () => {
 	const dispatch = useDispatch();
@@ -157,4 +157,4 @@ const Profile = () => {
 	);
 };
 
-export default withAuth(Profile);
+export default Profile;

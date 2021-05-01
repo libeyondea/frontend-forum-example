@@ -1,9 +1,9 @@
-import { getPageInfo, getRange } from 'lib/utils/calculatePagination';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import Maybe from './Maybe';
+import Maybe from '@/components/Common/Maybe';
+import { getPageInfo, getRange } from '@/lib/utils/calculatePagination';
 
 const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
 	const router = useRouter();

@@ -1,5 +1,19 @@
 {
     "compilerOptions": {
-        "baseUrl": "."
+        "baseUrl": ".",
+        "paths": {
+            "@/components/*": [
+                "./components/*"
+            ],
+            "@/lib/*": [
+                "./lib/*"
+            ],
+            "@/redux/*": [
+                "./redux/*"
+            ],
+            "@/styles/*": [
+                "./styles/*"
+            ]
+        }
     }
 }

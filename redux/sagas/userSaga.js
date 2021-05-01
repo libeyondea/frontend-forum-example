@@ -1,26 +1,27 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
+
+import userAPI from '@/lib/api/user';
+import { getCookie, removeCookie, setCookie } from '@/lib/utils/session';
 import {
-	loginUserSucceedAction,
 	loginUserFailedAction,
-	logoutUserSucceedAction,
+	loginUserSucceedAction,
 	logoutUserFailedAction,
-	registerUserSucceedAction,
+	logoutUserSucceedAction,
 	registerUserFailedAction,
-	singleUserSucceedAction,
+	registerUserSucceedAction,
 	singleUserFailedAction,
-	updateUserSucceedAction,
-	updateUserFailedAction
-} from '../actions/userAction';
+	singleUserSucceedAction,
+	updateUserFailedAction,
+	updateUserSucceedAction
+} from '@/redux/actions/userAction';
 import {
-	LOGIN_USER_REQUESTED,
 	CURRENT_USER_REQUESTED,
+	LOGIN_USER_REQUESTED,
+	LOGOUT_USER_REQUESTED,
 	REGISTER_USER_REQUESTED,
 	SINGLE_USER_REQUESTED,
-	LOGOUT_USER_REQUESTED,
 	UPDATE_USER_REQUESTED
-} from '../constants';
-import userAPI from 'lib/api/user';
-import { setCookie, getCookie, removeCookie } from 'lib/utils/session';
+} from '@/redux/constants';
 
 function* loginUser(action) {
 	try {
@@ -33,7 +34,6 @@ function* loginUser(action) {
 				avatar: res.data.avatar
 			};
 			setCookie('token', res.data.access_token);
-			//window.localStorage.setItem('token', res.data.access_token);
 			yield put(loginUserSucceedAction(user));
 			router.push('/');
 		} else {
@@ -67,13 +67,11 @@ function* currentUser() {
 				yield put(loginUserSucceedAction(res.data));
 			} else {
 				removeCookie('token');
-				//window.localStorage.removeItem('token');
 				yield put(logoutUserSucceedAction());
 			}
 		}
 	} catch (err) {
 		removeCookie('token');
-		//window.localStorage.removeItem('token');
 		yield put(logoutUserSucceedAction());
 		yield put(loginUserFailedAction(err.message));
 	}
@@ -85,7 +83,6 @@ function* logoutUser(action) {
 		const res = yield call(userAPI.logout);
 		if (res.success) {
 			removeCookie('token');
-			//window.localStorage.removeItem('token');
 			yield put(logoutUserSucceedAction());
 			router.push('/user/login');
 		}
@@ -108,13 +105,11 @@ function* singleUser(action) {
 
 function* updateUser(action) {
 	try {
-		const { user_name, user, router } = action.payload;
-		const res = yield call(userAPI.update, user_name, user);
+		const { user } = action.payload;
+		const res = yield call(userAPI.update, user);
 		if (res.success) {
-			yield put(updateUserSucceedAction(res.result));
-			removeCookie('token');
-			//window.localStorage.removeItem('token');
-			window.location.reload();
+			yield put(updateUserSucceedAction(res.data));
+			window.location.replace('/profile/' + res.data.user_name);
 		}
 	} catch (err) {
 		yield put(updateUserFailedAction(err.message));

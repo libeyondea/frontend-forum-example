@@ -1,16 +1,22 @@
 import { all } from 'redux-saga/effects';
-import { listPostWatcher, listPostTagWatcher, listPostCategoryWatcher, singlePostWatcher } from './postSaga';
-import { singleTagWatcher, listTagWatcher } from './tagSaga';
-import { singleCategoryWatcher, listCategoryWatcher } from './categorySaga';
-import { listCommentWatcher } from './commentSaga';
+
+import { listCategoryWatcher, singleCategoryWatcher } from '@/redux/sagas/categorySaga';
+import { createCommentWatcher, listCommentWatcher } from '@/redux/sagas/commentSaga';
 import {
-	loginUserWatcher,
-	registerUserWatcher,
+	listPostCategoryWatcher,
+	listPostTagWatcher,
+	listPostWatcher,
+	singlePostWatcher
+} from '@/redux/sagas/postSaga';
+import { listTagWatcher, singleTagWatcher } from '@/redux/sagas/tagSaga';
+import {
 	currentUserWatcher,
+	loginUserWatcher,
 	logoutUserWatcher,
+	registerUserWatcher,
 	singleUserWatcher,
 	updateUserWatcher
-} from './userSaga';
+} from '@/redux/sagas/userSaga';
 
 function* rootSaga() {
 	yield all([
@@ -28,7 +34,8 @@ function* rootSaga() {
 		logoutUserWatcher(),
 		singleUserWatcher(),
 		updateUserWatcher(),
-		listCommentWatcher()
+		listCommentWatcher(),
+		createCommentWatcher()
 	]);
 }
 

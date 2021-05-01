@@ -5,7 +5,7 @@ import {
 	SINGLE_CATEGORY_FAILED,
 	SINGLE_CATEGORY_REQUESTED,
 	SINGLE_CATEGORY_SUCCEED
-} from '../constants';
+} from '@/redux/constants';
 
 export const listCategoryRequestedAction = (page) => ({
 	type: LIST_CATEGORY_REQUESTED,

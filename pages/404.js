@@ -2,20 +2,17 @@ import React from 'react';
 
 const Error404 = () => {
 	return (
-		<div className="notfound">
-			<div className="noise" />
-			<div className="overlay" />
-			<div className="terminal">
-				<h1>
-					Error <span className="errorcode">404</span>
-				</h1>
-				<p className="output">
-					The page you are looking for might have been removed, had its name changed or is temporarily unavailable.
-				</p>
-				<p className="output">
-					Please try to <a href="#">go back</a> or <a href="/">return to the homepage</a>.
-				</p>
-				<p className="output">Good luck.</p>
+		<div className="notfound d-flex flex-row align-items-center">
+			<div className="container">
+				<div className="row justify-content-center">
+					<div className="col-md-12 text-center">
+						<span className="display-404 d-block">404</span>
+						<div className="mb-4 lead">The page you are looking for was not found.</div>
+						<a href="/" className="btn-link">
+							Back to Home
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
