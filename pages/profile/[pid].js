@@ -10,7 +10,9 @@ import Layout from '@/components/Common/Layout';
 import Maybe from '@/components/Common/Maybe';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
 import FollowUserButton from '@/components/User/FollowUserButton';
+import ListPostUser from '@/components/User/ListPostUser';
 import SettingsForm from '@/components/User/SettingsForm';
+import { listPostUserRequestedAction } from '@/redux/actions/postAction';
 import { singleUserRequestedAction } from '@/redux/actions/userAction';
 
 const Profile = () => {
@@ -19,12 +21,21 @@ const Profile = () => {
 	const singleUser = useSelector((state) => state.users.single_user);
 	const router = useRouter();
 	const {
-		query: { pid }
+		query: { page, pid },
+		isReady
 	} = router;
 
 	useEffect(() => {
-		dispatch(singleUserRequestedAction(pid));
-	}, [dispatch, pid]);
+		if (isReady) {
+			dispatch(singleUserRequestedAction(pid));
+		}
+	}, [dispatch, pid, isReady]);
+
+	useEffect(() => {
+		if (isReady) {
+			dispatch(listPostUserRequestedAction(pid, page));
+		}
+	}, [dispatch, pid, page, isReady]);
 
 	const handleFollow = async () => {};
 
@@ -141,7 +152,9 @@ const Profile = () => {
 								</Nav>
 								<Tab.Content className="bg-light p-4 rounded-lg shadow-sm">
 									<Tab.Pane eventKey="notification">Notification</Tab.Pane>
-									<Tab.Pane eventKey="activity">Activity</Tab.Pane>
+									<Tab.Pane eventKey="activity">
+										<ListPostUser />
+									</Tab.Pane>
 									<Maybe test={login.is_authenticated && singleUser.user?.user_name === login.user?.user_name}>
 										<Tab.Pane eventKey="editprofile">
 											<SettingsForm />

@@ -13,18 +13,12 @@ import CustomImage from '@/components/Common/CustomImage';
 import CustomLink from '@/components/Common/CustomLink';
 import Maybe from '@/components/Common/Maybe';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
-import { listCategoryRequestedAction } from '@/redux/actions/categoryAction';
 import { logoutUserRequestedAction } from '@/redux/actions/userAction';
 
 const NavBar = () => {
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const login = useSelector((state) => state.users.login);
-	const listCategory = useSelector((state) => state.categories.list_category);
-
-	useEffect(() => {
-		dispatch(listCategoryRequestedAction(1));
-	}, [dispatch]);
 
 	const handleLogoutUser = (e) => {
 		e.preventDefault();
@@ -55,25 +49,6 @@ const NavBar = () => {
 									<Nav.Link>Home</Nav.Link>
 								</Link>
 							</Nav.Item>
-							<Dropdown as={NavItem}>
-								<Dropdown.Toggle as={NavLink} id="dropdown-custom-1">
-									Categories
-								</Dropdown.Toggle>
-								<Dropdown.Menu align="right">
-									<MayBeSpinner test={listCategory.is_loading} spinner={<>Loading...</>}>
-										{listCategory.categories?.map((category) => (
-											<CustomLink
-												key={category.id}
-												href={`/category/[pid]`}
-												as={`/category/${category.slug}`}
-												className="dropdown-item"
-											>
-												{category.title}
-											</CustomLink>
-										))}
-									</MayBeSpinner>
-								</Dropdown.Menu>
-							</Dropdown>
 							<Maybe test={login.is_authenticated}>
 								<Nav.Item>
 									<Link href="/editor/new" as="/editor/new" passHref>

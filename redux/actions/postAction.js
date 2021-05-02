@@ -8,6 +8,9 @@ import {
 	LIST_POST_TAG_FAILED,
 	LIST_POST_TAG_REQUESTED,
 	LIST_POST_TAG_SUCCEED,
+	LIST_POST_USER_FAILED,
+	LIST_POST_USER_REQUESTED,
+	LIST_POST_USER_SUCCEED,
 	SINGLE_POST_FAILED,
 	SINGLE_POST_REQUESTED,
 	SINGLE_POST_SUCCEED
@@ -70,6 +73,27 @@ export const listPostCategorySucceedAction = (posts, posts_count) => ({
 });
 export const listPostCategoryFailedAction = (errors) => ({
 	type: LIST_POST_CATEGORY_FAILED,
+	payload: {
+		errors: errors
+	}
+});
+//
+export const listPostUserRequestedAction = (user_name, page) => ({
+	type: LIST_POST_USER_REQUESTED,
+	payload: {
+		user_name: user_name,
+		page: page
+	}
+});
+export const listPostUserSucceedAction = (posts, posts_count) => ({
+	type: LIST_POST_USER_SUCCEED,
+	payload: {
+		posts: posts,
+		posts_count: posts_count
+	}
+});
+export const listPostUserFailedAction = (errors) => ({
+	type: LIST_POST_USER_FAILED,
 	payload: {
 		errors: errors
 	}

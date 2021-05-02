@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import CustomLink from '@/components/Common/CustomLink';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
+import { listCategoryRequestedAction } from '@/redux/actions/categoryAction';
 import { listTagRequestedAction } from '@/redux/actions/tagAction';
+import LoadingSpinner from './LoadingSpinner';
 
 const SideBar = () => {
 	const dispatch = useDispatch();
@@ -12,7 +14,8 @@ const SideBar = () => {
 
 	useEffect(() => {
 		dispatch(listTagRequestedAction(1));
-	}, []);
+		dispatch(listCategoryRequestedAction(1));
+	}, [dispatch]);
 
 	return (
 		<div className="sticky-top">
@@ -21,7 +24,7 @@ const SideBar = () => {
 					<h4 className="mb-0">Categories</h4>
 				</div>
 				<div className="list-group">
-					<MayBeSpinner test={listCategory.is_loading} spinner={<>Loading...</>}>
+					<MayBeSpinner test={listCategory.is_loading} spinner={<LoadingSpinner />}>
 						{listCategory.categories?.map((category) => (
 							<li className="list-group-item-custom d-flex align-items-center px-3 py-2" key={category.id}>
 								<CustomLink href={`/category/[pid]`} as={`/category/${category.slug}`} className="text-decoration-none">
@@ -38,7 +41,7 @@ const SideBar = () => {
 					<h4 className="mb-0">Top tags</h4>
 				</div>
 				<div className="list-group">
-					<MayBeSpinner test={listTag.is_loading} spinner={<>Loading...</>}>
+					<MayBeSpinner test={listTag.is_loading} spinner={<LoadingSpinner />}>
 						{listTag.tags?.map((tag) => (
 							<li className="list-group-item-custom d-flex align-items-center border-0 px-3 py-2" key={tag.id}>
 								<CustomLink href={`/tag/[pid]`} as={`/tag/${tag.slug}`} className="text-decoration-none">

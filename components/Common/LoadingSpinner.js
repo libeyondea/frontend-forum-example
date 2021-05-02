@@ -1,5 +1,15 @@
 import React from 'react';
+import BeatLoader from 'react-spinners/BeatLoader';
+import { css } from 'styled-components';
 
-const LoadingSpinner = () => <></>;
+const override = css``;
+
+const LoadingSpinner = () => {
+	return (
+		<div>
+			<BeatLoader css={override} loading={true} size={20} color={'#323ebe'} />
+		</div>
+	);
+};
 
 export default LoadingSpinner;

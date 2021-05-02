@@ -7,7 +7,7 @@ import { getPageInfo, getRange } from '@/lib/utils/calculatePagination';
 
 const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
 	const router = useRouter();
-	if (total <= 20) return null;
+	if (total <= limit) return null;
 	const {
 		pathname,
 		query: { page }

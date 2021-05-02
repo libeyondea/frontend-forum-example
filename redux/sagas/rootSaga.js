@@ -5,6 +5,7 @@ import { createCommentWatcher, deleteCommentWatcher, listCommentWatcher } from '
 import {
 	listPostCategoryWatcher,
 	listPostTagWatcher,
+	listPostUserWatcher,
 	listPostWatcher,
 	singlePostWatcher
 } from '@/redux/sagas/postSaga';
@@ -23,6 +24,7 @@ function* rootSaga() {
 		listPostWatcher(),
 		listPostTagWatcher(),
 		listPostCategoryWatcher(),
+		listPostUserWatcher(),
 		singlePostWatcher(),
 		listTagWatcher(),
 		singleTagWatcher(),

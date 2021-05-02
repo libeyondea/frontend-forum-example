@@ -8,6 +8,9 @@ import {
 	LIST_POST_TAG_FAILED,
 	LIST_POST_TAG_REQUESTED,
 	LIST_POST_TAG_SUCCEED,
+	LIST_POST_USER_FAILED,
+	LIST_POST_USER_REQUESTED,
+	LIST_POST_USER_SUCCEED,
 	SINGLE_POST_FAILED,
 	SINGLE_POST_REQUESTED,
 	SINGLE_POST_SUCCEED
@@ -27,6 +30,12 @@ const initialState = {
 		errors: null
 	},
 	list_post_category: {
+		posts: [],
+		posts_count: 0,
+		is_loading: true,
+		errors: null
+	},
+	list_post_user: {
 		posts: [],
 		posts_count: 0,
 		is_loading: true,
@@ -117,6 +126,33 @@ const postReducer = (state = initialState, action) => {
 				...state,
 				list_post_category: {
 					...state.list_post_category,
+					errors: action.payload.errors
+				}
+			};
+		//
+		case LIST_POST_USER_REQUESTED:
+			return {
+				...state,
+				list_post_user: {
+					...state.list_post_user,
+					is_loading: true
+				}
+			};
+		case LIST_POST_USER_SUCCEED:
+			return {
+				...state,
+				list_post_user: {
+					...state.list_post_user,
+					posts: action.payload.posts,
+					posts_count: action.payload.posts_count,
+					is_loading: false
+				}
+			};
+		case LIST_POST_USER_FAILED:
+			return {
+				...state,
+				list_post_user: {
+					...state.list_post_user,
 					errors: action.payload.errors
 				}
 			};

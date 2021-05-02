@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Breadcrumb from '@/components/Common/Breadcrumb';
 import Layout from '@/components/Common/Layout';
+import LoadingSpinner from '@/components/Common/LoadingSpinner';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
 import Pagination from '@/components/Common/Pagination';
 import SideBar from '@/components/Common/SideBar';
@@ -17,23 +18,28 @@ const SingleTag = () => {
 	const listPostTag = useSelector((state) => state.posts.list_post_tag);
 	const router = useRouter();
 	const {
-		query: { pid, page }
+		query: { pid, page },
+		isReady
 	} = router;
 
 	useEffect(() => {
-		dispatch(singleTagRequestedAction(pid));
-	}, [dispatch, pid]);
+		if (isReady) {
+			dispatch(singleTagRequestedAction(pid));
+		}
+	}, [dispatch, isReady, pid]);
 
 	useEffect(() => {
-		dispatch(listPostTagRequestedAction(pid, page));
-	}, [dispatch, pid, page]);
+		if (isReady) {
+			dispatch(listPostTagRequestedAction(pid, page));
+		}
+	}, [dispatch, pid, page, isReady]);
 
 	return (
 		<Layout>
 			<div className="container my-4">
 				<div className="row">
 					<div className="col-lg-9">
-						<MayBeSpinner test={singleTag.is_loading || !singleTag.tag} spinner={<>Loading...</>}>
+						<MayBeSpinner test={singleTag.is_loading || !singleTag.tag} spinner={<LoadingSpinner />}>
 							<Breadcrumb
 								items={[
 									{
@@ -50,7 +56,10 @@ const SingleTag = () => {
 								]}
 							/>
 							<h1 className="mb-4">{singleTag.tag?.title}</h1>
-							<MayBeSpinner test={listPostTag.is_loading || listPostTag.posts.length === 0} spinner={<>Loading...</>}>
+							<MayBeSpinner
+								test={listPostTag.is_loading || listPostTag.posts.length === 0}
+								spinner={<LoadingSpinner />}
+							>
 								<div className="row">
 									{listPostTag.posts.map((post) => (
 										<div className="col-12 mb-4" key={post.id}>

@@ -8,6 +8,8 @@ import {
 	listPostSucceedAction,
 	listPostTagFailedAction,
 	listPostTagSucceedAction,
+	listPostUserFailedAction,
+	listPostUserSucceedAction,
 	singlePostFailedAction,
 	singlePostSucceedAction
 } from '@/redux/actions/postAction';
@@ -15,6 +17,7 @@ import {
 	LIST_POST_CATEGORY_REQUESTED,
 	LIST_POST_REQUESTED,
 	LIST_POST_TAG_REQUESTED,
+	LIST_POST_USER_REQUESTED,
 	SINGLE_POST_REQUESTED
 } from '@/redux/constants';
 
@@ -54,6 +57,18 @@ function* listPostCategory(action) {
 	}
 }
 
+function* listPostUser(action) {
+	try {
+		const { user_name, page } = action.payload;
+		const res = yield call(postAPI.listByUser, user_name, page);
+		if (res.success) {
+			yield put(listPostUserSucceedAction(res.data, res.meta.posts_count));
+		}
+	} catch (err) {
+		yield put(listPostUserFailedAction(err.message));
+	}
+}
+
 function* singlePost(action) {
 	try {
 		const { slug } = action.payload;
@@ -76,6 +91,10 @@ export function* listPostTagWatcher() {
 
 export function* listPostCategoryWatcher() {
 	yield takeLatest(LIST_POST_CATEGORY_REQUESTED, listPostCategory);
+}
+
+export function* listPostUserWatcher() {
+	yield takeLatest(LIST_POST_USER_REQUESTED, listPostUser);
 }
 
 export function* singlePostWatcher() {

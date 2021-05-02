@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Breadcrumb from '@/components/Common/Breadcrumb';
 import Layout from '@/components/Common/Layout';
+import LoadingSpinner from '@/components/Common/LoadingSpinner';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
 import Pagination from '@/components/Common/Pagination';
 import SideBar from '@/components/Common/SideBar';
@@ -17,23 +18,28 @@ const SingleCategory = () => {
 	const listPostCategory = useSelector((state) => state.posts.list_post_category);
 	const router = useRouter();
 	const {
-		query: { pid, page }
+		query: { pid, page },
+		isReady
 	} = router;
 
 	useEffect(() => {
-		dispatch(singleCategoryRequestedAction(pid));
-	}, [dispatch, pid]);
+		if (isReady) {
+			dispatch(singleCategoryRequestedAction(pid));
+		}
+	}, [dispatch, isReady, pid]);
 
 	useEffect(() => {
-		dispatch(listPostCategoryRequestedAction(pid, page));
-	}, [dispatch, pid, page]);
+		if (isReady) {
+			dispatch(listPostCategoryRequestedAction(pid, page));
+		}
+	}, [dispatch, pid, page, isReady]);
 
 	return (
 		<Layout>
 			<div className="container my-4">
 				<div className="row">
 					<div className="col-lg-9">
-						<MayBeSpinner test={singleCategory.is_loading || !singleCategory.category} spinner={<>Loading...</>}>
+						<MayBeSpinner test={singleCategory.is_loading || !singleCategory.category} spinner={<LoadingSpinner />}>
 							<Breadcrumb
 								items={[
 									{
@@ -52,7 +58,7 @@ const SingleCategory = () => {
 							<h1 className="mb-4">{singleCategory.category?.title}</h1>
 							<MayBeSpinner
 								test={listPostCategory.is_loading || listPostCategory.posts.length === 0}
-								spinner={<>Loading...</>}
+								spinner={<LoadingSpinner />}
 							>
 								<div className="row">
 									{listPostCategory.posts.map((post) => (

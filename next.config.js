@@ -35,7 +35,7 @@ module.exports = (phase) => {
 			LIST_POST_FAVORITED: 10,
 			LIST_TAG: 20,
 			LIST_CATEGORY: 20,
-			LIST_COMMENT: 10
+			LIST_COMMENT: 5
 		},
 		REQUEST: {
 			TIMEOUT: 30000
