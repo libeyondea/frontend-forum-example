@@ -14,7 +14,7 @@ function* listTag(action) {
 	try {
 		const res = yield call(tagAPI.list, page);
 		if (res.success) {
-			yield put(listTagSucceedAction(res.data));
+			yield put(listTagSucceedAction(res.data, res.meta.tags_count));
 		}
 	} catch (err) {
 		yield put(listTagFailedAction(err.message));

@@ -7,7 +7,9 @@ const Breadcrumb = ({ items = [] }) => {
 			{items.map((item, index) =>
 				items.indexOf(item) !== countArr ? (
 					<li key={index} className="breadcrumb-item">
-						<CustomLink href={item.href}>{item.title}</CustomLink>
+						<CustomLink className="text-decoration-none" href={item.href}>
+							{item.title}
+						</CustomLink>
 					</li>
 				) : (
 					<li key={index} className="breadcrumb-item active">

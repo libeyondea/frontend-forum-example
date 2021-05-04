@@ -6,7 +6,7 @@ import CustomLink from '@/components/Common/CustomLink';
 
 const Comment = ({ comment }) => {
 	return (
-		<div className="media mb-5">
+		<div className="media mb-4">
 			<CustomLink href="/profile/[pid]" as={`/profile/${comment.user?.user_name}`}>
 				<CustomImage
 					width="50"

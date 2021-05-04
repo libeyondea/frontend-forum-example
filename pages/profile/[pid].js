@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Breadcrumb from '@/components/Common/Breadcrumb';
 import CustomImage from '@/components/Common/CustomImage';
 import Layout from '@/components/Common/Layout';
+import LoadingSpinner from '@/components/Common/LoadingSpinner';
 import Maybe from '@/components/Common/Maybe';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
 import FollowUserButton from '@/components/User/FollowUserButton';
@@ -44,7 +45,7 @@ const Profile = () => {
 	return (
 		<Layout>
 			<div className="container my-4">
-				<MayBeSpinner test={singleUser.is_loading || !singleUser.user} spinner={<>Loading...</>}>
+				<MayBeSpinner test={singleUser.is_loading || !singleUser.user} spinner={<LoadingSpinner />}>
 					<Breadcrumb
 						items={[
 							{
@@ -73,7 +74,7 @@ const Profile = () => {
 								/>
 								<Maybe test={login.is_authenticated && singleUser.user?.user_name === login.user?.user_name}>
 									<h6>Upload a different photo...</h6>
-									<input type="file" className="text-center center-block file-upload" />
+									{/* <input type="file" className="text-center center-block file-upload" /> */}
 								</Maybe>
 								<div>
 									<Maybe test={login.is_authenticated}>
@@ -92,7 +93,7 @@ const Profile = () => {
 									Website <i className="fa fa-link fa-1x" />
 								</div>
 								<div className="card-body">
-									<a href="http://bootnipets.com">de4thzone.com</a>
+									<a href="https://de4thzone.com">de4thzone.com</a>
 								</div>
 							</div>
 							<ul className="list-group mb-4 rounded-lg shadow-sm">
@@ -101,27 +102,27 @@ const Profile = () => {
 								</li>
 								<li className="list-group-item text-right">
 									<span className="pull-left">
-										<strong>Shares</strong>
+										<strong>Posts published</strong>
 									</span>
-									125
+									666
+								</li>
+								<li className="list-group-item text-right">
+									<span className="pull-left">
+										<strong>Comment written</strong>
+									</span>
+									66
 								</li>
 								<li className="list-group-item text-right">
 									<span className="pull-left">
 										<strong>Likes</strong>
 									</span>
-									13
+									66
 								</li>
 								<li className="list-group-item text-right">
 									<span className="pull-left">
-										<strong>Posts</strong>
+										<strong>Tags followed</strong>
 									</span>
-									37
-								</li>
-								<li className="list-group-item text-right">
-									<span className="pull-left">
-										<strong>Followers</strong>
-									</span>
-									78
+									66
 								</li>
 							</ul>
 							<div className="card">
@@ -136,13 +137,10 @@ const Profile = () => {
 							</div>
 						</div>
 						<div className="col-lg-9">
-							<Tab.Container id="profile-tabs" defaultActiveKey="notification">
+							<Tab.Container id="profile-tabs" defaultActiveKey="posts-published">
 								<Nav as="nav" className="nav-tabs">
 									<Nav.Item as="li">
-										<Nav.Link eventKey="notification">Notification</Nav.Link>
-									</Nav.Item>
-									<Nav.Item as="li">
-										<Nav.Link eventKey="activity">Activity</Nav.Link>
+										<Nav.Link eventKey="posts-published">Posts published</Nav.Link>
 									</Nav.Item>
 									<Maybe test={login.is_authenticated && singleUser.user?.user_name === login.user?.user_name}>
 										<Nav.Item as="li">
@@ -151,8 +149,7 @@ const Profile = () => {
 									</Maybe>
 								</Nav>
 								<Tab.Content className="bg-light p-4 rounded-lg shadow-sm">
-									<Tab.Pane eventKey="notification">Notification</Tab.Pane>
-									<Tab.Pane eventKey="activity">
+									<Tab.Pane eventKey="posts-published">
 										<ListPostUser />
 									</Tab.Pane>
 									<Maybe test={login.is_authenticated && singleUser.user?.user_name === login.user?.user_name}>

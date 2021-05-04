@@ -13,10 +13,11 @@ export const listTagRequestedAction = (page) => ({
 		page: page
 	}
 });
-export const listTagSucceedAction = (tags) => ({
+export const listTagSucceedAction = (tags, tags_count) => ({
 	type: LIST_TAG_SUCCEED,
 	payload: {
-		tags: tags
+		tags: tags,
+		tags_count: tags_count
 	}
 });
 export const listTagFailedAction = (errors) => ({

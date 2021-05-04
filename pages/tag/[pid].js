@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import Breadcrumb from '@/components/Common/Breadcrumb';
 import Layout from '@/components/Common/Layout';
 import LoadingSpinner from '@/components/Common/LoadingSpinner';
+import Maybe from '@/components/Common/Maybe';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
 import Pagination from '@/components/Common/Pagination';
-import SideBar from '@/components/Common/SideBar';
+import SideBarRight from '@/components/Common/SideBarRight';
 import PostCard from '@/components/Post/PostCard';
+import useViewport from '@/lib/hooks/useViewport';
 import { listPostTagRequestedAction } from '@/redux/actions/postAction';
 import { singleTagRequestedAction } from '@/redux/actions/tagAction';
 
@@ -17,6 +19,7 @@ const SingleTag = () => {
 	const singleTag = useSelector((state) => state.tags.single_tag);
 	const listPostTag = useSelector((state) => state.posts.list_post_tag);
 	const router = useRouter();
+	const viewPort = useViewport();
 	const {
 		query: { pid, page },
 		isReady
@@ -36,9 +39,9 @@ const SingleTag = () => {
 
 	return (
 		<Layout>
-			<div className="container my-4">
+			<div className="container-xl my-4">
 				<div className="row">
-					<div className="col-lg-9">
+					<div className="col-xl-9 col-md-8">
 						<MayBeSpinner test={singleTag.is_loading || !singleTag.tag} spinner={<LoadingSpinner />}>
 							<Breadcrumb
 								items={[
@@ -48,7 +51,7 @@ const SingleTag = () => {
 									},
 									{
 										title: 'Tag',
-										href: '/'
+										href: '/tags'
 									},
 									{
 										title: singleTag.tag?.title
@@ -75,9 +78,11 @@ const SingleTag = () => {
 							</MayBeSpinner>
 						</MayBeSpinner>
 					</div>
-					<div className="col-lg-3">
-						<SideBar />
-					</div>
+					<Maybe test={viewPort.vw >= 768}>
+						<div className="col-xl-3 col-md-4">
+							<SideBarRight />
+						</div>
+					</Maybe>
 				</div>
 			</div>
 		</Layout>

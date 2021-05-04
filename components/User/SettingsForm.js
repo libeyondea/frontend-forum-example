@@ -1,11 +1,11 @@
 import { Form, Formik } from 'formik';
-import { useRouter } from 'next/router';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
 import InputForm from '@/components/Form/InputForm';
 import SelectForm from '@/components/Form/SelectForm';
+import TextForm from '@/components/Form/TextForm';
 import { updateUserRequestedAction } from '@/redux/actions/userAction';
 
 const SettingsForm = () => {
@@ -35,7 +35,7 @@ const SettingsForm = () => {
 		user_name: Yup.string()
 			.min(6, 'User name must be at least 6 characters')
 			.max(66, 'User name must be at most 66 characters')
-			.matches(/^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, 'User name invalid')
+			.matches(/^(?![_.-])(?!.*[_.-]{2})[a-zA-Z0-9._-]+(?<![_.-])$/, 'User name invalid')
 			.required('User name is required'),
 		email: Yup.string()
 			.matches(
@@ -51,7 +51,7 @@ const SettingsForm = () => {
 			.min(6, 'Address must be at least 6 characters')
 			.max(66, 'Address must be at most 66 characters')
 			.nullable(),
-		avatar: Yup.string().max(666, 'Image must be at most 666 characters'),
+		avatar: Yup.string().max(666, 'Image must be at most 666 characters').nullable(),
 		gender: Yup.string().oneOf(['male', 'female', 'orther', null], 'Gender invalid').nullable()
 	});
 	const onSubmit = (values) => {
@@ -73,54 +73,56 @@ const SettingsForm = () => {
 	return (
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 			<Form>
-				<div className="form-group">
-					<InputForm label="First name" placeholder="First name" id="first_name" name="first_name" type="text" />
-				</div>
-				<div className="form-group">
-					<InputForm label="Last name" placeholder="Last name" id="last_name" name="last_name" type="text" />
-				</div>
-				<div className="form-group">
-					<InputForm
-						label="User name"
-						placeholder="User name"
-						id="user_name"
-						name="user_name"
-						type="text"
-						errors={updateUser.errors?.user_name}
-					/>
-				</div>
-				<div className="form-group">
-					<InputForm
-						label="Email"
-						placeholder="Email"
-						id="email"
-						name="email"
-						type="text"
-						errors={updateUser.errors?.email}
-					/>
-				</div>
-				<div className="form-group">
-					<InputForm
-						label="Phone number"
-						placeholder="84 336 077 131"
-						id="phone_number"
-						name="phone_number"
-						type="text"
-					/>
-				</div>
-				<div className="form-group">
-					<InputForm label="Address" placeholder="Address" id="address" name="address" type="text" />
-				</div>
-				<div className="form-group">
-					<SelectForm label="Gender" name="gender">
-						<option value={gender[0]}>Select gender</option>
-						<option value={gender[1]}>Male</option>
-						<option value={gender[2]}>Female</option>
-						<option value={gender[3]}>Other</option>
-					</SelectForm>
-				</div>
-				<div className="form-group">
-					<InputForm label="Image" placeholder="Avatar" id="avatar" name="avatar" type="text" />
+				<div className="form-row">
+					<div className="form-group col-md-6">
+						<InputForm label="First name" placeholder="First name" id="first_name" name="first_name" type="text" />
+					</div>
+					<div className="form-group col-md-6">
+						<InputForm label="Last name" placeholder="Last name" id="last_name" name="last_name" type="text" />
+					</div>
+					<div className="form-group col-md-6">
+						<InputForm
+							label="Email"
+							placeholder="Email"
+							id="email"
+							name="email"
+							type="text"
+							errors={updateUser.errors?.email}
+						/>
+					</div>
+					<div className="form-group col-md-6">
+						<InputForm
+							label="User name"
+							placeholder="User name"
+							id="user_name"
+							name="user_name"
+							type="text"
+							errors={updateUser.errors?.user_name}
+						/>
+					</div>
+					<div className="form-group col-md-6">
+						<InputForm
+							label="Phone number"
+							placeholder="84 336 077 131"
+							id="phone_number"
+							name="phone_number"
+							type="text"
+						/>
+					</div>
+					<div className="form-group col-md-6">
+						<SelectForm label="Gender" name="gender">
+							<option value={gender[0]}>Select gender</option>
+							<option value={gender[1]}>Male</option>
+							<option value={gender[2]}>Female</option>
+							<option value={gender[3]}>Other</option>
+						</SelectForm>
+					</div>
+					<div className="form-group col-md-12">
+						<TextForm rows="3" label="Address" placeholder="Address" id="address" name="address" />
+					</div>
+					<div className="form-group col-md-12">
+						<TextForm rows="6" label="Avatar (Url or Base64)" placeholder="Avatar" id="avatar" name="avatar" />
+					</div>
 				</div>
 				<div className="text-left">
 					{updateUser.is_loading ? (

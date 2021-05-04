@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 
 import CustomLink from '@/components/Common/CustomLink';
 import FacebookLoginButton from '@/components/Common/FacebookLoginButton';
-import GithubLoginButton from '@/components/Common/GithubLoginButton';
 import GoogleLoginButton from '@/components/Common/GoogleLoginButton';
 import InputForm from '@/components/Form/InputForm';
 import { loginUserRequestedAction } from '@/redux/actions/userAction';
@@ -34,7 +33,6 @@ const LoginForm = () => {
 	};
 
 	const handleSocialLogin = (res) => {
-		console.log(res);
 		const user = {
 			access_token: res._token.accessToken,
 			provider: res._provider
@@ -48,7 +46,7 @@ const LoginForm = () => {
 	return (
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 			<Form>
-				<h2 className="text-center mb-3">Login now</h2>
+				<h2 className="text-center mb-3">Login</h2>
 				<div className="form-group">
 					<InputForm
 						label="User name"
@@ -77,7 +75,9 @@ const LoginForm = () => {
 						</label>
 					</div>
 					<span>
-						<a href="#!">Forgot password?</a>
+						<CustomLink className="text-decoration-none" href="/user/forgot-password">
+							Forgot password?
+						</CustomLink>
 					</span>
 				</div>
 				<div className="text-center">
@@ -93,7 +93,7 @@ const LoginForm = () => {
 					)}
 					<p className="mt-3">
 						Not a member?{' '}
-						<CustomLink href="/user/register" as="/user/register">
+						<CustomLink className="text-decoration-none" href="/user/register">
 							Need an account?
 						</CustomLink>
 					</p>
@@ -109,9 +109,6 @@ const LoginForm = () => {
 							handleSocialLogin={handleSocialLogin}
 							handleSocialLoginFailure={handleSocialLoginFailure}
 						/>
-					</div>
-					<div>
-						<GithubLoginButton />
 					</div>
 				</div>
 			</Form>

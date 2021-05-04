@@ -19,8 +19,8 @@ const CommentMeta = ({ comment }) => {
 	};
 	return (
 		<div className="mod-options d-flex justify-content-start">
-			<a href="#!" className="text-decoration-none text-danger mr-3">
-				<i className="fa fa-heart fa-sm"></i> 666 likes
+			<a href="#!" className="text-decoration-none text-secondary mr-3">
+				<i className="fa fa-heart-o fa-sm"></i> 666 likes
 			</a>
 			<a href="#!" className="text-decoration-none text-secondary mr-3">
 				<i className="fa fa-comment-o fa-sm"></i> 666 Reply

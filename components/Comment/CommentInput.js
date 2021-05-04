@@ -37,11 +37,11 @@ const CommentInput = () => {
 	if (!login.is_authenticated) {
 		return (
 			<div className="mb-3">
-				<CustomLink href="/user/login" as="/user/login">
+				<CustomLink className="text-decoration-none" href="/user/login">
 					Login
 				</CustomLink>
 				&nbsp;or&nbsp;
-				<CustomLink href="/user/register" as="/user/register">
+				<CustomLink className="text-decoration-none" href="/user/register">
 					Register
 				</CustomLink>
 				&nbsp;to add comments on this post.

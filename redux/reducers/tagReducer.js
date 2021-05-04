@@ -10,6 +10,7 @@ import {
 const initialState = {
 	list_tag: {
 		tags: [],
+		tags_count: 0,
 		is_loading: true,
 		errors: null
 	},
@@ -35,6 +36,7 @@ const tagReducer = (state = initialState, action) => {
 				list_tag: {
 					...state.list_tag,
 					tags: action.payload.tags,
+					tags_count: action.payload.tags_count,
 					is_loading: false
 				}
 			};

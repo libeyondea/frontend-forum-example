@@ -68,7 +68,7 @@ const userReducer = (state = initialState, action) => {
 					is_loading: false
 				}
 			};
-
+		//
 		case REGISTER_USER_REQUESTED:
 			return {
 				...state,
@@ -95,7 +95,7 @@ const userReducer = (state = initialState, action) => {
 					is_loading: false
 				}
 			};
-
+		//
 		case LOGOUT_USER_SUCCEED:
 			return {
 				...state,

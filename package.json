@@ -1,6 +1,6 @@
 {
 	"name": "frontend-forum-example",
-	"version": "1.0.0",
+	"version": "1.2.1",
 	"author": "de4th-zone",
 	"scripts": {
 		"dev": "next dev -p 999",
@@ -12,7 +12,6 @@
 		"bootstrap": "^4.6.0",
 		"classnames": "^2.3.1",
 		"formik": "^2.2.6",
-		"html-react-parser": "^1.2.6",
 		"js-cookie": "^2.2.1",
 		"jwt-decode": "^3.1.2",
 		"lazysizes": "^5.3.2",
@@ -26,11 +25,8 @@
 		"react": "^17.0.2",
 		"react-bootstrap": "^1.5.2",
 		"react-dom": "^17.0.2",
-		"react-facebook-login": "^4.1.1",
-		"react-google-login": "^5.2.2",
 		"react-redux": "^7.2.3",
 		"react-social-login": "^3.4.13",
-		"react-social-login-buttons": "^3.4.0",
 		"react-spinners": "^0.10.6",
 		"redux": "^4.0.5",
 		"redux-saga": "^1.1.3",
