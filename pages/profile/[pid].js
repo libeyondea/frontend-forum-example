@@ -6,15 +6,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Breadcrumb from '@/components/Common/Breadcrumb';
 import CustomImage from '@/components/Common/CustomImage';
+import CustomLink from '@/components/Common/CustomLink';
 import Layout from '@/components/Common/Layout';
 import LoadingSpinner from '@/components/Common/LoadingSpinner';
 import Maybe from '@/components/Common/Maybe';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
 import FollowUserButton from '@/components/User/FollowUserButton';
 import ListPostUser from '@/components/User/ListPostUser';
-import SettingsForm from '@/components/User/SettingsForm';
 import { listPostUserRequestedAction } from '@/redux/actions/postAction';
-import { singleUserRequestedAction } from '@/redux/actions/userAction';
+import {
+	followUserRequestedAction,
+	singleUserRequestedAction,
+	unFollowUserRequestedAction
+} from '@/redux/actions/userAction';
 
 const Profile = () => {
 	const dispatch = useDispatch();
@@ -38,9 +42,13 @@ const Profile = () => {
 		}
 	}, [dispatch, pid, page, isReady]);
 
-	const handleFollow = async () => {};
+	const handleFollow = () => {
+		dispatch(followUserRequestedAction(singleUser.user?.user_name));
+	};
 
-	const handleUnfollow = async () => {};
+	const handleUnfollow = () => {
+		dispatch(unFollowUserRequestedAction(singleUser.user?.user_name));
+	};
 
 	return (
 		<Layout>
@@ -74,7 +82,9 @@ const Profile = () => {
 								/>
 								<Maybe test={login.is_authenticated && singleUser.user?.user_name === login.user?.user_name}>
 									<h6>Upload a different photo...</h6>
-									{/* <input type="file" className="text-center center-block file-upload" /> */}
+									<CustomLink className="btn btn-primary" href="/profile/settings">
+										Edit profile
+									</CustomLink>
 								</Maybe>
 								<div>
 									<Maybe test={login.is_authenticated}>
@@ -104,7 +114,7 @@ const Profile = () => {
 									<span className="pull-left">
 										<strong>Posts published</strong>
 									</span>
-									666
+									{singleUser.user?.total_posts}
 								</li>
 								<li className="list-group-item text-right">
 									<span className="pull-left">
@@ -142,21 +152,15 @@ const Profile = () => {
 									<Nav.Item as="li">
 										<Nav.Link eventKey="posts-published">Posts published</Nav.Link>
 									</Nav.Item>
-									<Maybe test={login.is_authenticated && singleUser.user?.user_name === login.user?.user_name}>
-										<Nav.Item as="li">
-											<Nav.Link eventKey="editprofile">Edit profile</Nav.Link>
-										</Nav.Item>
-									</Maybe>
+									<Nav.Item as="li">
+										<Nav.Link eventKey="more">More</Nav.Link>
+									</Nav.Item>
 								</Nav>
 								<Tab.Content className="bg-light p-4 rounded-lg shadow-sm">
 									<Tab.Pane eventKey="posts-published">
 										<ListPostUser />
 									</Tab.Pane>
-									<Maybe test={login.is_authenticated && singleUser.user?.user_name === login.user?.user_name}>
-										<Tab.Pane eventKey="editprofile">
-											<SettingsForm />
-										</Tab.Pane>
-									</Maybe>
+									<Tab.Pane eventKey="more">More</Tab.Pane>
 								</Tab.Content>
 							</Tab.Container>
 						</div>

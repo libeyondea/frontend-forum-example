@@ -12,10 +12,13 @@ import {
 import { listTagWatcher, singleTagWatcher } from '@/redux/sagas/tagSaga';
 import {
 	currentUserWatcher,
+	editUserWatcher,
+	followUserWatcher,
 	loginUserWatcher,
 	logoutUserWatcher,
 	registerUserWatcher,
 	singleUserWatcher,
+	unFollowUserWatcher,
 	updateUserWatcher
 } from '@/redux/sagas/userSaga';
 
@@ -38,7 +41,10 @@ function* rootSaga() {
 		updateUserWatcher(),
 		listCommentWatcher(),
 		createCommentWatcher(),
-		deleteCommentWatcher()
+		deleteCommentWatcher(),
+		followUserWatcher(),
+		unFollowUserWatcher(),
+		editUserWatcher()
 	]);
 }
 

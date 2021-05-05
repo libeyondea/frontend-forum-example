@@ -9,7 +9,7 @@ const SideBarLeft = () => {
 				<div className="px-2 py-2">
 					<h5 className="mb-0">Options</h5>
 				</div>
-				<div className="list-group">
+				<ul className="list-group">
 					<li className="list-group-item-custom d-flex align-items-center border-0 px-2 py-2">
 						<CustomLink href="/" className="text-decoration-none">
 							<i className="fa fa-home fa-sm" /> Home
@@ -35,13 +35,13 @@ const SideBarLeft = () => {
 							<i className="fa fa-info fa-sm" /> Contact
 						</CustomLink>
 					</li>
-				</div>
+				</ul>
 			</div>
 			<div className="mb-4">
 				<div className="px-2 py-2">
 					<h5 className="mb-0">My Tags</h5>
 				</div>
-				<div className="list-group">
+				<ul className="list-group">
 					<li className="list-group-item-custom d-flex align-items-center border-0 px-2 py-2">
 						<CustomLink href={`/tag/[pid]`} as={`/tag/next`} className="text-decoration-none">
 							<span className="text-secondary">#</span>next
@@ -52,7 +52,7 @@ const SideBarLeft = () => {
 							<span className="text-secondary">#</span>react
 						</CustomLink>
 					</li>
-				</div>
+				</ul>
 			</div>
 		</div>
 	);

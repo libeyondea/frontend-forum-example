@@ -1,5 +1,8 @@
 import {
 	CURRENT_USER_REQUESTED,
+	FOLLOW_USER_FAILED,
+	FOLLOW_USER_REQUESTED,
+	FOLLOW_USER_SUCCEED,
 	LOGIN_USER_FAILED,
 	LOGIN_USER_REQUESTED,
 	LOGIN_USER_SUCCEED,
@@ -9,9 +12,15 @@ import {
 	REGISTER_USER_FAILED,
 	REGISTER_USER_REQUESTED,
 	REGISTER_USER_SUCCEED,
+	EDIT_USER_FAILED,
+	EDIT_USER_REQUESTED,
+	EDIT_USER_SUCCEED,
 	SINGLE_USER_FAILED,
 	SINGLE_USER_REQUESTED,
 	SINGLE_USER_SUCCEED,
+	UNFOLLOW_USER_FAILED,
+	UNFOLLOW_USER_REQUESTED,
+	UNFOLLOW_USER_SUCCEED,
 	UPDATE_USER_FAILED,
 	UPDATE_USER_REQUESTED,
 	UPDATE_USER_SUCCEED
@@ -110,6 +119,60 @@ export const updateUserSucceedAction = (user) => ({
 });
 export const updateUserFailedAction = (errors) => ({
 	type: UPDATE_USER_FAILED,
+	payload: {
+		errors: errors
+	}
+});
+//
+export const followUserRequestedAction = (user_name) => ({
+	type: FOLLOW_USER_REQUESTED,
+	payload: {
+		user_name: user_name
+	}
+});
+export const followUserSucceedAction = (user) => ({
+	type: FOLLOW_USER_SUCCEED,
+	payload: {
+		user: user
+	}
+});
+export const followUserFailedAction = (errors) => ({
+	type: FOLLOW_USER_FAILED,
+	payload: {
+		errors: errors
+	}
+});
+//
+export const unFollowUserRequestedAction = (user_name) => ({
+	type: UNFOLLOW_USER_REQUESTED,
+	payload: {
+		user_name: user_name
+	}
+});
+export const unFollowUserSucceedAction = (user) => ({
+	type: UNFOLLOW_USER_SUCCEED,
+	payload: {
+		user: user
+	}
+});
+export const unFollowUserFailedAction = (errors) => ({
+	type: UNFOLLOW_USER_FAILED,
+	payload: {
+		errors: errors
+	}
+});
+//
+export const editUserRequestedAction = () => ({
+	type: EDIT_USER_REQUESTED
+});
+export const editUserSucceedAction = (user) => ({
+	type: EDIT_USER_SUCCEED,
+	payload: {
+		user: user
+	}
+});
+export const editUserFailedAction = (errors) => ({
+	type: EDIT_USER_FAILED,
 	payload: {
 		errors: errors
 	}

@@ -1,4 +1,7 @@
 import {
+	FOLLOW_USER_FAILED,
+	FOLLOW_USER_REQUESTED,
+	FOLLOW_USER_SUCCEED,
 	LOGIN_USER_FAILED,
 	LOGIN_USER_REQUESTED,
 	LOGIN_USER_SUCCEED,
@@ -7,9 +10,15 @@ import {
 	REGISTER_USER_FAILED,
 	REGISTER_USER_REQUESTED,
 	REGISTER_USER_SUCCEED,
+	EDIT_USER_FAILED,
+	EDIT_USER_REQUESTED,
+	EDIT_USER_SUCCEED,
 	SINGLE_USER_FAILED,
 	SINGLE_USER_REQUESTED,
 	SINGLE_USER_SUCCEED,
+	UNFOLLOW_USER_FAILED,
+	UNFOLLOW_USER_REQUESTED,
+	UNFOLLOW_USER_SUCCEED,
 	UPDATE_USER_FAILED,
 	UPDATE_USER_REQUESTED,
 	UPDATE_USER_SUCCEED
@@ -35,6 +44,21 @@ const initialState = {
 	update_user: {
 		user: {},
 		is_loading: false,
+		errors: null
+	},
+	follow_user: {
+		user: {},
+		is_loading: false,
+		errors: null
+	},
+	unfollow_user: {
+		user: {},
+		is_loading: false,
+		errors: null
+	},
+	edit_user: {
+		user: {},
+		is_loading: true,
 		errors: null
 	}
 };
@@ -162,6 +186,98 @@ const userReducer = (state = initialState, action) => {
 				...state,
 				update_user: {
 					...state.update_user,
+					errors: action.payload.errors
+				}
+			};
+		//
+		case FOLLOW_USER_REQUESTED:
+			return {
+				...state,
+				follow_user: {
+					...state.follow_user,
+					is_loading: true
+				}
+			};
+		case FOLLOW_USER_SUCCEED:
+			return {
+				...state,
+				follow_user: {
+					...state.follow_user,
+					user: action.payload.user,
+					is_loading: false
+				},
+				single_user: {
+					...state.single_user,
+					user: {
+						...state.single_user.user,
+						following: state.single_user.user.id === action.payload.user.id
+					}
+				}
+			};
+		case FOLLOW_USER_FAILED:
+			return {
+				...state,
+				follow_user: {
+					...state.follow_user,
+					errors: action.payload.errors
+				}
+			};
+		//
+		case UNFOLLOW_USER_REQUESTED:
+			return {
+				...state,
+				unfollow_user: {
+					...state.unfollow_user,
+					is_loading: true
+				}
+			};
+		case UNFOLLOW_USER_SUCCEED:
+			return {
+				...state,
+				unfollow_user: {
+					...state.unfollow_user,
+					user: action.payload.user,
+					is_loading: false
+				},
+				single_user: {
+					...state.single_user,
+					user: {
+						...state.single_user.user,
+						following: !state.single_user.user.id === action.payload.user.id
+					}
+				}
+			};
+		case UNFOLLOW_USER_FAILED:
+			return {
+				...state,
+				unfollow_user: {
+					...state.unfollow_user,
+					errors: action.payload.errors
+				}
+			};
+		//
+		case EDIT_USER_REQUESTED:
+			return {
+				...state,
+				edit_user: {
+					...state.edit_user,
+					is_loading: true
+				}
+			};
+		case EDIT_USER_SUCCEED:
+			return {
+				...state,
+				edit_user: {
+					...state.edit_user,
+					user: action.payload.user,
+					is_loading: false
+				}
+			};
+		case EDIT_USER_FAILED:
+			return {
+				...state,
+				edit_user: {
+					...state.edit_user,
 					errors: action.payload.errors
 				}
 			};

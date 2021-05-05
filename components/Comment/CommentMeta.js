@@ -15,7 +15,7 @@ const CommentMeta = ({ comment }) => {
 
 	const deleteCommentHandle = (e) => {
 		e.preventDefault();
-		dispatch(deleteCommentRequestedAction(pid, comment.id));
+		dispatch(deleteCommentRequestedAction(comment.id, pid));
 	};
 	return (
 		<div className="mod-options d-flex justify-content-start">

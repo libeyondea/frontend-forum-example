@@ -1,8 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
+import followAPI from '@/lib/api/follow';
 import userAPI from '@/lib/api/user';
 import { getCookie, removeCookie, setCookie } from '@/lib/utils/session';
 import {
+	editUserFailedAction,
+	editUserSucceedAction,
+	followUserFailedAction,
+	followUserSucceedAction,
 	loginUserFailedAction,
 	loginUserSucceedAction,
 	logoutUserFailedAction,
@@ -11,15 +16,20 @@ import {
 	registerUserSucceedAction,
 	singleUserFailedAction,
 	singleUserSucceedAction,
+	unFollowUserFailedAction,
+	unFollowUserSucceedAction,
 	updateUserFailedAction,
 	updateUserSucceedAction
 } from '@/redux/actions/userAction';
 import {
 	CURRENT_USER_REQUESTED,
+	EDIT_USER_REQUESTED,
+	FOLLOW_USER_REQUESTED,
 	LOGIN_USER_REQUESTED,
 	LOGOUT_USER_REQUESTED,
 	REGISTER_USER_REQUESTED,
 	SINGLE_USER_REQUESTED,
+	UNFOLLOW_USER_REQUESTED,
 	UPDATE_USER_REQUESTED
 } from '@/redux/constants';
 
@@ -116,6 +126,41 @@ function* updateUser(action) {
 	}
 }
 
+function* followUser(action) {
+	try {
+		const { user_name } = action.payload;
+		const res = yield call(followAPI.follow, user_name);
+		if (res.success) {
+			yield put(followUserSucceedAction(res.data));
+		}
+	} catch (err) {
+		yield put(followUserFailedAction(err.message));
+	}
+}
+
+function* unFollowUser(action) {
+	try {
+		const { user_name } = action.payload;
+		const res = yield call(followAPI.unFollow, user_name);
+		if (res.success) {
+			yield put(unFollowUserSucceedAction(res.data));
+		}
+	} catch (err) {
+		yield put(unFollowUserFailedAction(err.message));
+	}
+}
+
+function* editUser() {
+	try {
+		const res = yield call(userAPI.edit);
+		if (res.success) {
+			yield put(editUserSucceedAction(res.data));
+		}
+	} catch (err) {
+		yield put(editUserFailedAction(err.message));
+	}
+}
+
 export function* loginUserWatcher() {
 	yield takeLatest(LOGIN_USER_REQUESTED, loginUser);
 }
@@ -138,4 +183,16 @@ export function* singleUserWatcher() {
 
 export function* updateUserWatcher() {
 	yield takeLatest(UPDATE_USER_REQUESTED, updateUser);
+}
+
+export function* followUserWatcher() {
+	yield takeLatest(FOLLOW_USER_REQUESTED, followUser);
+}
+
+export function* unFollowUserWatcher() {
+	yield takeLatest(UNFOLLOW_USER_REQUESTED, unFollowUser);
+}
+
+export function* editUserWatcher() {
+	yield takeLatest(EDIT_USER_REQUESTED, editUser);
 }

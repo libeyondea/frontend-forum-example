@@ -23,7 +23,7 @@ const SideBarRight = () => {
 				<div className="px-3 py-2 border-bottom">
 					<h5 className="mb-0">Categories</h5>
 				</div>
-				<div className="list-group">
+				<ul className="list-group">
 					<MayBeSpinner test={listCategory.is_loading} spinner={<LoadingSpinner />}>
 						{listCategory.categories?.map((category) => (
 							<li className="list-group-item-custom d-flex align-items-center px-3 py-2" key={category.id}>
@@ -34,13 +34,13 @@ const SideBarRight = () => {
 							</li>
 						))}
 					</MayBeSpinner>
-				</div>
+				</ul>
 			</div>
 			<div className="bg-light rounded-lg shadow-sm border mb-4">
 				<div className="px-3 py-2 border-bottom">
 					<h5 className="mb-0">Popular tags</h5>
 				</div>
-				<div className="list-group">
+				<ul className="list-group">
 					<MayBeSpinner test={listTag.is_loading} spinner={<LoadingSpinner />}>
 						{listTag.tags?.map((tag) => (
 							<li className="list-group-item-custom d-flex align-items-center border-0 px-3 py-2" key={tag.id}>
@@ -51,7 +51,7 @@ const SideBarRight = () => {
 							</li>
 						))}
 					</MayBeSpinner>
-				</div>
+				</ul>
 			</div>
 		</div>
 	);

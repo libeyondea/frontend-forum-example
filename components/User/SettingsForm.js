@@ -10,18 +10,18 @@ import { updateUserRequestedAction } from '@/redux/actions/userAction';
 
 const SettingsForm = () => {
 	const dispatch = useDispatch();
-	const singleUser = useSelector((state) => state.users.single_user);
+	const editUser = useSelector((state) => state.users.edit_user);
 	const updateUser = useSelector((state) => state.users.update_user);
 
 	const initialValues = {
-		first_name: singleUser.user.first_name,
-		last_name: singleUser.user.last_name,
-		user_name: singleUser.user.user_name,
-		email: singleUser.user.email,
-		phone_number: singleUser.user.phone_number,
-		address: singleUser.user.address,
-		gender: singleUser.user.gender,
-		avatar: singleUser.user.avatar
+		first_name: editUser.user.first_name,
+		last_name: editUser.user.last_name,
+		user_name: editUser.user.user_name,
+		email: editUser.user.email,
+		phone_number: editUser.user.phone_number,
+		address: editUser.user.address,
+		gender: editUser.user.gender,
+		avatar: editUser.user.avatar
 	};
 	const validationSchema = Yup.object({
 		first_name: Yup.string()
