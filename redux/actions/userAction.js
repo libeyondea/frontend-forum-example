@@ -1,5 +1,10 @@
 import {
+	CURRENT_USER_FAILED,
 	CURRENT_USER_REQUESTED,
+	CURRENT_USER_SUCCEED,
+	EDIT_USER_FAILED,
+	EDIT_USER_REQUESTED,
+	EDIT_USER_SUCCEED,
 	FOLLOW_USER_FAILED,
 	FOLLOW_USER_REQUESTED,
 	FOLLOW_USER_SUCCEED,
@@ -12,9 +17,6 @@ import {
 	REGISTER_USER_FAILED,
 	REGISTER_USER_REQUESTED,
 	REGISTER_USER_SUCCEED,
-	EDIT_USER_FAILED,
-	EDIT_USER_REQUESTED,
-	EDIT_USER_SUCCEED,
 	SINGLE_USER_FAILED,
 	SINGLE_USER_REQUESTED,
 	SINGLE_USER_SUCCEED,
@@ -46,8 +48,22 @@ export const loginUserFailedAction = (errors) => ({
 		errors: errors
 	}
 });
+//
 export const currentUserRequestedAction = () => ({
 	type: CURRENT_USER_REQUESTED
+});
+export const currentUserSucceedAction = (user, is_authenticated) => ({
+	type: CURRENT_USER_SUCCEED,
+	payload: {
+		user: user,
+		is_authenticated: is_authenticated
+	}
+});
+export const currentUserFailedAction = (errors) => ({
+	type: CURRENT_USER_FAILED,
+	payload: {
+		errors: errors
+	}
 });
 //
 export const registerUserRequestedAction = (user, router) => ({
@@ -162,8 +178,11 @@ export const unFollowUserFailedAction = (errors) => ({
 	}
 });
 //
-export const editUserRequestedAction = () => ({
-	type: EDIT_USER_REQUESTED
+export const editUserRequestedAction = (user_name) => ({
+	type: EDIT_USER_REQUESTED,
+	payload: {
+		user_name: user_name
+	}
 });
 export const editUserSucceedAction = (user) => ({
 	type: EDIT_USER_SUCCEED,

@@ -93,7 +93,7 @@ const LoginForm = () => {
 					)}
 					<p className="mt-3">
 						Not a member?{' '}
-						<CustomLink className="text-decoration-none" href="/user/register">
+						<CustomLink className="text-decoration-none" href="/register">
 							Need an account?
 						</CustomLink>
 					</p>

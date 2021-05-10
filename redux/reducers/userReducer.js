@@ -1,4 +1,10 @@
 import {
+	CURRENT_USER_FAILED,
+	CURRENT_USER_REQUESTED,
+	CURRENT_USER_SUCCEED,
+	EDIT_USER_FAILED,
+	EDIT_USER_REQUESTED,
+	EDIT_USER_SUCCEED,
 	FOLLOW_USER_FAILED,
 	FOLLOW_USER_REQUESTED,
 	FOLLOW_USER_SUCCEED,
@@ -10,9 +16,6 @@ import {
 	REGISTER_USER_FAILED,
 	REGISTER_USER_REQUESTED,
 	REGISTER_USER_SUCCEED,
-	EDIT_USER_FAILED,
-	EDIT_USER_REQUESTED,
-	EDIT_USER_SUCCEED,
 	SINGLE_USER_FAILED,
 	SINGLE_USER_REQUESTED,
 	SINGLE_USER_SUCCEED,
@@ -27,8 +30,13 @@ import {
 const initialState = {
 	login: {
 		user: {},
-		is_authenticated: false,
 		is_loading: false,
+		errors: null
+	},
+	current_user: {
+		user: {},
+		is_authenticated: false,
+		is_loading: true,
 		errors: null
 	},
 	register: {
@@ -46,6 +54,11 @@ const initialState = {
 		is_loading: false,
 		errors: null
 	},
+	edit_user: {
+		user: {},
+		is_loading: true,
+		errors: null
+	},
 	follow_user: {
 		user: {},
 		is_loading: false,
@@ -54,11 +67,6 @@ const initialState = {
 	unfollow_user: {
 		user: {},
 		is_loading: false,
-		errors: null
-	},
-	edit_user: {
-		user: {},
-		is_loading: true,
 		errors: null
 	}
 };
@@ -79,7 +87,6 @@ const userReducer = (state = initialState, action) => {
 				login: {
 					...state.login,
 					user: action.payload.user,
-					is_authenticated: true,
 					is_loading: false
 				}
 			};
@@ -90,6 +97,33 @@ const userReducer = (state = initialState, action) => {
 					...state.login,
 					errors: action.payload.errors,
 					is_loading: false
+				}
+			};
+		//
+		case CURRENT_USER_REQUESTED:
+			return {
+				...state,
+				current_user: {
+					...state.current_user,
+					is_loading: true
+				}
+			};
+		case CURRENT_USER_SUCCEED:
+			return {
+				...state,
+				current_user: {
+					...state.current_user,
+					user: action.payload.user,
+					is_authenticated: action.payload.is_authenticated,
+					is_loading: false
+				}
+			};
+		case CURRENT_USER_FAILED:
+			return {
+				...state,
+				current_user: {
+					...state.current_user,
+					errors: action.payload.errors
 				}
 			};
 		//
@@ -123,8 +157,8 @@ const userReducer = (state = initialState, action) => {
 		case LOGOUT_USER_SUCCEED:
 			return {
 				...state,
-				login: {
-					...state.login,
+				current_user: {
+					...state.current_user,
 					user: {},
 					is_authenticated: false
 				}
@@ -132,8 +166,8 @@ const userReducer = (state = initialState, action) => {
 		case LOGOUT_USER_FAILED:
 			return {
 				...state,
-				login: {
-					...state.login,
+				current_user: {
+					...state.current_user,
 					errors: action.payload.errors
 				}
 			};
@@ -190,6 +224,32 @@ const userReducer = (state = initialState, action) => {
 				}
 			};
 		//
+		case EDIT_USER_REQUESTED:
+			return {
+				...state,
+				edit_user: {
+					...state.edit_user,
+					is_loading: true
+				}
+			};
+		case EDIT_USER_SUCCEED:
+			return {
+				...state,
+				edit_user: {
+					...state.edit_user,
+					user: action.payload.user,
+					is_loading: false
+				}
+			};
+		case EDIT_USER_FAILED:
+			return {
+				...state,
+				edit_user: {
+					...state.edit_user,
+					errors: action.payload.errors
+				}
+			};
+		//
 		case FOLLOW_USER_REQUESTED:
 			return {
 				...state,
@@ -210,7 +270,7 @@ const userReducer = (state = initialState, action) => {
 					...state.single_user,
 					user: {
 						...state.single_user.user,
-						following: state.single_user.user.id === action.payload.user.id
+						following: state.single_user.user.user_name === action.payload.user.user_name
 					}
 				}
 			};
@@ -243,7 +303,7 @@ const userReducer = (state = initialState, action) => {
 					...state.single_user,
 					user: {
 						...state.single_user.user,
-						following: !state.single_user.user.id === action.payload.user.id
+						following: !state.single_user.user.user_name === action.payload.user.user_name
 					}
 				}
 			};
@@ -252,32 +312,6 @@ const userReducer = (state = initialState, action) => {
 				...state,
 				unfollow_user: {
 					...state.unfollow_user,
-					errors: action.payload.errors
-				}
-			};
-		//
-		case EDIT_USER_REQUESTED:
-			return {
-				...state,
-				edit_user: {
-					...state.edit_user,
-					is_loading: true
-				}
-			};
-		case EDIT_USER_SUCCEED:
-			return {
-				...state,
-				edit_user: {
-					...state.edit_user,
-					user: action.payload.user,
-					is_loading: false
-				}
-			};
-		case EDIT_USER_FAILED:
-			return {
-				...state,
-				edit_user: {
-					...state.edit_user,
 					errors: action.payload.errors
 				}
 			};

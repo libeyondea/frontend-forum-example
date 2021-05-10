@@ -8,11 +8,13 @@ import LoadingSpinner from '@/components/Common/LoadingSpinner';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
 import Pagination from '@/components/Common/Pagination';
 import { listCommentRequestedAction } from '@/redux/actions/commentAction';
+import Maybe from '@/components/Common/Maybe';
+import isEmpty from '@/lib/utils/isEmpty';
+import Empty from '@/components/Common/Empty';
 
 const CommentList = ({ postSlug }) => {
 	const dispatch = useDispatch();
 	const listComment = useSelector((state) => state.comments.list_comment);
-
 	const router = useRouter();
 
 	const {
@@ -27,14 +29,16 @@ const CommentList = ({ postSlug }) => {
 		<>
 			<CommentInput />
 			<MayBeSpinner test={listComment.is_loading} spinner={<LoadingSpinner />}>
-				{listComment.comments?.map((comment) => (
-					<Comment key={comment.id} comment={comment} />
-				))}
-				<Pagination
-					total={listComment.comments_count}
-					limit={process.env.LIMIT_PAGE.LIST_COMMENT}
-					asUrl={`/post/${postSlug}`}
-				/>
+				<MayBeSpinner test={isEmpty(listComment.comments)} spinner={<Empty />}>
+					{listComment.comments?.map((comment) => (
+						<Comment key={comment.id} comment={comment} />
+					))}
+					<Pagination
+						total={listComment.comments_count}
+						limit={process.env.LIMIT_PAGE.LIST_COMMENT}
+						asUrl={`/posts/${postSlug}`}
+					/>
+				</MayBeSpinner>
 			</MayBeSpinner>
 		</>
 	);

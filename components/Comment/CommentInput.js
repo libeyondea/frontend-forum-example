@@ -11,7 +11,7 @@ import { createCommentRequestedAction } from '@/redux/actions/commentAction';
 
 const CommentInput = () => {
 	const dispatch = useDispatch();
-	const login = useSelector((state) => state.users.login);
+	const currentUser = useSelector((state) => state.users.current_user);
 	const createComment = useSelector((state) => state.comments.create_comment);
 	const router = useRouter();
 	const {
@@ -34,14 +34,14 @@ const CommentInput = () => {
 		resetForm();
 	};
 
-	if (!login.is_authenticated) {
+	if (!currentUser.is_authenticated && !currentUser.is_loading) {
 		return (
 			<div className="mb-3">
-				<CustomLink className="text-decoration-none" href="/user/login">
+				<CustomLink className="text-decoration-none" href="/login">
 					Login
 				</CustomLink>
 				&nbsp;or&nbsp;
-				<CustomLink className="text-decoration-none" href="/user/register">
+				<CustomLink className="text-decoration-none" href="/register">
 					Register
 				</CustomLink>
 				&nbsp;to add comments on this post.
@@ -50,12 +50,12 @@ const CommentInput = () => {
 	}
 	return (
 		<div className="media my-5">
-			<CustomLink href="/profile/[pid]" as={`/profile/${login.user?.user_name}`}>
+			<CustomLink href="/users/[pid]" as={`/users/${currentUser.user?.user_name}`}>
 				<CustomImage
 					width="50"
 					height="50"
-					src={login.user?.avatar}
-					alt={login.user?.user_name}
+					src={currentUser.user?.avatar}
+					alt={currentUser.user?.user_name}
 					className="d-flex mr-3 mb-3 rounded-circle"
 				/>
 			</CustomLink>

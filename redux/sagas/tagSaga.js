@@ -2,12 +2,21 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 
 import tagAPI from '@/lib/api/tag';
 import {
+	followTagFailedAction,
+	followTagSucceedAction,
 	listTagFailedAction,
 	listTagSucceedAction,
 	singleTagFailedAction,
-	singleTagSucceedAction
+	singleTagSucceedAction,
+	unFollowTagFailedAction,
+	unFollowTagSucceedAction
 } from '@/redux/actions/tagAction';
-import { LIST_TAG_REQUESTED, SINGLE_TAG_REQUESTED } from '@/redux/constants';
+import {
+	FOLLOW_TAG_REQUESTED,
+	LIST_TAG_REQUESTED,
+	SINGLE_TAG_REQUESTED,
+	UNFOLLOW_TAG_REQUESTED
+} from '@/redux/constants';
 
 function* listTag(action) {
 	const { page } = action.payload;
@@ -33,10 +42,42 @@ function* singleTag(action) {
 	}
 }
 
+function* followTag(action) {
+	try {
+		const { slug } = action.payload;
+		const res = yield call(tagAPI.follow, slug);
+		if (res.success) {
+			yield put(followTagSucceedAction(res.data));
+		}
+	} catch (err) {
+		yield put(followTagFailedAction(err.message));
+	}
+}
+
+function* unFollowTag(action) {
+	try {
+		const { slug } = action.payload;
+		const res = yield call(tagAPI.unFollow, slug);
+		if (res.success) {
+			yield put(unFollowTagSucceedAction(res.data));
+		}
+	} catch (err) {
+		yield put(unFollowTagFailedAction(err.message));
+	}
+}
+
 export function* listTagWatcher() {
 	yield takeLatest(LIST_TAG_REQUESTED, listTag);
 }
 
 export function* singleTagWatcher() {
 	yield takeLatest(SINGLE_TAG_REQUESTED, singleTag);
+}
+
+export function* followTagWatcher() {
+	yield takeLatest(FOLLOW_TAG_REQUESTED, followTag);
+}
+
+export function* unFollowTagWatcher() {
+	yield takeLatest(UNFOLLOW_TAG_REQUESTED, unFollowTag);
 }

@@ -23,8 +23,8 @@ import {
 
 function* listPost(action) {
 	try {
-		const { page } = action.payload;
-		const res = yield call(postAPI.list, page);
+		const { page, tab } = action.payload;
+		const res = yield call(postAPI.list, tab, page);
 		if (res.success) {
 			yield put(listPostSucceedAction(res.data, res.meta.posts_count));
 		}
@@ -35,8 +35,8 @@ function* listPost(action) {
 
 function* listPostTag(action) {
 	try {
-		const { tag_slug, page } = action.payload;
-		const res = yield call(postAPI.listByTag, tag_slug, page);
+		const { tag_slug, tab, page } = action.payload;
+		const res = yield call(postAPI.listByTag, tag_slug, tab, page);
 		if (res.success) {
 			yield put(listPostTagSucceedAction(res.data, res.meta.posts_count));
 		}
@@ -47,8 +47,8 @@ function* listPostTag(action) {
 
 function* listPostCategory(action) {
 	try {
-		const { category_slug, page } = action.payload;
-		const res = yield call(postAPI.listByCategory, category_slug, page);
+		const { category_slug, tab, page } = action.payload;
+		const res = yield call(postAPI.listByCategory, category_slug, tab, page);
 		if (res.success) {
 			yield put(listPostCategorySucceedAction(res.data, res.meta.posts_count));
 		}

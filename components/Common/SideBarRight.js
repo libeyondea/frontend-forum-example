@@ -27,7 +27,11 @@ const SideBarRight = () => {
 					<MayBeSpinner test={listCategory.is_loading} spinner={<LoadingSpinner />}>
 						{listCategory.categories?.map((category) => (
 							<li className="list-group-item-custom d-flex align-items-center px-3 py-2" key={category.id}>
-								<CustomLink href={`/category/[pid]`} as={`/category/${category.slug}`} className="text-decoration-none">
+								<CustomLink
+									href={`/categories/[pid]`}
+									as={`/categories/${category.slug}`}
+									className="text-decoration-none"
+								>
 									{category.title}
 								</CustomLink>
 								<span className="badge badge-default badge-pill">{category.total_posts}</span>
@@ -44,7 +48,7 @@ const SideBarRight = () => {
 					<MayBeSpinner test={listTag.is_loading} spinner={<LoadingSpinner />}>
 						{listTag.tags?.map((tag) => (
 							<li className="list-group-item-custom d-flex align-items-center border-0 px-3 py-2" key={tag.id}>
-								<CustomLink href={`/tag/[pid]`} as={`/tag/${tag.slug}`} className="text-decoration-none">
+								<CustomLink href={`/tags/[pid]`} as={`/tags/${tag.slug}`} className="text-decoration-none">
 									<span className="text-secondary">#</span>
 									{tag.slug}
 								</CustomLink>

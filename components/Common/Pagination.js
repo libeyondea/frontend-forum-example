@@ -8,9 +8,11 @@ import { getPageInfo, getRange } from '@/lib/utils/calculatePagination';
 const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
 	const router = useRouter();
 	if (total <= limit) return null;
+	let hrefLink;
+	let asLink;
 	const {
 		pathname,
-		query: { page }
+		query: { page, tab }
 	} = router;
 	let curPage = parseInt(page || 1);
 
@@ -27,12 +29,20 @@ const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
 
 	const pages = total > 0 ? getRange(firstPage, lastPage) : [];
 
+	if (tab) {
+		hrefLink = `${pathname}?tab=${tab}&`;
+		asLink = `${window.location.pathname}?tab=${tab}&`;
+	} else {
+		hrefLink = `${pathname}?`;
+		asLink = `${window.location.pathname}?`;
+	}
+
 	return (
 		<div className="col-12">
 			<nav>
-				<ul className="pagination">
+				<ul className="pagination flex-wrap">
 					<li className={`page-item ${currentPage === 0 && 'disabled'}`}>
-						<Link href={`${pathname}?page=1`} as={`${asUrl}?page=1`} scroll={false} passHref>
+						<Link href={`${hrefLink}page=1`} as={`${asLink}page=1`} scroll={false} passHref>
 							<a className="page-link">
 								<i className="fa fa-angle-double-left" />
 							</a>
@@ -40,12 +50,7 @@ const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
 					</li>
 					<Maybe test={hasPreviousPage}>
 						<li className="page-item">
-							<Link
-								href={`${pathname}?page=${curPage - 1}`}
-								as={`${asUrl}?page=${curPage - 1}`}
-								scroll={false}
-								passHref
-							>
+							<Link href={`${hrefLink}page=${curPage - 1}`} as={`${asLink}page=${curPage - 1}`} scroll={false} passHref>
 								<a className="page-link">
 									<i className="fa fa-angle-left" />
 								</a>
@@ -56,7 +61,7 @@ const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
 						const isCurrent = !currentPage ? page === 0 : page === currentPage;
 						return (
 							<li key={page.toString()} className={`page-item ${isCurrent && 'active'}`}>
-								<Link href={`${pathname}?page=${page + 1}`} as={`${asUrl}?page=${page + 1}`} scroll={false} passHref>
+								<Link href={`${hrefLink}page=${page + 1}`} as={`${asLink}page=${page + 1}`} scroll={false} passHref>
 									<a className="page-link">{page + 1}</a>
 								</Link>
 							</li>
@@ -64,12 +69,7 @@ const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
 					})}
 					<Maybe test={hasNextPage}>
 						<li className="page-item">
-							<Link
-								href={`${pathname}?page=${curPage + 1}`}
-								as={`${asUrl}?page=${curPage + 1}`}
-								scroll={false}
-								passHref
-							>
+							<Link href={`${hrefLink}page=${curPage + 1}`} as={`${asLink}page=${curPage + 1}`} scroll={false} passHref>
 								<a className="page-link">
 									<i className="fa fa-angle-right" />
 								</a>
@@ -78,8 +78,8 @@ const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
 					</Maybe>
 					<li className={`page-item ${currentPage === lastIndex && 'disabled'}`}>
 						<Link
-							href={`${pathname}?page=${lastIndex + 1}`}
-							as={`${asUrl}?page=${lastIndex + 1}`}
+							href={`${hrefLink}page=${lastIndex + 1}`}
+							as={`${asLink}page=${lastIndex + 1}`}
 							scroll={false}
 							passHref
 						>

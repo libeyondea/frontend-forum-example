@@ -9,7 +9,7 @@ import {
 	listPostWatcher,
 	singlePostWatcher
 } from '@/redux/sagas/postSaga';
-import { listTagWatcher, singleTagWatcher } from '@/redux/sagas/tagSaga';
+import { followTagWatcher, listTagWatcher, singleTagWatcher, unFollowTagWatcher } from '@/redux/sagas/tagSaga';
 import {
 	currentUserWatcher,
 	editUserWatcher,
@@ -44,7 +44,9 @@ function* rootSaga() {
 		deleteCommentWatcher(),
 		followUserWatcher(),
 		unFollowUserWatcher(),
-		editUserWatcher()
+		followTagWatcher(),
+		editUserWatcher(),
+		unFollowTagWatcher()
 	]);
 }
 

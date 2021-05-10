@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 import CustomLink from '@/components/Common/CustomLink';
 
 const PostAction = ({ post }) => {
-	const login = useSelector((state) => state.users.login);
+	const currentUser = useSelector((state) => state.users.current_user);
 	return (
 		<>
-			{login.is_authenticated && login.user?.user_name === post.user?.user_name && (
+			{currentUser.is_authenticated && currentUser.user?.user_name === post.user?.user_name && (
 				<div className="mb-3">
 					<CustomLink
-						href="/post/[pid]/edit"
-						as={`/post/${post.slug}/edit`}
+						href="/posts/[pid]/edit"
+						as={`/posts/${post.slug}/edit`}
 						className="btn btn-outline-secondary btn-sm mr-2"
 					>
 						<i className="ion-edit" /> Edit Post

@@ -16,9 +16,10 @@ import {
 	SINGLE_POST_SUCCEED
 } from '@/redux/constants';
 
-export const listPostRequestedAction = (page) => ({
+export const listPostRequestedAction = (tab, page) => ({
 	type: LIST_POST_REQUESTED,
 	payload: {
+		tab: tab,
 		page: page
 	}
 });
@@ -36,10 +37,11 @@ export const listPostFailedAction = (errors) => ({
 	}
 });
 //
-export const listPostTagRequestedAction = (tag_slug, page) => ({
+export const listPostTagRequestedAction = (tag_slug, tab, page) => ({
 	type: LIST_POST_TAG_REQUESTED,
 	payload: {
 		tag_slug: tag_slug,
+		tab: tab,
 		page: page
 	}
 });
@@ -57,10 +59,11 @@ export const listPostTagFailedAction = (errors) => ({
 	}
 });
 //
-export const listPostCategoryRequestedAction = (category_slug, page) => ({
+export const listPostCategoryRequestedAction = (category_slug, tab, page) => ({
 	type: LIST_POST_CATEGORY_REQUESTED,
 	payload: {
 		category_slug: category_slug,
+		tab: tab,
 		page: page
 	}
 });

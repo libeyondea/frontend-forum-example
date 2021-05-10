@@ -11,8 +11,8 @@ const PostMeta = ({ post }) => {
 			<div className="user-post clearfix mb-4">
 				<div className="float-left mr-2">
 					<CustomLink
-						href="/profile/[pid]"
-						as={`/profile/${encodeURIComponent(post.user?.user_name)}`}
+						href="/users/[pid]"
+						as={`/users/${encodeURIComponent(post.user?.user_name)}`}
 						className="text-decoration-none"
 					>
 						<CustomImage
@@ -27,8 +27,8 @@ const PostMeta = ({ post }) => {
 				<div className="float-left">
 					<div className="card-block">
 						<CustomLink
-							href="/profile/[pid]"
-							as={`/profile/${encodeURIComponent(post.user?.user_name)}`}
+							href="/users/[pid]"
+							as={`/users/${encodeURIComponent(post.user?.user_name)}`}
 							className="text-decoration-none"
 						>
 							<h6 className="mb-0">{post.user?.user_name}</h6>

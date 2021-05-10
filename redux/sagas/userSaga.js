@@ -1,9 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import followAPI from '@/lib/api/follow';
 import userAPI from '@/lib/api/user';
 import { getCookie, removeCookie, setCookie } from '@/lib/utils/session';
 import {
+	currentUserFailedAction,
+	currentUserSucceedAction,
 	editUserFailedAction,
 	editUserSucceedAction,
 	followUserFailedAction,
@@ -60,7 +61,7 @@ function* registerUser(action) {
 		const res = yield call(userAPI.register, user);
 		if (res.success) {
 			yield put(registerUserSucceedAction(res.data));
-			router.push('/user/login');
+			router.push('/login');
 		} else {
 			yield put(registerUserFailedAction(res.errors));
 		}
@@ -74,16 +75,18 @@ function* currentUser() {
 		if (getCookie('token')) {
 			const res = yield call(userAPI.current);
 			if (res.success) {
-				yield put(loginUserSucceedAction(res.data));
+				yield put(currentUserSucceedAction(res.data, true));
 			} else {
 				removeCookie('token');
-				yield put(logoutUserSucceedAction());
+				yield put(currentUserSucceedAction({}, false));
 			}
+		} else {
+			yield put(currentUserSucceedAction({}, false));
 		}
 	} catch (err) {
 		removeCookie('token');
-		yield put(logoutUserSucceedAction());
-		yield put(loginUserFailedAction(err.message));
+		yield put(currentUserSucceedAction({}, false));
+		yield put(currentUserFailedAction(err.message));
 	}
 }
 
@@ -94,7 +97,7 @@ function* logoutUser(action) {
 		if (res.success) {
 			removeCookie('token');
 			yield put(logoutUserSucceedAction());
-			router.push('/user/login');
+			router.push('/login');
 		}
 	} catch (err) {
 		yield put(logoutUserFailedAction(err.message));
@@ -119,7 +122,7 @@ function* updateUser(action) {
 		const res = yield call(userAPI.update, user);
 		if (res.success) {
 			yield put(updateUserSucceedAction(res.data));
-			window.location.replace('/profile/' + res.data.user_name);
+			window.location.replace('/users/' + res.data.user_name);
 		}
 	} catch (err) {
 		yield put(updateUserFailedAction(err.message));
@@ -129,7 +132,7 @@ function* updateUser(action) {
 function* followUser(action) {
 	try {
 		const { user_name } = action.payload;
-		const res = yield call(followAPI.follow, user_name);
+		const res = yield call(userAPI.follow, user_name);
 		if (res.success) {
 			yield put(followUserSucceedAction(res.data));
 		}
@@ -141,7 +144,7 @@ function* followUser(action) {
 function* unFollowUser(action) {
 	try {
 		const { user_name } = action.payload;
-		const res = yield call(followAPI.unFollow, user_name);
+		const res = yield call(userAPI.unFollow, user_name);
 		if (res.success) {
 			yield put(unFollowUserSucceedAction(res.data));
 		}
@@ -150,9 +153,10 @@ function* unFollowUser(action) {
 	}
 }
 
-function* editUser() {
+function* editUser(action) {
 	try {
-		const res = yield call(userAPI.edit);
+		const { user_name } = action.payload;
+		const res = yield call(userAPI.edit, user_name);
 		if (res.success) {
 			yield put(editUserSucceedAction(res.data));
 		}
@@ -185,14 +189,14 @@ export function* updateUserWatcher() {
 	yield takeLatest(UPDATE_USER_REQUESTED, updateUser);
 }
 
+export function* editUserWatcher() {
+	yield takeLatest(EDIT_USER_REQUESTED, editUser);
+}
+
 export function* followUserWatcher() {
 	yield takeLatest(FOLLOW_USER_REQUESTED, followUser);
 }
 
 export function* unFollowUserWatcher() {
 	yield takeLatest(UNFOLLOW_USER_REQUESTED, unFollowUser);
-}
-
-export function* editUserWatcher() {
-	yield takeLatest(EDIT_USER_REQUESTED, editUser);
 }

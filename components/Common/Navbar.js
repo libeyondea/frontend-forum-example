@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import Container from 'react-bootstrap/Container';
+import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -10,15 +9,15 @@ import NavLink from 'react-bootstrap/NavLink';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CustomImage from '@/components/Common/CustomImage';
-import CustomLink from '@/components/Common/CustomLink';
 import Maybe from '@/components/Common/Maybe';
-import MayBeSpinner from '@/components/Common/MayBeSpinner';
+import useViewport from '@/lib/hooks/useViewport';
 import { logoutUserRequestedAction } from '@/redux/actions/userAction';
 
 const NavBar = () => {
 	const dispatch = useDispatch();
 	const router = useRouter();
-	const login = useSelector((state) => state.users.login);
+	const viewPort = useViewport();
+	const currentUser = useSelector((state) => state.users.current_user);
 
 	const handleLogoutUser = (e) => {
 		e.preventDefault();
@@ -28,9 +27,9 @@ const NavBar = () => {
 	return (
 		<>
 			<Navbar collapseOnSelect expand="lg" bg="light" variant="light" fixed="top" className="shadow-sm">
-				<Container>
+				<div className="container-xl">
 					<Link href="/" passHref>
-						<Navbar.Brand className="d-flex align-items-center">
+						<Navbar.Brand className="d-flex align-items-center mr-auto">
 							<CustomImage
 								className="rounded-circle mr-2"
 								src="https://avatars1.githubusercontent.com/u/57558120?s=460&u=edcf8c9d01f9f5b76c1c6e30d6c775ec147cc434&v=4"
@@ -41,7 +40,28 @@ const NavBar = () => {
 							De4thZone
 						</Navbar.Brand>
 					</Link>
-					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
+					<Maybe test={viewPort.vw < 992}>
+						<Dropdown as={NavItem}>
+							<Dropdown.Toggle as={NavLink} id="dropdown-custom-2" className="d-flex align-items-center">
+								<CustomImage
+									className="rounded-circle mr-2"
+									src={currentUser.user?.avatar}
+									width={35}
+									height={35}
+									alt={currentUser.user?.user_name}
+								/>
+								{currentUser.user?.user_name}
+							</Dropdown.Toggle>
+							<Dropdown.Menu align="right">
+								<Link href={`/users/[pid]`} as={`/users/${currentUser.user.user_name}`} passHref>
+									<Dropdown.Item>Profile</Dropdown.Item>
+								</Link>
+								<Dropdown.Divider />
+								<Dropdown.Item onClick={handleLogoutUser}>Logout</Dropdown.Item>
+							</Dropdown.Menu>
+						</Dropdown>
+					</Maybe>
+					<Navbar.Toggle aria-controls="responsive-navbar-nav"></Navbar.Toggle>
 					<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav className="ml-auto align-items-lg-center">
 							<Nav.Item>
@@ -49,47 +69,84 @@ const NavBar = () => {
 									<Nav.Link>Home</Nav.Link>
 								</Link>
 							</Nav.Item>
-							<Maybe test={login.is_authenticated}>
+							<Maybe test={currentUser.is_authenticated}>
 								<Nav.Item>
 									<Link href="/editor/new" as="/editor/new" passHref>
 										<Nav.Link>New Post</Nav.Link>
 									</Link>
 								</Nav.Item>
-								<Dropdown as={NavItem}>
-									<Dropdown.Toggle as={NavLink} id="dropdown-custom-2" className="d-flex align-items-center">
-										<CustomImage
-											className="rounded-circle mr-2"
-											src={login.user?.avatar}
-											width={35}
-											height={35}
-											alt={login.user?.user_name}
-										/>
-										{login.user?.user_name}
-									</Dropdown.Toggle>
-									<Dropdown.Menu align="right">
-										<Link href={`/profile/[pid]`} as={`/profile/${login.user.user_name}`} passHref>
-											<Dropdown.Item>Profile</Dropdown.Item>
-										</Link>
-										<Dropdown.Divider />
-										<Dropdown.Item onClick={handleLogoutUser}>Logout</Dropdown.Item>
-									</Dropdown.Menu>
-								</Dropdown>
+								<Maybe test={viewPort.vw >= 992}>
+									<Dropdown as={NavItem}>
+										<Dropdown.Toggle as={NavLink} id="dropdown-custom-2" className="d-flex align-items-center">
+											<CustomImage
+												className="rounded-circle mr-2"
+												src={currentUser.user?.avatar}
+												width={35}
+												height={35}
+												alt={currentUser.user?.user_name}
+											/>
+											{currentUser.user?.user_name}
+										</Dropdown.Toggle>
+										<Dropdown.Menu align="right">
+											<Link href={`/users/[pid]`} as={`/users/${currentUser.user.user_name}`} passHref>
+												<Dropdown.Item>Profile</Dropdown.Item>
+											</Link>
+											<Dropdown.Divider />
+											<Dropdown.Item onClick={handleLogoutUser}>Logout</Dropdown.Item>
+										</Dropdown.Menu>
+									</Dropdown>
+								</Maybe>
 							</Maybe>
-							<Maybe test={!login.is_authenticated}>
+							<Maybe test={!currentUser.is_authenticated}>
 								<Nav.Item>
-									<Link href="/user/register" passHref>
+									<Link href="/register" passHref>
 										<Nav.Link>Register</Nav.Link>
 									</Link>
 								</Nav.Item>
 								<Nav.Item>
-									<Link href="/user/login" passHref>
+									<Link href="/login" passHref>
 										<Nav.Link>Login</Nav.Link>
 									</Link>
 								</Nav.Item>
 							</Maybe>
+
+							<Maybe test={viewPort.vw < 768}>
+								<Dropdown as={NavItem}>
+									<Dropdown.Toggle as={NavLink} id="dropdown-custom-5">
+										Options
+									</Dropdown.Toggle>
+									<Dropdown.Menu align="right">
+										<Link href="/" passHref>
+											<Dropdown.Item>
+												<i className="fa fa-home fa-sm" /> Home
+											</Dropdown.Item>
+										</Link>
+										<Link href="/tags" passHref>
+											<Dropdown.Item>
+												<i className="fa fa-tags fa-sm" /> Tags
+											</Dropdown.Item>
+										</Link>
+										<Link href="/about" passHref>
+											<Dropdown.Item>
+												<i className="fa fa-question fa-sm" /> About
+											</Dropdown.Item>
+										</Link>
+										<Link href="/faq" passHref>
+											<Dropdown.Item>
+												<i className="fa fa-question-circle fa-sm" /> FAQ
+											</Dropdown.Item>
+										</Link>
+										<Link href="/contact" passHref>
+											<Dropdown.Item>
+												<i className="fa fa-info fa-sm" /> Contact
+											</Dropdown.Item>
+										</Link>
+									</Dropdown.Menu>
+								</Dropdown>
+							</Maybe>
 						</Nav>
 					</Navbar.Collapse>
-				</Container>
+				</div>
 			</Navbar>
 		</>
 	);

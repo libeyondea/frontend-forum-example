@@ -181,7 +181,7 @@ const RegisterForm = () => {
 						</button>
 					)}
 					<p className="mt-3">
-						<CustomLink className="text-decoration-none" href="/user/login" as="/user/login">
+						<CustomLink className="text-decoration-none" href="/login" as="/login">
 							Have an account?
 						</CustomLink>
 					</p>

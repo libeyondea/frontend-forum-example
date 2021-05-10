@@ -7,7 +7,7 @@ import CustomLink from '@/components/Common/CustomLink';
 const Comment = ({ comment }) => {
 	return (
 		<div className="media mb-4">
-			<CustomLink href="/profile/[pid]" as={`/profile/${comment.user?.user_name}`}>
+			<CustomLink href="/users/[pid]" as={`/users/${comment.user?.user_name}`}>
 				<CustomImage
 					width="50"
 					height="50"
@@ -19,11 +19,7 @@ const Comment = ({ comment }) => {
 			<div className="media-body">
 				<div className="border p-3 bg-white text-break">
 					<div className="mb-2">
-						<CustomLink
-							href="/profile/[pid]"
-							as={`/profile/${comment.user?.user_name}`}
-							className="text-decoration-none"
-						>
+						<CustomLink href="/users/[pid]" as={`/users/${comment.user?.user_name}`} className="text-decoration-none">
 							<h5 className="my-0">{comment.user?.user_name}</h5>
 						</CustomLink>
 						<small className="mx-0 my-0">{new Date(comment.created_at).toDateString()}</small>
