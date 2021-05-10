@@ -9,24 +9,21 @@ import CustomLink from '@/components/Common/CustomLink';
 import Empty from '@/components/Common/Empty';
 import Layout from '@/components/Common/Layout';
 import LoadingSpinner from '@/components/Common/LoadingSpinner';
-import Maybe from '@/components/Common/Maybe';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
 import SideBarRight from '@/components/Common/SideBarRight';
 import PostMeta from '@/components/Post/PostMeta';
-import useViewport from '@/lib/hooks/useViewport';
 import isEmpty from '@/lib/utils/isEmpty';
 import { singlePostRequestedAction } from '@/redux/actions/postAction';
 import { wrapper } from '@/redux/store';
 
 const SinglePost = () => {
 	const singlePost = useSelector((state) => state.posts.single_post);
-	const viewPort = useViewport();
 
 	return (
 		<Layout>
 			<div className="container-xl my-4">
 				<div className="row">
-					<div className="col-xl-9 col-md-8">
+					<div className="col-xl-9 col-md-9">
 						<MayBeSpinner test={singlePost.is_loading} spinner={<LoadingSpinner />}>
 							<MayBeSpinner test={isEmpty(singlePost.post)} spinner={<Empty />}>
 								<Breadcrumb
@@ -74,11 +71,9 @@ const SinglePost = () => {
 							</MayBeSpinner>
 						</MayBeSpinner>
 					</div>
-					<Maybe test={viewPort.vw >= 768}>
-						<div className="col-xl-3 col-md-4">
-							<SideBarRight />
-						</div>
-					</Maybe>
+					<div className="d-none d-md-block col-xl-3 col-md-3">
+						<SideBarRight />
+					</div>
 				</div>
 			</div>
 		</Layout>

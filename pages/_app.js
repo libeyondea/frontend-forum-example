@@ -33,17 +33,4 @@ const App = ({ Component, pageProps }) => {
 	);
 };
 
-/* App.getInitialProps = async ({ Component, ctx }) => {
-	const pageProps = {
-		...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {})
-	};
-	if (ctx.req) {
-		ctx.store.dispatch(END);
-		await ctx.store.sagaTask.toPromise();
-	}
-	return {
-		pageProps
-	};
-}; */
-
 export default wrapper.withRedux(App);

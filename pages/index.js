@@ -6,14 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import Empty from '@/components/Common/Empty';
 import Layout from '@/components/Common/Layout';
 import LoadingSpinner from '@/components/Common/LoadingSpinner';
-import Maybe from '@/components/Common/Maybe';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
 import Pagination from '@/components/Common/Pagination';
 import SideBarLeft from '@/components/Common/SideBarLeft';
 import SideBarRight from '@/components/Common/SideBarRight';
 import PostCard from '@/components/Post/PostCard';
 import SortByPost from '@/components/Post/SortByPost';
-import useViewport from '@/lib/hooks/useViewport';
 import isEmpty from '@/lib/utils/isEmpty';
 import { listPostRequestedAction } from '@/redux/actions/postAction';
 
@@ -21,7 +19,6 @@ const Index = () => {
 	const dispatch = useDispatch();
 	const listPost = useSelector((state) => state.posts.list_post);
 	const router = useRouter();
-	const viewPort = useViewport();
 	const {
 		query: { tab, page },
 		isReady
@@ -64,16 +61,12 @@ const Index = () => {
 								</MayBeSpinner>
 							</MayBeSpinner>
 						</div>
-						<Maybe test={viewPort.vw >= 768}>
-							<div className="col-xl-2 col-lg-2 col-md-3 order-xl-1 order-lg-1 order-md-1">
-								<SideBarLeft />
-							</div>
-						</Maybe>
-						<Maybe test={viewPort.vw >= 992}>
-							<div className="col-xl-3 col-lg-3 col-md-12 order-xl-3 order-lg-3 order-md-3">
-								<SideBarRight />
-							</div>
-						</Maybe>
+						<div className="d-none d-md-block col-xl-2 col-lg-2 col-md-3 order-xl-1 order-lg-1 order-md-1">
+							<SideBarLeft />
+						</div>
+						<div className="d-none d-lg-block col-xl-3 col-lg-3 col-md-12 order-xl-3 order-lg-3 order-md-3">
+							<SideBarRight />
+						</div>
 					</div>
 				</div>
 			</Layout>

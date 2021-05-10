@@ -6,14 +6,12 @@ import Breadcrumb from '@/components/Common/Breadcrumb';
 import Empty from '@/components/Common/Empty';
 import Layout from '@/components/Common/Layout';
 import LoadingSpinner from '@/components/Common/LoadingSpinner';
-import Maybe from '@/components/Common/Maybe';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
 import Pagination from '@/components/Common/Pagination';
 import SideBarRight from '@/components/Common/SideBarRight';
 import PostCard from '@/components/Post/PostCard';
 import SortByPost from '@/components/Post/SortByPost';
 import FollowTagButton from '@/components/User/FollowTagButton';
-import useViewport from '@/lib/hooks/useViewport';
 import isEmpty from '@/lib/utils/isEmpty';
 import { listPostTagRequestedAction } from '@/redux/actions/postAction';
 import {
@@ -27,7 +25,6 @@ const SingleTag = () => {
 	const singleTag = useSelector((state) => state.tags.single_tag);
 	const listPostTag = useSelector((state) => state.posts.list_post_tag);
 	const router = useRouter();
-	const viewPort = useViewport();
 	const {
 		query: { pid, tab, page },
 		isReady
@@ -118,11 +115,9 @@ const SingleTag = () => {
 							</MayBeSpinner>
 						</MayBeSpinner>
 					</div>
-					<Maybe test={viewPort.vw >= 768}>
-						<div className="col-xl-3 col-md-4">
-							<SideBarRight />
-						</div>
-					</Maybe>
+					<div className="d-none d-md-block col-xl-3 col-md-4">
+						<SideBarRight />
+					</div>
 				</div>
 			</div>
 		</Layout>

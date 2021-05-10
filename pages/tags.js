@@ -6,12 +6,10 @@ import Breadcrumb from '@/components/Common/Breadcrumb';
 import Empty from '@/components/Common/Empty';
 import Layout from '@/components/Common/Layout';
 import LoadingSpinner from '@/components/Common/LoadingSpinner';
-import Maybe from '@/components/Common/Maybe';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
 import Pagination from '@/components/Common/Pagination';
 import SideBarLeft from '@/components/Common/SideBarLeft';
 import TagCard from '@/components/Tag/TagCard';
-import useViewport from '@/lib/hooks/useViewport';
 import isEmpty from '@/lib/utils/isEmpty';
 import { listTagRequestedAction } from '@/redux/actions/tagAction';
 
@@ -19,7 +17,6 @@ const Tags = () => {
 	const dispatch = useDispatch();
 	const listTag = useSelector((state) => state.tags.list_tag);
 	const router = useRouter();
-	const viewPort = useViewport();
 	const {
 		query: { page },
 		isReady
@@ -61,11 +58,9 @@ const Tags = () => {
 							</MayBeSpinner>
 						</MayBeSpinner>
 					</div>
-					<Maybe test={viewPort.vw >= 768}>
-						<div className="col-xl-2 col-md-3 order-md-1">
-							<SideBarLeft />
-						</div>
-					</Maybe>
+					<div className="d-none d-md-block col-xl-2 col-md-3 order-md-1">
+						<SideBarLeft />
+					</div>
 				</div>
 			</div>
 		</Layout>

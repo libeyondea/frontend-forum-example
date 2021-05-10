@@ -10,13 +10,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import CustomImage from '@/components/Common/CustomImage';
 import Maybe from '@/components/Common/Maybe';
-import useViewport from '@/lib/hooks/useViewport';
 import { logoutUserRequestedAction } from '@/redux/actions/userAction';
 
 const NavBar = () => {
 	const dispatch = useDispatch();
 	const router = useRouter();
-	const viewPort = useViewport();
 	const currentUser = useSelector((state) => state.users.current_user);
 
 	const handleLogoutUser = (e) => {
@@ -40,8 +38,8 @@ const NavBar = () => {
 							De4thZone
 						</Navbar.Brand>
 					</Link>
-					<Maybe test={viewPort.vw < 992}>
-						<Dropdown as={NavItem}>
+					<Maybe test={currentUser.is_authenticated}>
+						<Dropdown as={NavItem} className="d-block d-lg-none">
 							<Dropdown.Toggle as={NavLink} id="dropdown-custom-2" className="d-flex align-items-center">
 								<CustomImage
 									className="rounded-circle mr-2"
@@ -75,27 +73,25 @@ const NavBar = () => {
 										<Nav.Link>New Post</Nav.Link>
 									</Link>
 								</Nav.Item>
-								<Maybe test={viewPort.vw >= 992}>
-									<Dropdown as={NavItem}>
-										<Dropdown.Toggle as={NavLink} id="dropdown-custom-2" className="d-flex align-items-center">
-											<CustomImage
-												className="rounded-circle mr-2"
-												src={currentUser.user?.avatar}
-												width={35}
-												height={35}
-												alt={currentUser.user?.user_name}
-											/>
-											{currentUser.user?.user_name}
-										</Dropdown.Toggle>
-										<Dropdown.Menu align="right">
-											<Link href={`/users/[pid]`} as={`/users/${currentUser.user.user_name}`} passHref>
-												<Dropdown.Item>Profile</Dropdown.Item>
-											</Link>
-											<Dropdown.Divider />
-											<Dropdown.Item onClick={handleLogoutUser}>Logout</Dropdown.Item>
-										</Dropdown.Menu>
-									</Dropdown>
-								</Maybe>
+								<Dropdown as={NavItem} className="d-none d-lg-block">
+									<Dropdown.Toggle as={NavLink} id="dropdown-custom-2" className="d-flex align-items-center">
+										<CustomImage
+											className="rounded-circle mr-2"
+											src={currentUser.user?.avatar}
+											width={35}
+											height={35}
+											alt={currentUser.user?.user_name}
+										/>
+										{currentUser.user?.user_name}
+									</Dropdown.Toggle>
+									<Dropdown.Menu align="right">
+										<Link href={`/users/[pid]`} as={`/users/${currentUser.user.user_name}`} passHref>
+											<Dropdown.Item>Profile</Dropdown.Item>
+										</Link>
+										<Dropdown.Divider />
+										<Dropdown.Item onClick={handleLogoutUser}>Logout</Dropdown.Item>
+									</Dropdown.Menu>
+								</Dropdown>
 							</Maybe>
 							<Maybe test={!currentUser.is_authenticated}>
 								<Nav.Item>
@@ -109,41 +105,38 @@ const NavBar = () => {
 									</Link>
 								</Nav.Item>
 							</Maybe>
-
-							<Maybe test={viewPort.vw < 768}>
-								<Dropdown as={NavItem}>
-									<Dropdown.Toggle as={NavLink} id="dropdown-custom-5">
-										Options
-									</Dropdown.Toggle>
-									<Dropdown.Menu align="right">
-										<Link href="/" passHref>
-											<Dropdown.Item>
-												<i className="fa fa-home fa-sm" /> Home
-											</Dropdown.Item>
-										</Link>
-										<Link href="/tags" passHref>
-											<Dropdown.Item>
-												<i className="fa fa-tags fa-sm" /> Tags
-											</Dropdown.Item>
-										</Link>
-										<Link href="/about" passHref>
-											<Dropdown.Item>
-												<i className="fa fa-question fa-sm" /> About
-											</Dropdown.Item>
-										</Link>
-										<Link href="/faq" passHref>
-											<Dropdown.Item>
-												<i className="fa fa-question-circle fa-sm" /> FAQ
-											</Dropdown.Item>
-										</Link>
-										<Link href="/contact" passHref>
-											<Dropdown.Item>
-												<i className="fa fa-info fa-sm" /> Contact
-											</Dropdown.Item>
-										</Link>
-									</Dropdown.Menu>
-								</Dropdown>
-							</Maybe>
+							<Dropdown as={NavItem} className="d-block d-lg-none">
+								<Dropdown.Toggle as={NavLink} id="dropdown-custom-5">
+									Options
+								</Dropdown.Toggle>
+								<Dropdown.Menu align="right">
+									<Link href="/" passHref>
+										<Dropdown.Item>
+											<i className="fa fa-home fa-sm" /> Home
+										</Dropdown.Item>
+									</Link>
+									<Link href="/tags" passHref>
+										<Dropdown.Item>
+											<i className="fa fa-tags fa-sm" /> Tags
+										</Dropdown.Item>
+									</Link>
+									<Link href="/about" passHref>
+										<Dropdown.Item>
+											<i className="fa fa-question fa-sm" /> About
+										</Dropdown.Item>
+									</Link>
+									<Link href="/faq" passHref>
+										<Dropdown.Item>
+											<i className="fa fa-question-circle fa-sm" /> FAQ
+										</Dropdown.Item>
+									</Link>
+									<Link href="/contact" passHref>
+										<Dropdown.Item>
+											<i className="fa fa-info fa-sm" /> Contact
+										</Dropdown.Item>
+									</Link>
+								</Dropdown.Menu>
+							</Dropdown>
 						</Nav>
 					</Navbar.Collapse>
 				</div>

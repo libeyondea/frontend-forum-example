@@ -6,13 +6,11 @@ import Breadcrumb from '@/components/Common/Breadcrumb';
 import Empty from '@/components/Common/Empty';
 import Layout from '@/components/Common/Layout';
 import LoadingSpinner from '@/components/Common/LoadingSpinner';
-import Maybe from '@/components/Common/Maybe';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
 import Pagination from '@/components/Common/Pagination';
 import SideBarRight from '@/components/Common/SideBarRight';
 import PostCard from '@/components/Post/PostCard';
 import SortByPost from '@/components/Post/SortByPost';
-import useViewport from '@/lib/hooks/useViewport';
 import isEmpty from '@/lib/utils/isEmpty';
 import { singleCategoryRequestedAction } from '@/redux/actions/categoryAction';
 import { listPostCategoryRequestedAction } from '@/redux/actions/postAction';
@@ -22,7 +20,6 @@ const SingleCategory = () => {
 	const singleCategory = useSelector((state) => state.categories.single_category);
 	const listPostCategory = useSelector((state) => state.posts.list_post_category);
 	const router = useRouter();
-	const viewPort = useViewport();
 	const {
 		query: { pid, tab, page },
 		isReady
@@ -86,11 +83,9 @@ const SingleCategory = () => {
 							</MayBeSpinner>
 						</MayBeSpinner>
 					</div>
-					<Maybe test={viewPort.vw >= 768}>
-						<div className="col-xl-3 col-md-4">
-							<SideBarRight />
-						</div>
-					</Maybe>
+					<div className="d-none d-md-block col-xl-3 col-md-4">
+						<SideBarRight />
+					</div>
 				</div>
 			</div>
 		</Layout>
