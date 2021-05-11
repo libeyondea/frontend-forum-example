@@ -43,7 +43,7 @@ const RegisterForm = () => {
 		user_name: Yup.string()
 			.min(6, 'User name must be at least 6 characters')
 			.max(16, 'User name must be at most 16 characters')
-			.matches(/^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, 'User name invalid')
+			.matches(/^(?![_.-])(?!.*[_.-]{2})[a-zA-Z0-9._-]+(?<![_.-])$/, 'User name invalid')
 			.required('User name is required'),
 		email: Yup.string()
 			.matches(
@@ -114,7 +114,7 @@ const RegisterForm = () => {
 							id="email"
 							name="email"
 							type="text"
-							errors={register.errors?.email}
+							errors={register.errors?.invalid_params?.email}
 						/>
 					</div>
 					<div className="form-group col-md-6">
@@ -124,7 +124,7 @@ const RegisterForm = () => {
 							id="user_name"
 							name="user_name"
 							type="text"
-							errors={register.errors?.user_name}
+							errors={register.errors?.invalid_params?.user_name}
 						/>
 					</div>
 					<div className="form-group col-md-6">

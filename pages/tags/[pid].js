@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Error404 from 'pages/404';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -49,6 +50,10 @@ const SingleTag = () => {
 	const handleUnfollow = () => {
 		dispatch(unFollowTagRequestedAction(singleTag.tag?.slug));
 	};
+
+	if (isEmpty(singleTag.tag && !singleTag.is_loading)) {
+		return <Error404 />;
+	}
 
 	return (
 		<Layout>

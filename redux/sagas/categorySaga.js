@@ -11,25 +11,21 @@ import { LIST_CATEGORY_REQUESTED, SINGLE_CATEGORY_REQUESTED } from '@/redux/cons
 
 function* listCategory(action) {
 	const { page } = action.payload;
-	try {
-		const res = yield call(categoryAPI.list, page);
-		if (res.success) {
-			yield put(listCategorySucceedAction(res.data));
-		}
-	} catch (err) {
-		yield put(listCategoryFailedAction(err.message));
+	const response = yield call(categoryAPI.list, page);
+	if (response.success) {
+		yield put(listCategorySucceedAction(response.data));
+	} else {
+		yield put(listCategoryFailedAction(response.errors));
 	}
 }
 
 function* singleCategory(action) {
-	try {
-		const { slug } = action.payload;
-		const res = yield call(categoryAPI.single, slug);
-		if (res.success) {
-			yield put(singleCategorySucceedAction(res.data));
-		}
-	} catch (err) {
-		yield put(singleCategoryFailedAction(err.message));
+	const { slug } = action.payload;
+	const response = yield call(categoryAPI.single, slug);
+	if (response.success) {
+		yield put(singleCategorySucceedAction(response.data));
+	} else {
+		yield put(singleCategoryFailedAction(response.errors));
 	}
 }
 

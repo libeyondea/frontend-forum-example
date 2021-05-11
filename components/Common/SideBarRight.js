@@ -2,8 +2,10 @@ import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CustomLink from '@/components/Common/CustomLink';
+import Empty from '@/components/Common/Empty';
 import LoadingSpinner from '@/components/Common/LoadingSpinner';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
+import isEmpty from '@/lib/utils/isEmpty';
 import { listCategoryRequestedAction } from '@/redux/actions/categoryAction';
 import { listTagRequestedAction } from '@/redux/actions/tagAction';
 
@@ -25,18 +27,20 @@ const SideBarRight = () => {
 				</div>
 				<ul className="list-group">
 					<MayBeSpinner test={listCategory.is_loading} spinner={<LoadingSpinner />}>
-						{listCategory.categories?.map((category) => (
-							<li className="list-group-item-custom d-flex align-items-center px-3 py-2" key={category.id}>
-								<CustomLink
-									href={`/categories/[pid]`}
-									as={`/categories/${category.slug}`}
-									className="text-decoration-none"
-								>
-									{category.title}
-								</CustomLink>
-								<span className="badge badge-default badge-pill">{category.total_posts}</span>
-							</li>
-						))}
+						<MayBeSpinner test={isEmpty(listCategory.categories)} spinner={<Empty />}>
+							{listCategory.categories?.map((category) => (
+								<li className="list-group-item-custom d-flex align-items-center px-3 py-2" key={category.id}>
+									<CustomLink
+										href={`/categories/[pid]`}
+										as={`/categories/${category.slug}`}
+										className="text-decoration-none"
+									>
+										{category.title}
+									</CustomLink>
+									<span className="badge badge-default badge-pill">{category.total_posts}</span>
+								</li>
+							))}
+						</MayBeSpinner>
 					</MayBeSpinner>
 				</ul>
 			</div>
@@ -46,14 +50,16 @@ const SideBarRight = () => {
 				</div>
 				<ul className="list-group">
 					<MayBeSpinner test={listTag.is_loading} spinner={<LoadingSpinner />}>
-						{listTag.tags?.map((tag) => (
-							<li className="list-group-item-custom d-flex align-items-center border-0 px-3 py-2" key={tag.id}>
-								<CustomLink href={`/tags/[pid]`} as={`/tags/${tag.slug}`} className="text-decoration-none">
-									<span className="text-secondary">#</span>
-									{tag.slug}
-								</CustomLink>
-							</li>
-						))}
+						<MayBeSpinner test={isEmpty(listTag.tags)} spinner={<Empty />}>
+							{listTag.tags?.map((tag) => (
+								<li className="list-group-item-custom d-flex align-items-center border-0 px-3 py-2" key={tag.id}>
+									<CustomLink href={`/tags/[pid]`} as={`/tags/${tag.slug}`} className="text-decoration-none">
+										<span className="text-secondary">#</span>
+										{tag.slug}
+									</CustomLink>
+								</li>
+							))}
+						</MayBeSpinner>
 					</MayBeSpinner>
 				</ul>
 			</div>

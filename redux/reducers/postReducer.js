@@ -21,30 +21,30 @@ const initialState = {
 		posts: [],
 		posts_count: 0,
 		is_loading: true,
-		errors: null
+		errors: {}
 	},
 	list_post_tag: {
 		posts: [],
 		posts_count: 0,
 		is_loading: true,
-		errors: null
+		errors: {}
 	},
 	list_post_category: {
 		posts: [],
 		posts_count: 0,
 		is_loading: true,
-		errors: null
+		errors: {}
 	},
 	list_post_user: {
 		posts: [],
 		posts_count: 0,
 		is_loading: true,
-		errors: null
+		errors: {}
 	},
 	single_post: {
 		post: {},
 		is_loading: true,
-		errors: null
+		errors: {}
 	}
 };
 const postReducer = (state = initialState, action) => {

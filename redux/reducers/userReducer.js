@@ -31,43 +31,43 @@ const initialState = {
 	login: {
 		user: {},
 		is_loading: false,
-		errors: null
+		errors: {}
 	},
 	current_user: {
 		user: {},
 		is_authenticated: false,
 		is_loading: true,
-		errors: null
+		errors: {}
 	},
 	register: {
 		user: {},
 		is_loading: false,
-		errors: null
+		errors: {}
 	},
 	single_user: {
 		user: {},
 		is_loading: true,
-		errors: null
+		errors: {}
 	},
 	update_user: {
 		user: {},
 		is_loading: false,
-		errors: null
+		errors: {}
 	},
 	edit_user: {
 		user: {},
 		is_loading: true,
-		errors: null
+		errors: {}
 	},
 	follow_user: {
 		user: {},
 		is_loading: false,
-		errors: null
+		errors: {}
 	},
 	unfollow_user: {
 		user: {},
 		is_loading: false,
-		errors: null
+		errors: {}
 	}
 };
 

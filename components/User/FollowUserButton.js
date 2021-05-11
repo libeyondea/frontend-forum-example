@@ -1,17 +1,26 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
 const FollowUserButton = ({ isUser, following, user_name, follow, unfollow }) => {
 	const followUser = useSelector((state) => state.users.follow_user);
 	const unFollowUser = useSelector((state) => state.users.unfollow_user);
+	const currentUser = useSelector((state) => state.users.current_user);
+	const router = useRouter();
+
+	const handleClick = (e) => {
+		e.preventDefault();
+		if (currentUser.is_authenticated) {
+			following ? unfollow(user_name) : follow(user_name);
+		} else {
+			router.push('/login');
+		}
+	};
+
 	if (isUser) {
 		return null;
 	}
 
-	const handleClick = (e) => {
-		e.preventDefault();
-		following ? unfollow(user_name) : follow(user_name);
-	};
 	return (
 		<>
 			{followUser.is_loading || unFollowUser.is_loading ? (

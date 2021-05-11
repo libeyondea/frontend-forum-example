@@ -14,6 +14,7 @@ import SortByPost from '@/components/Post/SortByPost';
 import isEmpty from '@/lib/utils/isEmpty';
 import { singleCategoryRequestedAction } from '@/redux/actions/categoryAction';
 import { listPostCategoryRequestedAction } from '@/redux/actions/postAction';
+import Error404 from 'pages/404';
 
 const SingleCategory = () => {
 	const dispatch = useDispatch();
@@ -36,6 +37,10 @@ const SingleCategory = () => {
 			dispatch(listPostCategoryRequestedAction(pid, tab, page));
 		}
 	}, [dispatch, pid, tab, page, isReady]);
+
+	if (isEmpty(singleCategory.category && !singleCategory.is_loading)) {
+		return <Error404 />;
+	}
 
 	return (
 		<Layout>

@@ -22,62 +22,52 @@ import {
 } from '@/redux/constants';
 
 function* listPost(action) {
-	try {
-		const { page, tab } = action.payload;
-		const res = yield call(postAPI.list, tab, page);
-		if (res.success) {
-			yield put(listPostSucceedAction(res.data, res.meta.posts_count));
-		}
-	} catch (err) {
-		yield put(listPostFailedAction(err.message));
+	const { page, tab } = action.payload;
+	const response = yield call(postAPI.list, tab, page);
+	if (response.success) {
+		yield put(listPostSucceedAction(response.data, response.meta.posts_count));
+	} else {
+		yield put(listPostFailedAction(response.eerrors));
 	}
 }
 
 function* listPostTag(action) {
-	try {
-		const { tag_slug, tab, page } = action.payload;
-		const res = yield call(postAPI.listByTag, tag_slug, tab, page);
-		if (res.success) {
-			yield put(listPostTagSucceedAction(res.data, res.meta.posts_count));
-		}
-	} catch (err) {
-		yield put(listPostTagFailedAction(err.message));
+	const { tag_slug, tab, page } = action.payload;
+	const response = yield call(postAPI.listByTag, tag_slug, tab, page);
+	if (response.success) {
+		yield put(listPostTagSucceedAction(response.data, response.meta.posts_count));
+	} else {
+		yield put(listPostTagFailedAction(response.errors));
 	}
 }
 
 function* listPostCategory(action) {
-	try {
-		const { category_slug, tab, page } = action.payload;
-		const res = yield call(postAPI.listByCategory, category_slug, tab, page);
-		if (res.success) {
-			yield put(listPostCategorySucceedAction(res.data, res.meta.posts_count));
-		}
-	} catch (err) {
-		yield put(listPostCategoryFailedAction(err.message));
+	const { category_slug, tab, page } = action.payload;
+	const response = yield call(postAPI.listByCategory, category_slug, tab, page);
+	if (response.success) {
+		yield put(listPostCategorySucceedAction(response.data, response.meta.posts_count));
+	} else {
+		yield put(listPostCategoryFailedAction(response.errors));
 	}
 }
 
 function* listPostUser(action) {
-	try {
-		const { user_name, page } = action.payload;
-		const res = yield call(postAPI.listByUser, user_name, page);
-		if (res.success) {
-			yield put(listPostUserSucceedAction(res.data, res.meta.posts_count));
-		}
-	} catch (err) {
-		yield put(listPostUserFailedAction(err.message));
+	const { user_name, page } = action.payload;
+	const response = yield call(postAPI.listByUser, user_name, page);
+	if (response.success) {
+		yield put(listPostUserSucceedAction(response.data, response.meta.posts_count));
+	} else {
+		yield put(listPostUserFailedAction(response.errors));
 	}
 }
 
 function* singlePost(action) {
-	try {
-		const { slug } = action.payload;
-		const res = yield call(postAPI.single, slug);
-		if (res.success) {
-			yield put(singlePostSucceedAction(res.data));
-		}
-	} catch (err) {
-		yield put(singlePostFailedAction(err.message));
+	const { slug } = action.payload;
+	const response = yield call(postAPI.single, slug);
+	if (response.success) {
+		yield put(singlePostSucceedAction(response.data));
+	} else {
+		yield put(singlePostFailedAction(response.errors));
 	}
 }
 

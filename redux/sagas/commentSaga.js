@@ -12,38 +12,32 @@ import {
 import { CREATE_COMMENT_REQUESTED, DELETE_COMMENT_REQUESTED, LIST_COMMENT_REQUESTED } from '@/redux/constants';
 
 function* listComment(action) {
-	try {
-		const { post_slug, page } = action.payload;
-		const res = yield call(commentAPI.list, post_slug, page);
-		if (res.success) {
-			yield put(listCommentSucceedAction(res.data, res.meta.comments_count));
-		}
-	} catch (err) {
-		yield put(listCommentFailedAction(err.message));
+	const { post_slug, page } = action.payload;
+	const response = yield call(commentAPI.list, post_slug, page);
+	if (response.success) {
+		yield put(listCommentSucceedAction(response.data, response.meta.comments_count));
+	} else {
+		yield put(listCommentFailedAction(response.errors));
 	}
 }
 
 function* createComment(action) {
-	try {
-		const { comment } = action.payload;
-		const res = yield call(commentAPI.create, comment);
-		if (res.success) {
-			yield put(createCommentSucceedAction(res.data));
-		}
-	} catch (err) {
-		yield put(createCommentFailedAction(err.message));
+	const { comment } = action.payload;
+	const response = yield call(commentAPI.create, comment);
+	if (response.success) {
+		yield put(createCommentSucceedAction(response.data));
+	} else {
+		yield put(createCommentFailedAction(response.errors));
 	}
 }
 
 function* deleteComment(action) {
-	try {
-		const { post_slug, id } = action.payload;
-		const res = yield call(commentAPI.delete, post_slug, id);
-		if (res.success) {
-			yield put(deleteCommentSucceedAction(res.data));
-		}
-	} catch (err) {
-		yield put(deleteCommentFailedAction(err.message));
+	const { post_slug, id } = action.payload;
+	const response = yield call(commentAPI.delete, post_slug, id);
+	if (response.success) {
+		yield put(deleteCommentSucceedAction(response.data));
+	} else {
+		yield put(deleteCommentFailedAction(response.errors));
 	}
 }
 

@@ -1,13 +1,20 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
 const FollowTagButton = ({ following, slug, follow, unfollow }) => {
 	const followTag = useSelector((state) => state.tags.follow_tag);
 	const unFollowTag = useSelector((state) => state.tags.unfollow_tag);
+	const currentUser = useSelector((state) => state.users.current_user);
+	const router = useRouter();
 
 	const handleClick = (e) => {
 		e.preventDefault();
-		following ? unfollow(slug) : follow(slug);
+		if (currentUser.is_authenticated) {
+			following ? unfollow(slug) : follow(slug);
+		} else {
+			router.push('/login');
+		}
 	};
 
 	return (

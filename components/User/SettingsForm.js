@@ -65,7 +65,7 @@ const SettingsForm = () => {
 			gender: values.gender,
 			avatar: values.avatar
 		};
-		dispatch(updateUserRequestedAction(user));
+		dispatch(updateUserRequestedAction(editUser.user.user_name, user));
 	};
 
 	const gender = ['', 'male', 'female', 'orther'];

@@ -18,22 +18,22 @@ const initialState = {
 		tags: [],
 		tags_count: 0,
 		is_loading: true,
-		errors: null
+		errors: {}
 	},
 	single_tag: {
 		tag: {},
 		is_loading: true,
-		errors: null
+		errors: {}
 	},
 	follow_tag: {
 		tag: {},
 		is_loading: false,
-		errors: null
+		errors: {}
 	},
 	unfollow_tag: {
 		tag: {},
 		is_loading: false,
-		errors: null
+		errors: {}
 	}
 };
 const tagReducer = (state = initialState, action) => {

@@ -1,4 +1,5 @@
 import { END } from '@redux-saga/core';
+import Error404 from 'pages/404';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -18,6 +19,10 @@ import { wrapper } from '@/redux/store';
 
 const SinglePost = () => {
 	const singlePost = useSelector((state) => state.posts.single_post);
+
+	if (isEmpty(singlePost.post && !singlePost.is_loading)) {
+		return <Error404 />;
+	}
 
 	return (
 		<Layout>

@@ -11,12 +11,12 @@ const initialState = {
 	list_category: {
 		categories: [],
 		is_loading: true,
-		errors: null
+		errors: {}
 	},
 	single_category: {
 		category: {},
 		is_loading: true,
-		errors: null
+		errors: {}
 	}
 };
 const categoryReducer = (state = initialState, action) => {

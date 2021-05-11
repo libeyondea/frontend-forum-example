@@ -4,7 +4,6 @@ import React from 'react';
 import Breadcrumb from '@/components/Common/Breadcrumb';
 import Layout from '@/components/Common/Layout';
 import RegisterForm from '@/components/User/RegisterForm';
-import withAuth from '@/lib/hoc/withAuth';
 
 const Register = () => (
 	<>

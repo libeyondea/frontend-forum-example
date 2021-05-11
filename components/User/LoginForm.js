@@ -54,7 +54,7 @@ const LoginForm = () => {
 						id="user_name"
 						name="user_name"
 						type="text"
-						errors={login.errors?.user}
+						errors={login.errors?.title}
 					/>
 				</div>
 				<div className="form-group">
@@ -64,7 +64,7 @@ const LoginForm = () => {
 						id="password"
 						name="password"
 						type="password"
-						errors={login.errors?.user}
+						errors={login.errors?.title}
 					/>
 				</div>
 				<div className="d-flex justify-content-between mb-3">

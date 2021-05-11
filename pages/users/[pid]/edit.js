@@ -17,6 +17,7 @@ const EditUser = () => {
 	const dispatch = useDispatch();
 	const editUser = useSelector((state) => state.users.edit_user);
 	const currentUser = useSelector((state) => state.users.current_user);
+	const updateUser = useSelector((state) => state.users.update_user);
 	const router = useRouter();
 	const {
 		query: { pid },
@@ -31,11 +32,11 @@ const EditUser = () => {
 		}
 	}, [dispatch, isReady, currentUser.is_authenticated, pid]);
 
-	if (!currentUser.is_authenticated && !currentUser.is_loading) {
+	if (!currentUser.is_loading && !currentUser.is_authenticated) {
 		Router.push('/login');
 	}
 
-	if (editUser.errors) {
+	if (!isEmpty(editUser.errors) || !isEmpty(updateUser.errors)) {
 		return <Error404 />;
 	}
 

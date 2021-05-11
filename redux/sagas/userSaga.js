@@ -35,133 +35,108 @@ import {
 } from '@/redux/constants';
 
 function* loginUser(action) {
-	try {
-		const { user, router } = action.payload;
-		const res = yield call(userAPI.login, user);
-		if (res.success) {
-			const user = {
-				id: res.data.id,
-				user_name: res.data.user_name,
-				avatar: res.data.avatar
-			};
-			setCookie('token', res.data.access_token);
-			yield put(loginUserSucceedAction(user));
-			router.push('/');
-		} else {
-			yield put(loginUserFailedAction(res.errors));
-		}
-	} catch (err) {
-		yield put(loginUserFailedAction(err.message));
+	const { user, router } = action.payload;
+	const response = yield call(userAPI.login, user);
+	if (response.success) {
+		const user = {
+			id: response.data.id,
+			user_name: response.data.user_name,
+			avatar: response.data.avatar
+		};
+		setCookie('token', response.data.access_token);
+		yield put(loginUserSucceedAction(user));
+		router.push('/');
+	} else {
+		yield put(loginUserFailedAction(response.errors));
 	}
 }
 
 function* registerUser(action) {
-	try {
-		const { user, router } = action.payload;
-		const res = yield call(userAPI.register, user);
-		if (res.success) {
-			yield put(registerUserSucceedAction(res.data));
-			router.push('/login');
-		} else {
-			yield put(registerUserFailedAction(res.errors));
-		}
-	} catch (err) {
-		yield put(registerUserFailedAction(err.message));
+	const { user, router } = action.payload;
+	const response = yield call(userAPI.register, user);
+	if (response.success) {
+		yield put(registerUserSucceedAction(response.data));
+		router.push('/login');
+	} else {
+		yield put(registerUserFailedAction(response.errors));
 	}
 }
 
 function* currentUser() {
-	try {
-		if (getCookie('token')) {
-			const res = yield call(userAPI.current);
-			if (res.success) {
-				yield put(currentUserSucceedAction(res.data, true));
-			} else {
-				removeCookie('token');
-				yield put(currentUserSucceedAction({}, false));
-			}
+	if (getCookie('token')) {
+		const response = yield call(userAPI.current);
+		if (response.success) {
+			yield put(currentUserSucceedAction(response.data, true));
 		} else {
+			removeCookie('token');
 			yield put(currentUserSucceedAction({}, false));
+			yield put(currentUserFailedAction(response.errors));
 		}
-	} catch (err) {
-		removeCookie('token');
+	} else {
 		yield put(currentUserSucceedAction({}, false));
-		yield put(currentUserFailedAction(err.message));
 	}
 }
 
 function* logoutUser(action) {
-	try {
-		const { router } = action.payload;
-		const res = yield call(userAPI.logout);
-		if (res.success) {
-			removeCookie('token');
-			yield put(logoutUserSucceedAction());
-			router.push('/login');
-		}
-	} catch (err) {
-		yield put(logoutUserFailedAction(err.message));
+	const { router } = action.payload;
+	const response = yield call(userAPI.logout);
+	if (response.success) {
+		removeCookie('token');
+		yield put(logoutUserSucceedAction());
+		router.push('/login');
+	} else {
+		yield put(logoutUserFailedAction(response.errors));
 	}
 }
 
 function* singleUser(action) {
-	try {
-		const { user_name } = action.payload;
-		const res = yield call(userAPI.single, user_name);
-		if (res.success) {
-			yield put(singleUserSucceedAction(res.data));
-		}
-	} catch (err) {
-		yield put(singleUserFailedAction(err.message));
+	const { user_name } = action.payload;
+	const response = yield call(userAPI.single, user_name);
+	if (response.success) {
+		yield put(singleUserSucceedAction(response.data));
+	} else {
+		yield put(singleUserFailedAction(response.errors));
 	}
 }
 
 function* updateUser(action) {
-	try {
-		const { user } = action.payload;
-		const res = yield call(userAPI.update, user);
-		if (res.success) {
-			yield put(updateUserSucceedAction(res.data));
-			window.location.replace('/users/' + res.data.user_name);
-		}
-	} catch (err) {
-		yield put(updateUserFailedAction(err.message));
+	const { user_name, user } = action.payload;
+	const response = yield call(userAPI.update, user_name, user);
+	if (response.success) {
+		yield put(updateUserSucceedAction(response.data));
+		window.location.replace('/users/' + response.data.user_name);
+	} else {
+		yield put(updateUserFailedAction(response.errors));
 	}
 }
 
 function* followUser(action) {
-	try {
-		const { user_name } = action.payload;
-		const res = yield call(userAPI.follow, user_name);
-		if (res.success) {
-			yield put(followUserSucceedAction(res.data));
-		}
-	} catch (err) {
-		yield put(followUserFailedAction(err.message));
+	const { user_name } = action.payload;
+	const response = yield call(userAPI.follow, user_name);
+	if (response.success) {
+		yield put(followUserSucceedAction(response.data));
+	} else {
+		yield put(followUserFailedAction(response.errors));
 	}
 }
 
 function* unFollowUser(action) {
-	try {
-		const { user_name } = action.payload;
-		const res = yield call(userAPI.unFollow, user_name);
-		if (res.success) {
-			yield put(unFollowUserSucceedAction(res.data));
-		}
-	} catch (err) {
-		yield put(unFollowUserFailedAction(err.message));
+	const { user_name } = action.payload;
+	const response = yield call(userAPI.unFollow, user_name);
+	if (response.success) {
+		yield put(unFollowUserSucceedAction(response.data));
+	} else {
+		yield put(unFollowUserFailedAction(response.errors));
 	}
 }
 
 function* editUser(action) {
-	try {
-		const { user_name } = action.payload;
-		const res = yield call(userAPI.edit, user_name);
-		if (res.success) {
-			yield put(editUserSucceedAction(res.data));
-		}
-	} catch (err) {
-		yield put(editUserFailedAction(err.message));
+	const { user_name } = action.payload;
+	const response = yield call(userAPI.edit, user_name);
+	if (response.success) {
+		yield put(editUserSucceedAction(response.data));
+	} else {
+		yield put(editUserFailedAction(response.errors));
 	}
 }
 

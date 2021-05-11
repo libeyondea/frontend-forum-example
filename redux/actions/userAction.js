@@ -35,11 +35,10 @@ export const loginUserRequestedAction = (user, router) => ({
 		router: router
 	}
 });
-export const loginUserSucceedAction = (user, is_authenticated) => ({
+export const loginUserSucceedAction = (user) => ({
 	type: LOGIN_USER_SUCCEED,
 	payload: {
-		user: user,
-		is_authenticated: is_authenticated
+		user: user
 	}
 });
 export const loginUserFailedAction = (errors) => ({
@@ -121,9 +120,10 @@ export const singleUserFailedAction = (errors) => ({
 	}
 });
 //
-export const updateUserRequestedAction = (user) => ({
+export const updateUserRequestedAction = (user_name, user) => ({
 	type: UPDATE_USER_REQUESTED,
 	payload: {
+		user_name: user_name,
 		user: user
 	}
 });

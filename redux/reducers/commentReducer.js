@@ -15,17 +15,17 @@ const initialState = {
 		comments: [],
 		comments_count: 0,
 		is_loading: true,
-		errors: null
+		errors: {}
 	},
 	create_comment: {
 		comment: {},
 		is_loading: false,
-		errors: null
+		errors: {}
 	},
 	delete_comment: {
 		comment: {},
 		is_loading: false,
-		errors: null
+		errors: {}
 	}
 };
 
