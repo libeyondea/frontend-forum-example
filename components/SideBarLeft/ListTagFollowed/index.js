@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import useSWR from 'swr';
 
 import CustomLink from '@/components/Common/CustomLink';
-import EmptySBRight from '@/components/Common/EmptySBRight';
 import LoadingSBRight from '@/components/Common/LoadingSBRight';
 import useUser from '@/lib/hooks/useUser';
 import isEmpty from '@/lib/utils/isEmpty';
@@ -10,7 +9,7 @@ import isEmpty from '@/lib/utils/isEmpty';
 const ListTagFollowed = () => {
 	const { user } = useUser();
 	const { data: listTagFollowed } = useSWR(
-		`/tags-followed?offset=0&limit=${process.env.LIMIT_PAGE.LIST_TAG_FOLLOWED}`,
+		user ? `/tags-followed?offset=0&limit=${process.env.LIMIT_PAGE.LIST_TAG_FOLLOWED}` : null,
 		{
 			revalidateOnFocus: false
 		}
