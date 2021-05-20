@@ -38,7 +38,7 @@ const NavBar = () => {
 		<>
 			<Navbar collapseOnSelect expand="lg" bg="light" variant="light" fixed="top" className="shadow-sm">
 				<div className="container-xl">
-					<Link href="/" passHref>
+					<Link href="/" as="/[[...pid]]" passHref>
 						<Navbar.Brand className="d-flex align-items-center mr-auto">
 							<CustomImage
 								className="rounded-circle"
