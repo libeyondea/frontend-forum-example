@@ -54,9 +54,14 @@ const Index = ({ listPost, pid }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const { pid: getPid = [], page } = query;
+		const { pid: initialPid, page } = query;
+
+		const getPid = Array.isArray(initialPid) ? initialPid : [];
+
 		const pid = getPid[0] || 'feed';
+
 		console.log(0, getPid);
+
 		if (getPid.length > 1) {
 			console.log('1');
 			return {
