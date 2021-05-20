@@ -57,6 +57,7 @@ export async function getServerSideProps({ req, query }) {
 		const { pid: getPid = [], page } = query;
 		const pid = getPid[0] || 'feed';
 		if (getPid.length > 1) {
+			console.log('1');
 			return {
 				notFound: true
 			};
@@ -71,6 +72,7 @@ export async function getServerSideProps({ req, query }) {
 			}
 		});
 		if (resListPost.data.success) {
+			console.log('2');
 			return {
 				props: {
 					listPost: resListPost.data,
@@ -78,6 +80,7 @@ export async function getServerSideProps({ req, query }) {
 				}
 			};
 		}
+		console.log('3');
 		return {
 			notFound: true
 		};
