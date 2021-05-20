@@ -56,7 +56,7 @@ module.exports = (phase) => {
 		env,
 		reactStrictMode: true,
 		images: {
-			domains: ['i.imgur.com', 'localhost']
+			domains: ['localhost', 'backend-forum-example.herokuapp.com']
 		}
 	};
 };
