@@ -57,7 +57,7 @@
 ### Built With
 
 - [Next](https://github.com/vercel/next.js)
-- [Reux-Saga](https://github.com/redux-saga/redux-saga)
+- [React](https://github.com/facebook/react)
 - [React Bootstrap](https://github.com/react-bootstrap/react-bootstrap)
 - ...
 
