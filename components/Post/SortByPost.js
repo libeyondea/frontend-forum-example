@@ -1,33 +1,24 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import Nav from 'react-bootstrap/Nav';
+import CustomLink from '@/components/Common/CustomLink';
 
-const SortByPost = ({ asUrl }) => {
-	const router = useRouter();
-	const {
-		pathname,
-		query: { tab }
-	} = router;
-
+const SortByPost = ({ url = '', pidSort }) => {
 	return (
-		<Nav variant="pills">
-			<Nav.Item>
-				<Link href={`${pathname}?tab=feed`} as={`${asUrl}?tab=feed`} passHref>
-					<Nav.Link className={`${(tab === 'feed' || !tab) && 'active'}`}>Feed</Nav.Link>
-				</Link>
-			</Nav.Item>
-			<Nav.Item>
-				<Link href={`${pathname}?tab=latest`} as={`${asUrl}?tab=latest`} passHref>
-					<Nav.Link className={`${tab === 'latest' && 'active'}`}>Latest</Nav.Link>
-				</Link>
-			</Nav.Item>
-
-			<Nav.Item>
-				<Link href={`${pathname}?tab=oldest`} as={`${asUrl}?tab=oldest`} passHref>
-					<Nav.Link className={`${tab === 'oldest' && 'active'}`}>Oldest</Nav.Link>
-				</Link>
-			</Nav.Item>
-		</Nav>
+		<ul className="nav nav-pills">
+			<li className="nav-item">
+				<CustomLink href={`${url}/feed`} className={`nav-link ${(!pidSort || pidSort === 'feed') && 'active'}`}>
+					Feed
+				</CustomLink>
+			</li>
+			<li className="nav-item">
+				<CustomLink href={`${url}/latest`} className={`nav-link ${pidSort === 'latest' && 'active'}`}>
+					Latest
+				</CustomLink>
+			</li>
+			<li className="nav-item">
+				<CustomLink href={`${url}/oldest`} className={`nav-link ${pidSort === 'oldest' && 'active'}`}>
+					Oldest
+				</CustomLink>
+			</li>
+		</ul>
 	);
 };
 

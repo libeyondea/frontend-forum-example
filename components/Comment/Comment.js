@@ -6,14 +6,18 @@ import CustomLink from '@/components/Common/CustomLink';
 
 const Comment = ({ comment }) => {
 	return (
-		<div className="media mb-4">
-			<CustomLink href="/users/[pid]" as={`/users/${comment.user?.user_name}`}>
+		<div className="media mb-4 card-comment">
+			<CustomLink
+				href="/users/[pid]"
+				as={`/users/${comment.user?.user_name}`}
+				className="d-flex mr-3 mb-3 text-decoration-none img-avatar d-inline-block"
+			>
 				<CustomImage
 					width="50"
 					height="50"
-					src={comment.user?.avatar}
+					src={`${process.env.IMAGES_URL}/${comment.user?.avatar}`}
 					alt={comment.user?.user_name}
-					className="d-flex mr-3 mb-3 rounded-circle"
+					className="rounded-circle h-100 w-100"
 				/>
 			</CustomLink>
 			<div className="media-body">

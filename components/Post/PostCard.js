@@ -9,52 +9,72 @@ const PostCard = ({ post }) => {
 	return (
 		<div className="card card-post">
 			<div className="p-3">
-				<div className="card-block">
-					<h5 className="card-title mb-1">
+				<div className="user-meta mb-2">
+					<div className="d-flex align-items-center">
+						<div className="mr-1">
+							<CustomLink
+								href="/users/[pid]"
+								as={`/users/${post.user.user_name}`}
+								className="text-decoration-none d-inline-block"
+							>
+								<CustomImage
+									src={`${process.env.IMAGES_URL}/${post.user.avatar}`}
+									className="rounded-circle h-100 w-100"
+									width={35}
+									height={35}
+									alt={post.user.user_name}
+								/>
+							</CustomLink>
+						</div>
+						<div>
+							<p className="mb-0">
+								<CustomLink href="/users/[pid]" as={`/users/${post.user.user_name}`} className="text-decoration-none">
+									{post.user.user_name}
+								</CustomLink>
+							</p>
+							<small className="text-muted">{timeAgo(post.created_at)}</small>
+						</div>
+					</div>
+				</div>
+				<div className="body-card-post">
+					<h5 className="card-title mb-2">
 						<CustomLink href="/posts/[pid]" as={`/posts/${post.slug}`} className="text-decoration-none">
 							{post.title}
 						</CustomLink>
 					</h5>
-					<p className="card-text mb-2">{post.excerpt}</p>
-				</div>
-				<div className="clearfix">
-					<div className="float-left">
+					<div className="mb-1">
+						<p className="card-text mb-0">{post.excerpt}</p>
+					</div>
+					<div className="tags mb-2">
 						{post.tags.map((tag) => (
 							<CustomLink
 								href={`/tags/[pid]`}
 								as={`/tags/${tag.slug}`}
 								key={tag.id}
 								onClick={(e) => e.stopPropagation()}
-								className="badge badge-light p-2 mb-2 mr-2"
+								className="custom-tag p-1 text-decoration-none"
 							>
-								<span className="text-secondary">#</span>
+								<span>#</span>
 								{tag.slug}
 							</CustomLink>
 						))}
 					</div>
-					<div className="float-right d-flex align-items-center">
-						<small className="text-muted">{timeAgo(post.created_at)}</small>
-						<div className=" ml-1">
-							<CustomLink href="/users/[pid]" as={`/users/${post.user.user_name}`} className="text-decoration-none">
-								<CustomImage height="35" src={post.user.avatar} className="rounded-circle" alt={post.user.user_name} />
-							</CustomLink>
-						</div>
-						<CustomLink href="/users/[pid]" as={`/users/${post.user.user_name}`} className="text-decoration-none ml-1">
-							<span>{post.user.user_name}</span>
+					<div className="d-flex justify-content-end">
+						<CustomLink
+							href="/posts/[pid]#comment-post"
+							as={`/posts/${post.slug}#comment-post`}
+							className="text-decoration-none text-secondary mr-2"
+						>
+							<i className="fa fa-comment-o fa-sm" /> {post.total_comments} comments
 						</CustomLink>
+						<a
+							href="#!"
+							className={`text-decoration-none ${false ? 'text-danger' : 'text-secondary'}`}
+							onClick={() => handleClickFavorite(post.slug)}
+						>
+							<i className={`fa ${false ? 'fa-heart' : 'fa-heart-o'} fa-sm`} /> 666 likes
+						</a>
 					</div>
-				</div>
-				<div className="d-flex justify-content-end mt-2">
-					<a href="#!" className="text-decoration-none text-secondary mr-2">
-						<i className="fa fa-comment-o fa-sm" /> 666 comments
-					</a>
-					<a
-						href="#!"
-						className={`text-decoration-none ${false ? 'text-danger' : 'text-secondary'}`}
-						onClick={() => handleClickFavorite(post.slug)}
-					>
-						<i className={`fa ${false ? 'fa-heart' : 'fa-heart-o'} fa-sm`} /> 666 likes
-					</a>
 				</div>
 			</div>
 		</div>

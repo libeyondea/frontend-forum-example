@@ -79,7 +79,8 @@ body {
 	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 1px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 } */
 
-.list-group-item-custom {
+.list-group-item-custom,
+.list-group-item-custom-empty {
 	position: relative;
 	display: block;
 	padding: 0.75rem 1.25rem;
@@ -252,7 +253,7 @@ a.disabled {
 }
 
 /*  */
-.single-post .cover-img img {
+.single-post .cover-img {
 	width: 100%;
 	max-height: 420px;
 }
@@ -263,6 +264,47 @@ a.disabled {
 
 .comment-post .media .media-body a:hover {
 	color: #4d5760;
+}
+
+/*  */
+
+@media (min-width: 768px) {
+	.card-post .body-card-post {
+		padding-left: calc(2rem + 0.25rem);
+	}
+}
+
+.card-post .user-meta {
+	line-height: 1.25rem;
+}
+
+.card-post .tags .custom-tag,
+.custom-tag {
+	color: #64707d;
+	display: inline-block;
+}
+
+.card-post .tags .custom-tag span,
+.custom-tag span {
+	opacity: 0.4;
+}
+.card-post .tags .custom-tag:hover,
+.custom-tag:hover {
+	color: #08090a !important;
+}
+
+.card-post .tags {
+	margin-left: calc(0.25rem * -1);
+}
+
+.card-post .user-meta .img-avatar {
+	width: 2rem;
+	height: 2rem;
+}
+
+.card-comment .img-avatar {
+	width: 2.8rem;
+	height: 2.8rem;
 }
 
 .card-post .card-title a {
@@ -277,4 +319,61 @@ a.disabled {
 .card-post:focus-within {
 	box-shadow: 0px 0px 1px 3px #3b49df;
 	border-radius: 0.25rem;
+}
+
+/* loading spinner */
+
+.title-loading,
+.excerpt-loading,
+.card-loading-post .tags-list-loading,
+.avt-loading,
+.card-loading-post .user-loading,
+.list-group-item-custom-loading {
+	border-radius: 5px;
+	animation-duration: 1.25s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: infinite;
+	animation-name: placeHolderShimmer;
+	animation-timing-function: linear;
+	background: linear-gradient(
+		to right,
+		rgba(255, 255, 255, 0.1) 10%,
+		rgba(0, 0, 0, 0.05) 25%,
+		rgba(255, 255, 255, 0.1) 40%
+	);
+	box-shadow: inset 0 0 0 200px rgba(0, 0, 0, 0.025);
+	background-size: 800px 104px;
+	position: relative;
+}
+
+@keyframes placeHolderShimmer {
+	0% {
+		background-position: -468px 0;
+	}
+	100% {
+		background-position: 468px 0;
+	}
+}
+
+@media (min-width: 768px) {
+	.card-loading-post .body-loading {
+		padding-left: calc(2rem + 0.25rem);
+	}
+}
+
+.card-loading-post .tags-list-loading {
+	height: 0%;
+}
+
+.list-group-item-custom-loading {
+	position: relative;
+	display: block;
+}
+
+.card-loading-post .user-loading {
+	height: 0%;
+}
+
+.height-list-group {
+	height: 320px;
 }

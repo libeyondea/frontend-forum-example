@@ -1,28 +1,60 @@
 import { useRouter } from 'next/router';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { mutate } from 'swr';
 
-const FollowTagButton = ({ following, slug, follow, unfollow }) => {
-	const followTag = useSelector((state) => state.tags.follow_tag);
-	const unFollowTag = useSelector((state) => state.tags.unfollow_tag);
-	const currentUser = useSelector((state) => state.users.current_user);
+import useUser from '@/lib/hooks/useUser';
+import httpRequest from '@/lib/utils/httpRequest';
+import { getCookie } from '@/lib/utils/session';
+import showToast from '@/lib/utils/showToast';
+
+const FollowTagButton = ({ following, slug }) => {
+	const { user } = useUser();
 	const router = useRouter();
+	const [isFollow, setFollow] = useState(following);
+	const [isLoading, setLoading] = useState(false);
 
-	const handleClick = (e) => {
+	const onHandleClick = async (e) => {
 		e.preventDefault();
-		if (currentUser.is_authenticated) {
-			following ? unfollow(slug) : follow(slug);
-		} else {
-			router.push('/login');
+		try {
+			if (!user) {
+				router.push('/login');
+				return;
+			}
+			setLoading(true);
+			const response = isFollow
+				? await httpRequest.delete({
+						url: `/follow_tag`,
+						params: {
+							slug: slug
+						},
+						token: getCookie('token')
+				  })
+				: await httpRequest.post({
+						url: `/follow_tag`,
+						data: {
+							slug: slug
+						},
+						token: getCookie('token')
+				  });
+			if (response.data.success) {
+				mutate(`/tags-followed?offset=0&limit=${process.env.LIMIT_PAGE.LIST_TAG_FOLLOWED}`);
+				setFollow(!isFollow);
+				showToast.success(`${!isFollow ? 'Follow' : 'Unfollow'} ${response.data.data.slug} success`);
+			}
+		} catch (error) {
+			console.log(error.response);
+			showToast.error();
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	return (
 		<>
-			{followTag.is_loading || unFollowTag.is_loading ? (
-				<button className={`btn btn-sm ${following ? 'btn-secondary' : 'btn-outline-secondary'}`} disabled>
+			{isLoading ? (
+				<button className={`btn btn-sm ${isFollow ? 'btn-secondary' : 'btn-outline-secondary'}`} disabled>
 					<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
-					{following ? (
+					{isFollow ? (
 						<>
 							<i className="fa fa-minus" /> UnFollow
 						</>
@@ -33,8 +65,11 @@ const FollowTagButton = ({ following, slug, follow, unfollow }) => {
 					)}
 				</button>
 			) : (
-				<button className={`btn btn-sm ${following ? 'btn-secondary' : 'btn-outline-secondary'}`} onClick={handleClick}>
-					{following ? (
+				<button
+					className={`btn btn-sm ${isFollow ? 'btn-secondary' : 'btn-outline-secondary'}`}
+					onClick={onHandleClick}
+				>
+					{isFollow ? (
 						<>
 							<i className="fa fa-minus" /> UnFollow
 						</>

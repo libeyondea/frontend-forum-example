@@ -1,95 +1,109 @@
-import { END } from '@redux-saga/core';
-import Error404 from 'pages/404';
+import Head from 'next/head';
 import React from 'react';
-import { useSelector } from 'react-redux';
 
+import Breadcrumb from '@/components/Breadcrumb';
 import CommentList from '@/components/Comment/CommentList';
-import Breadcrumb from '@/components/Common/Breadcrumb';
 import CustomImage from '@/components/Common/CustomImage';
 import CustomLink from '@/components/Common/CustomLink';
-import Empty from '@/components/Common/Empty';
-import Layout from '@/components/Common/Layout';
-import LoadingSpinner from '@/components/Common/LoadingSpinner';
-import MayBeSpinner from '@/components/Common/MayBeSpinner';
-import SideBarRight from '@/components/Common/SideBarRight';
+import Layout from '@/components/Layout';
 import PostMeta from '@/components/Post/PostMeta';
-import isEmpty from '@/lib/utils/isEmpty';
-import { singlePostRequestedAction } from '@/redux/actions/postAction';
-import { wrapper } from '@/redux/store';
+import SideBarRight from '@/components/SideBarRight';
+import httpRequest from '@/lib/utils/httpRequest';
 
-const SinglePost = () => {
-	const singlePost = useSelector((state) => state.posts.single_post);
-
-	if (isEmpty(singlePost.post && !singlePost.is_loading)) {
-		return <Error404 />;
-	}
-
+const SinglePost = ({ singlePost }) => {
 	return (
-		<Layout>
-			<div className="container-xl my-4">
-				<div className="row">
-					<div className="col-xl-9 col-md-9">
-						<MayBeSpinner test={singlePost.is_loading} spinner={<LoadingSpinner />}>
-							<MayBeSpinner test={isEmpty(singlePost.post)} spinner={<Empty />}>
-								<Breadcrumb
-									items={[
-										{
-											title: 'Home',
-											href: '/'
-										},
-										{
-											title: singlePost.post?.title
-										}
-									]}
-								/>
-								<article className="single-post bg-light rounded-lg shadow-sm">
-									<div className="cover-img">
-										<CustomImage src={singlePost.post?.image} className="rounded-lg" alt={singlePost.post?.title} />
+		<>
+			<Head>
+				<title>{singlePost.data?.title} | De4th Zone</title>
+				<meta name="description" content={singlePost.data?.excerpt} />
+			</Head>
+			<Layout>
+				<div className="container-xl my-4">
+					<div className="row">
+						<div className="col-xl-9 col-md-9">
+							<Breadcrumb
+								items={[
+									{
+										title: 'Home',
+										href: '/'
+									},
+									{
+										title: singlePost.data?.title
+									}
+								]}
+							/>
+							<article className="single-post bg-light rounded-lg shadow-sm">
+								<div className="cover-img-none">
+									<CustomImage
+										src={`${process.env.IMAGES_URL}/${singlePost.data?.image}`}
+										className="rounded-lg"
+										alt={singlePost.data?.title}
+										layout="responsive"
+										width={500}
+										height={280}
+									/>
+								</div>
+								<div className="p-5">
+									<div className="mb-3">
+										<h1 className="mb-3">{singlePost.data?.title}</h1>
+										{singlePost.data?.tags?.map((tag) => (
+											<CustomLink
+												key={tag.id}
+												href={`/tags/[...pid]`}
+												as={`/tags/${tag.slug}`}
+												className="custom-tag p-1 text-decoration-none"
+											>
+												<span>#</span>
+												{tag.slug}
+											</CustomLink>
+										))}
 									</div>
-									<div className="p-5">
-										<div className="mb-3">
-											<h1 className="mb-3">{singlePost.post?.title}</h1>
-											{singlePost.post?.tags?.map((tag) => (
-												<CustomLink
-													key={tag.id}
-													href={`/tags/[pid]`}
-													as={`/tags/${tag.slug}`}
-													className="badge badge-light p-2 mb-2 mr-2"
-												>
-													<span className="text-secondary">#</span>
-													{tag.slug}
-												</CustomLink>
-											))}
-										</div>
-										<PostMeta post={singlePost.post} />
-										<div
-											dangerouslySetInnerHTML={{
-												__html: singlePost.post?.content
-											}}
-										/>
-										<hr />
-										<div className="comment-post">
-											<CommentList postSlug={singlePost.post?.slug} />
-										</div>
+									<PostMeta singlePost={singlePost} />
+									<div
+										dangerouslySetInnerHTML={{
+											__html: singlePost.data?.content
+										}}
+									/>
+									<hr />
+									<div id="comment-post" className="comment-post">
+										<CommentList />
 									</div>
-								</article>
-							</MayBeSpinner>
-						</MayBeSpinner>
-					</div>
-					<div className="d-none d-md-block col-xl-3 col-md-3">
-						<SideBarRight />
+								</div>
+							</article>
+						</div>
+						<div className="d-none d-md-block col-xl-3 col-md-3">
+							<SideBarRight />
+						</div>
 					</div>
 				</div>
-			</div>
-		</Layout>
+			</Layout>
+		</>
 	);
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async ({ store, query }) => {
-	const { pid } = query;
-	store.dispatch(singlePostRequestedAction(pid));
-	store.dispatch(END);
-	await store.sagaTask.toPromise();
-});
+export async function getServerSideProps({ query }) {
+	try {
+		console.log(query.pid);
+		const { pid } = query;
+		const resSinglePost = await httpRequest.get({
+			url: `/posts/${pid}`
+		});
+		if (resSinglePost.data.success) {
+			return {
+				props: {
+					singlePost: resSinglePost.data
+				}
+			};
+		}
+		return {
+			notFound: true
+		};
+	} catch (error) {
+		console.log(error);
+		return {
+			notFound: true
+		};
+	}
+}
 
 export default SinglePost;

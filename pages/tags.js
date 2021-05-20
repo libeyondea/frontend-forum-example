@@ -1,33 +1,17 @@
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 
-import Breadcrumb from '@/components/Common/Breadcrumb';
-import Empty from '@/components/Common/Empty';
-import Layout from '@/components/Common/Layout';
-import LoadingSpinner from '@/components/Common/LoadingSpinner';
+import Breadcrumb from '@/components/Breadcrumb';
+import EmptyTags from '@/components/Common/EmptyTags';
 import MayBeSpinner from '@/components/Common/MayBeSpinner';
-import Pagination from '@/components/Common/Pagination';
-import SideBarLeft from '@/components/Common/SideBarLeft';
+import Layout from '@/components/Layout';
+import Pagination from '@/components/Pagination';
+import SideBarLeft from '@/components/SideBarLeft';
 import TagCard from '@/components/Tag/TagCard';
+import httpRequest from '@/lib/utils/httpRequest';
 import isEmpty from '@/lib/utils/isEmpty';
-import { listTagRequestedAction } from '@/redux/actions/tagAction';
+import { getCookie } from '@/lib/utils/session';
 
-const Tags = () => {
-	const dispatch = useDispatch();
-	const listTag = useSelector((state) => state.tags.list_tag);
-	const router = useRouter();
-	const {
-		query: { page },
-		isReady
-	} = router;
-
-	useEffect(() => {
-		if (isReady) {
-			dispatch(listTagRequestedAction(page));
-		}
-	}, [dispatch, page, isReady]);
-
+const Tags = ({ listTag }) => {
 	return (
 		<Layout>
 			<div className="container-xl my-4">
@@ -45,18 +29,16 @@ const Tags = () => {
 							]}
 						/>
 						<h1 className="mb-4">Tags</h1>
-						<MayBeSpinner test={listTag.is_loading} spinner={<LoadingSpinner />}>
-							<MayBeSpinner test={isEmpty(listTag.tags)} spinner={<Empty />}>
-								<div className="row">
-									{listTag.tags?.map((tag) => (
-										<div className="col-lg-6 mb-4" key={tag.id}>
-											<TagCard tag={tag} />
-										</div>
-									))}
-									<Pagination total={listTag.tags_count} limit={process.env.LIMIT_PAGE.LIST_TAG} asUrl={`/tags`} />
-								</div>
+						<div className="row">
+							<MayBeSpinner test={isEmpty(listTag.data)} spinner={<EmptyTags />}>
+								{listTag.data?.map((tag) => (
+									<div className="col-lg-6 mb-4" key={tag.id}>
+										<TagCard tag={tag} />
+									</div>
+								))}
+								<Pagination total={listTag.meta?.tags_count} limit={process.env.LIMIT_PAGE.LIST_TAG} />
 							</MayBeSpinner>
-						</MayBeSpinner>
+						</div>
 					</div>
 					<div className="d-none d-md-block col-xl-2 col-md-3 order-md-1">
 						<SideBarLeft />
@@ -66,5 +48,31 @@ const Tags = () => {
 		</Layout>
 	);
 };
+
+export async function getServerSideProps({ req, query }) {
+	try {
+		const { page } = query;
+		const response = await httpRequest.get({
+			url: `/tags`,
+			token: getCookie('token', req),
+			params: {
+				offset: (page - 1) * process.env.LIMIT_PAGE.LIST_TAG,
+				limit: process.env.LIMIT_PAGE.LIST_TAG
+			}
+		});
+		return {
+			props: {
+				listTag: response.data
+			}
+		};
+	} catch (error) {
+		console.log(error.response.data);
+		return {
+			props: {
+				listTag: {}
+			}
+		};
+	}
+}
 
 export default Tags;

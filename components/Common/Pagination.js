@@ -5,7 +5,7 @@ import React from 'react';
 import Maybe from '@/components/Common/Maybe';
 import { getPageInfo, getRange } from '@/lib/utils/calculatePagination';
 
-const Pagination = ({ total, limit, pageCount = 10, asUrl }) => {
+const Pagination = ({ total, limit, pageCount = 10 }) => {
 	const router = useRouter();
 	if (total <= limit) return null;
 	let hrefLink;

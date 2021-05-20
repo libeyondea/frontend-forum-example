@@ -1,22 +1,45 @@
 import { useRouter } from 'next/router';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { mutate } from 'swr';
 
-import Maybe from '@/components/Common/Maybe';
-import { deleteCommentRequestedAction } from '@/redux/actions/commentAction';
+import useUser from '@/lib/hooks/useUser';
+import httpRequest from '@/lib/utils/httpRequest';
+import { getCookie } from '@/lib/utils/session';
+import showToast from '@/lib/utils/showToast';
 
 const CommentMeta = ({ comment }) => {
-	const dispatch = useDispatch();
-	const currentUser = useSelector((state) => state.users.current_user);
-	const deleteComment = useSelector((state) => state.comments.delete_comment);
+	const { user } = useUser();
+	const [isLoading, setLoading] = useState(false);
 	const router = useRouter();
 	const {
-		query: { pid }
+		query: { pid, page = 1 }
 	} = router;
 
-	const deleteCommentHandle = (e) => {
+	const onDeleteCommentClicked = async (e) => {
 		e.preventDefault();
-		dispatch(deleteCommentRequestedAction(comment.id, pid));
+		try {
+			setLoading(true);
+			const response = await httpRequest.delete({
+				url: `/comments/${comment.id}`,
+				token: getCookie('token'),
+				params: {
+					post_slug: pid
+				}
+			});
+			if (response.data.success) {
+				await mutate(
+					`/comments?post_slug=${pid}&offset=${(page - 1) * process.env.LIMIT_PAGE.LIST_COMMENT}&limit=${
+						process.env.LIMIT_PAGE.LIST_COMMENT
+					}`
+				);
+				showToast.success(`Delete comment successfully`);
+			}
+		} catch (error) {
+			console.log(error.response);
+			showToast.error();
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	return (
@@ -27,17 +50,19 @@ const CommentMeta = ({ comment }) => {
 			<a href="#!" className="text-decoration-none text-secondary mr-3">
 				<i className="fa fa-comment-o fa-sm"></i> 666 Reply
 			</a>
-			<Maybe test={currentUser.is_authenticated && currentUser.user?.user_name === comment.user?.user_name}>
-				{deleteComment.is_loading ? (
-					<a href="#!" className="text-decoration-none text-secondary disabled">
-						<i className="fa fa-trash-o fa-sm" /> Delete
-					</a>
-				) : (
-					<a href="#!" className="text-decoration-none text-secondary" onClick={deleteCommentHandle}>
-						<i className="fa fa-trash-o fa-sm" /> Delete
-					</a>
-				)}
-			</Maybe>
+			{user && user?.user_name === comment.user?.user_name && (
+				<>
+					{isLoading ? (
+						<a href="#!" className="text-decoration-none text-secondary disabled">
+							<i className="fa fa-trash-o fa-sm" /> Delete
+						</a>
+					) : (
+						<a href="#!" className="text-decoration-none text-secondary" onClick={onDeleteCommentClicked}>
+							<i className="fa fa-trash-o fa-sm" /> Delete
+						</a>
+					)}
+				</>
+			)}
 		</div>
 	);
 };

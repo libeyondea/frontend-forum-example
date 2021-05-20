@@ -1,19 +1,20 @@
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 import CustomLink from '@/components/Common/CustomLink';
-import FacebookLoginButton from '@/components/Common/FacebookLoginButton';
-import GoogleLoginButton from '@/components/Common/GoogleLoginButton';
 import InputForm from '@/components/Form/InputForm';
-import { loginUserRequestedAction } from '@/redux/actions/userAction';
+import FacebookLoginButton from '@/components/SocialButtonLogin/Facebook';
+import GoogleLoginButton from '@/components/SocialButtonLogin/Google';
+import httpRequest from '@/lib/utils/httpRequest';
+import { setCookie } from '@/lib/utils/session';
+import showToast from '@/lib/utils/showToast';
 
 const LoginForm = () => {
-	const dispatch = useDispatch();
 	const router = useRouter();
-	const login = useSelector((state) => state.users.login);
+	const [isLoading, setLoading] = useState(false);
+	const [errors, setErrors] = useState({});
 
 	const initialValues = {
 		user_name: '',
@@ -24,24 +25,57 @@ const LoginForm = () => {
 		password: Yup.string().required('Password is required')
 	});
 
-	const onSubmit = (values) => {
-		const user = {
-			user_name: values.user_name,
-			password: values.password
-		};
-		dispatch(loginUserRequestedAction(user, router));
+	const onSubmit = async (values) => {
+		try {
+			const user = {
+				user_name: values.user_name,
+				password: values.password
+			};
+			setLoading(true);
+			const response = await httpRequest.post({
+				url: `/users/login`,
+				data: user
+			});
+			if (response.data.success) {
+				setCookie('token', response.data.data.access_token);
+				router.push('/');
+			} else {
+				setErrors(response.data);
+			}
+		} catch (error) {
+			console.log(error.response);
+			showToast.error();
+		} finally {
+			setLoading(false);
+		}
 	};
 
-	const handleSocialLogin = (res) => {
-		const user = {
-			access_token: res._token.accessToken,
-			provider: res._provider
-		};
-		dispatch(loginUserRequestedAction(user, router));
+	const handleSocialLogin = async (res) => {
+		try {
+			const user = {
+				access_token: res._token.accessToken,
+				provider: res._provider
+			};
+			setLoading(true);
+			const response = await httpRequest.post({
+				url: `/users/login`,
+				data: user
+			});
+			if (response.data.success) {
+				setCookie('token', response.data.data.access_token);
+				router.push('/');
+			}
+		} catch (error) {
+			console.log(error.response);
+			showToast.error();
+		} finally {
+			setLoading(false);
+		}
 	};
 
-	const handleSocialLoginFailure = (err) => {
-		console.error(err);
+	const handleSocialLoginFailure = (error) => {
+		console.error(error);
+		showToast.error();
 	};
 	return (
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
@@ -54,7 +88,7 @@ const LoginForm = () => {
 						id="user_name"
 						name="user_name"
 						type="text"
-						errors={login.errors?.title}
+						errors={errors.errors?.title}
 					/>
 				</div>
 				<div className="form-group">
@@ -64,7 +98,7 @@ const LoginForm = () => {
 						id="password"
 						name="password"
 						type="password"
-						errors={login.errors?.title}
+						errors={errors.errors?.title}
 					/>
 				</div>
 				<div className="d-flex justify-content-between mb-3">
@@ -81,7 +115,7 @@ const LoginForm = () => {
 					</span>
 				</div>
 				<div className="text-center">
-					{login.is_loading ? (
+					{isLoading ? (
 						<button type="submit" className="btn btn-success" disabled>
 							<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
 							Login

@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import React from 'react';
 
-import Breadcrumb from '@/components/Common/Breadcrumb';
-import Layout from '@/components/Common/Layout';
+import Breadcrumb from '@/components/Breadcrumb';
+import Layout from '@/components/Layout';
 import RegisterForm from '@/components/User/RegisterForm';
 
 const Register = () => (
