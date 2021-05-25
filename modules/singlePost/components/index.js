@@ -6,8 +6,8 @@ import CustomImage from '@/common/components/CustomImage/components';
 import SideBarRightComponent from '@/modules/sidebarRight/components';
 import CommentComponent from '@/modules/singlePost/components/comment/components';
 import PostActionComponent from '@/modules/singlePost/components/postAction';
-import PostMetaComponent from '@/modules/singlePost/components/PostMeta';
-import PostTagListComponent from '@/modules/singlePost/components/PostTagList';
+import PostMetaComponent from '@/modules/singlePost/components/postMeta';
+import PostTagListComponent from '@/modules/singlePost/components/postTagList';
 
 const SinglePostComponent = ({ singlePost }) => {
 	return (
