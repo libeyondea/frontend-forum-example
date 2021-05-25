@@ -15,7 +15,7 @@ import showToast from '@/common/utils/showToast';
 
 const TopProgressBar = dynamic(
 	() => {
-		return import('@/common/utils/TopProgressBar');
+		return import('@/common/utils/topProgressBar');
 	},
 	{ ssr: false }
 );
