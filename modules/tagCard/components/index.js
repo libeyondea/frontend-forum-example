@@ -1,7 +1,7 @@
 import React from 'react';
 
 import CustomLink from '@/common/components/CustomLink/components';
-import FollowTagButtonComponent from '@/modules/tagCard/components/FollowTagButton';
+import FollowTagButtonComponent from '@/modules/tagCard/components/followTagButton';
 import style from '@/modules/tagCard/styles/style.module.scss';
 
 const TagCardComponent = ({ tag, classNameContainer, isSingle = false }) => {
