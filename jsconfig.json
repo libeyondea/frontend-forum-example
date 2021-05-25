@@ -2,14 +2,11 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@/components/*": [
-                "./components/*"
+            "@/common/*": [
+                "./common/*"
             ],
-            "@/lib/*": [
-                "./lib/*"
-            ],
-            "@/redux/*": [
-                "./redux/*"
+            "@/modules/*": [
+                "./modules/*"
             ],
             "@/styles/*": [
                 "./styles/*"

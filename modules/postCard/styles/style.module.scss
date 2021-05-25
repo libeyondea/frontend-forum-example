@@ -1,0 +1,22 @@
+@media (min-width: 768px) {
+	.post_card {
+		.body_post_card {
+			padding-left: calc(35px + 0.25rem);
+		}
+	}
+}
+
+.post_card {
+	.body_post_card {
+		.tags {
+			margin-left: calc(0.25rem * -1);
+		}
+		.title_post_card:hover {
+			color: #323ebe !important;
+		}
+	}
+	&:focus-within {
+		box-shadow: 0px 0px 1px 3px #3b49df;
+		border-radius: 0.25rem;
+	}
+}

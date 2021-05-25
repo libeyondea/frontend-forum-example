@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import React from 'react';
 
-import Breadcrumb from '@/components/Breadcrumb';
-import Layout from '@/components/Layout';
-import RegisterForm from '@/components/User/RegisterForm';
+import Layout from '@/modules/layout/components';
+import RegisterComponent from '@/modules/register/components';
 
 const Register = () => (
 	<>
@@ -11,24 +10,7 @@ const Register = () => (
 			<title>Register | De4th Zone</title>
 		</Head>
 		<Layout>
-			<div className="container my-4">
-				<Breadcrumb
-					items={[
-						{
-							title: 'Home',
-							href: '/'
-						},
-						{
-							title: 'Register'
-						}
-					]}
-				/>
-				<div className="row">
-					<div className="col-lg-8 col-md-10 mx-auto">
-						<RegisterForm />
-					</div>
-				</div>
-			</div>
+			<RegisterComponent />
 		</Layout>
 	</>
 );

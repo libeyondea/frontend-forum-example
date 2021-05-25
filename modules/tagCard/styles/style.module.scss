@@ -1,0 +1,11 @@
+.tag_card {
+	.body_tag_card {
+		.title_tag_card:hover {
+			color: #323ebe !important;
+		}
+	}
+	&:focus-within {
+		box-shadow: 0px 0px 1px 3px #3b49df;
+		border-radius: 0.25rem;
+	}
+}

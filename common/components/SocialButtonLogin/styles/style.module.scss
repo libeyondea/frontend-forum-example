@@ -1,0 +1,79 @@
+.facebook_login_button {
+	border: 0px;
+	border-radius: 5px;
+	box-shadow: rgb(0 0 0 / 50%) 0px 1px 2px;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+	font-size: 19px;
+	margin: 5px;
+	width: calc(100% - 10px);
+	overflow: hidden;
+	padding: 0px 10px;
+	user-select: none;
+	height: 50px;
+	background: rgb(59, 89, 152);
+	&:hover,
+	&:focus {
+		background: rgb(41, 62, 105) !important;
+	}
+}
+
+.google_login_button {
+	border: 0px;
+	border-radius: 3px;
+	box-shadow: rgb(0 0 0 / 50%) 0px 1px 2px;
+	color: black;
+	cursor: pointer;
+	font-size: 19px;
+	margin: 5px;
+	width: calc(100% - 10px);
+	overflow: hidden;
+	padding: 0px 10px;
+	user-select: none;
+	height: 50px;
+	background: white;
+	&:hover,
+	&:focus {
+		background: rgb(239, 240, 238) !important;
+	}
+}
+
+.github_login_button {
+	border: 0px;
+	border-radius: 3px;
+	box-shadow: rgb(0 0 0 / 50%) 0px 1px 2px;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+	font-size: 19px;
+	margin: 5px;
+	width: calc(100% - 10px);
+	overflow: hidden;
+	padding: 0px 10px;
+	user-select: none;
+	height: 50px;
+	background: rgb(51, 51, 51);
+	&:hover,
+	&:focus {
+		background: rgb(85, 85, 85) !important;
+	}
+}
+
+.facebook_login_button,
+.google_login_button,
+.github_login_button {
+	& .body_social {
+		align-items: center;
+		display: flex;
+		height: 100%;
+		& .icon_social {
+			display: flex;
+			justify-content: center;
+			min-width: 26px;
+		}
+		& .text_social {
+			text-align: left;
+			width: 100%;
+			margin-left: 0.5rem;
+		}
+	}
+}

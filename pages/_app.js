@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '@/styles/app.css';
+import '@/styles/global.css';
 import 'nprogress/nprogress.css';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,13 +9,13 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import { SWRConfig } from 'swr';
 
-import fetcher from '@/lib/utils/fetcher';
-import { removeCookie } from '@/lib/utils/session';
-import showToast from '@/lib/utils/showToast';
+import fetcher from '@/common/utils/fetcher';
+import { removeCookie } from '@/common/utils/session';
+import showToast from '@/common/utils/showToast';
 
 const TopProgressBar = dynamic(
 	() => {
-		return import('@/components/Common/TopProgressBar');
+		return import('@/common/utils/TopProgressBar');
 	},
 	{ ssr: false }
 );

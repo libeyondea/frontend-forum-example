@@ -1,0 +1,10 @@
+.list_group_item_custom {
+	position: relative;
+	display: block;
+
+	&:last-child {
+		border-bottom: 0 !important;
+		border-bottom-left-radius: inherit;
+		border-bottom-right-radius: inherit;
+	}
+}
