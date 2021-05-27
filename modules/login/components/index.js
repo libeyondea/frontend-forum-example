@@ -5,7 +5,7 @@ import LoginFormComponent from '@/modules/login/components/loginForm';
 
 const LoginComponent = () => {
 	return (
-		<div className="container my-4">
+		<div className="container-xl my-4">
 			<Breadcrumb
 				items={[
 					{
@@ -19,7 +19,9 @@ const LoginComponent = () => {
 			/>
 			<div className="row">
 				<div className="col-lg-8 col-md-10 mx-auto">
-					<LoginFormComponent />
+					<div className="bg-light rounded-lg shadow-sm p-4">
+						<LoginFormComponent />
+					</div>
 				</div>
 			</div>
 		</div>

@@ -10,7 +10,7 @@ import EditProfileFormComponent from '@/modules/settingUser/components/editProfi
 const SettingUserComponent = ({ editProfile, pid }) => {
 	const { user } = useUser();
 	return (
-		<div className="container my-4">
+		<div className="container-xl my-4">
 			{!editProfile || !user ? (
 				<LoadingSpinner />
 			) : (

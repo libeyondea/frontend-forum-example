@@ -36,7 +36,7 @@ const NavBarComponent = () => {
 	};
 
 	return (
-		<Navbar collapseOnSelect expand="lg" bg="light" variant="light" fixed="top" className="shadow-sm">
+		<Navbar collapseOnSelect expand="md" bg="light" variant="light" fixed="top" className="shadow-sm">
 			<div className="container-xl">
 				<Link href="/" passHref>
 					<Navbar.Brand className="d-flex align-items-center mr-auto">
@@ -51,7 +51,7 @@ const NavBarComponent = () => {
 					</Navbar.Brand>
 				</Link>
 				{user && (
-					<Dropdown as={NavItem} className="d-block d-lg-none">
+					<Dropdown as={NavItem} className="d-block d-md-none">
 						<Dropdown.Toggle as={NavLink} id="dropdown-custom-2" className="d-flex align-items-center text-secondary">
 							<CustomImage
 								className="rounded-circle"
@@ -73,7 +73,7 @@ const NavBarComponent = () => {
 				)}
 				<Navbar.Toggle aria-controls="responsive-navbar-nav"></Navbar.Toggle>
 				<Navbar.Collapse id="responsive-navbar-nav">
-					<Nav className="ml-auto align-items-lg-center">
+					<Nav className="ml-auto align-items-md-center">
 						<Nav.Item>
 							<Link href="/" passHref>
 								<Nav.Link>Home</Nav.Link>
@@ -86,7 +86,7 @@ const NavBarComponent = () => {
 										<Nav.Link>New Post</Nav.Link>
 									</Link>
 								</Nav.Item>
-								<Dropdown as={NavItem} className="d-none d-lg-block">
+								<Dropdown as={NavItem} className="d-none d-md-block">
 									<Dropdown.Toggle as={NavLink} id="dropdown-custom-2" className="d-flex align-items-center">
 										<CustomImage
 											className="rounded-circle"
@@ -121,7 +121,7 @@ const NavBarComponent = () => {
 								</Nav.Item>
 							</>
 						)}
-						<Dropdown as={NavItem} className="d-block d-lg-none">
+						<Dropdown as={NavItem} className="d-block d-md-none">
 							<Dropdown.Toggle as={NavLink} id="dropdown-custom-5">
 								Options
 							</Dropdown.Toggle>

@@ -3,9 +3,9 @@ import React from 'react';
 import Breadcrumb from '@/common/components/Breadcrumb/components';
 import LoadingSpinner from '@/common/components/LoadingSpinner/components';
 import useUser from '@/common/hooks/useUser';
-import NewPostFormComponent from '@/modules/newPost/components/newPostForm';
+import EditPostFormComponent from '@/modules/editPost/components/editPostForm';
 
-const NewPostComponent = () => {
+const EditPostComponent = ({ editPost }) => {
 	const { user } = useUser();
 
 	return (
@@ -21,14 +21,14 @@ const NewPostComponent = () => {
 								href: '/'
 							},
 							{
-								title: 'New post'
+								title: 'Edit post'
 							}
 						]}
 					/>
 					<div className="row">
 						<div className="col-12 mb-4">
 							<div className="bg-light rounded-lg shadow-sm p-4">
-								<NewPostFormComponent />
+								<EditPostFormComponent editPost={editPost} />
 							</div>
 						</div>
 					</div>
@@ -38,4 +38,4 @@ const NewPostComponent = () => {
 	);
 };
 
-export default NewPostComponent;
+export default EditPostComponent;

@@ -4,7 +4,7 @@ import React from 'react';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import HomeComponent from '@/modules/home/components';
-import Layout from '@/modules/layout/components';
+import LayoutComponent from '@/modules/layout/components';
 
 const Index = ({ listPost, pid }) => {
 	return (
@@ -13,9 +13,9 @@ const Index = ({ listPost, pid }) => {
 				<title>Home | De4th Zone</title>
 				<meta name="description" content="De4th Zone" />
 			</Head>
-			<Layout>
+			<LayoutComponent>
 				<HomeComponent listPost={listPost} pid={pid} />
-			</Layout>
+			</LayoutComponent>
 		</>
 	);
 };

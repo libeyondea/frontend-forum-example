@@ -10,7 +10,7 @@ import ListPostUserComponent from '@/modules/singleUser/components/listPostUser'
 
 const SingleUserComponent = ({ singleUser, listPostUser }) => {
 	return (
-		<div className="container my-4">
+		<div className="container-xl my-4">
 			<Breadcrumb
 				items={[
 					{
@@ -27,7 +27,7 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 				]}
 			/>
 			<div className="row">
-				<div className="col-lg-3 mb-4">
+				<div className="col-lg-3 col-md-4 mb-4">
 					<div className="text-center bg-light rounded-lg shadow-sm mb-4 p-4">
 						<h3 className="text-break">{singleUser.data?.user_name}</h3>
 						<CustomImage
@@ -69,19 +69,19 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 							<span className="pull-left">
 								<strong>Comment written</strong>
 							</span>
-							66
+							0
 						</li>
 						<li className="list-group-item text-right">
 							<span className="pull-left">
 								<strong>Likes</strong>
 							</span>
-							66
+							0
 						</li>
 						<li className="list-group-item text-right">
 							<span className="pull-left">
 								<strong>Tags followed</strong>
 							</span>
-							66
+							0
 						</li>
 					</ul>
 					<div className="card">
@@ -95,7 +95,7 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 						</div>
 					</div>
 				</div>
-				<div className="col-lg-9">
+				<div className="col-lg-9 col-md-8">
 					<Tab.Container id="profile-tabs" defaultActiveKey="posts-published">
 						<Nav as="nav" className="nav-tabs">
 							<Nav.Item as="li">

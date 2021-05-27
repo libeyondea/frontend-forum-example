@@ -115,12 +115,12 @@ const LoginFormComponent = () => {
 				</div>
 				<div className="text-center">
 					{isLoading ? (
-						<button type="submit" className="btn btn-success" disabled>
+						<button type="submit" className="btn btn-info" disabled>
 							<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
 							Login
 						</button>
 					) : (
-						<button type="submit" className="btn btn-success">
+						<button type="submit" className="btn btn-info">
 							Login
 						</button>
 					)}

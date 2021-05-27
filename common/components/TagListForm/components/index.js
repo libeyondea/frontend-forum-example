@@ -28,13 +28,13 @@ const TagListFormComponent = ({ errors, tags, setTag, ...props }) => {
 	const handleInputKeyDown = (e) => {
 		const value = convertTextToSlug(e.target.value);
 		if (value) {
-			if (tags.find((tag) => tag.title.toLowerCase() === value.toLowerCase())) {
+			if (tags.find((tag) => tag.slug.toLowerCase() === value.toLowerCase())) {
 				return;
 			}
 			setTag([
 				...tags,
 				{
-					title: value
+					slug: value
 				}
 			]);
 			setInput('');
@@ -50,13 +50,13 @@ const TagListFormComponent = ({ errors, tags, setTag, ...props }) => {
 	const handleInputOnBlur = (e) => {
 		const value = convertTextToSlug(e.target.value);
 		if (value) {
-			if (tags.find((tag) => tag.title.toLowerCase() === value.toLowerCase())) {
+			if (tags.find((tag) => tag.slug.toLowerCase() === value.toLowerCase())) {
 				return;
 			}
 			setTag([
 				...tags,
 				{
-					title: value
+					slug: value
 				}
 			]);
 			setInput('');
@@ -75,9 +75,9 @@ const TagListFormComponent = ({ errors, tags, setTag, ...props }) => {
 			<ul className="border rounded px-1 flex-wrap d-flex border mb-0">
 				{tags.map(
 					(item, i) =>
-						item.title && (
-							<span className="badge badge-secondary my-1 mr-1 d-flex align-items-center" key={i}>
-								{item.title}
+						item.slug && (
+							<span className="badge badge-secondary my-1 mr-1 d-flex align-items-center font-weight-normal" key={i}>
+								{item.slug}
 								<i className="fa fa-times p-1 cursor-pointer" onClick={() => handleRemoveItem(i)} aria-hidden="true" />
 							</span>
 						)

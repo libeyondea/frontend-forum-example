@@ -15,14 +15,16 @@ const PostActionComponent = ({ userName, postSlug }) => {
 	const onDeletePostClick = async (e) => {
 		e.preventDefault();
 		try {
-			setLoading(true);
-			const response = await httpRequest.delete({
-				url: `posts/${postSlug}`,
-				token: getCookie('token')
-			});
-			if (response.data.success) {
-				showToast.success('Delete post success');
-				router.push('/');
+			if (window.confirm('Do you want to delete?')) {
+				setLoading(true);
+				const response = await httpRequest.delete({
+					url: `posts/${postSlug}`,
+					token: getCookie('token')
+				});
+				if (response.data.success) {
+					showToast.success('Delete post success');
+					router.push('/');
+				}
 			}
 		} catch (error) {
 			console.log(error.response);

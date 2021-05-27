@@ -16,8 +16,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 	const router = useRouter();
 	const { mutateUser } = useUser();
 	const [isLoading, setLoading] = useState(false);
-	const [loadImg, setLoadImg] = useState(null);
-	const [imgName, setImgName] = useState(null);
+	const [loadImg, setLoadImg] = useState(`${process.env.IMAGES_URL}/${editProfile.data.avatar}`);
 	const [errors, setErrors] = useState({});
 	const gender = ['', 'male', 'female', 'orther'];
 	const FILE_SIZE = 2048 * 1024;
@@ -114,17 +113,13 @@ const EditProfileFormComponent = ({ editProfile }) => {
 			console.log(e.target.files[0]);
 			let file = e.target.files[0];
 			let reader = new FileReader();
-			setFieldValue('avatar', file || null);
 			if (file) {
 				reader.onloadend = () => {
 					setLoadImg(reader.result);
 				};
 				reader.readAsDataURL(file);
-				setImgName(file.name);
+				setFieldValue('avatar', file);
 				showToast.info(`Load file success "${file.name}"`);
-			} else {
-				setLoadImg(`${process.env.IMAGES_URL}/${editProfile.data.avatar}`);
-				setImgName(null);
 			}
 		} catch (error) {
 			console.log(error);
@@ -198,8 +193,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 								onBlur={(e) => onBlurAvatar(e, setFieldTouched)}
 								error={error.avatar}
 								touched={touched.avatar}
-								imgName={imgName}
-								imageSrc={loadImg || `${process.env.IMAGES_URL}/${editProfile.data.avatar}`}
+								imageSrc={loadImg}
 								imagAlt={editProfile.data.user_name}
 							/>
 						</div>

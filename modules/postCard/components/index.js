@@ -50,7 +50,7 @@ const PostCardComponent = ({ post }) => {
 						<h5 className="font-weight-bold mb-0">{post.title}</h5>
 					</CustomLink>
 					<div className="mb-1">
-						<p className="card-text mb-0">{post.excerpt}</p>
+						<p className="card-text mb-0 text-secondary">{post.excerpt}</p>
 					</div>
 					<div className={`mb-2 ${style.tags}`}>
 						{post.tags.map((tag) => (

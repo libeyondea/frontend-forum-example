@@ -17,8 +17,7 @@ import showToast from '@/common/utils/showToast';
 const RegisterFormComponent = () => {
 	const router = useRouter();
 	const [isLoading, setLoading] = useState(false);
-	const [loadImg, setLoadImg] = useState(null);
-	const [imgName, setImgName] = useState(null);
+	const [loadImg, setLoadImg] = useState(`${process.env.IMAGES_URL}/${process.env.IMAGES.DEFAULT_IMAGE_AVATAR}`);
 	const [errors, setErrors] = useState({});
 	const gender = ['', 'male', 'female', 'orther'];
 	const FILE_SIZE = 2048 * 1024;
@@ -146,17 +145,13 @@ const RegisterFormComponent = () => {
 			console.log(e.target.files[0]);
 			let file = e.target.files[0];
 			let reader = new FileReader();
-			setFieldValue('avatar', file || null);
 			if (file) {
 				reader.onloadend = () => {
 					setLoadImg(reader.result);
 				};
 				reader.readAsDataURL(file);
-				setImgName(file.name);
+				setFieldValue('avatar', file);
 				showToast.info(`Load file success "${file.name}"`);
-			} else {
-				setLoadImg(`${process.env.IMAGES_URL}/${process.env.IMAGES.DEFAULT_IMAGE_AVATAR}`);
-				setImgName(null);
 			}
 		} catch (error) {
 			console.log(error);
@@ -243,9 +238,8 @@ const RegisterFormComponent = () => {
 								onBlur={(e) => onBlurAvatar(e, setFieldTouched)}
 								error={error.avatar}
 								touched={touched.avatar}
-								imgName={imgName}
-								imageSrc={loadImg || `${process.env.IMAGES_URL}/${process.env.IMAGES.DEFAULT_IMAGE_AVATAR}`}
-								imagAlt={`Default avatar`}
+								imageSrc={loadImg}
+								imagAlt={`User avatar`}
 							/>
 						</div>
 						<div className="form-group col-md-12">
@@ -256,12 +250,12 @@ const RegisterFormComponent = () => {
 					</div>
 					<div className="text-center">
 						{isLoading ? (
-							<button type="submit" className="btn btn-success" disabled>
+							<button type="submit" className="btn btn-info" disabled>
 								<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
 								Register
 							</button>
 						) : (
-							<button type="submit" className="btn btn-success">
+							<button type="submit" className="btn btn-info">
 								Register
 							</button>
 						)}

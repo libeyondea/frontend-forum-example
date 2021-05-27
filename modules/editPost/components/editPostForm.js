@@ -16,12 +16,12 @@ import { getCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
 import style from '@/modules/newPost/styles/style.module.scss';
 
-const NewPostFormComponent = () => {
+const EditPostFormComponent = ({ editPost }) => {
 	const router = useRouter();
 	const [isLoading, setLoading] = useState(false);
-	const [tags, setTag] = useState([]);
+	const [tags, setTag] = useState(editPost.data.tags);
 	const [errors, setErrors] = useState({});
-	const [loadImg, setLoadImg] = useState(null);
+	const [loadImg, setLoadImg] = useState(`${process.env.IMAGES_URL}/${editPost.data.image}`);
 	const FILE_SIZE = 2048 * 1024;
 	const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
@@ -30,10 +30,10 @@ const NewPostFormComponent = () => {
 	});
 
 	const initialValues = {
-		title: '',
-		excerpt: '',
-		content: '',
-		category_id: '',
+		title: editPost.data.title,
+		excerpt: editPost.data.excerpt,
+		content: editPost.data.content,
+		category_id: editPost.data.category.id,
 		image: null
 	};
 	const validationSchema = Yup.object({
@@ -53,7 +53,7 @@ const NewPostFormComponent = () => {
 		try {
 			setLoading(true);
 			const response = await httpRequest.upload({
-				url: `/posts`,
+				url: `/posts/${editPost.data.slug}`,
 				token: getCookie('token'),
 				data: {
 					title: values.title,
@@ -71,7 +71,7 @@ const NewPostFormComponent = () => {
 				showToast.error('Validation form errors');
 			}
 			if (response.data.success) {
-				showToast.success('Create post success');
+				showToast.success('Update post success');
 				router.push(`/posts/${response.data.data.slug}`);
 			}
 		} catch (error) {
@@ -129,7 +129,7 @@ const NewPostFormComponent = () => {
 								error={error.image}
 								touched={touched.image}
 								imageSrc={loadImg}
-								imagAlt={`Default image`}
+								imagAlt={`Post image`}
 								removeImage={() => onChangeRemoveImage(setFieldValue)}
 							/>
 						</div>
@@ -173,12 +173,7 @@ const NewPostFormComponent = () => {
 							</SelectForm>
 						</div>
 						<div className="form-group col-md-12">
-							<TagListForm
-								tags={tags}
-								setTag={setTag}
-								errors={errors.errors?.invalid_params?.tags}
-								placeholder="Add up to 4 tags..."
-							/>
+							<TagListForm tags={tags} setTag={setTag} errors={errors.errors?.invalid_params?.tags} />
 						</div>
 					</div>
 					<div className="text-left">
@@ -199,4 +194,4 @@ const NewPostFormComponent = () => {
 	);
 };
 
-export default NewPostFormComponent;
+export default EditPostFormComponent;
