@@ -60,7 +60,7 @@ const NavBarComponent = () => {
 								height={35}
 								alt={user?.user_name}
 							/>
-							<div className="ml-2">{user?.user_name}</div>
+							<div className="ml-2 d-none d-sm-block">{user?.user_name}</div>
 						</Dropdown.Toggle>
 						<Dropdown.Menu align="right" className="p-0">
 							<Link href={`/users/[pid]`} as={`/users/${user?.user_name}`} passHref>

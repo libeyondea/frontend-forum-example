@@ -30,13 +30,15 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 				<div className="col-lg-3 col-md-4 mb-4">
 					<div className="text-center bg-light rounded-lg shadow-sm mb-4 p-4">
 						<h3 className="text-break">{singleUser.data?.user_name}</h3>
-						<CustomImage
-							src={`${process.env.IMAGES_URL}/${singleUser.data?.avatar}`}
-							alt={singleUser.data?.user_name}
-							className="avatar rounded-circle img-thumbnail"
-							width="192"
-							height="192"
-						/>
+						<div className="mb-1">
+							<CustomImage
+								src={`${process.env.IMAGES_URL}/${singleUser.data?.avatar}`}
+								alt={singleUser.data?.user_name}
+								className="avatar rounded-circle img-thumbnail"
+								width="192"
+								height="192"
+							/>
+						</div>
 						<div>
 							<EditProfileButtonComponent user_name={singleUser.data?.user_name} />
 						</div>

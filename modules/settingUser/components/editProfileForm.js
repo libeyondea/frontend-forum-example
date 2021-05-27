@@ -119,6 +119,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 				};
 				reader.readAsDataURL(file);
 				setFieldValue('avatar', file);
+				e.target.value = null;
 				showToast.info(`Load file success "${file.name}"`);
 			}
 		} catch (error) {
