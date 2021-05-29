@@ -19,6 +19,7 @@ const RegisterFormComponent = () => {
 	const [isLoading, setLoading] = useState(false);
 	const [loadImg, setLoadImg] = useState(`${process.env.IMAGES_URL}/${process.env.IMAGES.DEFAULT_IMAGE_AVATAR}`);
 	const [errors, setErrors] = useState({});
+	const [verify, setVerify] = useState('');
 	const gender = ['', 'male', 'female', 'orther'];
 	const FILE_SIZE = 2048 * 1024;
 	const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
@@ -102,7 +103,8 @@ const RegisterFormComponent = () => {
 				setErrors(response.data);
 			}
 			if (response.data.success) {
-				router.push('/login');
+				setVerify(response.data.data.email);
+				//router.push('/login');
 			}
 		} catch (error) {
 			console.log(error);
@@ -164,6 +166,14 @@ const RegisterFormComponent = () => {
 		setFieldTouched('avatar', e.target.files[0] || null);
 	};
 
+	if (verify) {
+		return (
+			<div className="alert alert-success mb-0" role="alert">
+				Pleases verify email {verify}
+			</div>
+		);
+	}
+
 	return (
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 			{({ setFieldValue, setFieldTouched, errors: error, touched }) => (
@@ -183,7 +193,7 @@ const RegisterFormComponent = () => {
 								id="email"
 								name="email"
 								type="text"
-								errors={errors.errors?.invalid_params?.email}
+								errors={errors.error?.invalid_params?.email}
 							/>
 						</div>
 						<div className="form-group col-md-6">
@@ -193,7 +203,7 @@ const RegisterFormComponent = () => {
 								id="user_name"
 								name="user_name"
 								type="text"
-								errors={errors.errors?.invalid_params?.user_name}
+								errors={errors.error?.invalid_params?.user_name}
 							/>
 						</div>
 						<div className="form-group col-md-6">

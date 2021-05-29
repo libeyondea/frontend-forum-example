@@ -150,7 +150,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 								id="email"
 								name="email"
 								type="text"
-								errors={errors.errors?.invalid_params?.email}
+								errors={errors.error?.invalid_params?.email}
 							/>
 						</div>
 						<div className="form-group col-md-6">
@@ -160,7 +160,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 								id="user_name"
 								name="user_name"
 								type="text"
-								errors={errors.errors?.invalid_params?.user_name}
+								errors={errors.error?.invalid_params?.user_name}
 							/>
 						</div>
 						<div className="form-group col-md-6">

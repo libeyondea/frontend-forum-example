@@ -87,7 +87,7 @@ const LoginFormComponent = () => {
 						id="user_name"
 						name="user_name"
 						type="text"
-						errors={errors.errors?.title}
+						errors={errors.error?.title}
 					/>
 				</div>
 				<div className="form-group">
@@ -97,7 +97,7 @@ const LoginFormComponent = () => {
 						id="password"
 						name="password"
 						type="password"
-						errors={errors.errors?.title}
+						errors={errors.error?.title}
 					/>
 				</div>
 				<div className="d-flex justify-content-between mb-3">

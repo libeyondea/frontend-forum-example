@@ -80,3 +80,22 @@ body {
 	-o-background-size: cover;
 	background-size: cover;
 }
+
+/* 404 Page */
+
+.notfound {
+	min-height: 100vh;
+	margin-top: -72px;
+}
+
+.notfound .display-404 {
+	font-size: 16rem;
+	font-weight: 1000;
+}
+
+@media (max-width: 576px) {
+	.notfound .display-404 {
+		font-size: 8rem;
+		font-weight: 900;
+	}
+}

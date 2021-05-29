@@ -13,6 +13,8 @@ import fetcher from '@/common/utils/fetcher';
 import { removeCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
 
+import Error from './_error';
+
 const TopProgressBar = dynamic(
 	() => {
 		return import('@/common/utils/topProgressBar');
@@ -21,6 +23,9 @@ const TopProgressBar = dynamic(
 );
 
 const App = ({ Component, pageProps }) => {
+	if (pageProps.statusCode) {
+		return <Error statusCode={pageProps.statusCode} />;
+	}
 	return (
 		<>
 			<Head>
