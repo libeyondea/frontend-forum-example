@@ -36,8 +36,8 @@ export async function getServerSideProps({ req, query }) {
 				url: '/posts',
 				token: getCookie('token', req),
 				params: {
-					tag: pid[0] || 'feed',
-					tab: pid[1],
+					tag: pid[0],
+					tab: pid[1] || 'feed',
 					offset: (page - 1) * process.env.LIMIT_PAGE.LIST_POST_TAG,
 					limit: process.env.LIMIT_PAGE.LIST_POST_TAG
 				}
