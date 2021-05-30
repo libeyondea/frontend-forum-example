@@ -66,17 +66,16 @@ const NewPostFormComponent = () => {
 					image: values.image
 				}
 			});
-			if (!response.data.success) {
-				setErrors(response.data);
-				showToast.error('Validation form errors');
-			}
 			if (response.data.success) {
 				showToast.success('Create post success');
 				router.push(`/posts/${response.data.data.slug}`);
 			}
 		} catch (error) {
 			console.log(error);
-			showToast.error();
+			if (!error.response.data.success) {
+				setErrors(error.response.data);
+			}
+			showToast.error('Create post fail');
 		} finally {
 			setLoading(false);
 		}
