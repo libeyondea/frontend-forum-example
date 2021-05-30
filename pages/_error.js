@@ -2,7 +2,7 @@ import React from 'react';
 
 import Layout from '@/modules/layout/components';
 
-const Error = ({ statusCode }) => {
+const Error = ({ statusCode = 500 }) => {
 	return (
 		<Layout>
 			<div className="notfound d-flex flex-row align-items-center">
