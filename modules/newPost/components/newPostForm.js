@@ -176,7 +176,7 @@ const NewPostFormComponent = () => {
 							<TagListForm
 								tags={tags}
 								setTag={setTag}
-								errors={errors.error?.invalid_params?.tags}
+								errors={errors.error?.message?.tags}
 								placeholder="Add up to 4 tags..."
 							/>
 						</div>

@@ -18,21 +18,23 @@ const CommentMetaComponent = ({ comment }) => {
 	const onDeleteCommentClicked = async (e) => {
 		e.preventDefault();
 		try {
-			setLoading(true);
-			const response = await httpRequest.delete({
-				url: `/comments/${comment.id}`,
-				token: getCookie('token'),
-				params: {
-					post_slug: pid
+			if (window.confirm('Do you want to delete?')) {
+				setLoading(true);
+				const response = await httpRequest.delete({
+					url: `/comments/${comment.id}`,
+					token: getCookie('token'),
+					params: {
+						post_slug: pid
+					}
+				});
+				if (response.data.success) {
+					mutate(
+						`/comments?post_slug=${pid}&offset=${(page - 1) * process.env.LIMIT_PAGE.LIST_COMMENT}&limit=${
+							process.env.LIMIT_PAGE.LIST_COMMENT
+						}`
+					);
+					showToast.success(`Delete comment successfully`);
 				}
-			});
-			if (response.data.success) {
-				await mutate(
-					`/comments?post_slug=${pid}&offset=${(page - 1) * process.env.LIMIT_PAGE.LIST_COMMENT}&limit=${
-						process.env.LIMIT_PAGE.LIST_COMMENT
-					}`
-				);
-				showToast.success(`Delete comment successfully`);
 			}
 		} catch (error) {
 			console.log(error.response);

@@ -67,7 +67,7 @@ const SingleCategoryComponent = ({ singleCategory, listPostCategory, pid }) => {
 								))}
 							</>
 						)}
-						<Pagination total={listPostCategory.meta?.posts_count} limit={process.env.LIMIT_PAGE.LIST_POST_CATEGORY} />
+						<Pagination total={listPostCategory.meta?.total} limit={process.env.LIMIT_PAGE.LIST_POST_CATEGORY} />
 					</div>
 				</div>
 				<div className="d-none d-md-block col-xl-3 col-md-4">

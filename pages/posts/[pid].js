@@ -32,11 +32,7 @@ export async function getServerSideProps({ query }) {
 				}
 			};
 		}
-		return {
-			notFound: true
-		};
 	} catch (error) {
-		console.log(error);
 		return {
 			notFound: true
 		};

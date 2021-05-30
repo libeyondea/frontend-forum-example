@@ -40,15 +40,11 @@ export async function getServerSideProps({ req, query }) {
 			return {
 				props: {
 					listPost: resListPost.data,
-					pid
+					pid: pid
 				}
 			};
 		}
-		return {
-			notFound: true
-		};
 	} catch (error) {
-		console.log(error);
 		return {
 			notFound: true
 		};

@@ -20,7 +20,7 @@ const ListPostUserComponent = ({ listPostUser }) => {
 					</div>
 				))
 			)}
-			<Pagination total={listPostUser.meta.posts_count} limit={process.env.LIMIT_PAGE.LIST_POST_USER} />
+			<Pagination total={listPostUser.meta.total} limit={process.env.LIMIT_PAGE.LIST_POST_USER} />
 		</div>
 	);
 };

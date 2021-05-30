@@ -65,7 +65,7 @@ const HomeComponent = ({ listPost, pid }) => {
 								))}
 							</>
 						)}
-						<Pagination total={listPost?.meta?.posts_count} limit={process.env.LIMIT_PAGE.LIST_POST_HOME} />
+						<Pagination total={listPost?.meta?.total} limit={process.env.LIMIT_PAGE.LIST_POST_HOME} />
 					</div>
 				</div>
 				<div className="d-none d-md-block col-xl-2 col-lg-2 col-md-3 order-xl-1 order-lg-1 order-md-1">

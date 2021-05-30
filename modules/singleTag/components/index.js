@@ -69,7 +69,7 @@ const SingleTagComponent = ({ singleTag, listPostTag, pid }) => {
 								))}
 							</>
 						)}
-						<Pagination total={listPostTag.meta?.posts_count} limit={process.env.LIMIT_PAGE.LIST_POST_TAG} />
+						<Pagination total={listPostTag.meta?.total} limit={process.env.LIMIT_PAGE.LIST_POST_TAG} />
 					</div>
 				</div>
 				<div className="d-none d-md-block col-xl-3 col-md-4">

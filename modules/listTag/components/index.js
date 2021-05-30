@@ -39,7 +39,7 @@ const ListTag = ({ listTag }) => {
 								))}
 							</>
 						)}
-						<Pagination total={listTag.meta?.tags_count} limit={process.env.LIMIT_PAGE.LIST_TAG} />
+						<Pagination total={listTag.meta?.total} limit={process.env.LIMIT_PAGE.LIST_TAG} />
 					</div>
 				</div>
 				<div className="d-none d-md-block col-xl-2 col-md-3 order-md-1">

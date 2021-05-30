@@ -30,11 +30,7 @@ export async function getServerSideProps({ req, query }) {
 				}
 			};
 		}
-		return {
-			notFound: true
-		};
 	} catch (error) {
-		console.log(error);
 		if (error.response.status === 401) {
 			return {
 				redirect: {

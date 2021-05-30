@@ -44,9 +44,7 @@ export async function getServerSideProps({ req, query }) {
 		}
 	} catch (error) {
 		return {
-			props: {
-				statusCode: error.response?.status
-			}
+			notFound: true
 		};
 	}
 }

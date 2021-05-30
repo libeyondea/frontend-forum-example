@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
+import CustomLink from '@/common/components/CustomLink/components';
 import ImageUserForm from '@/common/components/ImageUserForm/components';
 import InputForm from '@/common/components/InputForm/components';
 import SelectForm from '@/common/components/SelectForm/components';
@@ -18,6 +19,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 	const [isLoading, setLoading] = useState(false);
 	const [loadImg, setLoadImg] = useState(`${process.env.IMAGES_URL}/${editProfile.data.avatar}`);
 	const [errors, setErrors] = useState({});
+	const [errorsVerify, setErrorsVerify] = useState({});
 	const gender = ['', 'male', 'female', 'orther'];
 	const FILE_SIZE = 2048 * 1024;
 	const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
@@ -91,10 +93,6 @@ const EditProfileFormComponent = ({ editProfile }) => {
 					avatar: values.avatar
 				}
 			});
-			if (!response.data.success) {
-				setErrors(response.data);
-				showToast.error('Validation form errors');
-			}
 			if (response.data.success) {
 				await mutateUser();
 				router.push(`/settings/profile`);
@@ -102,7 +100,10 @@ const EditProfileFormComponent = ({ editProfile }) => {
 			}
 		} catch (error) {
 			console.log(error.response);
-			showToast.error();
+			if (!error.response.data.success) {
+				setErrors(error.response.data);
+			}
+			showToast.error('Update profile fail');
 		} finally {
 			setLoading(false);
 		}
@@ -132,10 +133,41 @@ const EditProfileFormComponent = ({ editProfile }) => {
 		setFieldTouched('avatar', e.target.files[0] || null);
 	};
 
+	const onResendClick = async () => {
+		try {
+			const response = await httpRequest.post({
+				url: `/email/resend`,
+				data: {
+					email: editProfile.data.email
+				}
+			});
+			if (response.data.success) {
+				showToast.success(`Resend email '${response.data.data.email}' success`);
+			}
+		} catch (error) {
+			if (!error.response.data.success) {
+				setErrorsVerify(error.response.data);
+			}
+			showToast.error();
+		}
+	};
+
 	return (
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 			{({ setFieldValue, setFieldTouched, errors: error, touched }) => (
 				<Form>
+					{!editProfile.data.verified && (
+						<div className="alert alert-danger" role="alert">
+							Pleases verify email{' '}
+							<CustomLink className="text-decoration-none" href={`mailto:${editProfile.data.email}`}>
+								{editProfile.data.email}{' '}
+							</CustomLink>
+							<button type="button" className="btn btn-info" onClick={() => onResendClick()}>
+								Resend email
+							</button>{' '}
+							{errorsVerify.error.message && errorsVerify.error.message}
+						</div>
+					)}
 					<div className="form-row">
 						<div className="form-group col-md-6">
 							<InputForm label="First name" placeholder="First name" id="first_name" name="first_name" type="text" />
@@ -150,7 +182,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 								id="email"
 								name="email"
 								type="text"
-								errors={errors.error?.invalid_params?.email}
+								errors={errors.error?.message?.email}
 							/>
 						</div>
 						<div className="form-group col-md-6">
@@ -160,7 +192,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 								id="user_name"
 								name="user_name"
 								type="text"
-								errors={errors.error?.invalid_params?.user_name}
+								errors={errors.error?.message?.user_name}
 							/>
 						</div>
 						<div className="form-group col-md-6">

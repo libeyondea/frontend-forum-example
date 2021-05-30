@@ -12,7 +12,7 @@ export default function useUser() {
 	useEffect(() => {
 		if (data) {
 			setIsLoadingUser(false);
-			if (data.success) {
+			if (data.data) {
 				setUser(data.data);
 			}
 		}

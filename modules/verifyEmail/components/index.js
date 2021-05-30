@@ -1,12 +1,11 @@
 import { Form, Formik } from 'formik';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
+import CustomLink from '@/common/components/CustomLink/components';
 import InputForm from '@/common/components/InputForm/components';
 import httpRequest from '@/common/utils/httpRequest';
 import showToast from '@/common/utils/showToast';
-import CustomLink from '@/common/components/CustomLink/components';
 
 const VerifyEmailComponent = ({ verifyEmail }) => {
 	const [isLoading, setLoading] = useState(false);

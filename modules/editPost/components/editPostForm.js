@@ -173,7 +173,7 @@ const EditPostFormComponent = ({ editPost }) => {
 							</SelectForm>
 						</div>
 						<div className="form-group col-md-12">
-							<TagListForm tags={tags} setTag={setTag} errors={errors.error?.invalid_params?.tags} />
+							<TagListForm tags={tags} setTag={setTag} errors={errors.error?.message?.tags} />
 						</div>
 					</div>
 					<div className="text-left">

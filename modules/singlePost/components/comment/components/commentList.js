@@ -67,7 +67,7 @@ const CommentList = () => {
 							</div>
 						</div>
 					))}
-					<Pagination total={listComment?.meta?.comments_count} limit={process.env.LIMIT_PAGE.LIST_COMMENT} />
+					<Pagination total={listComment?.meta?.total} limit={process.env.LIMIT_PAGE.LIST_COMMENT} />
 				</>
 			)}
 		</>

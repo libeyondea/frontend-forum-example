@@ -16,7 +16,7 @@ const Tags = ({ listTag }) => {
 export async function getServerSideProps({ req, query }) {
 	try {
 		const { page } = query;
-		const response = await httpRequest.get({
+		const resListTag = await httpRequest.get({
 			url: `/tags`,
 			token: getCookie('token', req),
 			params: {
@@ -24,17 +24,16 @@ export async function getServerSideProps({ req, query }) {
 				limit: process.env.LIMIT_PAGE.LIST_TAG
 			}
 		});
-		return {
-			props: {
-				listTag: response.data
-			}
-		};
+		if (resListTag.data.success) {
+			return {
+				props: {
+					listTag: resListTag.data
+				}
+			};
+		}
 	} catch (error) {
-		console.log(error.response.data);
 		return {
-			props: {
-				listTag: {}
-			}
+			notFound: true
 		};
 	}
 }

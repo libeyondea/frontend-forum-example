@@ -99,16 +99,15 @@ const RegisterFormComponent = () => {
 					avatar: values.avatar
 				}
 			});
-			if (!response.data.success) {
-				setErrors(response.data);
-			}
 			if (response.data.success) {
 				setVerify(response.data.data.email);
-				//router.push('/login');
+				showToast.success('Register success');
 			}
 		} catch (error) {
-			console.log(error);
-			showToast.error();
+			if (!error.response.data.success) {
+				setErrors(error.response.data);
+			}
+			showToast.error('Register failed');
 		} finally {
 			setLoading(false);
 		}
@@ -127,11 +126,11 @@ const RegisterFormComponent = () => {
 			});
 			if (response.data.success) {
 				setCookie('token', response.data.data.access_token);
+				showToast.success('Login success');
 				router.push('/');
 			}
 		} catch (error) {
-			console.log(error.response);
-			showToast.error();
+			showToast.error('Login failed');
 		} finally {
 			setLoading(false);
 		}
@@ -193,7 +192,7 @@ const RegisterFormComponent = () => {
 								id="email"
 								name="email"
 								type="text"
-								errors={errors.error?.invalid_params?.email}
+								errors={errors.error?.message?.email}
 							/>
 						</div>
 						<div className="form-group col-md-6">
@@ -203,7 +202,7 @@ const RegisterFormComponent = () => {
 								id="user_name"
 								name="user_name"
 								type="text"
-								errors={errors.error?.invalid_params?.user_name}
+								errors={errors.error?.message?.user_name}
 							/>
 						</div>
 						<div className="form-group col-md-6">

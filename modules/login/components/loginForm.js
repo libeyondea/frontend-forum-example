@@ -37,13 +37,14 @@ const LoginFormComponent = () => {
 			});
 			if (response.data.success) {
 				setCookie('token', response.data.data.access_token);
+				showToast.success('Login success');
 				router.push('/');
-			} else {
-				setErrors(response.data);
 			}
 		} catch (error) {
-			console.log(error.response);
-			showToast.error();
+			if (!error.response.data.success) {
+				setErrors(error.response.data);
+			}
+			showToast.error('Login failed');
 		} finally {
 			setLoading(false);
 		}
@@ -62,11 +63,11 @@ const LoginFormComponent = () => {
 			});
 			if (response.data.success) {
 				setCookie('token', response.data.data.access_token);
+				showToast.success('Login success');
 				router.push('/');
 			}
 		} catch (error) {
-			console.log(error.response);
-			showToast.error();
+			showToast.error('Login failed');
 		} finally {
 			setLoading(false);
 		}
@@ -87,7 +88,7 @@ const LoginFormComponent = () => {
 						id="user_name"
 						name="user_name"
 						type="text"
-						errors={errors.error?.title}
+						errors={errors.error?.message}
 					/>
 				</div>
 				<div className="form-group">
@@ -97,7 +98,7 @@ const LoginFormComponent = () => {
 						id="password"
 						name="password"
 						type="password"
-						errors={errors.error?.title}
+						errors={errors.error?.message}
 					/>
 				</div>
 				<div className="d-flex justify-content-between mb-3">
