@@ -165,7 +165,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 							<button type="button" className="btn btn-info" onClick={() => onResendClick()}>
 								Resend email
 							</button>{' '}
-							{errorsVerify.error.message && errorsVerify.error.message}
+							{errorsVerify?.error?.message && errorsVerify?.error?.message}
 						</div>
 					)}
 					<div className="form-row">
