@@ -25,8 +25,12 @@ export async function getServerSideProps({ req, query }) {
 		const initialpage = query.page;
 		const initialPid = query.pid;
 		const page = Number.isInteger(parseInt(initialpage)) && initialpage >= 1 ? initialpage : 1;
-		const pid = Array.isArray(initialPid) && initialPid.length <= 2 ? initialPid : [];
-
+		const pid = Array.isArray(initialPid) ? initialPid : [];
+		if (pid.length > 2) {
+			return {
+				notFound: true
+			};
+		}
 		const [resSingleTag, resListPostTag] = await Promise.all([
 			httpRequest.get({
 				url: `/tags/${pid[0]}`,

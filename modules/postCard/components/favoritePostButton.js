@@ -1,16 +1,16 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { mutate } from 'swr';
 
 import useUser from '@/common/hooks/useUser';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
 
-const FollowTagButtonComponent = ({ following, slug }) => {
+const FavoritePostButtonComponent = ({ favorited, slug, totalFavorited }) => {
 	const { user } = useUser();
 	const router = useRouter();
-	const [isFollow, setFollow] = useState(following);
+	const [isFavorited, setFavorited] = useState(favorited);
+	const [sumFavorited, setSumFavorited] = useState(totalFavorited);
 	const [isLoading, setLoading] = useState(false);
 
 	const onHandleClick = async (e) => {
@@ -21,25 +21,25 @@ const FollowTagButtonComponent = ({ following, slug }) => {
 				return;
 			}
 			setLoading(true);
-			const response = isFollow
+			const response = isFavorited
 				? await httpRequest.delete({
-						url: `/follow_tag`,
+						url: `/favorite_post`,
 						params: {
 							slug: slug
 						},
 						token: getCookie('token')
 				  })
 				: await httpRequest.post({
-						url: `/follow_tag`,
+						url: `/favorite_post`,
 						data: {
 							slug: slug
 						},
 						token: getCookie('token')
 				  });
 			if (response.data.success) {
-				mutate(`/tags_followed?offset=0&limit=${process.env.LIMIT_PAGE.LIST_TAG_FOLLOWED}`);
-				setFollow(!isFollow);
-				showToast.success(`${!isFollow ? 'Follow' : 'Unfollow'} ${response.data.data.slug} success`);
+				setFavorited(!isFavorited);
+				setSumFavorited(!isFavorited ? sumFavorited + 1 : sumFavorited - 1);
+				showToast.success(`${!isFavorited ? 'Favorite' : 'Unfavorite'} ${response.data.data.slug} success`);
 			}
 		} catch (error) {
 			console.log(error.response);
@@ -52,30 +52,29 @@ const FollowTagButtonComponent = ({ following, slug }) => {
 	return (
 		<>
 			{isLoading ? (
-				<button className={`btn btn-sm ${isFollow ? 'btn-secondary' : 'btn-outline-secondary'}`} disabled>
-					<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
-					{isFollow ? (
+				<button className={`border-0 bg-transparent ${isFavorited ? 'text-danger' : 'text-secondary'}`} disabled>
+					{isFavorited ? (
 						<>
-							<i className="fa fa-minus" /> UnFollow
+							<i className="fa fa-heart fa-sm" /> {sumFavorited} likes
 						</>
 					) : (
 						<>
-							<i className="fa fa-plus" /> Follow
+							<i className="fa fa-heart-o fa-sm" /> {sumFavorited} likes
 						</>
 					)}
 				</button>
 			) : (
 				<button
-					className={`btn btn-sm ${isFollow ? 'btn-secondary' : 'btn-outline-secondary'}`}
+					className={`border-0 bg-transparent ${isFavorited ? 'text-danger' : 'text-secondary'}`}
 					onClick={onHandleClick}
 				>
-					{isFollow ? (
+					{isFavorited ? (
 						<>
-							<i className="fa fa-minus" /> UnFollow
+							<i className="fa fa-heart fa-sm" /> {sumFavorited} likes
 						</>
 					) : (
 						<>
-							<i className="fa fa-plus" /> Follow
+							<i className="fa fa-heart-o fa-sm" /> {sumFavorited} likes
 						</>
 					)}
 				</button>
@@ -84,4 +83,4 @@ const FollowTagButtonComponent = ({ following, slug }) => {
 	);
 };
 
-export default FollowTagButtonComponent;
+export default FavoritePostButtonComponent;

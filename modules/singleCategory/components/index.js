@@ -27,8 +27,8 @@ const SingleCategoryComponent = ({ singleCategory, listPostCategory, pid }) => {
 							}
 						]}
 					/>
-					<h1 className="mb-4">{singleCategory.data?.title}</h1>
-					<div className="d-flex align-items-center mb-2">
+					<h1 className="mb-3">{singleCategory.data?.title}</h1>
+					<div className="d-flex align-items-center mb-3">
 						<h4 className="mr-auto mb-0">Posts</h4>
 						<TabPost
 							pidTab={pid[1]}
@@ -61,7 +61,7 @@ const SingleCategoryComponent = ({ singleCategory, listPostCategory, pid }) => {
 						) : (
 							<>
 								{listPostCategory.data.map((post) => (
-									<div className="col-12 mb-4" key={post.id}>
+									<div className="col-12 mb-3" key={post.id}>
 										<PostCardComponent post={post} />
 									</div>
 								))}

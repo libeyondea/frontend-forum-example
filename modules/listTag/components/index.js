@@ -22,7 +22,7 @@ const ListTag = ({ listTag }) => {
 							}
 						]}
 					/>
-					<h1 className="mb-4">Tags</h1>
+					<h1 className="mb-3">Tags</h1>
 					<div className="row">
 						{isEmpty(listTag.data) ? (
 							<div className="col-12">
@@ -33,7 +33,7 @@ const ListTag = ({ listTag }) => {
 						) : (
 							<>
 								{listTag.data?.map((tag) => (
-									<div className="col-lg-6 mb-4" key={tag.id}>
+									<div className="col-lg-6 mb-3" key={tag.id}>
 										<TagCardComponent tag={tag} />
 									</div>
 								))}

@@ -3,6 +3,7 @@ import React from 'react';
 import CustomImage from '@/common/components/CustomImage/components';
 import CustomLink from '@/common/components/CustomLink/components';
 import timeAgo from '@/common/utils/timeAgo';
+import FavoritePostButtonComponent from '@/modules/postCard/components/favoritePostButton';
 import style from '@/modules/postCard/styles/style.module.scss';
 
 const PostCardComponent = ({ post }) => {
@@ -74,9 +75,11 @@ const PostCardComponent = ({ post }) => {
 						>
 							<i className="fa fa-comment-o fa-sm" /> {post.total_comments} comments
 						</CustomLink>
-						<a href="#!" className={`text-decoration-none ${false ? 'text-danger' : 'text-secondary'}`}>
-							<i className={`fa ${false ? 'fa-heart' : 'fa-heart-o'} fa-sm`} /> 666 likes
-						</a>
+						<FavoritePostButtonComponent
+							favorited={post.favorited}
+							totalFavorited={post.total_favorited}
+							slug={post.slug}
+						/>
 					</div>
 				</div>
 			</div>

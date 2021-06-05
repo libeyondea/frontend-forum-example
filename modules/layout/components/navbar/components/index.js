@@ -66,6 +66,9 @@ const NavBarComponent = () => {
 							<Link href={`/users/[pid]`} as={`/users/${user?.user_name}`} passHref>
 								<Dropdown.Item>Profile</Dropdown.Item>
 							</Link>
+							<Link href={`/dashboard`} passHref>
+								<Dropdown.Item>Dashboard</Dropdown.Item>
+							</Link>
 							<Dropdown.Divider className="m-0" />
 							<Dropdown.Item onClick={onLogoutClick}>Logout</Dropdown.Item>
 						</Dropdown.Menu>
@@ -100,6 +103,9 @@ const NavBarComponent = () => {
 									<Dropdown.Menu align="right" className="p-0">
 										<Link href={`/users/[pid]`} as={`/users/${user?.user_name}`} passHref>
 											<Dropdown.Item>Profile</Dropdown.Item>
+										</Link>
+										<Link href={`/dashboard`} passHref>
+											<Dropdown.Item>Dashboard</Dropdown.Item>
 										</Link>
 										<Dropdown.Divider className="m-0" />
 										<Dropdown.Item onClick={onLogoutClick}>Logout</Dropdown.Item>

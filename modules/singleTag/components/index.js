@@ -28,9 +28,8 @@ const SingleTagComponent = ({ singleTag, listPostTag, pid }) => {
 							}
 						]}
 					/>
-					<TagCardComponent tag={singleTag.data} classNameContainer={`mb-4`} isSingle />
-
-					<div className="d-flex align-items-center mb-2">
+					<TagCardComponent tag={singleTag.data} classNameContainer={`mb-3`} isSingle />
+					<div className="d-flex align-items-center mb-3">
 						<h4 className="mr-auto mb-0">Posts</h4>
 						<TabPost
 							pidTab={pid[1]}
@@ -63,7 +62,7 @@ const SingleTagComponent = ({ singleTag, listPostTag, pid }) => {
 						) : (
 							<>
 								{listPostTag.data.map((post) => (
-									<div className="col-12 mb-4" key={post.id}>
+									<div className="col-12 mb-3" key={post.id}>
 										<PostCardComponent post={post} />
 									</div>
 								))}

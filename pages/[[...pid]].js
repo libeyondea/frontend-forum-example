@@ -6,7 +6,7 @@ import { getCookie } from '@/common/utils/session';
 import HomeComponent from '@/modules/home/components';
 import LayoutComponent from '@/modules/layout/components';
 
-const Index = ({ listPost, pid }) => {
+const Index = ({ listPostGhim, listPost, pid }) => {
 	return (
 		<>
 			<Head>
@@ -14,7 +14,7 @@ const Index = ({ listPost, pid }) => {
 				<meta name="description" content="De4th Zone" />
 			</Head>
 			<LayoutComponent>
-				<HomeComponent listPost={listPost} pid={pid} />
+				<HomeComponent listPostGhim={listPostGhim} listPost={listPost} pid={pid} />
 			</LayoutComponent>
 		</>
 	);
@@ -25,20 +25,31 @@ export async function getServerSideProps({ req, query }) {
 		const initialpage = query.page;
 		const initialPid = query.pid;
 		const page = Number.isInteger(parseInt(initialpage)) && initialpage >= 1 ? initialpage : 1;
-		const pid = Array.isArray(initialPid) && initialPid.length <= 1 ? initialPid : [];
-
-		const resListPost = await httpRequest.get({
-			url: '/posts',
-			token: getCookie('token', req),
-			params: {
-				tab: pid[0] || 'feed',
-				offset: (page - 1) * process.env.LIMIT_PAGE.LIST_POST_HOME,
-				limit: process.env.LIMIT_PAGE.LIST_POST_HOME
-			}
-		});
-		if (resListPost.data.success) {
+		const pid = Array.isArray(initialPid) ? initialPid : [];
+		if (pid.length > 1) {
+			return {
+				notFound: true
+			};
+		}
+		const [resListPostGhim, resListPost] = await Promise.all([
+			httpRequest.get({
+				url: `/posts_ghim`,
+				token: getCookie('token', req)
+			}),
+			httpRequest.get({
+				url: '/posts',
+				token: getCookie('token', req),
+				params: {
+					tab: pid[0] || 'feed',
+					offset: (page - 1) * process.env.LIMIT_PAGE.LIST_POST_HOME,
+					limit: process.env.LIMIT_PAGE.LIST_POST_HOME
+				}
+			})
+		]);
+		if (resListPostGhim.data.success && resListPost.data.success) {
 			return {
 				props: {
+					listPostGhim: resListPostGhim.data,
 					listPost: resListPost.data,
 					pid: pid
 				}

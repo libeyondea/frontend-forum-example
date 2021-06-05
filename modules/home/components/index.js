@@ -9,24 +9,26 @@ import PostCardComponent from '@/modules/postCard/components';
 import SideBarLeftComponent from '@/modules/sidebarLeft/components';
 import SideBarRightComponent from '@/modules/sidebarRight/components';
 
-const HomeComponent = ({ listPost, pid }) => {
-	const { data: ghimPost } = useSWR(`/posts/forum-example-next-and-laravel-rest-api`); // Ghim post
+const HomeComponent = ({ listPostGhim, listPost, pid }) => {
 	return (
 		<div className="container-xl my-4">
 			<div className="row">
 				<div className="col-xl-7 col-lg-7 col-md-9 order-xl-2 order-lg-2 order-md-2">
 					{/* Ghim post - start */}
-					<div className="row">
-						{!ghimPost ? (
-							<LoadingPost />
-						) : (
-							<div className="col-12 mb-2">
-								<PostCardComponent post={ghimPost?.data} />
+					{!isEmpty(listPostGhim?.data) && (
+						<>
+							<h4 className="mb-3">Ghim</h4>
+							<div className="row">
+								{listPostGhim?.data?.map((post) => (
+									<div className="col-12 mb-3" key={post?.id}>
+										<PostCardComponent post={post} />
+									</div>
+								))}
 							</div>
-						)}
-					</div>
+						</>
+					)}
 					{/* Ghim post - end */}
-					<div className="d-flex align-items-center mb-2">
+					<div className="d-flex align-items-center mb-3">
 						<h4 className="mr-auto mb-0">Posts</h4>
 						<TabPost
 							pidTab={pid[0]}
@@ -59,7 +61,7 @@ const HomeComponent = ({ listPost, pid }) => {
 						) : (
 							<>
 								{listPost?.data?.map((post) => (
-									<div className="col-12 mb-4" key={post?.id}>
+									<div className="col-12 mb-3" key={post?.id}>
 										<PostCardComponent post={post} />
 									</div>
 								))}

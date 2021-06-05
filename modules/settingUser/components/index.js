@@ -7,11 +7,11 @@ import useUser from '@/common/hooks/useUser';
 import EditCustomizationComponent from '@/modules/settingUser/components/editCustomization';
 import EditProfileFormComponent from '@/modules/settingUser/components/editProfileForm';
 
-const SettingUserComponent = ({ editProfile, pid }) => {
+const SettingUserComponent = ({ settingUser, pid }) => {
 	const { user } = useUser();
 	return (
 		<div className="container-xl my-4">
-			{!editProfile || !user ? (
+			{!settingUser || !user ? (
 				<LoadingSpinner />
 			) : (
 				<>
@@ -51,7 +51,7 @@ const SettingUserComponent = ({ editProfile, pid }) => {
 						</div>
 						<div className="col-lg-9">
 							<div className="bg-light p-4 rounded-lg shadow-sm">
-								{(!pid[0] || pid[0] === 'profile') && <EditProfileFormComponent editProfile={editProfile} />}
+								{(!pid[0] || pid[0] === 'profile') && <EditProfileFormComponent editProfile={settingUser} />}
 								{pid[0] === 'customization' && <EditCustomizationComponent />}
 							</div>
 						</div>

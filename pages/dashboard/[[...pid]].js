@@ -2,13 +2,13 @@ import React from 'react';
 
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
+import DashboardUserComponent from '@/modules/dashboardUser/components';
 import LayoutComponent from '@/modules/layout/components';
-import SettingUserComponent from '@/modules/settingUser/components';
 
-const SettingUser = ({ settingUser, pid }) => {
+const DashboardUser = ({ dashboardUser, pid }) => {
 	return (
 		<LayoutComponent>
-			<SettingUserComponent settingUser={settingUser} pid={pid} />
+			<DashboardUserComponent dashboardUser={dashboardUser} pid={pid} />
 		</LayoutComponent>
 	);
 };
@@ -22,14 +22,14 @@ export async function getServerSideProps({ req, query }) {
 				notFound: true
 			};
 		}
-		const resSettingUser = await httpRequest.get({
-			url: `/settings/${pid[0] || 'profile'}/edit`,
+		const resDashboardUser = await httpRequest.get({
+			url: `/dashboard/${pid[0] || 'posts'}`,
 			token: getCookie('token', req)
 		});
-		if (resSettingUser.data.success) {
+		if (resDashboardUser.data.success) {
 			return {
 				props: {
-					settingUser: resSettingUser.data,
+					dashboardUser: resDashboardUser.data,
 					pid: pid
 				}
 			};
@@ -49,4 +49,4 @@ export async function getServerSideProps({ req, query }) {
 	}
 }
 
-export default SettingUser;
+export default DashboardUser;

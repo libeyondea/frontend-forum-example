@@ -1,6 +1,4 @@
 import React from 'react';
-import Nav from 'react-bootstrap/Nav';
-import Tab from 'react-bootstrap/Tab';
 
 import Breadcrumb from '@/common/components/Breadcrumb/components';
 import CustomImage from '@/common/components/CustomImage/components';
@@ -98,22 +96,7 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 					</div>
 				</div>
 				<div className="col-lg-9 col-md-8">
-					<Tab.Container id="profile-tabs" defaultActiveKey="posts-published">
-						<Nav as="nav" className="nav-tabs">
-							<Nav.Item as="li">
-								<Nav.Link eventKey="posts-published">Posts published</Nav.Link>
-							</Nav.Item>
-							<Nav.Item as="li">
-								<Nav.Link eventKey="more">More</Nav.Link>
-							</Nav.Item>
-						</Nav>
-						<Tab.Content className="bg-light p-4 rounded-lg shadow-sm">
-							<Tab.Pane eventKey="posts-published">
-								<ListPostUserComponent listPostUser={listPostUser} />
-							</Tab.Pane>
-							<Tab.Pane eventKey="more">More</Tab.Pane>
-						</Tab.Content>
-					</Tab.Container>
+					<ListPostUserComponent listPostUser={listPostUser} />
 				</div>
 			</div>
 		</div>

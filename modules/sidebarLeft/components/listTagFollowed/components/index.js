@@ -9,7 +9,7 @@ import style from '@/modules/sidebarLeft/components/listTagFollowed/styles/style
 const ListTagFollowedComponent = () => {
 	const { user } = useUser();
 	const { data: listTagFollowed } = useSWR(
-		user ? `/tags-followed?offset=0&limit=${process.env.LIMIT_PAGE.LIST_TAG_FOLLOWED}` : null,
+		user ? `/tags_followed?offset=0&limit=${process.env.LIMIT_PAGE.LIST_TAG_FOLLOWED}` : null,
 		{
 			revalidateOnFocus: false
 		}

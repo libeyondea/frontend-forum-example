@@ -95,7 +95,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 			});
 			if (response.data.success) {
 				await mutateUser();
-				router.push(`/settings/profile`);
+				router.replace(`/settings/profile`);
 				showToast.success(`Update profile success`);
 			}
 		} catch (error) {

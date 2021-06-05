@@ -46,7 +46,7 @@ const App = ({ Component, pageProps }) => {
 					},
 					onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
 						// Never retry on 404.
-						if (error.response.status === 404) return;
+						if (error.response.status === 404 || error.response.status === 401) return;
 
 						// Never retry for a specific key.
 						if (key === '/current_user') return;
