@@ -28,9 +28,10 @@ module.exports = (phase) => {
 			return 'RESTURL_SESSIONS:not (isDev,isProd && !isStaging,isProd && isStaging)';
 		})(),
 		IMAGES_URL: (() => {
-			if (isDev) return 'http://localhost:666/images';
-			if (isProd) return 'http://backend-forum-example.herokuapp.com/images';
-			if (isStaging) return 'http://backend-forum-example.herokuapp.com/images';
+			if (isDev) return 'https://elasticbeanstalk-ap-southeast-1-153036539674.s3-ap-southeast-1.amazonaws.com/images';
+			if (isProd) return 'https://elasticbeanstalk-ap-southeast-1-153036539674.s3-ap-southeast-1.amazonaws.com/images';
+			if (isStaging)
+				return 'https://elasticbeanstalk-ap-southeast-1-153036539674.s3-ap-southeast-1.amazonaws.com/images';
 			return 'RESTURL_SESSIONS:not (isDev,isProd && !isStaging,isProd && isStaging)';
 		})(),
 		LIMIT_PAGE: {
@@ -56,7 +57,10 @@ module.exports = (phase) => {
 		env,
 		reactStrictMode: true,
 		images: {
-			domains: ['localhost', 'backend-forum-example.herokuapp.com']
+			domains: [
+				'backend-forum-example.herokuapp.com',
+				'elasticbeanstalk-ap-southeast-1-153036539674.s3-ap-southeast-1.amazonaws.com'
+			]
 		}
 	};
 };
