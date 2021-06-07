@@ -21,7 +21,9 @@ const EditPostFormComponent = ({ editPost }) => {
 	const [isLoading, setLoading] = useState(false);
 	const [tags, setTag] = useState(editPost.data.tags);
 	const [errors, setErrors] = useState({});
-	const [loadImg, setLoadImg] = useState(`${process.env.IMAGES_URL}/${editPost.data.image}`);
+	const [loadImg, setLoadImg] = useState(
+		editPost.data.image ? `${process.env.IMAGES_URL}/${editPost.data.image}` : null
+	);
 	const FILE_SIZE = 2048 * 1024;
 	const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
