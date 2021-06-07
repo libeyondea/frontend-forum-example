@@ -26,6 +26,7 @@ export async function getServerSideProps({ req, query }) {
 			}),
 			httpRequest.get({
 				url: '/posts',
+				token: getCookie('token', req),
 				params: {
 					user: pid,
 					offset: (page - 1) * process.env.LIMIT_PAGE.LIST_POST_USER,
