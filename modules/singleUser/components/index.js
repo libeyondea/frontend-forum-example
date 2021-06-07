@@ -27,7 +27,6 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 			<div className="row">
 				<div className="col-lg-3 col-md-4 mb-4">
 					<div className="text-center bg-light rounded-lg shadow-sm mb-4 p-4">
-						<h3 className="text-break">{singleUser.data?.user_name}</h3>
 						<div className="mb-1">
 							<CustomImage
 								src={`${process.env.IMAGES_URL}/${singleUser.data?.avatar}`}
@@ -37,6 +36,10 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 								height="192"
 							/>
 						</div>
+						<h4 className="text-break mb-0">
+							{singleUser.data?.first_name} {singleUser.data?.last_name}
+						</h4>
+						<p className="text-break text-secondary mb-1">{singleUser.data?.user_name}</p>
 						<div>
 							<EditProfileButtonComponent user_name={singleUser.data?.user_name} />
 						</div>
@@ -45,6 +48,10 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 								user_name={singleUser.data?.user_name}
 								following={singleUser.data?.following}
 							/>
+						</div>
+						<div className="mt-1">
+							{singleUser.data?.total_user_followers} <span className="text-secondary">followers</span> ·{' '}
+							{singleUser.data?.total_following_users} <span className="text-secondary">following</span>
 						</div>
 					</div>
 					<div className="card mb-4">
@@ -69,19 +76,19 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 							<span className="pull-left">
 								<strong>Comment written</strong>
 							</span>
-							0
+							{singleUser.data?.total_comments}
 						</li>
 						<li className="list-group-item text-right">
 							<span className="pull-left">
 								<strong>Likes</strong>
 							</span>
-							0
+							{singleUser.data?.total_favorited}
 						</li>
 						<li className="list-group-item text-right">
 							<span className="pull-left">
 								<strong>Tags followed</strong>
 							</span>
-							0
+							{singleUser.data?.total_tags_followed}
 						</li>
 					</ul>
 					<div className="card">
