@@ -52,31 +52,45 @@ const FavoritePostButtonComponent = ({ favorited, slug, totalFavorited }) => {
 	return (
 		<>
 			{isLoading ? (
-				<button className={`border-0 bg-transparent ${isFavorited ? 'text-danger' : 'text-secondary'}`} disabled>
+				<button
+					className={`d-flex align-items-center border-0 bg-transparent ${
+						isFavorited ? 'text-danger' : 'text-secondary'
+					}`}
+					disabled
+				>
 					{isFavorited ? (
 						<>
-							<i className="fa fa-heart fa-sm" /> {sumFavorited} likes
+							<i className="fa fa-heart fa-sm mr-1" />
 						</>
 					) : (
 						<>
-							<i className="fa fa-heart-o fa-sm" /> {sumFavorited} likes
+							<i className="fa fa-heart-o fa-sm mr-1" />
 						</>
 					)}
+					<span className="mr-1">{sumFavorited}</span>
+					<span className="d-none d-sm-block">likes</span>
+					<div className="spinner-border spinner-border-sm text-info ml-1" role="status">
+						<span className="sr-only">Loading...</span>
+					</div>
 				</button>
 			) : (
 				<button
-					className={`border-0 bg-transparent ${isFavorited ? 'text-danger' : 'text-secondary'}`}
+					className={`d-flex align-items-center border-0 bg-transparent ${
+						isFavorited ? 'text-danger' : 'text-secondary'
+					}`}
 					onClick={onHandleClick}
 				>
 					{isFavorited ? (
 						<>
-							<i className="fa fa-heart fa-sm" /> {sumFavorited} likes
+							<i className="fa fa-heart fa-sm mr-1" />
 						</>
 					) : (
 						<>
-							<i className="fa fa-heart-o fa-sm" /> {sumFavorited} likes
+							<i className="fa fa-heart-o fa-sm mr-1" />
 						</>
 					)}
+					<span className="mr-1">{sumFavorited}</span>
+					<span className="d-none d-sm-block">likes</span>
 				</button>
 			)}
 		</>
