@@ -58,7 +58,8 @@ module.exports = (phase) => {
 		images: {
 			domains: [
 				'backend-forum-example.herokuapp.com',
-				'elasticbeanstalk-ap-southeast-1-153036539674.s3-ap-southeast-1.amazonaws.com'
+				'elasticbeanstalk-ap-southeast-1-153036539674.s3-ap-southeast-1.amazonaws.com',
+				'de4thzone.s3-ap-southeast-1.amazonaws.com'
 			]
 		}
 	};
