@@ -18,7 +18,7 @@ const PaginationComponent = ({ total, limit }) => {
 	if (page > pageCount || page < 1) return null;
 
 	const handlePageClick = (data) => {
-		router.push(`${asPath.split('?')[0]}?page=${data.selected + 1}`);
+		router.push(`${asPath.split('?')[0]}?page=${data.selected + 1}`, undefined, { scroll: false });
 	};
 
 	const initialPage = page ? page - 1 : 0;
