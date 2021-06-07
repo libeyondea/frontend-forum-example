@@ -67,13 +67,15 @@ const PostCardComponent = ({ post }) => {
 							</CustomLink>
 						))}
 					</div>
-					<div className="d-flex justify-content-end">
+					<div className="d-flex justify-content-end align-items-center">
 						<CustomLink
 							href="/posts/[pid]#comment-post"
 							as={`/posts/${post.slug}#comment-post`}
-							className="text-decoration-none text-secondary mr-2"
+							className="d-flex align-items-center text-decoration-none text-secondary mr-2"
 						>
-							<i className="fa fa-comment-o fa-sm" /> {post.total_comments} comments
+							<i className="fa fa-comment-o fa-sm mr-1" />
+							<span className="mr-1">{post.total_comments}</span>
+							<span className="d-none d-sm-block">comments</span>
 						</CustomLink>
 						<FavoritePostButtonComponent
 							favorited={post.favorited}
