@@ -29,9 +29,8 @@ module.exports = (phase) => {
 		})(),
 		IMAGES_URL: (() => {
 			if (isDev) return 'https://elasticbeanstalk-ap-southeast-1-153036539674.s3-ap-southeast-1.amazonaws.com/images';
-			if (isProd) return 'https://elasticbeanstalk-ap-southeast-1-153036539674.s3-ap-southeast-1.amazonaws.com/images';
-			if (isStaging)
-				return 'https://elasticbeanstalk-ap-southeast-1-153036539674.s3-ap-southeast-1.amazonaws.com/images';
+			if (isProd) return 'https://de4thzone.s3-ap-southeast-1.amazonaws.com/images';
+			if (isStaging) return 'https://de4thzone.s3-ap-southeast-1.amazonaws.com/images';
 			return 'RESTURL_SESSIONS:not (isDev,isProd && !isStaging,isProd && isStaging)';
 		})(),
 		LIMIT_PAGE: {
