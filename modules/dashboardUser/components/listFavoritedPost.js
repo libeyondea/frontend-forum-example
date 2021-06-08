@@ -21,7 +21,7 @@ const ListFavoritedPostComponent = ({ listPost }) => {
 					<>
 						{listPost.data.map((post) => (
 							<div className="col-12 mb-3" key={post.id}>
-								<div className="d-flex bg-light rounded-lg shadow-sm p-3 flex-column flex-sm-row">
+								<div className="wapper__card d-flex bg-light rounded-lg shadow-sm p-3 flex-column flex-sm-row">
 									<div className="d-flex align-items-center mr-auto mr-1 mb-1 mb-sm-0">
 										<CustomLink
 											href="/posts/[pid]"

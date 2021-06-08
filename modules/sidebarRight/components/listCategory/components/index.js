@@ -11,7 +11,7 @@ const ListCategoryComponent = () => {
 	});
 
 	return (
-		<div className="bg-light rounded-lg shadow-sm border mb-4">
+		<div className="wapper__card bg-light rounded-lg shadow-sm border mb-4">
 			<div className="px-3 py-2 border-bottom">
 				<h5 className="mb-0">Categories</h5>
 			</div>
@@ -24,10 +24,7 @@ const ListCategoryComponent = () => {
 					</li>
 				) : (
 					listCategory?.data?.map((category) => (
-						<li
-							className={`bg-light border-bottom d-flex align-items-center px-3 py-2 ${style.list_group_item_custom}`}
-							key={category.id}
-						>
+						<li className={`bg-light border-bottom px-3 py-2 ${style.list_group_item_custom}`} key={category.id}>
 							<CustomLink
 								href={`/categories/[...pid]`}
 								as={`/categories/${category.slug}`}

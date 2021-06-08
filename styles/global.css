@@ -68,7 +68,11 @@ body {
 }
 
 .sticky-top {
-	top: 72px;
+	top: calc(72px + 1.5rem);
+}
+
+.wapper__card {
+	overflow-wrap: anywhere;
 }
 
 .carousel-item img {

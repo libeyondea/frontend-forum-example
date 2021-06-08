@@ -1,0 +1,18 @@
+.border__top__user {
+	border-top: 2rem solid #122e48;
+}
+
+.list_group_item_custom {
+	position: relative;
+	display: block;
+
+	&:last-child {
+		border-bottom: 0 !important;
+		border-bottom-left-radius: inherit;
+		border-bottom-right-radius: inherit;
+	}
+}
+
+.tags {
+	margin-left: calc(0.25rem * -1);
+}

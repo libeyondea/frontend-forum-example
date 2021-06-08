@@ -6,7 +6,7 @@ import ListTagFollowedComponent from '@/modules/sidebarLeft/components/listTagFo
 const SideBarLeftComponent = () => {
 	return (
 		<div className="sticky-top">
-			<div className="mb-4">
+			<div className="wapper__card mb-4">
 				<div className="px-2 py-2">
 					<h5 className="mb-0">Options</h5>
 				</div>

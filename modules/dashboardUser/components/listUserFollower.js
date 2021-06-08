@@ -20,7 +20,7 @@ const ListUserFollowerComponent = ({ listUser }) => {
 					<>
 						{listUser.data.map((user) => (
 							<div className="col-md-4 col-sm-6 mb-3" key={user.id}>
-								<div className="bg-light rounded-lg shadow-sm p-4 text-center">
+								<div className="wapper__card bg-light rounded-lg shadow-sm p-4 text-center">
 									<CustomLink
 										href={`/users/${user.user_name}`}
 										className="text-decoration-none d-inline-block d-flex align-items-center justify-content-center"

@@ -62,7 +62,7 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 							<a href="https://de4thzone.com">de4thzone.com</a>
 						</div>
 					</div>
-					<ul className="list-group mb-4 rounded-lg shadow-sm">
+					<ul className="wapper__card list-group mb-4 rounded-lg shadow-sm">
 						<li className="list-group-item text-muted">
 							Activity <i className="fa fa-dashboard fa-1x" />
 						</li>

@@ -3,17 +3,17 @@ import React from 'react';
 
 import Breadcrumb from '@/common/components/Breadcrumb/components';
 import CustomImage from '@/common/components/CustomImage/components';
-import SideBarRightComponent from '@/modules/sidebarRight/components';
 import CommentComponent from '@/modules/singlePost/components/comment/components';
 import PostActionComponent from '@/modules/singlePost/components/postAction';
 import PostMetaComponent from '@/modules/singlePost/components/postMeta';
 import PostTagListComponent from '@/modules/singlePost/components/postTagList';
+import SideBarRightUserComponent from '@/modules/singlePost/components/sidebarRightUser/components';
 
-const SinglePostComponent = ({ singlePost }) => {
+const SinglePostComponent = ({ singlePost, listPostUser }) => {
 	return (
 		<div className="container-xl my-4">
 			<div className="row">
-				<div className="col-xl-9 col-md-9">
+				<div className="col-xl-9 col-md-8 mb-4 mb-md-0">
 					<Breadcrumb
 						items={[
 							{
@@ -25,7 +25,7 @@ const SinglePostComponent = ({ singlePost }) => {
 							}
 						]}
 					/>
-					<article className="single-post bg-light rounded-lg shadow-sm">
+					<article className="wapper__card single-post bg-light rounded-lg shadow-sm">
 						{singlePost.data?.image && (
 							<div>
 								<CustomImage
@@ -57,8 +57,8 @@ const SinglePostComponent = ({ singlePost }) => {
 						</div>
 					</article>
 				</div>
-				<div className="d-none d-md-block col-xl-3 col-md-3">
-					<SideBarRightComponent />
+				<div className="col-xl-3 col-md-4">
+					<SideBarRightUserComponent user={singlePost.data.user} listPostUser={listPostUser} />
 				</div>
 			</div>
 		</div>

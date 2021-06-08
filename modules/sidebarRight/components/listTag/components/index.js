@@ -10,7 +10,7 @@ const ListTagComponent = () => {
 	});
 
 	return (
-		<div className="bg-light rounded-lg shadow-sm border mb-4">
+		<div className="wapper__card bg-light rounded-lg shadow-sm border mb-4">
 			<div className="px-3 py-2 border-bottom">
 				<h5 className="mb-0">Popular tags</h5>
 			</div>

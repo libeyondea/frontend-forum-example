@@ -18,7 +18,7 @@ const ListTagFollowedComponent = () => {
 	return (
 		<>
 			{user && (
-				<div className="mb-4">
+				<div className="wapper__card mb-4">
 					<div className="px-2 py-2">
 						<h5 className="mb-0">My Tags</h5>
 					</div>
@@ -34,7 +34,7 @@ const ListTagFollowedComponent = () => {
 								<li className="d-flex align-items-center border-0 px-2 py-2" key={tag.id}>
 									<CustomLink href={`/tags/${tag.slug}`} className="text-decoration-none text-dark">
 										<span className="text-secondary">#</span>
-										{tag.title}
+										{tag.slug}
 									</CustomLink>
 								</li>
 							))
