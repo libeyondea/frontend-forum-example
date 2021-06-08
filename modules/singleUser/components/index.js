@@ -1,45 +1,32 @@
 import React from 'react';
 
-import Breadcrumb from '@/common/components/Breadcrumb/components';
 import CustomImage from '@/common/components/CustomImage/components';
 import EditProfileButtonComponent from '@/modules/singleUser/components/editProfileButton';
 import FollowUserButtonComponent from '@/modules/singleUser/components/followUserButton';
 import ListPostUserComponent from '@/modules/singleUser/components/listPostUser';
+import style from '@/modules/singleUser/styles/style.module.scss';
 
 const SingleUserComponent = ({ singleUser, listPostUser }) => {
 	return (
 		<div className="container-xl my-4">
-			<Breadcrumb
-				items={[
-					{
-						title: 'Home',
-						href: '/'
-					},
-					{
-						title: 'Users',
-						href: '/users'
-					},
-					{
-						title: singleUser.data?.user_name
-					}
-				]}
-			/>
 			<div className="row">
-				<div className="col-lg-3 col-md-4 mb-4">
-					<div className="text-center bg-light rounded-lg shadow-sm mb-4 p-4">
-						<div className="mb-1">
-							<CustomImage
-								src={`${process.env.IMAGES_URL}/${singleUser.data?.avatar}`}
-								alt={singleUser.data?.user_name}
-								className="avatar rounded-circle img-thumbnail"
-								width="192"
-								height="192"
-							/>
+				<div className="col-12 mb-4">
+					<div className={`text-center bg-light rounded-lg shadow-sm px-4 pb-4 pt-4 ${style.info__user}`}>
+						<div className={`mb-2 ${style.avt}`}>
+							<span className="d-inline-flex p-3 rounded-circle">
+								<CustomImage
+									src={`${process.env.IMAGES_URL}/${singleUser.data?.avatar}`}
+									alt={singleUser.data?.user_name}
+									className="avatar rounded-circle img-thumbnail"
+									width="166"
+									height="166"
+								/>
+							</span>
 						</div>
-						<h4 className="text-break mb-0">
+						<h4 className="text-break mb-1">
 							{singleUser.data?.first_name} {singleUser.data?.last_name}
 						</h4>
-						<p className="text-break text-secondary mb-1">{singleUser.data?.user_name}</p>
+						<p className="text-break text-secondary mb-2">{singleUser.data?.user_name}</p>
 						<div>
 							<EditProfileButtonComponent user_name={singleUser.data?.user_name} />
 						</div>
@@ -54,14 +41,8 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 							{singleUser.data?.total_following_users} <span className="text-secondary">following</span>
 						</div>
 					</div>
-					<div className="card mb-4">
-						<div className="card-header">
-							Website <i className="fa fa-link fa-1x" />
-						</div>
-						<div className="card-body">
-							<a href="https://de4thzone.com">de4thzone.com</a>
-						</div>
-					</div>
+				</div>
+				<div className="col-lg-4 col-md-4 mb-4">
 					<ul className="wapper__card list-group mb-4 rounded-lg shadow-sm">
 						<li className="list-group-item text-muted">
 							Activity <i className="fa fa-dashboard fa-1x" />
@@ -102,7 +83,7 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 						</div>
 					</div>
 				</div>
-				<div className="col-lg-9 col-md-8">
+				<div className="col-lg-8 col-md-8">
 					<ListPostUserComponent listPostUser={listPostUser} />
 				</div>
 			</div>
