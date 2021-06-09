@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Breadcrumb from '@/common/components/Breadcrumb/components';
 import Pagination from '@/common/components/Pagination/components';
 import TabPost from '@/common/components/TabPost/components';
 import isEmpty from '@/common/utils/isEmpty';
@@ -13,21 +12,6 @@ const SingleTagComponent = ({ singleTag, listPostTag, pid }) => {
 		<div className="container-xl my-4">
 			<div className="row">
 				<div className="col-xl-9 col-md-8">
-					<Breadcrumb
-						items={[
-							{
-								title: 'Home',
-								href: '/'
-							},
-							{
-								title: 'Tags',
-								href: '/tags'
-							},
-							{
-								title: singleTag.data?.title
-							}
-						]}
-					/>
 					<TagCardComponent tag={singleTag.data} classNameContainer={`mb-3`} isSingle />
 					<div className="d-flex align-items-center mb-3">
 						<h4 className="mr-auto mb-0">Posts</h4>

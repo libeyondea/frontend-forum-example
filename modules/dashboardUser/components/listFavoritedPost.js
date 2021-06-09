@@ -9,7 +9,7 @@ import timeAgo from '@/common/utils/timeAgo';
 const ListFavoritedPostComponent = ({ listPost }) => {
 	return (
 		<>
-			<h4 className="mb-3">Posts ({listPost?.meta?.total} )</h4>
+			<h4 className="mb-3">Posts ({listPost?.meta?.total})</h4>
 			<div className="row">
 				{isEmpty(listPost.data) ? (
 					<div className="col-12">

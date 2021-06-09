@@ -4,10 +4,10 @@ import CustomLink from '@/common/components/CustomLink/components';
 import FollowTagButtonComponent from '@/modules/tagCard/components/followTagButton';
 import style from '@/modules/tagCard/styles/style.module.scss';
 
-const TagCardComponent = ({ tag, classNameContainer, isSingle = false }) => {
+const TagCardComponent = ({ tag, classNameContainer = '', isSingle = false }) => {
 	if (!tag) return null;
 	return (
-		<div className={`card ${style.tag_card} ${classNameContainer}`}>
+		<div className={`card ${style.tag_card} ${classNameContainer} ${!isSingle ? 'h-100' : ''}`}>
 			<div className="p-3">
 				<div className={`${style.body_tag_card}`}>
 					{isSingle ? (

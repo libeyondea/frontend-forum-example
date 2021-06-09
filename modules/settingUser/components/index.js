@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Breadcrumb from '@/common/components/Breadcrumb/components';
+import CustomLink from '@/common/components/CustomLink/components';
 import LoadingSpinner from '@/common/components/LoadingSpinner/components';
 import TabSetting from '@/common/components/TabSetting/components';
 import useUser from '@/common/hooks/useUser';
@@ -15,21 +15,12 @@ const SettingUserComponent = ({ settingUser, pid }) => {
 				<LoadingSpinner />
 			) : (
 				<>
-					<Breadcrumb
-						items={[
-							{
-								title: 'Home',
-								href: '/'
-							},
-							{
-								title: user?.user_name,
-								href: `/users/${user?.user_name}`
-							},
-							{
-								title: 'Settings'
-							}
-						]}
-					/>
+					<h3 className="mb-4 font-weight-bold">
+						Settings for{' '}
+						<CustomLink href={`/users/${user.user_name}`} className="text-decoration-none">
+							@{user.user_name}
+						</CustomLink>
+					</h3>
 					<div className="row">
 						<div className="col-lg-3 mb-4">
 							<TabSetting
@@ -37,7 +28,7 @@ const SettingUserComponent = ({ settingUser, pid }) => {
 								pidTab={pid[0]}
 								items={[
 									{
-										title: 'Edit porfile',
+										title: 'Profile',
 										slug: 'profile',
 										href: '/settings/profile'
 									},

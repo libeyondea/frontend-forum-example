@@ -18,28 +18,20 @@ const DashboardUserComponent = ({ dashboardUser, pid }) => {
 				<LoadingSpinner />
 			) : (
 				<>
-					<Breadcrumb
-						items={[
-							{
-								title: 'Dashboard',
-								href: '/dashboard'
-							},
-							{
-								title:
-									!pid[0] || pid[0] === 'posts'
-										? 'Posts'
-										: pid[0] === 'favorited_posts'
-										? 'Favorited posts'
-										: pid[0] === 'user_followers'
-										? 'Followers'
-										: pid[0] === 'following_users'
-										? 'Following users'
-										: pid[0] === 'following_tags'
-										? 'Following tags'
-										: null
-							}
-						]}
-					/>
+					<h3 className="mb-4 font-weight-bold">
+						Dashboard »{' '}
+						{!pid[0] || pid[0] === 'posts'
+							? 'Posts'
+							: pid[0] === 'favorited_posts'
+							? 'Favorited posts'
+							: pid[0] === 'user_followers'
+							? 'Followers'
+							: pid[0] === 'following_users'
+							? 'Following users'
+							: pid[0] === 'following_tags'
+							? 'Following tags'
+							: null}
+					</h3>
 					<div className="row">
 						<div className="col-lg-3 mb-4">
 							<TabDashboard

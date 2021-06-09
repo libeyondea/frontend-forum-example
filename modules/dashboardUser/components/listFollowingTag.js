@@ -20,7 +20,7 @@ const ListFollowingTagComponent = ({ listTag }) => {
 					<>
 						{listTag.data.map((tag) => (
 							<div className="col-md-4 col-sm-6 mb-3" key={tag.id}>
-								<div className={`card`}>
+								<div className={`card h-100`}>
 									<div className="p-3">
 										<CustomLink
 											href={`/tags/${tag.slug}`}

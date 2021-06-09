@@ -9,7 +9,7 @@ const ListFollowingUserComponent = ({ listUser }) => {
 	return (
 		<>
 			<h4 className="mb-3">Following ({listUser?.meta?.total})</h4>
-			<div className="row">
+			<div className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
 				{isEmpty(listUser.data) ? (
 					<div className="col-12">
 						<div className="text-center font-weight-bold">
@@ -19,8 +19,8 @@ const ListFollowingUserComponent = ({ listUser }) => {
 				) : (
 					<>
 						{listUser.data.map((user) => (
-							<div className="col-md-4 col-sm-6 mb-3" key={user.id}>
-								<div className="wapper__card bg-light rounded-lg shadow-sm p-4 text-center">
+							<div className="col mb-3" key={user.id}>
+								<div className="wapper__card bg-light rounded-lg shadow-sm p-4 text-center h-100">
 									<CustomLink
 										href={`/users/${user.user_name}`}
 										className="text-decoration-none d-inline-block d-flex align-items-center justify-content-center"

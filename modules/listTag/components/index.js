@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Breadcrumb from '@/common/components/Breadcrumb/components';
 import Pagination from '@/common/components/Pagination/components';
 import isEmpty from '@/common/utils/isEmpty';
 import SideBarLeftComponent from '@/modules/sidebarLeft/components';
@@ -11,17 +10,6 @@ const ListTag = ({ listTag }) => {
 		<div className="container-xl my-4">
 			<div className="row">
 				<div className="col-xl-9 col-md-9 order-md-2">
-					<Breadcrumb
-						items={[
-							{
-								title: 'Home',
-								href: '/'
-							},
-							{
-								title: 'Tags'
-							}
-						]}
-					/>
 					<h1 className="mb-3">Tags</h1>
 					<div className="row">
 						{isEmpty(listTag.data) ? (

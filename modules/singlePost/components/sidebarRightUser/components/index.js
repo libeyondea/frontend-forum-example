@@ -10,7 +10,7 @@ const SideBarRightUserComponent = ({ user, listPostUser }) => {
 	return (
 		<div className="sticky-top">
 			<div className={`wapper__card bg-light rounded-lg shadow-sm pt-0 pb-3 px-3 mb-4 ${style.border__top__user}`}>
-				<div className="text-center mb-2 mt-n3">
+				<div className="text-center mb-2 mt-n4">
 					<CustomLink
 						href={`/users/${user?.user_name}`}
 						className="text-decoration-none d-inline-block text-dark font-weight-bold"

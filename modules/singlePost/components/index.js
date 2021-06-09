@@ -14,17 +14,6 @@ const SinglePostComponent = ({ singlePost, listPostUser }) => {
 		<div className="container-xl my-4">
 			<div className="row">
 				<div className="col-xl-9 col-md-8 mb-4 mb-md-0">
-					<Breadcrumb
-						items={[
-							{
-								title: 'Home',
-								href: '/'
-							},
-							{
-								title: singlePost.data?.title
-							}
-						]}
-					/>
 					<article className="wapper__card single-post bg-light rounded-lg shadow-sm">
 						{singlePost.data?.image && (
 							<div>
