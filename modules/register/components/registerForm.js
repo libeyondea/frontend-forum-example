@@ -20,7 +20,7 @@ const RegisterFormComponent = () => {
 	const [loadImg, setLoadImg] = useState(`${process.env.IMAGES_URL}/${process.env.IMAGES.DEFAULT_IMAGE_AVATAR}`);
 	const [errors, setErrors] = useState({});
 	const [verify, setVerify] = useState('');
-	const gender = ['', 'male', 'female', 'orther'];
+	const gender = ['', 'male', 'female', 'unknown'];
 	const FILE_SIZE = 2048 * 1024;
 	const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
@@ -35,6 +35,7 @@ const RegisterFormComponent = () => {
 		address: '',
 		gender: '',
 		avatar: null,
+		biography: '',
 		agreeterms: false
 	};
 	const validationSchema = Yup.object({
@@ -76,7 +77,11 @@ const RegisterFormComponent = () => {
 				'Unsupported Format',
 				(value) => value === null || (value && SUPPORTED_FORMATS.includes(value.type))
 			),
-		gender: Yup.string().oneOf(['male', 'female', 'orther', null], 'Gender invalid').nullable(),
+		gender: Yup.string().oneOf(['male', 'female', 'unknown'], 'Gender invalid').required('Please select gender'),
+		biography: Yup.string()
+			.min(6, 'Bio must be at least 6 characters')
+			.max(66, 'Bio must be at most 666 characters')
+			.nullable(),
 		agreeterms: Yup.boolean().oneOf([true], 'You must agree to terms of service').required('Required')
 	});
 
@@ -93,7 +98,8 @@ const RegisterFormComponent = () => {
 					password: values.password,
 					phone_number: values.phone_number,
 					address: values.address,
-					gender: values.gender
+					gender: values.gender,
+					biography: values.biography
 				},
 				files: {
 					avatar: values.avatar
@@ -231,11 +237,14 @@ const RegisterFormComponent = () => {
 								<option value={gender[0]}>Select gender</option>
 								<option value={gender[1]}>Male</option>
 								<option value={gender[2]}>Female</option>
-								<option value={gender[3]}>Other</option>
+								<option value={gender[3]}>Unknown</option>
 							</SelectForm>
 						</div>
 						<div className="form-group col-md-12">
-							<TextForm rows="3" label="Address" placeholder="Address" id="address" name="address" />
+							<TextForm rows="2" label="Address" placeholder="Address" id="address" name="address" />
+						</div>
+						<div className="form-group col-md-12">
+							<TextForm rows="3" label="Biography" placeholder="Biography" id="biography" name="biography" />
 						</div>
 						<div className="form-group col-md-12">
 							<ImageUserForm

@@ -27,6 +27,7 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 							{singleUser.data?.first_name} {singleUser.data?.last_name}
 						</h4>
 						<p className="text-break text-secondary mb-2">{singleUser.data?.user_name}</p>
+						{singleUser.data?.biography && <p className="text-break mb-2">{singleUser.data?.biography}</p>}
 						<div>
 							<EditProfileButtonComponent user_name={singleUser.data?.user_name} />
 						</div>
@@ -42,8 +43,8 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 						</div>
 					</div>
 				</div>
-				<div className="col-lg-4 col-md-4 mb-4">
-					<ul className="wapper__card list-group mb-4 rounded-lg shadow-sm">
+				<div className="col-lg-4 col-md-4 mb-4 mb-md-0">
+					<ul className="wapper__card list-group rounded-lg shadow-sm">
 						<li className="list-group-item text-muted">
 							Activity <i className="fa fa-dashboard fa-1x" />
 						</li>
@@ -72,16 +73,6 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 							{singleUser.data?.total_tags_followed}
 						</li>
 					</ul>
-					<div className="card">
-						<div className="card-header">Social Media</div>
-						<div className="card-body">
-							<i className="fa fa-facebook fa-2x mr-1" />
-							<i className="fa fa-github fa-2x mr-1" />
-							<i className="fa fa-twitter fa-2x mr-1" />
-							<i className="fa fa-pinterest fa-2x mr-1" />
-							<i className="fa fa-google-plus fa-2x" />
-						</div>
-					</div>
 				</div>
 				<div className="col-lg-8 col-md-8">
 					<ListPostUserComponent listPostUser={listPostUser} />

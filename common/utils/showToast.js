@@ -1,22 +1,34 @@
 import { toast } from 'react-toastify';
 
 const showToast = {
-	current: (message) => toast(message),
-	success: (message) =>
+	current: (message, id) =>
+		toast(message, {
+			autoClose: 1666,
+			toastId: id
+		}),
+	success: (message, id) =>
 		toast.success(message, {
-			position: toast.POSITION.BOTTOM_RIGHT
+			autoClose: 1666,
+			position: toast.POSITION.BOTTOM_RIGHT,
+			toastId: id
 		}),
-	error: (message = 'An error occurred. Please try again later.') =>
+	error: (message = 'An error occurred. Please try again later.', id) =>
 		toast.error(message, {
-			position: toast.POSITION.BOTTOM_RIGHT
+			autoClose: 1666,
+			position: toast.POSITION.BOTTOM_RIGHT,
+			toastId: id
 		}),
-	warn: (message) =>
+	warn: (message, id) =>
 		toast.info(message, {
-			position: toast.POSITION.BOTTOM_RIGHT
+			autoClose: 1666,
+			position: toast.POSITION.BOTTOM_RIGHT,
+			toastId: id
 		}),
-	info: (message) =>
+	info: (message, id) =>
 		toast.info(message, {
-			position: toast.POSITION.BOTTOM_RIGHT
+			autoClose: 1666,
+			position: toast.POSITION.BOTTOM_RIGHT,
+			toastId: id
 		})
 };
 
