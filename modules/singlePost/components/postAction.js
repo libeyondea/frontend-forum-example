@@ -37,7 +37,7 @@ const PostActionComponent = ({ userName, postSlug }) => {
 		<>
 			{user && user.user_name === userName && (
 				<div className="mb-3">
-					<CustomLink href={`/posts/${postSlug}/edit`} className="btn btn-outline-secondary btn-sm mr-2">
+					<CustomLink href={`/u/${userName}/${postSlug}/edit`} className="btn btn-outline-secondary btn-sm mr-2">
 						<i className="ion-edit" /> Edit Post
 					</CustomLink>
 					{isLoading ? (

@@ -15,9 +15,9 @@ const EditPost = ({ editPost }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const { pid } = query;
+		const { user_name, pid } = query;
 		const resEditPost = await httpRequest.get({
-			url: `posts/${pid}/edit`,
+			url: `posts/${user_name}/${pid}/edit`,
 			token: getCookie('token', req)
 		});
 		if (resEditPost.data.success) {
@@ -28,6 +28,7 @@ export async function getServerSideProps({ req, query }) {
 			};
 		}
 	} catch (error) {
+		console.log(error);
 		return {
 			notFound: true
 		};

@@ -15,8 +15,7 @@ const PostCardComponent = ({ post }) => {
 					<div className="d-flex align-items-center">
 						<div className="mr-1">
 							<CustomLink
-								href="/users/[pid]"
-								as={`/users/${post.user.user_name}`}
+								href={`/u/${post.user.user_name}`}
 								className="text-decoration-none d-inline-block d-flex align-items-center"
 							>
 								<CustomImage
@@ -30,11 +29,7 @@ const PostCardComponent = ({ post }) => {
 						</div>
 						<div className="lh-100">
 							<div className="d-flex align-items-center">
-								<CustomLink
-									href="/users/[pid]"
-									as={`/users/${post.user.user_name}`}
-									className="text-decoration-none text-dark"
-								>
+								<CustomLink href={`/u/${post.user.user_name}`} className="text-decoration-none text-dark">
 									{post.user.user_name}
 								</CustomLink>
 							</div>
@@ -44,8 +39,7 @@ const PostCardComponent = ({ post }) => {
 				</div>
 				<div className={`${style.body_post_card}`}>
 					<CustomLink
-						href="/posts/[pid]"
-						as={`/posts/${post.slug}`}
+						href={`/u/${post.user.user_name}/${post.slug}`}
 						className={`text-decoration-none text-dark card-title mb-2 d-block ${style.title_post_card}`}
 					>
 						<h5 className="font-weight-bold mb-0">{post.title}</h5>
@@ -56,8 +50,7 @@ const PostCardComponent = ({ post }) => {
 					<div className={`mb-2 ${style.tags}`}>
 						{post.tags.map((tag) => (
 							<CustomLink
-								href={`/tags/[pid]`}
-								as={`/tags/${tag.slug}`}
+								href={`/t/${tag.slug}`}
 								key={tag.id}
 								onClick={(e) => e.stopPropagation()}
 								className="p-1 text-decoration-none d-inline-block text-secondary"
@@ -69,8 +62,7 @@ const PostCardComponent = ({ post }) => {
 					</div>
 					<div className="d-flex justify-content-end align-items-center">
 						<CustomLink
-							href="/posts/[pid]#comment-post"
-							as={`/posts/${post.slug}#comment-post`}
+							href={`/u/${post.user.user_name}/${post.slug}#comment-post`}
 							className="d-flex align-items-center text-decoration-none text-secondary mr-2"
 						>
 							<i className="fa fa-comment-o fa-sm mr-1" />

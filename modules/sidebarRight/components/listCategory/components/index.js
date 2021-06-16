@@ -25,11 +25,7 @@ const ListCategoryComponent = () => {
 				) : (
 					listCategory?.data?.map((category) => (
 						<li className={`bg-light border-bottom px-3 py-2 ${style.list_group_item_custom}`} key={category.id}>
-							<CustomLink
-								href={`/categories/[...pid]`}
-								as={`/categories/${category.slug}`}
-								className="text-decoration-none text-dark mr-2"
-							>
+							<CustomLink href={`/c/${category.slug}`} className="text-decoration-none text-dark mr-2">
 								{category.title}
 							</CustomLink>
 							<span className="badge badge-pill badge-secondary">{category.total_posts}</span>

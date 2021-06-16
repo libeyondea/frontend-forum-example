@@ -32,7 +32,7 @@ const ListTagFollowedComponent = () => {
 						) : (
 							listTagFollowed?.data?.map((tag) => (
 								<li className="d-flex align-items-center border-0 px-2 py-2" key={tag.id}>
-									<CustomLink href={`/tags/${tag.slug}`} className="text-decoration-none text-dark">
+									<CustomLink href={`/t/${tag.slug}`} className="text-decoration-none text-dark">
 										<span className="text-secondary">#</span>
 										{tag.slug}
 									</CustomLink>

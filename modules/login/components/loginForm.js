@@ -38,7 +38,7 @@ const LoginFormComponent = () => {
 			if (response.data.success) {
 				setCookie('token', response.data.data.access_token);
 				showToast.success('Login success');
-				router.push('/');
+				router.back();
 			}
 		} catch (error) {
 			if (!error.response.data.success) {

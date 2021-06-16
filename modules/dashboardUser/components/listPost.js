@@ -23,15 +23,14 @@ const ListPostComponent = ({ listPost }) => {
 								<div className="wapper__card d-flex bg-light rounded-lg shadow-sm p-3 flex-column flex-sm-row">
 									<div className="d-flex align-items-center mr-auto mr-1 mb-1 mb-sm-0">
 										<CustomLink
-											href="/posts/[pid]"
-											as={`/posts/${post.slug}`}
+											href={`/u/${post.user.user_name}/${post.slug}`}
 											className={`text-decoration-none text-dark card-title mb-0 d-block`}
 										>
 											<h6 className="font-weight-bold mb-0">{post.title}</h6>
 										</CustomLink>
 									</div>
 									<div className="d-flex align-items-center ml-auto ml-sm-0">
-										<ListPostMetaComponent postSlug={post.slug} />
+										<ListPostMetaComponent postSlug={post.slug} userName={post.user.user_name} />
 									</div>
 								</div>
 							</div>

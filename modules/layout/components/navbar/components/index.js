@@ -63,7 +63,7 @@ const NavBarComponent = () => {
 							<div className="ml-2 d-none d-sm-block">{user?.user_name}</div>
 						</Dropdown.Toggle>
 						<Dropdown.Menu align="right" className="p-0">
-							<Link href={`/users/[pid]`} as={`/users/${user?.user_name}`} passHref>
+							<Link href={`/u/${user?.user_name}`} passHref>
 								<Dropdown.Item>Profile</Dropdown.Item>
 							</Link>
 							<Link href={`/dashboard`} passHref>
@@ -101,7 +101,7 @@ const NavBarComponent = () => {
 										<div className="ml-2">{user?.user_name}</div>
 									</Dropdown.Toggle>
 									<Dropdown.Menu align="right" className="p-0">
-										<Link href={`/users/[pid]`} as={`/users/${user?.user_name}`} passHref>
+										<Link href={`/u/${user?.user_name}`} passHref>
 											<Dropdown.Item>Profile</Dropdown.Item>
 										</Link>
 										<Link href={`/dashboard`} passHref>

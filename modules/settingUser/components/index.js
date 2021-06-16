@@ -17,7 +17,7 @@ const SettingUserComponent = ({ settingUser, pid }) => {
 				<>
 					<h3 className="mb-4 font-weight-bold">
 						Settings for{' '}
-						<CustomLink href={`/users/${user.user_name}`} className="text-decoration-none">
+						<CustomLink href={`/u/${user.user_name}`} className="text-decoration-none">
 							@{user.user_name}
 						</CustomLink>
 					</h3>

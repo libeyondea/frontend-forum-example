@@ -17,8 +17,7 @@ const TagCardComponent = ({ tag, classNameContainer = '', isSingle = false }) =>
 						</h1>
 					) : (
 						<CustomLink
-							href="/tags/[...pid]"
-							as={`/tags/${tag.slug}`}
+							href={`/t/${tag.slug}`}
 							className={`card-title text-decoration-none d-block mb-2 text-dark ${style.title_tag_card}`}
 						>
 							<h5 className="font-weight-bold mb-0">

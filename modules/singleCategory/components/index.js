@@ -20,17 +20,17 @@ const SingleCategoryComponent = ({ singleCategory, listPostCategory, pid }) => {
 								{
 									title: 'Feed',
 									slug: 'feed',
-									href: `/categories/${singleCategory.data?.slug}/feed`
+									href: `/c/${singleCategory.data?.slug}/feed`
 								},
 								{
 									title: 'Latest',
 									slug: 'latest',
-									href: `/categories/${singleCategory.data?.slug}/latest`
+									href: `/c/${singleCategory.data?.slug}/latest`
 								},
 								{
 									title: 'Oldest',
 									slug: 'oldest',
-									href: `/categories/${singleCategory.data?.slug}/oldest`
+									href: `/c/${singleCategory.data?.slug}/oldest`
 								}
 							]}
 						/>

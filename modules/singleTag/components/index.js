@@ -21,17 +21,17 @@ const SingleTagComponent = ({ singleTag, listPostTag, pid }) => {
 								{
 									title: 'Feed',
 									slug: 'feed',
-									href: `/tags/${singleTag.data?.slug}/feed`
+									href: `/t/${singleTag.data?.slug}/feed`
 								},
 								{
 									title: 'Latest',
 									slug: 'latest',
-									href: `/tags/${singleTag.data?.slug}/latest`
+									href: `/t/${singleTag.data?.slug}/latest`
 								},
 								{
 									title: 'Oldest',
 									slug: 'oldest',
-									href: `/tags/${singleTag.data?.slug}/oldest`
+									href: `/t/${singleTag.data?.slug}/oldest`
 								}
 							]}
 						/>

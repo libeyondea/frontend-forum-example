@@ -6,7 +6,7 @@ import { getCookie } from '@/common/utils/session';
 import Layout from '@/modules/layout/components';
 import SinglePostComponent from '@/modules/singlePost/components';
 
-const SinglePost = ({ singlePost, listPostUser }) => {
+const SinglePost = ({ singlePost, listPostUser, listComment }) => {
 	return (
 		<>
 			<Head>
@@ -14,7 +14,7 @@ const SinglePost = ({ singlePost, listPostUser }) => {
 				<meta name="description" content={singlePost.data?.excerpt} />
 			</Head>
 			<Layout>
-				<SinglePostComponent singlePost={singlePost} listPostUser={listPostUser} />
+				<SinglePostComponent singlePost={singlePost} listPostUser={listPostUser} listComment={listComment} />
 			</Layout>
 		</>
 	);
@@ -22,12 +22,23 @@ const SinglePost = ({ singlePost, listPostUser }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const { pid } = query;
-		const resSinglePost = await httpRequest.get({
-			url: `/posts/${pid}`,
-			token: getCookie('token', req)
-		});
-		if (resSinglePost.data.success) {
+		const { user_name, pid } = query;
+		const [resSinglePost, resListComment] = await Promise.all([
+			httpRequest.get({
+				url: `/posts/${user_name}/${pid}`,
+				token: getCookie('token', req)
+			}),
+			httpRequest.get({
+				url: `/comments`,
+				token: getCookie('token', req),
+				params: {
+					post_slug: pid,
+					offset: (1 - 1) * process.env.LIMIT_PAGE.LIST_COMMENT,
+					limit: process.env.LIMIT_PAGE.LIST_COMMENT
+				}
+			})
+		]);
+		if (resSinglePost.data.success && resListComment.data.success) {
 			const resListPostUser = await httpRequest.get({
 				url: '/posts',
 				token: getCookie('token', req),
@@ -41,13 +52,13 @@ export async function getServerSideProps({ req, query }) {
 				return {
 					props: {
 						singlePost: resSinglePost.data,
-						listPostUser: resListPostUser.data
+						listPostUser: resListPostUser.data,
+						listComment: resListComment.data
 					}
 				};
 			}
 		}
 	} catch (error) {
-		console.log(error);
 		return {
 			notFound: true
 		};

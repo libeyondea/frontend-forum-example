@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import { SWRConfig } from 'swr';
@@ -12,8 +13,7 @@ import { SWRConfig } from 'swr';
 import fetcher from '@/common/utils/fetcher';
 import { removeCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
-
-import Error from './_error';
+import Error from '@/pages/_error';
 
 const TopProgressBar = dynamic(
 	() => {
@@ -23,6 +23,7 @@ const TopProgressBar = dynamic(
 );
 
 const App = ({ Component, pageProps }) => {
+	const router = useRouter();
 	if (pageProps.statusCode) {
 		return <Error statusCode={pageProps.statusCode} />;
 	}
@@ -59,7 +60,7 @@ const App = ({ Component, pageProps }) => {
 					}
 				}}
 			>
-				<Component {...pageProps} />
+				<Component {...pageProps} key={router.asPath} />
 				<ToastContainer
 					position="bottom-right"
 					autoClose={5000}

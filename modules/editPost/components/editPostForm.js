@@ -70,7 +70,7 @@ const EditPostFormComponent = ({ editPost }) => {
 			});
 			if (response.data.success) {
 				showToast.success('Update post success');
-				router.push(`/posts/${response.data.data.slug}`);
+				router.push(`/u/${response.data.data.user.user_name}/${response.data.data.slug}`);
 			}
 		} catch (error) {
 			console.log(error);

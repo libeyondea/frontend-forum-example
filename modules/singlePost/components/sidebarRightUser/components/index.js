@@ -3,6 +3,7 @@ import React from 'react';
 import CustomImage from '@/common/components/CustomImage/components';
 import CustomLink from '@/common/components/CustomLink/components';
 import isEmpty from '@/common/utils/isEmpty';
+import timeFormat from '@/common/utils/timeFormat';
 import style from '@/modules/singlePost/components/sidebarRightUser/styles/style.module.scss';
 import FollowUserButtonComponent from '@/modules/singleUser/components/followUserButton';
 
@@ -12,7 +13,7 @@ const SideBarRightUserComponent = ({ user, listPostUser }) => {
 			<div className={`wapper__card bg-light rounded-lg shadow-sm pt-0 pb-3 px-3 mb-4 ${style.border__top__user}`}>
 				<div className="text-center mb-2 mt-n4">
 					<CustomLink
-						href={`/users/${user?.user_name}`}
+						href={`/u/${user?.user_name}`}
 						className="text-decoration-none d-inline-block text-dark font-weight-bold"
 					>
 						<CustomImage
@@ -37,7 +38,7 @@ const SideBarRightUserComponent = ({ user, listPostUser }) => {
 						<li className="bg-light list-group-item border-0 p-0">
 							<div className="text-secondary font-weight-bold small">JOINED</div>
 							<div className="small">
-								<time dateTime={user.created_at}>{new Date(user.created_at).toDateString()}</time>
+								<time dateTime={user.created_at}>{timeFormat(user.created_at)}</time>
 							</div>
 						</li>
 					</ul>
@@ -48,7 +49,7 @@ const SideBarRightUserComponent = ({ user, listPostUser }) => {
 					<h5 className="mb-0">
 						More from
 						<CustomLink
-							href={`/users/${user?.user_name}`}
+							href={`/u/${user?.user_name}`}
 							className="text-decoration-none d-inline-block font-weight-bold ml-1"
 						>
 							{user?.user_name}
@@ -59,13 +60,13 @@ const SideBarRightUserComponent = ({ user, listPostUser }) => {
 					<ul className="list-group">
 						{listPostUser?.data?.map((post) => (
 							<li className={`bg-light border-bottom px-3 py-2 ${style.list_group_item_custom}`} key={post.id}>
-								<CustomLink href={`/posts/${post.slug}`} className="text-decoration-none text-dark">
+								<CustomLink href={`/u/${post.user.user_name}/${post.slug}`} className="text-decoration-none text-dark">
 									{post.title}
 								</CustomLink>
 								<div className={`small ${style.tags}`}>
 									{post.tags?.map((tag) => (
 										<CustomLink
-											href={`/tags/${tag.slug}`}
+											href={`/t/${tag.slug}`}
 											key={tag.id}
 											onClick={(e) => e.stopPropagation()}
 											className="p-1 text-decoration-none d-inline-block text-secondary"

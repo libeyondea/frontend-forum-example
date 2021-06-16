@@ -1,7 +1,5 @@
 import { Form, Formik } from 'formik';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { mutate } from 'swr';
 import * as Yup from 'yup';
 
 import CustomImage from '@/common/components/CustomImage/components';
@@ -13,13 +11,9 @@ import { getCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
 import CommentLoadingComponent from '@/modules/singlePost/components/comment/components/commentLoading';
 
-const CommentInput = () => {
+const CommentInput = ({ listCommentClient, setListCommentClient, meta, setMeta, postSlug }) => {
 	const { user } = useUser();
 	const [isLoading, setLoading] = useState(false);
-	const router = useRouter();
-	const {
-		query: { pid, page = 1 }
-	} = router;
 
 	const initialValues = {
 		content: ''
@@ -30,7 +24,7 @@ const CommentInput = () => {
 	const onSubmit = async (values, { resetForm }) => {
 		try {
 			const comment = {
-				post_slug: pid,
+				post_slug: postSlug,
 				content: values.content
 			};
 			setLoading(true);
@@ -40,15 +34,16 @@ const CommentInput = () => {
 				data: comment
 			});
 			if (response.data.success) {
-				await mutate(
-					`/comments?post_slug=${pid}&offset=${(page - 1) * process.env.LIMIT_PAGE.LIST_COMMENT}&limit=${
-						process.env.LIMIT_PAGE.LIST_COMMENT
-					}`
-				);
+				setListCommentClient([response.data.data].concat(listCommentClient));
+				setMeta({
+					...meta,
+					total: meta.total + 1,
+					total_parent: meta.total_parent + 1
+				});
 				showToast.success(`Add comment success`);
 			}
 		} catch (error) {
-			console.log(error.response);
+			console.log(error);
 			showToast.error();
 		} finally {
 			setLoading(false);
@@ -59,11 +54,11 @@ const CommentInput = () => {
 	return (
 		<>
 			{user && (
-				<div className="my-5 d-flex align-items-start flex-column flex-sm-row">
-					<CustomLink href="/users/[pid]" as={`/users/${user?.user_name}`} className="mr-3 mb-3">
+				<div className="my-4 d-flex align-items-start flex-column flex-sm-row">
+					<CustomLink href={`/u/${user?.user_name}`} className="mr-3 mb-3">
 						<CustomImage
-							width="50"
-							height="50"
+							width="33"
+							height="33"
 							src={`${process.env.IMAGES_URL}/${user?.avatar}`}
 							alt={user?.user_name}
 							className="d-flex rounded-circle"
@@ -91,7 +86,7 @@ const CommentInput = () => {
 				</div>
 			)}
 			{!user && (
-				<div className="mb-3">
+				<div className="my-4">
 					<CustomLink className="text-decoration-none" href="/login">
 						Login
 					</CustomLink>

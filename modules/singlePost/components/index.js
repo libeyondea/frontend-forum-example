@@ -1,7 +1,6 @@
 import marked from 'marked';
 import React from 'react';
 
-import Breadcrumb from '@/common/components/Breadcrumb/components';
 import CustomImage from '@/common/components/CustomImage/components';
 import CommentComponent from '@/modules/singlePost/components/comment/components';
 import PostActionComponent from '@/modules/singlePost/components/postAction';
@@ -9,11 +8,11 @@ import PostMetaComponent from '@/modules/singlePost/components/postMeta';
 import PostTagListComponent from '@/modules/singlePost/components/postTagList';
 import SideBarRightUserComponent from '@/modules/singlePost/components/sidebarRightUser/components';
 
-const SinglePostComponent = ({ singlePost, listPostUser }) => {
+const SinglePostComponent = ({ singlePost, listPostUser, listComment }) => {
 	return (
 		<div className="container-xl my-4">
 			<div className="row">
-				<div className="col-xl-9 col-md-8 mb-4 mb-md-0">
+				<div className="col-xl-9 mb-4 mb-xl-0">
 					<article className="wapper__card single-post bg-light rounded-lg shadow-sm">
 						{singlePost.data?.image && (
 							<div>
@@ -42,11 +41,15 @@ const SinglePostComponent = ({ singlePost, listPostUser }) => {
 								}}
 							/>
 							<hr />
-							<CommentComponent />
+							<CommentComponent
+								listComment={listComment}
+								postSlug={singlePost.data.slug}
+								postUserName={singlePost.data.user.user_name}
+							/>
 						</div>
 					</article>
 				</div>
-				<div className="col-xl-3 col-md-4">
+				<div className="col-xl-3">
 					<SideBarRightUserComponent user={singlePost.data.user} listPostUser={listPostUser} />
 				</div>
 			</div>

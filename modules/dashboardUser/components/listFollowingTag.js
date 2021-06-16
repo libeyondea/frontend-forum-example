@@ -23,7 +23,7 @@ const ListFollowingTagComponent = ({ listTag }) => {
 								<div className={`card h-100`}>
 									<div className="p-3">
 										<CustomLink
-											href={`/tags/${tag.slug}`}
+											href={`/t/${tag.slug}`}
 											className={`card-title text-decoration-none d-block mb-2 text-dark`}
 										>
 											<h5 className="font-weight-bold mb-0">

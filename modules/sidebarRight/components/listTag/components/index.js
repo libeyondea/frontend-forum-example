@@ -22,7 +22,7 @@ const ListTagComponent = () => {
 				) : (
 					listTag?.data?.map((tag) => (
 						<li className="list-group-item bg-light d-flex align-items-center border-0 px-3 py-2" key={tag.id}>
-							<CustomLink href={`/tags/[...pid]`} as={`/tags/${tag.slug}`} className="text-decoration-none text-dark">
+							<CustomLink href={`/t/${tag.slug}`} className="text-decoration-none text-dark">
 								<span className="text-secondary">#</span>
 								{tag.slug}
 							</CustomLink>

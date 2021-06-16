@@ -16,19 +16,19 @@ const SingleUser = ({ singleUser, listPostUser }) => {
 export async function getServerSideProps({ req, query }) {
 	try {
 		const initialpage = query.page;
-		const pid = query.pid;
+		const user_name = query.user_name;
 		const page = Number.isInteger(parseInt(initialpage)) && initialpage >= 1 ? initialpage : 1;
 
 		const [resSingleUser, resListPostUser] = await Promise.all([
 			httpRequest.get({
-				url: `/users/${pid}`,
+				url: `/users/${user_name}`,
 				token: getCookie('token', req)
 			}),
 			httpRequest.get({
 				url: '/posts',
 				token: getCookie('token', req),
 				params: {
-					user: pid,
+					user: user_name,
 					offset: (page - 1) * process.env.LIMIT_PAGE.LIST_POST_USER,
 					limit: process.env.LIMIT_PAGE.LIST_POST_USER
 				}

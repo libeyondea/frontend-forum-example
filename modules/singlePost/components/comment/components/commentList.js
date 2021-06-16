@@ -1,73 +1,70 @@
-import { useRouter } from 'next/router';
-import React from 'react';
-import useSWR from 'swr';
+import React, { useState } from 'react';
 
-import CustomImage from '@/common/components/CustomImage/components';
-import CustomLink from '@/common/components/CustomLink/components';
-import Pagination from '@/common/components/Pagination/components';
+import httpRequest from '@/common/utils/httpRequest';
 import isEmpty from '@/common/utils/isEmpty';
-import CommentLoadingComponent from '@/modules/singlePost/components/comment/components/commentLoading';
-import CommentMetaComponent from '@/modules/singlePost/components/comment/components/commentMeta';
+import { getCookie } from '@/common/utils/session';
+import showToast from '@/common/utils/showToast';
+import CommentLoopComponent from '@/modules/singlePost/components/comment/components/commentLoop';
+const CommentList = ({ listCommentClient, setListCommentClient, meta, setMeta, postUserName, postSlug }) => {
+	const [isLoading, setLoading] = useState(false);
+	const [page, setPage] = useState(2);
 
-const CommentList = () => {
-	const router = useRouter();
-	const {
-		query: { pid, page = 1 }
-	} = router;
-
-	const { data: listComment } = useSWR(
-		`/comments?post_slug=${pid}&offset=${(page - 1) * process.env.LIMIT_PAGE.LIST_COMMENT}&limit=${
-			process.env.LIMIT_PAGE.LIST_COMMENT
-		}`
-	);
+	const onLoadMoreCommentClicked = async (e) => {
+		e.preventDefault();
+		try {
+			setLoading(true);
+			const response = await httpRequest.get({
+				url: `/comments`,
+				token: getCookie('token'),
+				params: {
+					post_slug: postSlug,
+					offset: (page - 1) * process.env.LIMIT_PAGE.LIST_COMMENT,
+					limit: process.env.LIMIT_PAGE.LIST_COMMENT
+				}
+			});
+			if (response.data.success) {
+				setPage(page + 1);
+				setListCommentClient(listCommentClient.concat(response.data.data));
+				showToast.success(`Load more comment success`);
+			}
+		} catch (error) {
+			showToast.error();
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	return (
 		<>
-			{!listComment ? (
-				<CommentLoadingComponent />
-			) : isEmpty(listComment?.data) ? (
+			{isEmpty(listCommentClient) ? (
 				<div className="text-center font-weight-bold">
 					<span>Empty comments</span>
 				</div>
 			) : (
 				<>
-					{listComment?.data?.map((comment) => (
-						<div className="mb-4 d-flex align-items-start flex-column flex-sm-row" key={comment.id}>
-							<CustomLink
-								href="/users/[pid]"
-								as={`/users/${comment.user?.user_name}`}
-								className="mr-3 mb-3 text-decoration-none d-inline-flex"
-							>
-								<CustomImage
-									width="50"
-									height="50"
-									src={`${process.env.IMAGES_URL}/${comment.user?.avatar}`}
-									alt={comment.user?.user_name}
-									className="rounded-circle h-100 w-100"
-								/>
-							</CustomLink>
-							<div className="flex-fill w-100">
-								<div className="border p-3 bg-white text-break">
-									<div className="mb-2">
-										<CustomLink
-											href="/users/[pid]"
-											as={`/users/${comment.user?.user_name}`}
-											className="text-decoration-none text-dark d-inline-block"
-										>
-											<h5 className="my-0">{comment.user?.user_name}</h5>
-										</CustomLink>
-										<span className="mx-0 my-0 small text-muted ">
-											{' '}
-											・{new Date(comment.created_at).toDateString()}
-										</span>
-									</div>
-									{comment.content}
-								</div>
-								<CommentMetaComponent comment={comment} />
-							</div>
+					<CommentLoopComponent
+						comments={listCommentClient}
+						listCommentClient={listCommentClient}
+						setListCommentClient={setListCommentClient}
+						meta={meta}
+						setMeta={setMeta}
+						postUserName={postUserName}
+						postSlug={postSlug}
+					/>
+					{meta.total_parent > listCommentClient.length && (
+						<div className="mt-4">
+							{isLoading ? (
+								<button type="submit" className="btn btn-info btn-block btn-sm" disabled>
+									<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+									Load more
+								</button>
+							) : (
+								<button type="submit" className="btn btn-info btn-block btn-sm" onClick={onLoadMoreCommentClicked}>
+									Load more
+								</button>
+							)}
 						</div>
-					))}
-					<Pagination total={listComment?.meta?.total} limit={process.env.LIMIT_PAGE.LIST_COMMENT} />
+					)}
 				</>
 			)}
 		</>

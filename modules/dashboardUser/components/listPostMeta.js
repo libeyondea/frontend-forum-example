@@ -6,7 +6,7 @@ import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
 
-const ListPostMetaComponent = ({ postSlug }) => {
+const ListPostMetaComponent = ({ postSlug, userName }) => {
 	const router = useRouter();
 	const [isLoading, setLoading] = useState(false);
 
@@ -42,7 +42,7 @@ const ListPostMetaComponent = ({ postSlug }) => {
 					Delete
 				</button>
 			)}
-			<CustomLink href={`/posts/${postSlug}/edit`} className="btn btn-outline-dark btn-sm">
+			<CustomLink href={`/u/${userName}/${postSlug}/edit`} className="btn btn-outline-dark btn-sm">
 				<i className="ion-edit" /> Edit
 			</CustomLink>
 		</>

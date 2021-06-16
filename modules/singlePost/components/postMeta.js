@@ -2,13 +2,14 @@ import React from 'react';
 
 import CustomImage from '@/common/components/CustomImage/components';
 import CustomLink from '@/common/components/CustomLink/components';
+import timeFormat from '@/common/utils/timeFormat';
 
 const PostMetaComponent = ({ singlePost }) => {
 	return (
 		<div className="mb-3">
 			<div className="d-flex justify-content-start align-items-center flex-wrap">
 				<CustomLink
-					href={`/users/${singlePost.data.user?.user_name}`}
+					href={`/u/${singlePost.data.user?.user_name}`}
 					className="text-decoration-none d-inline-block d-flex align-items-center text-dark font-weight-bold"
 				>
 					<CustomImage
@@ -20,7 +21,9 @@ const PostMetaComponent = ({ singlePost }) => {
 					/>
 					<span className="ml-2">{singlePost.data.user?.user_name}</span>
 				</CustomLink>
-				<span className="text-muted ml-1 small">・{new Date(singlePost.data.created_at).toDateString()}</span>
+				<time dateTime={singlePost.data.created_at} className="text-muted ml-1">
+					・{timeFormat(singlePost.data.created_at)}
+				</time>
 			</div>
 		</div>
 	);
