@@ -1,5 +1,6 @@
 import React from 'react';
 
+import MetaDefault from '@/common/meta/MetaDefault';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import EditCommentComponent from '@/modules/editComment/components';
@@ -8,6 +9,7 @@ import Layout from '@/modules/layout/components';
 const EditComment = ({ editComment }) => {
 	return (
 		<>
+			<MetaDefault title="Edit Comment" />
 			<Layout>
 				<EditCommentComponent editComment={editComment} />
 			</Layout>

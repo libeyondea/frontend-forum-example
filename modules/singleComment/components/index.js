@@ -141,8 +141,8 @@ const SingleCommentComponent = ({ singleComment }) => {
 															>
 																<Dropdown.Item>Open</Dropdown.Item>
 															</Link>
-															<Link href={`/report`} passHref>
-																<Dropdown.Item>Report</Dropdown.Item>
+															<Link href={`/report-abuse`} passHref>
+																<Dropdown.Item>Report abuse</Dropdown.Item>
 															</Link>
 															{user && user?.user_name === singleComment.data.user?.user_name && (
 																<>
@@ -170,7 +170,10 @@ const SingleCommentComponent = ({ singleComment }) => {
 											listCommentClient={listCommentClient}
 											setListCommentClient={setListCommentClient}
 											postSlug={singleComment.data.post.slug}
+											favorited={singleComment.data.favorited}
+											totalFavorited={singleComment.data.total_favorited}
 											commentId={singleComment.data.id}
+											commentSlug={singleComment.data.slug}
 											isChildren={true}
 										/>
 										<CommentLoopComponent
@@ -227,95 +230,6 @@ const SingleCommentComponent = ({ singleComment }) => {
 								</>
 							)}
 						</div>
-
-						{/* <div className="d-flex align-items-start flex-column flex-sm-row">
-							<CustomLink
-								href={`/u/${singleComment.data.user?.user_name}`}
-								className="mr-3 mb-3 text-decoration-none d-inline-flex"
-							>
-								<CustomImage
-									width="50"
-									height="50"
-									src={`${process.env.IMAGES_URL}/${singleComment.data.user?.avatar}`}
-									alt={singleComment.data.user?.user_name}
-									className="rounded-circle h-100 w-100"
-								/>
-							</CustomLink>
-							<div className="flex-fill w-100">
-								<div className="border p-3 bg-white text-break">
-									<div className="d-flex align-items-center mb-2">
-										<CustomLink
-											href={`/u/${singleComment.data.user?.user_name}`}
-											className="text-decoration-none text-dark d-inline-block"
-										>
-											<h5 className="my-0">{singleComment.data.user?.user_name}</h5>
-										</CustomLink>
-										<div className="mx-0 my-0 text-muted">
-											{' '}
-											・
-											<time dateTime={singleComment.data.created_at}>
-												{new Date(singleComment.data.created_at).toDateString()}
-											</time>
-										</div>
-										<div className="ml-auto">
-											<Dropdown as={NavItem}>
-												<Dropdown.Toggle
-													as={NavLink}
-													id="dropdown-custom-2"
-													className={`d-flex align-items-center text-secondary p-0 ${style.custom__dropdown__toggle}`}
-												>
-													<svg
-														xmlns="http://www.w3.org/2000/svg"
-														width={24}
-														height={24}
-														viewBox="0 0 24 24"
-														role="img"
-														aria-labelledby="amf1lepusdnzmtsxujxhxw7u5dhhlsay"
-														className="crayons-icon pointer-events-none"
-													>
-														<title id="amf1lepusdnzmtsxujxhxw7u5dhhlsay">Options</title>
-														<path
-															fillRule="evenodd"
-															clipRule="evenodd"
-															d="M8.25 12a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm5.25 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm3.75 1.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
-														/>
-													</svg>
-												</Dropdown.Toggle>
-												<Dropdown.Menu align="right" className="p-0 rounded-lg shadow-sm">
-													<Link
-														href={`/u/${singleComment.data.post.user?.user_name}/${singleComment.data.post.slug}/comment/${singleComment.data.slug}`}
-														passHref
-													>
-														<Dropdown.Item>Open</Dropdown.Item>
-													</Link>
-													<Link href={`/report`} passHref>
-														<Dropdown.Item>Report</Dropdown.Item>
-													</Link>
-													{user && user?.user_name === singleComment.data.user?.user_name && (
-														<>
-															<Link
-																href={`/u/${singleComment.data.post.user?.user_name}/${singleComment.data.post.slug}/comment/${singleComment.data.slug}/edit`}
-																passHref
-															>
-																<Dropdown.Item>Edit</Dropdown.Item>
-															</Link>
-															<Link
-																href={`/u/${singleComment.data.post.user?.user_name}/${singleComment.data.post.slug}/comment/${singleComment.data.slug}/delete`}
-																passHref
-															>
-																<Dropdown.Item>Delete</Dropdown.Item>
-															</Link>
-														</>
-													)}
-												</Dropdown.Menu>
-											</Dropdown>
-										</div>
-									</div>
-									<div>{singleComment.data.content}</div>
-								</div>
-								<CommentMetaComponent comment={singleComment} />
-							</div>
-						</div> */}
 					</div>
 				</div>
 			</div>

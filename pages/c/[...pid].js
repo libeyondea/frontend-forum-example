@@ -1,5 +1,6 @@
 import React from 'react';
 
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import LayoutComponent from '@/modules/layout/components';
@@ -7,9 +8,12 @@ import SingleCategoryComponent from '@/modules/singleCategory/components';
 
 const SingleCategory = ({ singleCategory, listPostCategory, pid }) => {
 	return (
-		<LayoutComponent>
-			<SingleCategoryComponent singleCategory={singleCategory} listPostCategory={listPostCategory} pid={pid} />
-		</LayoutComponent>
+		<>
+			<MetaWebsite title={singleCategory.data.title} description={singleCategory.data.content} />
+			<LayoutComponent>
+				<SingleCategoryComponent singleCategory={singleCategory} listPostCategory={listPostCategory} pid={pid} />
+			</LayoutComponent>
+		</>
 	);
 };
 

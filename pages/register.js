@@ -1,14 +1,12 @@
-import Head from 'next/head';
 import React from 'react';
 
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import Layout from '@/modules/layout/components';
 import RegisterComponent from '@/modules/register/components';
 
 const Register = () => (
 	<>
-		<Head>
-			<title>Register | De4th Zone</title>
-		</Head>
+		<MetaWebsite title="Register" />
 		<Layout>
 			<RegisterComponent />
 		</Layout>

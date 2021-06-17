@@ -26,7 +26,7 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 						<h4 className="text-break mb-1">
 							{singleUser.data?.first_name} {singleUser.data?.last_name}
 						</h4>
-						<p className="text-break text-secondary mb-2">{singleUser.data?.user_name}</p>
+						<p className="text-break text-secondary mb-2">@{singleUser.data?.user_name}</p>
 						{singleUser.data?.biography && <p className="text-break mb-2">{singleUser.data?.biography}</p>}
 						<div>
 							<EditProfileButtonComponent user_name={singleUser.data?.user_name} />

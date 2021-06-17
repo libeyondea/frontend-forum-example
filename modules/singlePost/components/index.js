@@ -4,6 +4,7 @@ import React from 'react';
 import CustomImage from '@/common/components/CustomImage/components';
 import CommentComponent from '@/modules/singlePost/components/comment/components';
 import PostActionComponent from '@/modules/singlePost/components/postAction';
+import PostFooterComponent from '@/modules/singlePost/components/postFooter';
 import PostMetaComponent from '@/modules/singlePost/components/postMeta';
 import PostTagListComponent from '@/modules/singlePost/components/postTagList';
 import SideBarRightUserComponent from '@/modules/singlePost/components/sidebarRightUser/components';
@@ -39,6 +40,13 @@ const SinglePostComponent = ({ singlePost, listPostUser, listComment }) => {
 								dangerouslySetInnerHTML={{
 									__html: marked(singlePost.data?.content)
 								}}
+							/>
+							<PostFooterComponent
+								favorited={singlePost.data.favorited}
+								totalFavorited={singlePost.data.total_favorited}
+								postSlug={singlePost.data.slug}
+								postUserName={singlePost.data.user.user_name}
+								postTitle={singlePost.data.title}
 							/>
 							<hr />
 							<CommentComponent

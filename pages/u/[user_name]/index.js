@@ -1,5 +1,6 @@
 import React from 'react';
 
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import LayoutComponent from '@/modules/layout/components';
@@ -7,9 +8,12 @@ import SingleUserComponent from '@/modules/singleUser/components';
 
 const SingleUser = ({ singleUser, listPostUser }) => {
 	return (
-		<LayoutComponent>
-			<SingleUserComponent singleUser={singleUser} listPostUser={listPostUser} />
-		</LayoutComponent>
+		<>
+			<MetaWebsite title={singleUser.data.user_name} />
+			<LayoutComponent>
+				<SingleUserComponent singleUser={singleUser} listPostUser={listPostUser} />
+			</LayoutComponent>
+		</>
 	);
 };
 

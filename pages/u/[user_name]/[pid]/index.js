@@ -1,6 +1,6 @@
-import Head from 'next/head';
 import React from 'react';
 
+import MetaPost from '@/common/meta/MetaPost';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import Layout from '@/modules/layout/components';
@@ -9,10 +9,11 @@ import SinglePostComponent from '@/modules/singlePost/components';
 const SinglePost = ({ singlePost, listPostUser, listComment }) => {
 	return (
 		<>
-			<Head>
-				<title>{singlePost.data?.title} | De4th Zone</title>
-				<meta name="description" content={singlePost.data?.excerpt} />
-			</Head>
+			<MetaPost
+				title={singlePost.data.title}
+				description={singlePost.data?.excerpt}
+				image={`${process.env.IMAGES_URL}/${singlePost.data?.image}`}
+			/>
 			<Layout>
 				<SinglePostComponent singlePost={singlePost} listPostUser={listPostUser} listComment={listComment} />
 			</Layout>

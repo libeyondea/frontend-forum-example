@@ -1,5 +1,6 @@
 import React from 'react';
 
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import LayoutComponent from '@/modules/layout/components';
@@ -7,9 +8,12 @@ import ListTag from '@/modules/listTag/components';
 
 const Tags = ({ listTag }) => {
 	return (
-		<LayoutComponent>
-			<ListTag listTag={listTag} />
-		</LayoutComponent>
+		<>
+			<MetaWebsite title="Tags" />
+			<LayoutComponent>
+				<ListTag listTag={listTag} />
+			</LayoutComponent>
+		</>
 	);
 };
 

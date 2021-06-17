@@ -1,6 +1,6 @@
-import Head from 'next/head';
 import React from 'react';
 
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import LayoutComponent from '@/modules/layout/components';
@@ -9,10 +9,7 @@ import SingleTagComponent from '@/modules/singleTag/components';
 const SingleTag = ({ singleTag, listPostTag, pid }) => {
 	return (
 		<>
-			<Head>
-				<title>{singleTag.data.title} | De4th Zone</title>
-				<meta name="description" content={singleTag.data.content} />
-			</Head>
+			<MetaWebsite title={singleTag.data.title} description={singleTag.data.content} />
 			<LayoutComponent>
 				<SingleTagComponent singleTag={singleTag} listPostTag={listPostTag} pid={pid} />
 			</LayoutComponent>

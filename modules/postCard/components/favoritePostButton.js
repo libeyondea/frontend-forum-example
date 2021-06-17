@@ -38,9 +38,7 @@ const FavoritePostButtonComponent = ({ favorited, slug, totalFavorited }) => {
 						token: getCookie('token')
 				  });
 			if (response.data.success) {
-				//setFavorited(!isFavorited);
-				//setSumFavorited(!isFavorited ? sumFavorited + 1 : sumFavorited - 1);
-				//showToast.success(`${!isFavorited ? 'Favorite' : 'Unfavorite'} ${response.data.data.slug} success`);
+				// success
 			}
 		} catch (error) {
 			showToast.error();

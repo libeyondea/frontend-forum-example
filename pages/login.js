@@ -1,16 +1,13 @@
-import Head from 'next/head';
 import React from 'react';
 
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import Layout from '@/modules/layout/components';
 import LoginComponent from '@/modules/login/components';
 
 const Login = () => {
 	return (
 		<>
-			<Head>
-				<title>Login | De4th Zone</title>
-				<meta name="description" content="Login" />
-			</Head>
+			<MetaWebsite title="Login" />
 			<Layout>
 				<LoginComponent />
 			</Layout>

@@ -12,7 +12,7 @@ module.exports = (phase) => {
 	console.log(`isDev:${isDev} isProd:${isProd} isStaging:${isStaging}`);
 
 	const env = {
-		APP_NAME: 'De4thZone',
+		APP_NAME: 'De4th Zone',
 		WEBSITE_URL: (() => {
 			if (isDev) return 'http://localhost:999';
 			if (isProd) {
@@ -49,6 +49,11 @@ module.exports = (phase) => {
 		},
 		IMAGES: {
 			DEFAULT_IMAGE_AVATAR: 'default_avatar.png'
+		},
+		META: {
+			TITLE: 'De4th Zone',
+			DESCRIPTION: 'De4th Zone',
+			TWITTER: '@de4th_zone'
 		}
 	};
 	// next.config.js object

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import MetaDefault from '@/common/meta/MetaDefault';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import LayoutComponent from '@/modules/layout/components';
@@ -7,9 +8,12 @@ import SettingUserComponent from '@/modules/settingUser/components';
 
 const SettingUser = ({ settingUser, pid }) => {
 	return (
-		<LayoutComponent>
-			<SettingUserComponent settingUser={settingUser} pid={pid} />
-		</LayoutComponent>
+		<>
+			<MetaDefault title="Settings" />
+			<LayoutComponent>
+				<SettingUserComponent settingUser={settingUser} pid={pid} />
+			</LayoutComponent>
+		</>
 	);
 };
 

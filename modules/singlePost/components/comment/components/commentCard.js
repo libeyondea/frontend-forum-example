@@ -97,8 +97,8 @@ const CommentCard = ({ comment, listCommentClient, setListCommentClient, meta, s
 											<Link href={`/u/${postUserName}/${comment.post.slug}/comment/${comment.slug}`} passHref>
 												<Dropdown.Item>Open</Dropdown.Item>
 											</Link>
-											<Link href={`/report`} passHref>
-												<Dropdown.Item>Report</Dropdown.Item>
+											<Link href={`/report-abuse`} passHref>
+												<Dropdown.Item>Report abuse</Dropdown.Item>
 											</Link>
 											{user && user?.user_name === comment.user?.user_name && (
 												<>
@@ -125,7 +125,10 @@ const CommentCard = ({ comment, listCommentClient, setListCommentClient, meta, s
 							meta={meta}
 							setMeta={setMeta}
 							postSlug={postSlug}
+							favorited={comment.favorited}
+							totalFavorited={comment.total_favorited}
 							commentId={comment.id}
+							commentSlug={comment.slug}
 						/>
 						{comment.children_comment && (
 							<CommentLoopComponent

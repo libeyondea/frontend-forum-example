@@ -1,6 +1,6 @@
-import Head from 'next/head';
 import React from 'react';
 
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import HomeComponent from '@/modules/home/components';
@@ -9,10 +9,7 @@ import LayoutComponent from '@/modules/layout/components';
 const Index = ({ listPostGhim, listPost, pid }) => {
 	return (
 		<>
-			<Head>
-				<title>Home | De4th Zone</title>
-				<meta name="description" content="De4th Zone" />
-			</Head>
+			<MetaWebsite isHome />
 			<LayoutComponent>
 				<HomeComponent listPostGhim={listPostGhim} listPost={listPost} pid={pid} />
 			</LayoutComponent>
