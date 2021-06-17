@@ -32,8 +32,8 @@ const MetaPost = ({
 				)}
 				{twitter && <meta name="twitter:creator" content={twitter} />}
 				<meta name="twitter:card" content="summary_large_image" />
-				{image && <meta property="og:image" content={image} />}
-				{image && <meta name="twitter:image" content={image} />}
+				{image && <meta property="og:image" content={`${process.env.IMAGES_URL}/${image}`} />}
+				{image && <meta name="twitter:image" content={`${process.env.IMAGES_URL}/${image}`} />}
 			</Head>
 		</>
 	);

@@ -9,11 +9,7 @@ import SinglePostComponent from '@/modules/singlePost/components';
 const SinglePost = ({ singlePost, listPostUser, listComment }) => {
 	return (
 		<>
-			<MetaPost
-				title={singlePost.data.title}
-				description={singlePost.data?.excerpt}
-				image={`${process.env.IMAGES_URL}/${singlePost.data?.image}`}
-			/>
+			<MetaPost title={singlePost.data.title} description={singlePost.data?.excerpt} image={singlePost.data?.image} />
 			<Layout>
 				<SinglePostComponent singlePost={singlePost} listPostUser={listPostUser} listComment={listComment} />
 			</Layout>
