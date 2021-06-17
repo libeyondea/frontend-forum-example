@@ -23,7 +23,6 @@ const MetaPost = ({
 				<meta property="og:title" content={title} />
 				<meta property="og:description" content={description} />
 				<meta property="og:url" content={canonical} />
-
 				<meta name="twitter:title" content={title} />
 				<meta name="twitter:description" content={description} />
 				<meta name="twitter:url" content={canonical} />
