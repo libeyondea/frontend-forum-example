@@ -58,7 +58,7 @@ const SinglePostComponent = ({ singlePost, listPostUser, listComment }) => {
 					</article>
 				</div>
 				<div className="col-xl-3">
-					<SideBarRightUserComponent user={singlePost.data.user} listPostUser={listPostUser} />
+					<SideBarRightUserComponent postUser={singlePost.data.user} listPostUser={listPostUser} />
 				</div>
 			</div>
 		</div>

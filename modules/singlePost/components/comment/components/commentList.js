@@ -37,7 +37,7 @@ const CommentList = ({ listCommentClient, setListCommentClient, meta, setMeta, p
 	return (
 		<>
 			{isEmpty(listCommentClient) ? (
-				<div className="text-center font-weight-bold">
+				<div className="text-center font-weight-bold mt-4">
 					<span>Empty comments</span>
 				</div>
 			) : (

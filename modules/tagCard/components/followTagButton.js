@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { mutate } from 'swr';
 
 import useUser from '@/common/hooks/useUser';
@@ -13,7 +13,7 @@ const FollowTagButtonComponent = ({ following, slug }) => {
 	const [isFollow, setFollow] = useState(following);
 	const [isLoading, setLoading] = useState(false);
 
-	const onHandleClick = async (e) => {
+	const onFollowTagClick = async (e) => {
 		e.preventDefault();
 		try {
 			if (!user) {
@@ -67,7 +67,7 @@ const FollowTagButtonComponent = ({ following, slug }) => {
 			) : (
 				<button
 					className={`btn btn-sm ${isFollow ? 'btn-secondary' : 'btn-outline-secondary'}`}
-					onClick={onHandleClick}
+					onClick={onFollowTagClick}
 				>
 					{isFollow ? (
 						<>

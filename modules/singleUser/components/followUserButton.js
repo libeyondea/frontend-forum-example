@@ -12,11 +12,7 @@ const FollowUserButtonComponent = ({ following, user_name }) => {
 	const [isFollow, setFollow] = useState(following);
 	const [isLoading, setLoading] = useState(false);
 
-	if (user_name === user?.user_name) {
-		return null;
-	}
-
-	const onHandleClick = async (e) => {
+	const onFollowUserClick = async (e) => {
 		e.preventDefault();
 		try {
 			if (!user) {
@@ -69,7 +65,7 @@ const FollowUserButtonComponent = ({ following, user_name }) => {
 			) : (
 				<button
 					className={`btn btn-sm ${isFollow ? 'btn-secondary' : 'btn-outline-secondary'}`}
-					onClick={onHandleClick}
+					onClick={onFollowUserClick}
 				>
 					{isFollow ? (
 						<>

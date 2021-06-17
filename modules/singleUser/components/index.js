@@ -1,12 +1,14 @@
 import React from 'react';
 
 import CustomImage from '@/common/components/CustomImage/components';
+import useUser from '@/common/hooks/useUser';
 import EditProfileButtonComponent from '@/modules/singleUser/components/editProfileButton';
 import FollowUserButtonComponent from '@/modules/singleUser/components/followUserButton';
 import ListPostUserComponent from '@/modules/singleUser/components/listPostUser';
 import style from '@/modules/singleUser/styles/style.module.scss';
 
 const SingleUserComponent = ({ singleUser, listPostUser }) => {
+	const { user } = useUser();
 	return (
 		<div className="container-xl my-4">
 			<div className="row">
@@ -28,15 +30,19 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 						</h4>
 						<p className="text-break text-secondary mb-2">@{singleUser.data?.user_name}</p>
 						{singleUser.data?.biography && <p className="text-break mb-2">{singleUser.data?.biography}</p>}
-						<div>
-							<EditProfileButtonComponent user_name={singleUser.data?.user_name} />
-						</div>
-						<div>
-							<FollowUserButtonComponent
-								user_name={singleUser.data?.user_name}
-								following={singleUser.data?.following}
-							/>
-						</div>
+						{(user || singleUser.data?.user_name === user?.user_name) && (
+							<div>
+								<EditProfileButtonComponent />
+							</div>
+						)}
+						{singleUser.data?.user_name !== user?.user_name && (
+							<div>
+								<FollowUserButtonComponent
+									user_name={singleUser.data?.user_name}
+									following={singleUser.data?.following}
+								/>
+							</div>
+						)}
 						<div className="mt-1">
 							{singleUser.data?.total_user_followers} <span className="text-secondary">followers</span> ·{' '}
 							{singleUser.data?.total_following_users} <span className="text-secondary">following</span>

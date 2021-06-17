@@ -38,27 +38,31 @@ const CommentMetaComponent = ({
 	});
 	const onSubmit = async (values, { resetForm }) => {
 		try {
-			setLoading(true);
-			const response = await httpRequest.post({
-				url: `/comments`,
-				token: getCookie('token'),
-				data: {
-					post_slug: postSlug,
-					content: values.content,
-					parent_id: commentId
-				}
-			});
-			if (response.data.success) {
-				setListCommentClient(
-					isChildren
-						? [response.data.data].concat(listCommentClient)
-						: updateNestedArray(listCommentClient, response.data.data.parent_id, response.data.data)
-				);
-				setMeta({
-					...meta,
-					total: meta.total + 1
+			if (!user) {
+				router.push('/login');
+			} else {
+				setLoading(true);
+				const response = await httpRequest.post({
+					url: `/comments`,
+					token: getCookie('token'),
+					data: {
+						post_slug: postSlug,
+						content: values.content,
+						parent_id: commentId
+					}
 				});
-				showToast.success(`Add comment success`);
+				if (response.data.success) {
+					setListCommentClient(
+						isChildren
+							? [response.data.data].concat(listCommentClient)
+							: updateNestedArray(listCommentClient, response.data.data.parent_id, response.data.data)
+					);
+					setMeta({
+						...meta,
+						total: meta.total + 1
+					});
+					showToast.success(`Add comment success`);
+				}
 			}
 		} catch (error) {
 			showToast.error();
@@ -69,36 +73,45 @@ const CommentMetaComponent = ({
 		}
 	};
 
-	const onHandleClick = async (e) => {
+	const onFavoriteCommentClick = async (e) => {
 		e.preventDefault();
 		try {
 			if (!user) {
 				router.push('/login');
-				return;
-			}
-			setFavorited(!isFavorited);
-			setSumFavorited(!isFavorited ? sumFavorited + 1 : sumFavorited - 1);
-			showToast.success(`${!isFavorited ? 'Liked' : 'Unliked '}`, commentSlug);
-			const response = isFavorited
-				? await httpRequest.delete({
-						url: `/favorite_comment`,
-						params: {
-							slug: commentSlug
-						},
-						token: getCookie('token')
-				  })
-				: await httpRequest.post({
-						url: `/favorite_comment`,
-						data: {
-							slug: commentSlug
-						},
-						token: getCookie('token')
-				  });
-			if (response.data.success) {
-				// success
+			} else {
+				setFavorited(!isFavorited);
+				setSumFavorited(!isFavorited ? sumFavorited + 1 : sumFavorited - 1);
+				showToast.success(`${!isFavorited ? 'Liked' : 'Unliked '}`, commentSlug);
+				const response = isFavorited
+					? await httpRequest.delete({
+							url: `/favorite_comment`,
+							params: {
+								slug: commentSlug
+							},
+							token: getCookie('token')
+					  })
+					: await httpRequest.post({
+							url: `/favorite_comment`,
+							data: {
+								slug: commentSlug
+							},
+							token: getCookie('token')
+					  });
+				if (response.data.success) {
+					// success
+				}
 			}
 		} catch (error) {
 			showToast.error();
+		}
+	};
+
+	const onBoxReplyCommentClick = (e) => {
+		e.preventDefault();
+		if (!user) {
+			router.push('/login');
+		} else {
+			setReplyBox(!replyBox);
 		}
 	};
 
@@ -110,7 +123,7 @@ const CommentMetaComponent = ({
 						className={`d-flex align-items-center border-0 bg-transparent mr-3 ${
 							isFavorited ? 'text-danger' : 'text-secondary'
 						}`}
-						onClick={onHandleClick}
+						onClick={onFavoriteCommentClick}
 					>
 						{isFavorited ? <i className="fa fa-heart fa-sm mr-1" /> : <i className="fa fa-heart-o fa-sm mr-1" />}
 						<span className="mr-1">{sumFavorited}</span>
@@ -119,9 +132,7 @@ const CommentMetaComponent = ({
 					<button
 						type="button"
 						className="p-0 text-secondary border-0 bg-transparent d-flex align-items-center"
-						onClick={() => {
-							setReplyBox(!replyBox);
-						}}
+						onClick={onBoxReplyCommentClick}
 					>
 						<i className="fa fa-comment-o fa-sm mr-1"></i>
 						{/* <span className="mr-1">666</span> */}
@@ -146,13 +157,7 @@ const CommentMetaComponent = ({
 										Submit
 									</button>
 								)}
-								<button
-									type="button"
-									className="btn btn-light ml-2"
-									onClick={() => {
-										setReplyBox(!replyBox);
-									}}
-								>
+								<button type="button" className="btn btn-light ml-2" onClick={onBoxReplyCommentClick}>
 									Cancel
 								</button>
 							</Form>

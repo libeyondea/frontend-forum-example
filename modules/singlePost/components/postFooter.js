@@ -19,7 +19,7 @@ const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName
 	const [isFavorited, setFavorited] = useState(favorited);
 	const [sumFavorited, setSumFavorited] = useState(totalFavorited);
 
-	const onHandleClick = async (e) => {
+	const onFavoritePostClick = async (e) => {
 		e.preventDefault();
 		try {
 			if (!user) {
@@ -58,7 +58,7 @@ const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName
 				className={`d-flex align-items-center border-0 bg-transparent p-0 mr-auto ${
 					isFavorited ? 'text-danger' : 'text-secondary'
 				}`}
-				onClick={onHandleClick}
+				onClick={onFavoritePostClick}
 			>
 				{isFavorited ? (
 					<>

@@ -12,7 +12,7 @@ const FavoritePostButtonComponent = ({ favorited, slug, totalFavorited }) => {
 	const [isFavorited, setFavorited] = useState(favorited);
 	const [sumFavorited, setSumFavorited] = useState(totalFavorited);
 
-	const onHandleClick = async (e) => {
+	const onFavoritePostClick = async (e) => {
 		e.preventDefault();
 		try {
 			if (!user) {
@@ -51,7 +51,7 @@ const FavoritePostButtonComponent = ({ favorited, slug, totalFavorited }) => {
 				className={`d-flex align-items-center border-0 bg-transparent ${
 					isFavorited ? 'text-danger' : 'text-secondary'
 				}`}
-				onClick={onHandleClick}
+				onClick={onFavoritePostClick}
 			>
 				{isFavorited ? (
 					<>

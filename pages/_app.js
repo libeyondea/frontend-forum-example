@@ -37,25 +37,15 @@ const App = ({ Component, pageProps }) => {
 				value={{
 					fetcher: fetcher,
 					onError: (error, key) => {
-						console.log(error.response);
-						console.log(key);
-						if (error.response.status === 401) {
+						if (key === '/current_user') {
 							removeCookie('token');
+							showToast.error('Unauthorized', key);
 						}
 						showToast.error();
 						return error.response;
 					},
 					onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
-						// Never retry on 404.
-						if (error.response.status === 404 || error.response.status === 401) return;
-
-						// Never retry for a specific key.
-						if (key === '/current_user') return;
-
-						// Only retry up to 10 times.
-						if (retryCount >= 10) return;
-
-						// Retry after 5 seconds.
+						if (error.response.status === 404 || key === '/current_user' || retryCount > 2) return;
 						setTimeout(() => revalidate({ retryCount }), 5000);
 					}
 				}}
