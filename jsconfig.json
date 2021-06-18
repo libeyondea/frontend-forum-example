@@ -3,16 +3,16 @@
         "baseUrl": ".",
         "paths": {
             "@/common/*": [
-                "./common/*"
+                "./src/common/*"
             ],
             "@/modules/*": [
-                "./modules/*"
+                "./src/modules/*"
             ],
             "@/styles/*": [
-                "./styles/*"
+                "./src/styles/*"
             ],
             "@/pages/*": [
-                "./pages/*"
+                "./src/pages/*"
             ]
         }
     }

@@ -66,6 +66,10 @@ module.exports = (phase) => {
 				'elasticbeanstalk-ap-southeast-1-153036539674.s3-ap-southeast-1.amazonaws.com',
 				'de4thzone.s3-ap-southeast-1.amazonaws.com'
 			]
+		},
+		i18n: {
+			locales: ['en-US', 'vi-VN'],
+			defaultLocale: 'en-US'
 		}
 	};
 };
