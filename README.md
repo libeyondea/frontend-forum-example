@@ -40,9 +40,7 @@
 ## About The Project
 
 <p align="center">
-	<a href="https://i.imgur.com/tSE6EmH.png" target="_blank">
-		<img src="https://i.imgur.com/tSE6EmH.png" alt='frontend-forum-example' width="66%"/>
-	</a>
+	<img src="https://i.imgur.com/tSE6EmH.png" alt='frontend-forum-example' width="66%"/>
 <p>
 
 **Libraries used in the project**
