@@ -1,10 +1,17 @@
 <p align="center">
-	<img src="https://img.shields.io/github/issues/de4th-zone/frontend-forum-example" alt="GitHub issues">
-	<img src="https://img.shields.io/github/issues-closed/de4th-zone/frontend-forum-example?color=red" alt="GitHub closed issues">
-	<img src="https://img.shields.io/github/package-json/v/de4th-zone/frontend-forum-example?color=orange" alt="GitHub package.json version">
-	<img alt="GitHub" src="https://img.shields.io/github/license/de4th-zone/frontend-forum-example">
-	<br />
-	<img src="https://img.shields.io/github/stars/de4th-zone/frontend-forum-example?style=social" alt="GitHub Repo stars">
+    <a href="https://github.com/de4th-zone/frontend-forum-example/issues"><img alt="GitHub issues"
+            src="https://img.shields.io/github/issues/de4th-zone/frontend-forum-example"></a>
+    <a href="https://github.com/de4th-zone/frontend-forum-example/issues"><img alt="GitHub closed issues"
+            src="https://img.shields.io/github/issues-closed/de4th-zone/frontend-forum-example?color=red"></a>
+    <a href="https://github.com/de4th-zone/frontend-forum-example/network"><img alt="GitHub forks"
+            src="https://img.shields.io/github/forks/de4th-zone/frontend-forum-example"></a>
+    <a href="https://github.com/de4th-zone/frontend-forum-example/stargazers"><img alt="GitHub stars"
+            src="https://img.shields.io/github/stars/de4th-zone/frontend-forum-example"></a>
+    <a href="https://github.com/de4th-zone/frontend-forum-example">
+        <img alt="GitHub package.json version"
+            src="https://img.shields.io/github/package-json/v/de4th-zone/frontend-forum-example"></a>
+    <a href="https://github.com/de4th-zone/frontend-forum-example/blob/main/LICENSE"><img alt="GitHub license"
+            src="https://img.shields.io/github/license/de4th-zone/frontend-forum-example"></a>
 </p>
 <br />
 <p align="center">
