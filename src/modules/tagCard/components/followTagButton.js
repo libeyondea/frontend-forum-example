@@ -39,7 +39,7 @@ const FollowTagButtonComponent = ({ following, slug }) => {
 			if (response.data.success) {
 				mutate(`/tags_followed?offset=0&limit=${process.env.LIMIT_PAGE.LIST_TAG_FOLLOWED}`);
 				setFollow(!isFollow);
-				showToast.success(`${!isFollow ? 'Follow' : 'Unfollow'} ${response.data.data.slug} success`);
+				showToast.success(`${!isFollow ? 'Follow' : 'Unfollow'}`);
 			}
 		} catch (error) {
 			console.log(error.response);

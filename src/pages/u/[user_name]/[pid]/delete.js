@@ -3,16 +3,16 @@ import React from 'react';
 import MetaDefault from '@/common/meta/MetaDefault';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
-import EditPostComponent from '@/modules/editPost/components';
-import LayoutComponent from '@/modules/layout/components';
+import DeletePostComponent from '@/modules/deletePost/components';
+import Layout from '@/modules/layout/components';
 
-const EditPost = ({ editPost }) => {
+const DeletePost = ({ deletePost }) => {
 	return (
 		<>
-			<MetaDefault title="Edit Post" />
-			<LayoutComponent>
-				<EditPostComponent editPost={editPost} />
-			</LayoutComponent>
+			<MetaDefault title="Delete Post" />
+			<Layout>
+				<DeletePostComponent deletePost={deletePost} />
+			</Layout>
 		</>
 	);
 };
@@ -20,26 +20,25 @@ const EditPost = ({ editPost }) => {
 export async function getServerSideProps({ req, query }) {
 	try {
 		const { user_name, pid } = query;
-		const resEditPost = await httpRequest.get({
-			url: `posts/${pid}/edit`,
+		const resDeletePost = await httpRequest.get({
+			url: `/posts/${pid}/delete`,
 			params: {
 				user_name: user_name
 			},
 			token: getCookie('token', req)
 		});
-		if (resEditPost.data.success) {
+		if (resDeletePost.data.success) {
 			return {
 				props: {
-					editPost: resEditPost.data
+					deletePost: resDeletePost.data
 				}
 			};
 		}
 	} catch (error) {
-		console.log(error);
 		return {
 			notFound: true
 		};
 	}
 }
 
-export default EditPost;
+export default DeletePost;

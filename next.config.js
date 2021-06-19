@@ -11,7 +11,6 @@ module.exports = (phase) => {
 	console.log(`isDev:${isDev} isProd:${isProd} isStaging:${isStaging}`);
 
 	const env = {
-		APP_NAME: 'De4th Zone',
 		WEBSITE_URL: (() => {
 			if (isDev) return 'http://localhost:999';
 			if (isProd) {

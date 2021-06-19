@@ -22,7 +22,10 @@ export async function getServerSideProps({ req, query }) {
 		const { user_name, pid } = query;
 		const [resSinglePost, resListComment] = await Promise.all([
 			httpRequest.get({
-				url: `/posts/${user_name}/${pid}`,
+				url: `/posts/${pid}`,
+				params: {
+					user_name: user_name
+				},
 				token: getCookie('token', req)
 			}),
 			httpRequest.get({

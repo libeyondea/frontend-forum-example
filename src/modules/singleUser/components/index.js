@@ -30,7 +30,7 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 						</h4>
 						<p className="text-break text-secondary mb-2">@{singleUser.data?.user_name}</p>
 						{singleUser.data?.biography && <p className="text-break mb-2">{singleUser.data?.biography}</p>}
-						{(user || singleUser.data?.user_name === user?.user_name) && (
+						{user && singleUser.data?.user_name === user?.user_name && (
 							<div>
 								<EditProfileButtonComponent />
 							</div>

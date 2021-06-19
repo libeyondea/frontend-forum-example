@@ -36,11 +36,10 @@ const FollowUserButtonComponent = ({ following, user_name }) => {
 						}
 				  });
 			if (response.data.success) {
-				showToast.success(`${!isFollow ? 'Follow' : 'Unfollow'} ${response.data.data.user_name} success`);
+				showToast.success(`${!isFollow ? 'Follow' : 'Unfollow'}`);
 				setFollow(!isFollow);
 			}
 		} catch (error) {
-			console.log(error.response);
 			showToast.error();
 		} finally {
 			setLoading(false);
