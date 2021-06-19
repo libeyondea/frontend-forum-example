@@ -1,15 +1,16 @@
+import { useRouter } from 'next/router';
 import React from 'react';
-import useSWR from 'swr';
 
-import LoadingPost from '@/common/components/LoadingPost/components';
 import Pagination from '@/common/components/Pagination/components';
 import TabPost from '@/common/components/TabPost/components';
 import isEmpty from '@/common/utils/isEmpty';
+import Language from '@/modules/home/languages';
 import PostCardComponent from '@/modules/postCard/components';
 import SideBarLeftComponent from '@/modules/sidebarLeft/components';
 import SideBarRightComponent from '@/modules/sidebarRight/components';
 
 const HomeComponent = ({ listPostGhim, listPost, pid }) => {
+	const router = useRouter();
 	return (
 		<div className="container-xl my-4">
 			<div className="row">
@@ -29,7 +30,7 @@ const HomeComponent = ({ listPostGhim, listPost, pid }) => {
 					)}
 					{/* Ghim post - end */}
 					<div className="d-flex align-items-center mb-3">
-						<h4 className="mr-auto mb-0">Posts</h4>
+						<h4 className="mr-auto mb-0">{Language.titleListPost(router.locale)}</h4>
 						<TabPost
 							pidTab={pid[0]}
 							items={[
