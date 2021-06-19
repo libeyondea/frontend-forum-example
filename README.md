@@ -1,26 +1,26 @@
 <p align="center">
-<img src="https://img.shields.io/github/issues/de4th-zone/frontend-forum-example" alt="GitHub issues">
-<img src="https://img.shields.io/github/issues-closed/de4th-zone/frontend-forum-example?color=red" alt="GitHub closed issues">
-<img src="https://img.shields.io/github/package-json/v/de4th-zone/frontend-forum-example?color=orange" alt="GitHub package.json version">
-<img alt="GitHub" src="https://img.shields.io/github/license/de4th-zone/frontend-forum-example">
-<br />
-<img src="https://img.shields.io/github/stars/de4th-zone/frontend-forum-example?style=social" alt="GitHub Repo stars">
+	<img src="https://img.shields.io/github/issues/de4th-zone/frontend-forum-example" alt="GitHub issues">
+	<img src="https://img.shields.io/github/issues-closed/de4th-zone/frontend-forum-example?color=red" alt="GitHub closed issues">
+	<img src="https://img.shields.io/github/package-json/v/de4th-zone/frontend-forum-example?color=orange" alt="GitHub package.json version">
+	<img alt="GitHub" src="https://img.shields.io/github/license/de4th-zone/frontend-forum-example">
+	<br />
+	<img src="https://img.shields.io/github/stars/de4th-zone/frontend-forum-example?style=social" alt="GitHub Repo stars">
 </p>
 <br />
 <p align="center">
-  <a href="https://github.com/de4th-zone/frontend-forum-example">
-    <img src="https://i.imgur.com/6jxXR32.jpg" alt="De4thZone" width="166" height="166">
-  </a>
-  <h3 align="center">Frontend Forum Examples</h3>
-  <p align="center">
-    <a href="https://github.com/de4th-zone/frontend-forum-example"><strong>Explore the docs »</strong></a>
-    <br />
-    <a href="https://de4thzone.com" target="_blank" rel="noopener noreferrer">View Demo</a>
-    ·
-    <a href="https://github.com/de4th-zone/frontend-forum-example/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/de4th-zone/frontend-forum-example/issues">Request Feature</a>
-  </p>
+	<a href="https://github.com/de4th-zone/frontend-forum-example">
+		<img src="https://i.imgur.com/6jxXR32.jpg" alt="De4thZone" width="166" height="166">
+	</a>
+	<h3 align="center">Frontend Forum Examples</h3>
+	<p align="center">
+		<a href="https://github.com/de4th-zone/frontend-forum-example"><strong>Explore the docs »</strong></a>
+		<br />
+		<a href="https://de4thzone.com" target="_blank" rel="noopener noreferrer">View Demo</a>
+		·
+		<a href="https://github.com/de4th-zone/frontend-forum-example/issues">Report Bug</a>
+		·
+		<a href="https://github.com/de4th-zone/frontend-forum-example/issues">Request Feature</a>
+	</p>
 </p>
 
 ## Table of Contents
@@ -40,7 +40,9 @@
 ## About The Project
 
 <p align="center">
-<a href="https://i.imgur.com/tSE6EmH.png" target="_blank"><img src="https://i.imgur.com/tSE6EmH.png" alt='frontend-forum-example' width="66%"/></a>
+	<a href="https://i.imgur.com/tSE6EmH.png" target="_blank">
+		<img src="https://i.imgur.com/tSE6EmH.png" alt='frontend-forum-example' width="66%"/>
+	</a>
 <p>
 
 **Libraries used in the project**
