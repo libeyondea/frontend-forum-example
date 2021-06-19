@@ -117,20 +117,10 @@ const SingleCommentComponent = ({ singleComment }) => {
 															id="dropdown-comment-card-single"
 															className={`d-flex align-items-center text-secondary p-0 ${style.custom__dropdown__toggle}`}
 														>
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																width={24}
-																height={24}
-																viewBox="0 0 24 24"
-																role="img"
-																aria-labelledby="amf1lepusdnzmtsxujxhxw7u5dhhlsay"
-																className="crayons-icon pointer-events-none"
-															>
-																<title id="amf1lepusdnzmtsxujxhxw7u5dhhlsay">Options</title>
+															<svg width={25} height={25}>
 																<path
+																	d="M5 12.5c0 .55.2 1.02.59 1.41.39.4.86.59 1.41.59.55 0 1.02-.2 1.41-.59.4-.39.59-.86.59-1.41 0-.55-.2-1.02-.59-1.41A1.93 1.93 0 0 0 7 10.5c-.55 0-1.02.2-1.41.59-.4.39-.59.86-.59 1.41zm5.62 0c0 .55.2 1.02.58 1.41.4.4.87.59 1.42.59.55 0 1.02-.2 1.41-.59.4-.39.59-.86.59-1.41 0-.55-.2-1.02-.59-1.41a1.93 1.93 0 0 0-1.41-.59c-.55 0-1.03.2-1.42.59-.39.39-.58.86-.58 1.41zm5.6 0c0 .55.2 1.02.58 1.41.4.4.87.59 1.43.59.56 0 1.03-.2 1.42-.59.39-.39.58-.86.58-1.41 0-.55-.2-1.02-.58-1.41a1.93 1.93 0 0 0-1.42-.59c-.56 0-1.04.2-1.43.59-.39.39-.58.86-.58 1.41z"
 																	fillRule="evenodd"
-																	clipRule="evenodd"
-																	d="M8.25 12a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm5.25 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm3.75 1.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
 																/>
 															</svg>
 														</Dropdown.Toggle>
