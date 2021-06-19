@@ -20,7 +20,7 @@ const CommentCard = ({ comment, listCommentClient, setListCommentClient, meta, s
 		<div className="mt-4 d-flex">
 			{!minimized ? (
 				<>
-					<div className="flex-shrink-0 mr-3 d-flex flex-column">
+					<div className="flex-shrink-0 mr-2 mr-sm-3 d-flex flex-column">
 						<CustomLink href={`/u/${comment.user?.user_name}`} className="mb-2 text-decoration-none d-inline-flex">
 							<CustomImage
 								width="33"
@@ -55,7 +55,7 @@ const CommentCard = ({ comment, listCommentClient, setListCommentClient, meta, s
 					<div className="w-100">
 						<div className="rounded-lg shadow-sm border p-3 bg-white text-break">
 							<div className="d-flex align-items-center mb-2">
-								<div className="d-flex align-items-sm-center flex-column flex-sm-row">
+								<div className="d-flex align-items-sm-center flex-column flex-sm-row mr-auto">
 									<CustomLink
 										href={`/u/${comment.user?.user_name}`}
 										className="text-decoration-none text-dark d-inline-block"
@@ -69,11 +69,11 @@ const CommentCard = ({ comment, listCommentClient, setListCommentClient, meta, s
 										</time>
 									</div>
 								</div>
-								<div className="ml-auto">
-									<Dropdown as={NavItem}>
+								<div className="">
+									<Dropdown>
 										<Dropdown.Toggle
 											as={NavLink}
-											id="dropdown-custom-2"
+											id="dropdown-comment-card"
 											className={`d-flex align-items-center text-secondary p-0 ${style.custom__dropdown__toggle}`}
 										>
 											<svg
@@ -93,7 +93,7 @@ const CommentCard = ({ comment, listCommentClient, setListCommentClient, meta, s
 												/>
 											</svg>
 										</Dropdown.Toggle>
-										<Dropdown.Menu align="right" className="p-0 rounded-lg shadow-sm">
+										<Dropdown.Menu alignRight="right" className="p-0 rounded-lg shadow-sm">
 											<Link href={`/u/${postUserName}/${comment.post.slug}/comment/${comment.slug}`} passHref>
 												<Dropdown.Item>Open</Dropdown.Item>
 											</Link>
