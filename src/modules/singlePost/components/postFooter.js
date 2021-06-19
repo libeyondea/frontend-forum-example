@@ -75,7 +75,7 @@ const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName
 			<Dropdown as={NavItem}>
 				<Dropdown.Toggle
 					as={NavLink}
-					id="dropdown-custom-2"
+					id="dropdown-custom-single-post"
 					className={`d-flex align-items-center text-secondary p-0 ${style.custom__dropdown__toggle}`}
 				>
 					<svg
