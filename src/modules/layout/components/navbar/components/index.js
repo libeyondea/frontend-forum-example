@@ -52,12 +52,12 @@ const NavBarComponent = () => {
 				</Link>
 				{user && (
 					<Dropdown as={NavItem} className="d-block d-md-none">
-						<Dropdown.Toggle as={NavLink} id="dropdown-custom-2" className="d-flex align-items-center text-secondary">
+						<Dropdown.Toggle as={NavLink} id="dropdown-res" className="d-flex align-items-center text-secondary">
 							<CustomImage
 								className="rounded-circle"
 								src={`${process.env.IMAGES_URL}/${user?.avatar}`}
-								width={35}
-								height={35}
+								width={40}
+								height={40}
 								alt={user?.user_name}
 							/>
 							<div className="ml-2 d-none d-sm-block">{user?.user_name}</div>
@@ -74,9 +74,14 @@ const NavBarComponent = () => {
 						</Dropdown.Menu>
 					</Dropdown>
 				)}
-				<Navbar.Toggle aria-controls="responsive-navbar-nav"></Navbar.Toggle>
+				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
-					<Nav className="ml-auto align-items-md-center">
+					<Nav className="mr-auto ml-0 ml-md-3 mt-2 mt-md-0">
+						<form className="form-inline">
+							<input placeholder="Search" type="text" className="form-control w-100" />
+						</form>
+					</Nav>
+					<Nav className="align-items-md-center">
 						<Nav.Item>
 							<Link href="/" passHref>
 								<Nav.Link>Home</Nav.Link>
@@ -94,8 +99,8 @@ const NavBarComponent = () => {
 										<CustomImage
 											className="rounded-circle"
 											src={`${process.env.IMAGES_URL}/${user?.avatar}`}
-											width={35}
-											height={35}
+											width={40}
+											height={40}
 											alt={user?.user_name}
 										/>
 										<div className="ml-2">{user?.user_name}</div>
