@@ -54,17 +54,19 @@ const CommentInput = ({ listCommentClient, setListCommentClient, meta, setMeta, 
 	return (
 		<>
 			{user && (
-				<div className="my-4 d-flex align-items-start flex-column flex-sm-row">
-					<CustomLink href={`/u/${user?.user_name}`} className="mr-3 mb-3">
-						<CustomImage
-							width="33"
-							height="33"
-							src={`${process.env.IMAGES_URL}/${user?.avatar}`}
-							alt={user?.user_name}
-							className="d-flex rounded-circle"
-						/>
-					</CustomLink>
-					<div className="flex-fill w-100">
+				<div className="my-4 d-flex">
+					<div className="flex-shrink-0 mr-2 mr-sm-3 d-flex flex-column">
+						<CustomLink href={`/u/${user?.user_name}`} className="d-inline-flex">
+							<CustomImage
+								width="33"
+								height="33"
+								src={`${process.env.IMAGES_URL}/${user?.avatar}`}
+								alt={user?.user_name}
+								className="d-flex rounded-circle"
+							/>
+						</CustomLink>
+					</div>
+					<div className="w-100">
 						<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 							<Form>
 								<div className="form-group">
