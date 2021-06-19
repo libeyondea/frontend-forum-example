@@ -58,7 +58,7 @@ const SingleCommentComponent = ({ singleComment }) => {
 						<div className="d-flex">
 							{!minimized ? (
 								<>
-									<div className="flex-shrink-0 mr-3 d-flex flex-column">
+									<div className="flex-shrink-0 mr-2 mr-sm-3 d-flex flex-column">
 										<CustomLink
 											href={`/u/${singleComment.data.user?.user_name}`}
 											className="mb-2 text-decoration-none d-inline-flex"
@@ -114,7 +114,7 @@ const SingleCommentComponent = ({ singleComment }) => {
 													<Dropdown as={NavItem}>
 														<Dropdown.Toggle
 															as={NavLink}
-															id="dropdown-custom-2"
+															id="dropdown-comment-card-single"
 															className={`d-flex align-items-center text-secondary p-0 ${style.custom__dropdown__toggle}`}
 														>
 															<svg
