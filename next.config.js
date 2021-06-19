@@ -1,6 +1,5 @@
 const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants');
 
-// This uses phases as outlined here: https://nextjs.org/docs/#custom-configuration
 module.exports = (phase) => {
 	// when started in development mode `next dev` or `npm run dev` regardless of the value of STAGING environmental variable
 	const isDev = phase === PHASE_DEVELOPMENT_SERVER;
@@ -56,7 +55,6 @@ module.exports = (phase) => {
 			TWITTER: '@de4th_zone'
 		}
 	};
-	// next.config.js object
 	return {
 		env,
 		reactStrictMode: true,
@@ -68,8 +66,8 @@ module.exports = (phase) => {
 			]
 		},
 		i18n: {
-			locales: ['en-US', 'vi-VN'],
-			defaultLocale: 'en-US'
+			locales: ['en', 'vi'],
+			defaultLocale: 'en'
 		}
 	};
 };
