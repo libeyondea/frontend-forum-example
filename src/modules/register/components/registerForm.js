@@ -17,7 +17,7 @@ import showToast from '@/common/utils/showToast';
 const RegisterFormComponent = () => {
 	const router = useRouter();
 	const [isLoading, setLoading] = useState(false);
-	const [loadImg, setLoadImg] = useState(`${process.env.IMAGES_URL}/${process.env.IMAGES.DEFAULT_IMAGE_AVATAR}`);
+	const [loadImg, setLoadImg] = useState('');
 	const [errors, setErrors] = useState({});
 	const [verify, setVerify] = useState('');
 	const gender = ['', 'male', 'female', 'unknown'];
@@ -149,7 +149,6 @@ const RegisterFormComponent = () => {
 
 	const onChangeAvatar = (e, setFieldValue) => {
 		try {
-			console.log(e.target.files[0]);
 			let file = e.target.files[0];
 			let reader = new FileReader();
 			if (file) {
@@ -173,7 +172,7 @@ const RegisterFormComponent = () => {
 
 	if (verify) {
 		return (
-			<div className="alert alert-success mb-0" role="alert">
+			<div className="alert alert-success mb-0 text-dark" role="alert">
 				Pleases verify email {verify}
 			</div>
 		);
