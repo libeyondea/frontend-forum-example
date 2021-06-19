@@ -21,8 +21,8 @@ const PostCardComponent = ({ post }) => {
 								<CustomImage
 									src={`${process.env.IMAGES_URL}/${post.user.avatar}`}
 									className="rounded-circle h-100 w-100"
-									width={35}
-									height={35}
+									width={33}
+									height={33}
 									alt={post.user.user_name}
 								/>
 							</CustomLink>
