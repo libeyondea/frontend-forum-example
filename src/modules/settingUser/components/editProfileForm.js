@@ -17,6 +17,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 	const router = useRouter();
 	const { mutateUser } = useUser();
 	const [isLoading, setLoading] = useState(false);
+	const [isLoadingResend, setLoadingResend] = useState(false);
 	const [loadImg, setLoadImg] = useState(`${process.env.IMAGES_URL}/${editProfile.data.avatar}`);
 	const [errors, setErrors] = useState({});
 	const [errorsVerify, setErrorsVerify] = useState({});
@@ -141,6 +142,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 
 	const onResendClick = async () => {
 		try {
+			setLoadingResend(true);
 			const response = await httpRequest.post({
 				url: `/email/resend`,
 				data: {
@@ -155,6 +157,8 @@ const EditProfileFormComponent = ({ editProfile }) => {
 				setErrorsVerify(error.response.data);
 			}
 			showToast.error();
+		} finally {
+			setLoadingResend(false);
 		}
 	};
 
@@ -163,14 +167,23 @@ const EditProfileFormComponent = ({ editProfile }) => {
 			{({ setFieldValue, setFieldTouched, errors: error, touched }) => (
 				<Form>
 					{!editProfile.data.verified && (
-						<div className="alert alert-danger" role="alert">
-							Pleases verify email{' '}
-							<CustomLink className="text-decoration-none" href={`mailto:${editProfile.data.email}`}>
-								{editProfile.data.email}{' '}
-							</CustomLink>
-							<button type="button" className="btn btn-info" onClick={() => onResendClick()}>
-								Resend email
-							</button>{' '}
+						<div className="alert alert-danger text-break" role="alert">
+							<h5 className="text-dark mb-0">Confirm your email to complete your profile.</h5>
+							<div>
+								<CustomLink className="text-decoration-none mr-1" href={`mailto:${editProfile.data.email}`}>
+									{editProfile.data.email}
+								</CustomLink>
+								{isLoadingResend ? (
+									<button type="submit" className="btn btn-info btn-sm mt-1" disabled>
+										<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+										Resend email
+									</button>
+								) : (
+									<button type="submit" className="btn btn-info btn-sm mt-1" onClick={() => onResendClick()}>
+										Resend email
+									</button>
+								)}
+							</div>
 							{errorsVerify?.error?.message && errorsVerify?.error?.message}
 						</div>
 					)}
