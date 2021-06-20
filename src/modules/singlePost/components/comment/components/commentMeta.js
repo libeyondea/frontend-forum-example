@@ -21,7 +21,7 @@ const CommentMetaComponent = ({
 	commentSlug,
 	favorited,
 	totalFavorited,
-	isChildren = false
+	isSingleComment
 }) => {
 	const { user } = useUser();
 	const router = useRouter();
@@ -29,12 +29,11 @@ const CommentMetaComponent = ({
 	const [replyBox, setReplyBox] = useState(false);
 	const [isFavorited, setFavorited] = useState(favorited);
 	const [sumFavorited, setSumFavorited] = useState(totalFavorited);
-
 	const initialValues = {
 		content: ''
 	};
 	const validationSchema = Yup.object({
-		content: Yup.string().required('Comment is required').max(1000, 'Comment must be at most 1000 characters')
+		content: Yup.string().required('Comment is required').max(6666, 'Comment must be at most 6666 characters')
 	});
 	const onSubmit = async (values, { resetForm }) => {
 		try {
@@ -53,7 +52,7 @@ const CommentMetaComponent = ({
 				});
 				if (response.data.success) {
 					setListCommentClient(
-						isChildren
+						isSingleComment
 							? [response.data.data].concat(listCommentClient)
 							: updateNestedArray(listCommentClient, response.data.data.parent_id, response.data.data)
 					);
@@ -61,6 +60,7 @@ const CommentMetaComponent = ({
 						...meta,
 						total: meta.total + 1
 					});
+
 					showToast.success(`Add comment success`);
 				}
 			}
