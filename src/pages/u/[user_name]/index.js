@@ -9,7 +9,7 @@ import SingleUserComponent from '@/modules/singleUser/components';
 const SingleUser = ({ singleUser, listPostUser }) => {
 	return (
 		<>
-			<MetaWebsite title={singleUser.data.user_name} />
+			<MetaWebsite title={singleUser.data.user_name} image={singleUser.data.avatar} />
 			<LayoutComponent>
 				<SingleUserComponent singleUser={singleUser} listPostUser={listPostUser} />
 			</LayoutComponent>

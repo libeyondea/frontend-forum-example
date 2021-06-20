@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MetaDefault from '@/common/meta/MetaDefault';
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import DeleteCommentComponent from '@/modules/deleteComment/components';
@@ -9,7 +9,7 @@ import Layout from '@/modules/layout/components';
 const DeleteComment = ({ deleteComment }) => {
 	return (
 		<>
-			<MetaDefault title="Delete Comment" />
+			<MetaWebsite title="Delete Comment" isNoneMeta />
 			<Layout>
 				<DeleteCommentComponent deleteComment={deleteComment} />
 			</Layout>

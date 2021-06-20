@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MetaPost from '@/common/meta/MetaPost';
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import markdownToText from '@/common/utils/markdownToText';
 import { getCookie } from '@/common/utils/session';
@@ -10,7 +10,11 @@ import SingleCommentComponent from '@/modules/singleComment/components';
 const SingleComment = ({ singleComment }) => {
 	return (
 		<>
-			<MetaPost title={markdownToText(singleComment.data.content, 66)} description={singleComment.data?.post.excerpt} />
+			<MetaWebsite
+				title={markdownToText(singleComment.data.content, 66)}
+				description={singleComment.data?.post.excerpt}
+				ogType="article"
+			/>
 			<Layout>
 				<SingleCommentComponent singleComment={singleComment} />
 			</Layout>

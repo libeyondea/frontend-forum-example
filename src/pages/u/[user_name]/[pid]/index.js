@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MetaPost from '@/common/meta/MetaPost';
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import Layout from '@/modules/layout/components';
@@ -9,7 +9,12 @@ import SinglePostComponent from '@/modules/singlePost/components';
 const SinglePost = ({ singlePost, listPostUser, listComment }) => {
 	return (
 		<>
-			<MetaPost title={singlePost.data.title} description={singlePost.data?.excerpt} image={singlePost.data?.image} />
+			<MetaWebsite
+				title={singlePost.data.title}
+				description={singlePost.data?.excerpt}
+				image={singlePost.data?.image}
+				ogType="article"
+			/>
 			<Layout>
 				<SinglePostComponent singlePost={singlePost} listPostUser={listPostUser} listComment={listComment} />
 			</Layout>

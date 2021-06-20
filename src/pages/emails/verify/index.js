@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MetaDefault from '@/common/meta/MetaDefault';
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import LayoutComponent from '@/modules/layout/components';
@@ -9,7 +9,7 @@ import VerifyEmailComponent from '@/modules/verifyEmail/components';
 const VerifyEmail = ({ verifyEmail }) => {
 	return (
 		<>
-			<MetaDefault title="Verify Email" />
+			<MetaWebsite title="Verify Email" isNoneMeta />
 			<LayoutComponent>
 				<VerifyEmailComponent verifyEmail={verifyEmail} />
 			</LayoutComponent>

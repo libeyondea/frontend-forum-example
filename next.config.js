@@ -50,8 +50,9 @@ module.exports = (phase) => {
 		},
 		META: {
 			TITLE: 'De4th Zone',
-			DESCRIPTION: 'De4th Zone',
-			TWITTER: '@de4th_zone'
+			DESCRIPTION: 'A social network for software developers.',
+			TWITTER: '@de4th_zone',
+			IMAGE: '6666666666.jpg'
 		}
 	};
 	return {

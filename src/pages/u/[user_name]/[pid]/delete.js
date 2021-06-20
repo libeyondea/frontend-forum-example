@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MetaDefault from '@/common/meta/MetaDefault';
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import DeletePostComponent from '@/modules/deletePost/components';
@@ -9,7 +9,7 @@ import Layout from '@/modules/layout/components';
 const DeletePost = ({ deletePost }) => {
 	return (
 		<>
-			<MetaDefault title="Delete Post" />
+			<MetaWebsite title="Delete Post" isNoneMeta />
 			<Layout>
 				<DeletePostComponent deletePost={deletePost} />
 			</Layout>

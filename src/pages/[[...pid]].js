@@ -9,7 +9,7 @@ import LayoutComponent from '@/modules/layout/components';
 const Index = ({ listPostGhim, listPost, pid }) => {
 	return (
 		<>
-			<MetaWebsite isHome />
+			<MetaWebsite />
 			<LayoutComponent>
 				<HomeComponent listPostGhim={listPostGhim} listPost={listPost} pid={pid} />
 			</LayoutComponent>

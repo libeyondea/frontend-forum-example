@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MetaDefault from '@/common/meta/MetaDefault';
+import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import DashboardUserComponent from '@/modules/dashboardUser/components';
@@ -9,7 +9,7 @@ import LayoutComponent from '@/modules/layout/components';
 const DashboardUser = ({ dashboardUser, pid }) => {
 	return (
 		<>
-			<MetaDefault title="Dashboard" />
+			<MetaWebsite title="Dashboard" isNoneMeta />
 			<LayoutComponent>
 				<DashboardUserComponent dashboardUser={dashboardUser} pid={pid} />
 			</LayoutComponent>
