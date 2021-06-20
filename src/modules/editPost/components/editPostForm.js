@@ -33,14 +33,12 @@ const EditPostFormComponent = ({ editPost }) => {
 
 	const initialValues = {
 		title: editPost.data.title,
-		excerpt: editPost.data.excerpt,
 		content: editPost.data.content,
 		category_id: editPost.data.category.id,
 		image: null
 	};
 	const validationSchema = Yup.object({
 		title: Yup.string().required('Title is required').max(150, 'Title is maximum 128 characters'),
-		excerpt: Yup.string().max(250, 'Excerpt is maximum 250 characters').nullable(),
 		content: Yup.string().required('Content is required').max(6666, 'Excerpt is maximum 250 characters'),
 		category_id: Yup.number().integer('Invaild category').required('Select category'),
 		image: Yup.mixed()
@@ -59,7 +57,6 @@ const EditPostFormComponent = ({ editPost }) => {
 				token: getCookie('token'),
 				data: {
 					title: values.title,
-					excerpt: values.excerpt,
 					content: values.content,
 					category_id: values.category_id,
 					tags: JSON.stringify(tags)
@@ -136,9 +133,6 @@ const EditPostFormComponent = ({ editPost }) => {
 						</div>
 						<div className="form-group col-md-12">
 							<InputForm label="Title" placeholder="Enter title" id="title" name="title" type="text" />
-						</div>
-						<div className="form-group col-md-12">
-							<TextForm rows="3" label="Excerpt" placeholder="Enter excerpt" id="excerpt" name="excerpt" type="text" />
 						</div>
 						<div className="form-group col-md-6">
 							<TextForm
