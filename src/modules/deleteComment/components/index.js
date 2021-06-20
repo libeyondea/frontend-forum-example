@@ -55,10 +55,16 @@ const DeleteCommentComponent = ({ deleteComment }) => {
 								</button>
 							)}
 							<CustomLink
-								className="btn btn-light"
+								className="btn btn-secondary"
 								href={`/u/${deleteComment.data.post.user.user_name}/${deleteComment.data.post.slug}/comment/${deleteComment.data.slug}/edit`}
 							>
 								Edit
+							</CustomLink>
+							<CustomLink
+								className="btn btn-light ml-2"
+								href={`/u/${deleteComment.data.post.user.user_name}/${deleteComment.data.post.slug}/comment/${deleteComment.data.slug}`}
+							>
+								Cancel
 							</CustomLink>
 						</div>
 					</div>
