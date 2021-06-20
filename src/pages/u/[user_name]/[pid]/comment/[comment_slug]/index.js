@@ -2,6 +2,7 @@ import React from 'react';
 
 import MetaPost from '@/common/meta/MetaPost';
 import httpRequest from '@/common/utils/httpRequest';
+import markdownToText from '@/common/utils/markdownToText';
 import { getCookie } from '@/common/utils/session';
 import Layout from '@/modules/layout/components';
 import SingleCommentComponent from '@/modules/singleComment/components';
@@ -9,7 +10,7 @@ import SingleCommentComponent from '@/modules/singleComment/components';
 const SingleComment = ({ singleComment }) => {
 	return (
 		<>
-			<MetaPost title={singleComment.data.content.slice(0, 20)} description={singleComment.data?.post.excerpt} />
+			<MetaPost title={markdownToText(singleComment.data.content, 66)} description={singleComment.data?.post.excerpt} />
 			<Layout>
 				<SingleCommentComponent singleComment={singleComment} />
 			</Layout>
