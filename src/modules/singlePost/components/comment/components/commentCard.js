@@ -1,3 +1,4 @@
+import marked from 'marked';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -12,12 +13,21 @@ import CommentLoopComponent from '@/modules/singlePost/components/comment/compon
 import CommentMetaComponent from '@/modules/singlePost/components/comment/components/commentMeta';
 import style from '@/modules/singlePost/components/comment/styles/style.module.scss';
 
-const CommentCard = ({ comment, listCommentClient, setListCommentClient, meta, setMeta, postUserName, postSlug }) => {
+const CommentCard = ({
+	comment,
+	listCommentClient,
+	setListCommentClient,
+	meta,
+	setMeta,
+	postUserName,
+	postSlug,
+	isSingleComment = false
+}) => {
 	const { user } = useUser();
 	const [minimized, setMinimized] = useState(false);
 
 	return (
-		<div className="mt-4 d-flex">
+		<div className={`d-flex ${!isSingleComment ? 'mt-4' : ''}`}>
 			{!minimized ? (
 				<>
 					<div className="flex-shrink-0 mr-2 mr-sm-3 d-flex flex-column">
@@ -107,7 +117,11 @@ const CommentCard = ({ comment, listCommentClient, setListCommentClient, meta, s
 									</Dropdown>
 								</div>
 							</div>
-							<div>{comment.content}</div>
+							<div
+								dangerouslySetInnerHTML={{
+									__html: marked(comment.content)
+								}}
+							/>
 						</div>
 						<CommentMetaComponent
 							listCommentClient={listCommentClient}
@@ -119,10 +133,11 @@ const CommentCard = ({ comment, listCommentClient, setListCommentClient, meta, s
 							totalFavorited={comment.total_favorited}
 							commentId={comment.id}
 							commentSlug={comment.slug}
+							isSingleComment={isSingleComment}
 						/>
-						{comment.children_comment && (
+						{isSingleComment ? (
 							<CommentLoopComponent
-								comments={comment.children_comment}
+								comments={listCommentClient}
 								listCommentClient={listCommentClient}
 								setListCommentClient={setListCommentClient}
 								meta={meta}
@@ -130,6 +145,18 @@ const CommentCard = ({ comment, listCommentClient, setListCommentClient, meta, s
 								postUserName={postUserName}
 								postSlug={postSlug}
 							/>
+						) : (
+							comment.children_comment && (
+								<CommentLoopComponent
+									comments={comment.children_comment}
+									listCommentClient={listCommentClient}
+									setListCommentClient={setListCommentClient}
+									meta={meta}
+									setMeta={setMeta}
+									postUserName={postUserName}
+									postSlug={postSlug}
+								/>
+							)
 						)}
 					</div>
 				</>
