@@ -47,8 +47,8 @@ const MetaWebsite = ({
 				) : (
 					<>
 						<meta name="twitter:card" content="summary_large_image" />
-						<meta property="og:image" content={`${process.env.IMAGES_URL}/${process.env.IMAGE}`} />
-						<meta name="twitter:image" content={`${process.env.IMAGES_URL}/${process.env.IMAGE}`} />
+						<meta property="og:image" content={`${process.env.IMAGES_URL}/${process.env.META.IMAGE}`} />
+						<meta name="twitter:image" content={`${process.env.IMAGES_URL}/${process.env.META.IMAGE}`} />
 					</>
 				)}
 			</Head>
