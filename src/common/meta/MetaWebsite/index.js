@@ -26,10 +26,10 @@ const MetaWebsite = ({
 						<link rel="canonical" href={canonical} />
 						<meta property="og:site_name" content={process.env.META.TITLE} />
 						<meta property="og:type" content={ogType} />
-						<meta property="og:title" content={title} />
+						<meta property="og:title" content={title ? title : process.env.META.TITLE} />
 						<meta property="og:description" content={description} />
 						<meta property="og:url" content={canonical} />
-						<meta name="twitter:title" content={title} />
+						<meta name="twitter:title" content={title ? title : process.env.META.TITLE} />
 						<meta name="twitter:description" content={description} />
 						<meta name="twitter:url" content={canonical} />
 						<meta name="twitter:site" content={`https://twitter.com/${process.env.META.TWITTER.replace(/^@/, ``)}/`} />
