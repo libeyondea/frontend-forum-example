@@ -80,9 +80,12 @@ const EditCommentComponent = ({ editComment }) => {
 													Submit
 												</button>
 											)}
-											<button type="button" className="btn btn-light ml-2" onClick={() => router.back()}>
-												Back
-											</button>
+											<CustomLink
+												className="btn btn-light ml-2"
+												href={`/u/${editComment.data.post.user.user_name}/${editComment.data.post.slug}/comment/${editComment.data.slug}`}
+											>
+												Cancel
+											</CustomLink>
 										</Form>
 									</Formik>
 								</div>
