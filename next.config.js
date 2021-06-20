@@ -52,7 +52,7 @@ module.exports = (phase) => {
 			TITLE: 'De4th Zone',
 			DESCRIPTION: 'A social network for software developers.',
 			TWITTER: '@de4th_zone',
-			IMAGE: '6666666666.jpg'
+			IMAGE: 'd4z-2000-666.jpg'
 		}
 	};
 	return {
