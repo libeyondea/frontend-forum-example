@@ -33,7 +33,7 @@ const MetaWebsite = ({
 						<meta name="twitter:description" content={description} />
 						<meta name="twitter:url" content={canonical} />
 						<meta name="twitter:site" content={`https://twitter.com/${process.env.META.TWITTER.replace(/^@/, ``)}/`} />
-						{creatorTwitter && <meta name="twitter:creator" content={twitter} />}
+						{creatorTwitter && <meta name="twitter:creator" content={creatorTwitter} />}
 					</>
 				)}
 			</Head>
