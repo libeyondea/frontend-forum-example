@@ -57,9 +57,9 @@ const DeletePostComponent = ({ deletePost }) => {
 							>
 								Edit
 							</CustomLink>
-							<button type="button" className="btn btn-light ml-2" onClick={() => router.push(`/dashboard/posts`)}>
-								Back
-							</button>
+							<CustomLink className="btn btn-light ml-2" href={`/dashboard/posts`}>
+								Cancel
+							</CustomLink>
 						</div>
 					</div>
 				</div>
