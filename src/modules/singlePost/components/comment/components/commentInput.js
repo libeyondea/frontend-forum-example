@@ -19,7 +19,7 @@ const CommentInput = ({ listCommentClient, setListCommentClient, meta, setMeta, 
 		content: ''
 	};
 	const validationSchema = Yup.object({
-		content: Yup.string().required('Comment is required').max(1000, 'Comment must be at most 1000 characters')
+		content: Yup.string().required('Comment is required').max(6666, 'Comment must be at most 6666 characters')
 	});
 	const onSubmit = async (values, { resetForm }) => {
 		try {
