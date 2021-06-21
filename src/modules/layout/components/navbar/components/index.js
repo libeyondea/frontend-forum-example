@@ -87,6 +87,19 @@ const NavBarComponent = () => {
 								<Nav.Link>Home</Nav.Link>
 							</Link>
 						</Nav.Item>
+						<Dropdown as={NavItem}>
+							<Dropdown.Toggle as={NavLink} id="dropdown-locale">
+								{router.locale === 'vi' ? 'Vietnamese' : 'English'}
+							</Dropdown.Toggle>
+							<Dropdown.Menu align="right" className="p-0">
+								<Link href={router.asPath} locale="en" passHref>
+									<Dropdown.Item>English</Dropdown.Item>
+								</Link>
+								<Link href={router.asPath} locale="vi" passHref>
+									<Dropdown.Item>Vietnamese</Dropdown.Item>
+								</Link>
+							</Dropdown.Menu>
+						</Dropdown>
 						{user && (
 							<>
 								<Nav.Item>
