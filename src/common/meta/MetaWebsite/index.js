@@ -10,8 +10,10 @@ const MetaWebsite = ({
 	ogType = 'website',
 	isNoneMeta = false
 }) => {
-	const { asPath } = useRouter();
-	const canonical = process.env.WEBSITE_URL + asPath.split('?')[0];
+	const { asPath, locale } = useRouter();
+	const tmpURL = new URL(`${locale !== 'en' ? `/${locale}` : ''}${asPath}`, process.env.WEBSITE_URL);
+	const canonical = new URL(tmpURL.pathname, tmpURL.origin);
+
 	return (
 		<>
 			<Head>
