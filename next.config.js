@@ -67,7 +67,8 @@ module.exports = (phase) => {
 		},
 		i18n: {
 			locales: ['en', 'vi'],
-			defaultLocale: 'en'
+			defaultLocale: 'en',
+			localeDetection: false
 		}
 	};
 };
