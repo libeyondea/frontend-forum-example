@@ -31,7 +31,7 @@ const ImagePostFormComponent = ({ errors, error, touched, label, imageSrc, imagA
 				{imageSrc && (
 					<div className="d-flex flex-column flex-sm-row">
 						<div className="mr-2 mb-2 mb-sm-0">
-							<CustomImage className="" src={`${imageSrc}`} width={350} height={150} alt={imagAlt} isBlur={false} />
+							<CustomImage className="" src={`${imageSrc}`} width={350} height={150} alt={imagAlt} />
 						</div>
 						<div className="d-flex align-items-center">
 							<button type="button" className="btn btn-danger" onClick={removeImage}>
