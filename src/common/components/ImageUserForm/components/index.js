@@ -30,14 +30,7 @@ const ImageUserFormComponent = ({ errors, error, touched, label, imageSrc, imagA
 				</div>
 				{imageSrc && (
 					<div className="d-flex">
-						<CustomImage
-							className="rounded-circle"
-							src={`${imageSrc}`}
-							width={60}
-							height={60}
-							alt={imagAlt}
-							isBlur={false}
-						/>
+						<CustomImage className="rounded-circle" src={`${imageSrc}`} width={60} height={60} alt={imagAlt} />
 					</div>
 				)}
 			</div>
