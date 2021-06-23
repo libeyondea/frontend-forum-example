@@ -17,31 +17,32 @@ const ListTagFollowedComponent = () => {
 
 	return (
 		<>
-			{user && (
-				<div className="wapper__card mb-4">
-					<div className="px-2 py-2">
-						<h5 className="mb-0">My Tags</h5>
-					</div>
-					<ul className={`list-group overflow-auto ${style.height_list_group}`}>
-						{!listTagFollowed ? (
+			{user &&
+				(!listTagFollowed ? (
+					<div className="wapper__card mb-4">
+						<ul className={`list-group`}>
 							<li className="loading-animation py-3 d-flex"></li>
-						) : isEmpty(listTagFollowed?.data) ? (
-							<li className="list-group-item bg-transparent d-flex align-items-center border-0 px-2 py-2">
-								Empty follow tags
-							</li>
-						) : (
-							listTagFollowed?.data?.map((tag) => (
-								<li className="d-flex align-items-center border-0 px-2 py-2" key={tag.id}>
-									<CustomLink href={`/t/${tag.slug}`} className="text-decoration-none text-dark">
-										<span className="text-secondary">#</span>
-										{tag.slug}
-									</CustomLink>
-								</li>
-							))
-						)}
-					</ul>
-				</div>
-			)}
+						</ul>
+					</div>
+				) : (
+					!isEmpty(listTagFollowed?.data) && (
+						<div className="wapper__card mb-4">
+							<div className="px-2 py-2">
+								<h5 className="mb-0">My Tags</h5>
+							</div>
+							<ul className={`list-group overflow-auto ${style.height_list_group}`}>
+								{listTagFollowed?.data?.map((tag) => (
+									<li className="d-flex align-items-center border-0 px-2 py-2" key={tag.id}>
+										<CustomLink href={`/t/${tag.slug}`} className="text-decoration-none text-dark">
+											<span className="text-secondary">#</span>
+											{tag.slug}
+										</CustomLink>
+									</li>
+								))}
+							</ul>
+						</div>
+					)
+				))}
 		</>
 	);
 };

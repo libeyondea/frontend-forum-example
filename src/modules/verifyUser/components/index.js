@@ -7,12 +7,12 @@ import InputForm from '@/common/components/InputForm/components';
 import httpRequest from '@/common/utils/httpRequest';
 import showToast from '@/common/utils/showToast';
 
-const VerifyEmailComponent = ({ verifyEmail }) => {
+const VerifyUserComponent = ({ verifyUser }) => {
 	const [isLoading, setLoading] = useState(false);
 	const [errors, setErrors] = useState({});
 
 	const initialValues = {
-		email: (verifyEmail && verifyEmail.data?.email) || ''
+		email: (verifyUser && verifyUser.data?.email) || ''
 	};
 	const validationSchema = Yup.object({
 		email: Yup.string()
@@ -36,10 +36,10 @@ const VerifyEmailComponent = ({ verifyEmail }) => {
 				showToast.success(`Resend email '${response.data.data.email}' success`);
 			}
 		} catch (error) {
-			if (!error.response.data.success) {
+			showToast.error('Resend fail');
+			if (!error.response.data.success && error.response.data.error.status === 422) {
 				setErrors(error.response.data);
 			}
-			showToast.error();
 		} finally {
 			setLoading(false);
 		}
@@ -53,7 +53,7 @@ const VerifyEmailComponent = ({ verifyEmail }) => {
 						<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 							<Form>
 								<h2 className="text-center mb-3">Verify email</h2>
-								{verifyEmail && (
+								{verifyUser && (
 									<div className="alert alert-success" role="alert">
 										<span className="mr-1 text-dark">Verify success</span>
 										<CustomLink className="text-decoration-none" href="/login">
@@ -63,7 +63,7 @@ const VerifyEmailComponent = ({ verifyEmail }) => {
 								)}
 								<div className="form-group">
 									<InputForm
-										label="Email verify"
+										label="Email"
 										placeholder="Enter email"
 										id="email"
 										name="email"
@@ -75,11 +75,11 @@ const VerifyEmailComponent = ({ verifyEmail }) => {
 									{isLoading ? (
 										<button type="submit" className="btn btn-info" disabled>
 											<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
-											Resend email
+											Resend
 										</button>
 									) : (
 										<button type="submit" className="btn btn-info">
-											Resend email
+											Resend
 										</button>
 									)}
 								</div>
@@ -92,4 +92,4 @@ const VerifyEmailComponent = ({ verifyEmail }) => {
 	);
 };
 
-export default VerifyEmailComponent;
+export default VerifyUserComponent;

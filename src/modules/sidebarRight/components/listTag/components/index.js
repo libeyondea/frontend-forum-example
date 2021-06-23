@@ -3,34 +3,61 @@ import useSWR from 'swr';
 
 import CustomLink from '@/common/components/CustomLink/components';
 import isEmpty from '@/common/utils/isEmpty';
+import style from '@/modules/sidebarRight/components/listTag/styles/style.module.scss';
 
 const ListTagComponent = () => {
-	const { data: listTag } = useSWR(`/tags?offset=0&limit=${process.env.LIMIT_PAGE.LIST_TAG}`, {
+	const { data: listTag } = useSWR(`/tags_with_posts?offset=0&limit=5`, {
 		revalidateOnFocus: false
 	});
 
 	return (
-		<div className="wapper__card bg-light rounded-lg shadow-sm border mb-4">
-			<div className="px-3 py-2 border-bottom">
-				<h5 className="mb-0">Popular tags</h5>
-			</div>
-			<ul className="list-group">
-				{!listTag ? (
-					<li className="loading-animation py-3 d-flex"></li>
-				) : isEmpty(listTag?.data) ? (
-					<li className="list-group-item bg-light d-flex align-items-center border-0 px-3 py-2">Empty tags</li>
-				) : (
-					listTag?.data?.map((tag) => (
-						<li className="list-group-item bg-light d-flex align-items-center border-0 px-3 py-2" key={tag.id}>
-							<CustomLink href={`/t/${tag.slug}`} className="text-decoration-none text-dark">
-								<span className="text-secondary">#</span>
-								{tag.slug}
-							</CustomLink>
-						</li>
-					))
-				)}
-			</ul>
-		</div>
+		<>
+			{!listTag ? (
+				<div className="wapper__card bg-light rounded-lg shadow-sm border">
+					<ul className="list-group">
+						<li className="loading-animation py-3 d-flex"></li>
+					</ul>
+				</div>
+			) : (
+				!isEmpty(listTag?.data) &&
+				listTag?.data?.map((tag) => (
+					<div className="wapper__card bg-light rounded-lg shadow-sm border mb-4" key={tag.id}>
+						<div className="px-3 py-2 border-bottom">
+							<h5 className="mb-0">
+								<CustomLink
+									href={`/t/${tag.slug}`}
+									className="text-decoration-none d-inline-block font-weight-bold text-dark"
+								>
+									#{tag.slug}
+								</CustomLink>
+							</h5>
+						</div>
+						<ul className="list-group">
+							{tag?.posts?.map((post) => (
+								<li className={`bg-light border-bottom px-3 py-2 ${style.list_group_item_custom}`} key={post.id}>
+									<CustomLink
+										href={`/u/${post.user.user_name}/${post.slug}`}
+										className="text-decoration-none text-dark"
+									>
+										{post.title}
+									</CustomLink>
+									{post.total_comments > 0 && (
+										<div className={`small ${style.tags}`}>
+											<CustomLink
+												href={`/u/${post.user.user_name}/${post.slug}#comment-post`}
+												className="p-1 text-decoration-none d-inline-block text-secondary"
+											>
+												{post.total_comments} comments
+											</CustomLink>
+										</div>
+									)}
+								</li>
+							))}
+						</ul>
+					</div>
+				))
+			)}
+		</>
 	);
 };
 

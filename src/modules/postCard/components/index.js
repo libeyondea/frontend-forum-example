@@ -7,9 +7,8 @@ import FavoritePostButtonComponent from '@/modules/postCard/components/favoriteP
 import style from '@/modules/postCard/styles/style.module.scss';
 
 const PostCardComponent = ({ post }) => {
-	if (!post) return null;
 	return (
-		<div className={`card ${style.post_card}`}>
+		<div className={`card shadow-sm ${style.post_card}`}>
 			<div className="p-3">
 				<div className="mb-2">
 					<div className="d-flex align-items-center">

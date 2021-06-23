@@ -4,14 +4,14 @@ import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import LayoutComponent from '@/modules/layout/components';
-import VerifyEmailComponent from '@/modules/verifyEmail/components';
+import VerifyUserComponent from '@/modules/verifyUser/components';
 
-const VerifyEmail = ({ verifyEmail }) => {
+const VerifyUser = ({ verifyUser }) => {
 	return (
 		<>
-			<MetaWebsite title="Verify Email" isNoneMeta />
+			<MetaWebsite title="Verify your email" isNoneMeta />
 			<LayoutComponent>
-				<VerifyEmailComponent verifyEmail={verifyEmail} />
+				<VerifyUserComponent verifyUser={verifyUser} />
 			</LayoutComponent>
 		</>
 	);
@@ -21,21 +21,21 @@ export async function getServerSideProps({ req, query }) {
 	try {
 		const url = query.url;
 		if (url) {
-			const resVerifyEmail = await httpRequest.get({
+			const resVerifyUser = await httpRequest.get({
 				url: decodeURIComponent(url),
 				token: getCookie('token', req)
 			});
-			if (resVerifyEmail.data.success) {
+			if (resVerifyUser.data.success) {
 				return {
 					props: {
-						verifyEmail: resVerifyEmail.data
+						verifyUser: resVerifyUser.data
 					}
 				};
 			}
 		} else {
 			return {
 				props: {
-					verifyEmail: null
+					verifyUser: null
 				}
 			};
 		}
@@ -46,4 +46,4 @@ export async function getServerSideProps({ req, query }) {
 	}
 }
 
-export default VerifyEmail;
+export default VerifyUser;

@@ -12,6 +12,7 @@ import useUser from '@/common/hooks/useUser';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
+import style from '@/modules/settingUser/styles/style.module.scss';
 
 const EditProfileFormComponent = ({ editProfile }) => {
 	const router = useRouter();
@@ -156,7 +157,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 			if (!error.response.data.success) {
 				setErrorsVerify(error.response.data);
 			}
-			showToast.error();
+			showToast.error('Resend fail');
 		} finally {
 			setLoadingResend(false);
 		}
@@ -169,22 +170,11 @@ const EditProfileFormComponent = ({ editProfile }) => {
 					{!editProfile.data.verified && (
 						<div className="alert alert-danger text-break" role="alert">
 							<h5 className="text-dark mb-0">Confirm your email to complete your profile.</h5>
-							<div>
+							<div className="d-flex align-items-center flex-wrap">
 								<CustomLink className="text-decoration-none mr-1" href={`mailto:${editProfile.data.email}`}>
 									{editProfile.data.email}
 								</CustomLink>
-								{isLoadingResend ? (
-									<button type="submit" className="btn btn-info btn-sm mt-1" disabled>
-										<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
-										Resend email
-									</button>
-								) : (
-									<button type="submit" className="btn btn-info btn-sm mt-1" onClick={() => onResendClick()}>
-										Resend email
-									</button>
-								)}
 							</div>
-							{errorsVerify?.error?.message && errorsVerify?.error?.message}
 						</div>
 					)}
 					<div className="form-row">
@@ -195,14 +185,36 @@ const EditProfileFormComponent = ({ editProfile }) => {
 							<InputForm label="Last name" placeholder="Last name" id="last_name" name="last_name" type="text" />
 						</div>
 						<div className="form-group col-md-6">
-							<InputForm
-								label="Email"
-								placeholder="Email"
-								id="email"
-								name="email"
-								type="text"
-								errors={errors.error?.message?.email}
-							/>
+							<div className="d-flex flex-column flex-sm-row">
+								<div className="w-100">
+									<InputForm
+										label="Email"
+										placeholder="Email"
+										id="email"
+										name="email"
+										type="text"
+										errors={errors.error?.message?.email}
+									/>
+								</div>
+								{!editProfile.data.verified &&
+									(isLoadingResend ? (
+										<button
+											type="button"
+											className={`d-flex align-items-center btn btn-info ml-0 ml-sm-2 mt-2 ${style.btn__resend}`}
+											disabled
+										>
+											<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
+										</button>
+									) : (
+										<button
+											type="button"
+											className={`btn btn-info ml-0 ml-sm-2 mt-2 ${style.btn__resend}`}
+											onClick={() => onResendClick()}
+										>
+											Resend
+										</button>
+									))}
+							</div>
 						</div>
 						<div className="form-group col-md-6">
 							<InputForm
