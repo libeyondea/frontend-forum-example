@@ -21,7 +21,7 @@ const ImagePostFormComponent = ({ errors, error, touched, label, imageSrc, imagA
 								})}
 							/>
 							<label className="mb-0" htmlFor={props.id || props.name}>
-								Change image
+								Change
 							</label>
 						</button>
 						{touched && error && <div className="invalid-feedback d-block">{error}</div>}

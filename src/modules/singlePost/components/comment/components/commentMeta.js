@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
+import ReactMarkdownComponent from '@/common/components/ReactMarkdown/components';
 import TextForm from '@/common/components/TextForm/components';
 import useUser from '@/common/hooks/useUser';
 import httpRequest from '@/common/utils/httpRequest';
@@ -10,6 +11,7 @@ import { getCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
 import updateNestedArray from '@/common/utils/updateNestedArray';
 import CommentLoadingComponent from '@/modules/singlePost/components/comment/components/commentLoading';
+import style from '@/modules/singlePost/components/comment/styles/style.module.scss';
 
 const CommentMetaComponent = ({
 	listCommentClient,
@@ -29,6 +31,7 @@ const CommentMetaComponent = ({
 	const [replyBox, setReplyBox] = useState(false);
 	const [isFavorited, setFavorited] = useState(favorited);
 	const [sumFavorited, setSumFavorited] = useState(totalFavorited);
+	const [isPreview, setIsPreview] = useState(false);
 	const initialValues = {
 		content: ''
 	};
@@ -113,6 +116,7 @@ const CommentMetaComponent = ({
 			router.push('/login');
 		} else {
 			setReplyBox(!replyBox);
+			setIsPreview(false);
 		}
 	};
 
@@ -142,26 +146,43 @@ const CommentMetaComponent = ({
 				</div>
 			) : (
 				<div className="d-flex mt-3">
-					<div className="w-100">
+					<div className={`w-100 ${style.comment__detail}`}>
 						<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-							<Form>
-								<div className="form-group">
-									<TextForm rows={3} placeholder="Write a comment..." id="content" name="content" />
-								</div>
-								{isLoading ? (
-									<button type="submit" className="btn btn-primary" disabled>
-										<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
-										Submit
+							{({ values }) => (
+								<Form>
+									{isPreview ? (
+										<div className={`rounded-lg shadow-sm border bg-white p-2 p-sm-3 mb-3`}>
+											<ReactMarkdownComponent text={values.content} />
+										</div>
+									) : (
+										<div className="form-group">
+											<TextForm rows={5} placeholder="Write a comment..." id="content" name="content" />
+										</div>
+									)}
+									{isLoading ? (
+										<button type="submit" className="btn btn-primary mr-2" disabled>
+											<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+											Submit
+										</button>
+									) : (
+										<button type="submit" className="btn btn-primary mr-2">
+											Submit
+										</button>
+									)}
+									{isPreview ? (
+										<button type="button" className="btn btn-secondary mr-2" onClick={() => setIsPreview(false)}>
+											Continue editing
+										</button>
+									) : (
+										<button type="button" className="btn btn-secondary mr-2" onClick={() => setIsPreview(true)}>
+											Preview
+										</button>
+									)}
+									<button type="button" className="btn btn-light" onClick={onBoxReplyCommentClick}>
+										Cancel
 									</button>
-								) : (
-									<button type="submit" className="btn btn-primary">
-										Submit
-									</button>
-								)}
-								<button type="button" className="btn btn-light ml-2" onClick={onBoxReplyCommentClick}>
-									Cancel
-								</button>
-							</Form>
+								</Form>
+							)}
 						</Formik>
 					</div>
 				</div>

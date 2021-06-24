@@ -1,26 +1,28 @@
 import { Form, Formik } from 'formik';
 import { isEmpty } from 'lodash';
-import marked from 'marked';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import useSWR from 'swr';
 import * as Yup from 'yup';
 
+import CustomImage from '@/common/components/CustomImage/components';
 import ImagePostForm from '@/common/components/ImagePostForm/components';
 import InputForm from '@/common/components/InputForm/components';
+import ReactMarkdownComponent from '@/common/components/ReactMarkdown/components';
 import SelectForm from '@/common/components/SelectForm/components';
 import TagListForm from '@/common/components/TagListForm/components';
 import TextForm from '@/common/components/TextForm/components';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
-import style from '@/modules/newPost/styles/style.module.scss';
 
-const EditPostFormComponent = ({ editPost }) => {
+const EditPostFormComponent = ({ editPost, isPreview }) => {
 	const router = useRouter();
 	const [isLoading, setLoading] = useState(false);
 	const [tags, setTag] = useState(editPost.data.tags);
 	const [errors, setErrors] = useState({});
+
+	const [isRemoveImg, setIsRemoveImg] = useState(false);
 	const [loadImg, setLoadImg] = useState(
 		editPost.data.image ? `${process.env.IMAGES_URL}/${editPost.data.image}` : null
 	);
@@ -39,7 +41,7 @@ const EditPostFormComponent = ({ editPost }) => {
 	};
 	const validationSchema = Yup.object({
 		title: Yup.string().required('Title is required').max(150, 'Title is maximum 128 characters'),
-		content: Yup.string().required('Content is required').max(6666, 'Excerpt is maximum 250 characters'),
+		content: Yup.string().required('Content is required').max(6666, 'Excerpt is maximum 6666 characters'),
 		category_id: Yup.number().integer('Invaild category').required('Select category'),
 		image: Yup.mixed()
 			.test('fileSize', 'File too large', (value) => value === null || (value && value.size <= FILE_SIZE))
@@ -59,7 +61,8 @@ const EditPostFormComponent = ({ editPost }) => {
 					title: values.title,
 					content: values.content,
 					category_id: values.category_id,
-					tags: JSON.stringify(tags)
+					tags: JSON.stringify(tags),
+					is_remove_img: isRemoveImg
 				},
 				files: {
 					image: values.image
@@ -71,10 +74,10 @@ const EditPostFormComponent = ({ editPost }) => {
 			}
 		} catch (error) {
 			console.log(error);
+			showToast.error('Update post fail');
 			if (!error.response.data.success) {
 				setErrors(error.response.data);
 			}
-			showToast.error('Update post fail');
 		} finally {
 			setLoading(false);
 		}
@@ -91,6 +94,7 @@ const EditPostFormComponent = ({ editPost }) => {
 				};
 				reader.readAsDataURL(file);
 				setFieldValue('image', file);
+				setIsRemoveImg(false);
 				e.target.value = null;
 				showToast.info(`Load file success "${file.name}"`);
 			}
@@ -107,71 +111,101 @@ const EditPostFormComponent = ({ editPost }) => {
 	const onChangeRemoveImage = (setFieldValue) => {
 		setFieldValue('image', null);
 		setLoadImg(null);
+		setIsRemoveImg(true);
 	};
 
 	return (
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 			{({ setFieldValue, setFieldTouched, errors: error, touched, values }) => (
 				<Form>
-					<h2 className="text-center mb-3">New post</h2>
-					<div className="form-row">
-						<div className="form-group col-md-12">
-							<ImagePostForm
-								label="Image (.png, .jpg, .jpeg .gif)"
-								id="image"
-								name="image"
-								type="file"
-								accept=".png, .jpg, .jpeg .gif"
-								onChange={(e) => onChangeAvatar(e, setFieldValue)}
-								onBlur={(e) => onBlurAvatar(e, setFieldTouched)}
-								error={error.image}
-								touched={touched.image}
-								imageSrc={loadImg}
-								imagAlt={`Post image`}
-								removeImage={() => onChangeRemoveImage(setFieldValue)}
-							/>
-						</div>
-						<div className="form-group col-md-12">
-							<InputForm label="Title" placeholder="Enter title" id="title" name="title" type="text" />
-						</div>
-						<div className="form-group col-md-6">
-							<TextForm
-								rows="16"
-								label="Content (Markdown)"
-								placeholder="Enter content"
-								id="content"
-								name="content"
-								type="text"
-							/>
-						</div>
-						<div className="form-group col-md-6">
-							<div className="mb-2">Preview</div>
-							<div
-								className={`p-1 border rounded-lg bg-white overflow-auto ${style.content__preview}`}
-								dangerouslySetInnerHTML={{ __html: marked(values.content) }}
-							></div>
-						</div>
-						<div className="form-group col-md-12">
-							<SelectForm label="Category" name="category_id">
-								<option value="">Select category</option>
-								{!listCategory ? (
-									<option value="">Loading...</option>
-								) : isEmpty(listCategory?.data) ? (
-									<option value="">Empty category</option>
-								) : (
-									listCategory?.data?.map((category) => (
-										<option value={category.id} key={category.id}>
-											{category.title}
-										</option>
-									))
+					<div className="bg-light rounded-lg shadow-sm">
+						{!isPreview ? (
+							<div className="p-3 p-sm-5">
+								<div className="form-row">
+									<div className="form-group col-md-12">
+										<ImagePostForm
+											label="Image (.png, .jpg, .jpeg .gif)"
+											id="image"
+											name="image"
+											type="file"
+											accept=".png, .jpg, .jpeg .gif"
+											onChange={(e) => onChangeAvatar(e, setFieldValue)}
+											onBlur={(e) => onBlurAvatar(e, setFieldTouched)}
+											error={error.image}
+											touched={touched.image}
+											imageSrc={loadImg}
+											imagAlt={`Post image`}
+											removeImage={() => onChangeRemoveImage(setFieldValue)}
+										/>
+									</div>
+									<div className="form-group col-md-12">
+										<InputForm label="Title" placeholder="Enter title" id="title" name="title" type="text" />
+									</div>
+									<div className="form-group col-md-12">
+										<TagListForm tags={tags} setTag={setTag} errors={errors.error?.message?.tags} />
+									</div>
+									<div className="form-group col-12">
+										<TextForm
+											rows="16"
+											label="Content (Markdown)"
+											placeholder="Enter content"
+											id="content"
+											name="content"
+											type="text"
+										/>
+									</div>
+									<div className="form-group col-md-12 mb-0">
+										<SelectForm label="Category" name="category_id">
+											<option value="">Select category</option>
+											{!listCategory ? (
+												<option value="">Loading...</option>
+											) : isEmpty(listCategory?.data) ? (
+												<option value="">Empty category</option>
+											) : (
+												listCategory?.data?.map((category) => (
+													<option value={category.id} key={category.id}>
+														{category.title}
+													</option>
+												))
+											)}
+										</SelectForm>
+									</div>
+								</div>
+							</div>
+						) : (
+							<article className="wapper__card">
+								{loadImg && (
+									<div>
+										<CustomImage
+											src={loadImg}
+											className="rounded-lg"
+											alt={``}
+											layout="responsive"
+											width={500}
+											height={220}
+										/>
+									</div>
 								)}
-							</SelectForm>
-						</div>
-						<div className="form-group col-md-12">
-							<TagListForm tags={tags} setTag={setTag} errors={errors.error?.message?.tags} />
-						</div>
+								<div className="p-3 p-sm-5">
+									<div className="mb-3">
+										<h1>{values.title}</h1>
+									</div>
+									<div className="mb-3">
+										{tags.map((tag) => (
+											<span key={tag.id} className="p-1 text-secondary">
+												<span className="text-muted">#</span>
+												{tag.slug}
+											</span>
+										))}
+									</div>
+									<div className="mt-5">
+										<ReactMarkdownComponent text={values.content} />
+									</div>
+								</div>
+							</article>
+						)}
 					</div>
-					<div className="text-left">
+					<div className="text-left mt-3">
 						{isLoading ? (
 							<button type="submit" className="btn btn-primary" disabled>
 								<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />

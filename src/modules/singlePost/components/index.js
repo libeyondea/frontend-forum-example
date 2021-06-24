@@ -1,7 +1,7 @@
-import marked from 'marked';
 import React from 'react';
 
 import CustomImage from '@/common/components/CustomImage/components';
+import ReactMarkdownComponent from '@/common/components/ReactMarkdown/components';
 import CommentComponent from '@/modules/singlePost/components/comment/components';
 import PostActionComponent from '@/modules/singlePost/components/postAction';
 import PostFooterComponent from '@/modules/singlePost/components/postFooter';
@@ -27,7 +27,6 @@ const SinglePostComponent = ({ singlePost, listPostUser, listComment }) => {
 								/>
 							</div>
 						)}
-
 						<div className="p-3 p-sm-5">
 							<div className="mb-3">
 								<h1>{singlePost.data?.title}</h1>
@@ -35,12 +34,9 @@ const SinglePostComponent = ({ singlePost, listPostUser, listComment }) => {
 							<PostTagListComponent tags={singlePost.data.tags} />
 							<PostMetaComponent singlePost={singlePost} />
 							<PostActionComponent userName={singlePost.data.user?.user_name} postSlug={singlePost.data.slug} />
-							<div
-								className="my-5"
-								dangerouslySetInnerHTML={{
-									__html: marked(singlePost.data?.content)
-								}}
-							/>
+							<div className="my-5">
+								<ReactMarkdownComponent text={singlePost.data?.content} />
+							</div>
 							<PostFooterComponent
 								favorited={singlePost.data.favorited}
 								totalFavorited={singlePost.data.total_favorited}
