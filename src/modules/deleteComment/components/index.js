@@ -23,14 +23,18 @@ const DeleteCommentComponent = ({ deleteComment }) => {
 					}
 				});
 				if (response.data.success) {
-					showToast.success(`Delete comment successfully`);
-					router.push(`/u/${deleteComment.data.post.user.user_name}/${deleteComment.data.post.slug}`);
+					showToast.success(`Delete comment success`);
+					await router.push(`/u/${deleteComment.data.post.user.user_name}/${deleteComment.data.post.slug}`);
+				} else {
+					showToast.warn('Delete comment warn');
+					setLoading(false);
 				}
 			}
 		} catch (error) {
-			showToast.error();
-		} finally {
+			showToast.warn('Delete comment fail');
 			setLoading(false);
+		} finally {
+			//setLoading(false);
 		}
 	};
 
@@ -55,13 +59,13 @@ const DeleteCommentComponent = ({ deleteComment }) => {
 								</button>
 							)}
 							<CustomLink
-								className="btn btn-secondary"
+								className="btn btn-secondary mr-2"
 								href={`/u/${deleteComment.data.post.user.user_name}/${deleteComment.data.post.slug}/comment/${deleteComment.data.slug}/edit`}
 							>
 								Edit
 							</CustomLink>
 							<CustomLink
-								className="btn btn-light ml-2"
+								className="btn btn-light"
 								href={`/u/${deleteComment.data.post.user.user_name}/${deleteComment.data.post.slug}/comment/${deleteComment.data.slug}`}
 							>
 								Cancel
