@@ -80,7 +80,13 @@ const CommentInput = ({ listCommentClient, setListCommentClient, meta, setMeta, 
 										</div>
 									) : (
 										<div className="form-group">
-											<TextForm rows={5} placeholder="Write a comment..." id="content" name="content" />
+											<TextForm
+												rows={5}
+												placeholder="Write a comment..."
+												id="content"
+												name="content"
+												disabled={isLoading ? true : false}
+											/>
 										</div>
 									)}
 									{isLoading ? (
@@ -94,7 +100,12 @@ const CommentInput = ({ listCommentClient, setListCommentClient, meta, setMeta, 
 										</button>
 									)}
 									{isPreview ? (
-										<button type="button" className="btn btn-secondary" onClick={() => setIsPreview(false)}>
+										<button
+											type="button"
+											className="btn btn-secondary"
+											onClick={() => setIsPreview(false)}
+											disabled={isLoading ? true : false}
+										>
 											Continue editing
 										</button>
 									) : (
