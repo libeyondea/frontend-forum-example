@@ -156,7 +156,13 @@ const CommentMetaComponent = ({
 										</div>
 									) : (
 										<div className="form-group">
-											<TextForm rows={5} placeholder="Write a comment..." id="content" name="content" />
+											<TextForm
+												rows={5}
+												placeholder="Write a comment..."
+												id="content"
+												name="content"
+												disabled={isLoading ? true : false}
+											/>
 										</div>
 									)}
 									{isLoading ? (
@@ -170,15 +176,30 @@ const CommentMetaComponent = ({
 										</button>
 									)}
 									{isPreview ? (
-										<button type="button" className="btn btn-secondary mr-2" onClick={() => setIsPreview(false)}>
+										<button
+											type="button"
+											className="btn btn-secondary mr-2"
+											onClick={() => setIsPreview(false)}
+											disabled={isLoading ? true : false}
+										>
 											Continue editing
 										</button>
 									) : (
-										<button type="button" className="btn btn-secondary mr-2" onClick={() => setIsPreview(true)}>
+										<button
+											type="button"
+											className="btn btn-secondary mr-2"
+											onClick={() => setIsPreview(true)}
+											disabled={isLoading ? true : false}
+										>
 											Preview
 										</button>
 									)}
-									<button type="button" className="btn btn-light" onClick={onBoxReplyCommentClick}>
+									<button
+										type="button"
+										className="btn btn-light"
+										onClick={onBoxReplyCommentClick}
+										disabled={isLoading ? true : false}
+									>
 										Cancel
 									</button>
 								</Form>
