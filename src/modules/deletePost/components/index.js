@@ -21,13 +21,17 @@ const DeletePostComponent = ({ deletePost }) => {
 				});
 				if (response.data.success) {
 					showToast.success(`Delete post success`);
-					router.push(`/dashboard/posts`);
+					await router.push(`/dashboard/posts`);
+				} else {
+					showToast.warn('Delete post warn');
+					setLoading(false);
 				}
 			}
 		} catch (error) {
-			showToast.error();
-		} finally {
+			showToast.warn('Delete post fail');
 			setLoading(false);
+		} finally {
+			//setLoading(false);
 		}
 	};
 
