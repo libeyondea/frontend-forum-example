@@ -51,6 +51,7 @@ const CommentInput = ({ listCommentClient, setListCommentClient, meta, setMeta, 
 		} finally {
 			setLoading(false);
 			resetForm();
+			setIsPreview(false);
 		}
 	};
 
