@@ -36,6 +36,11 @@ body {
 	outline-offset: 2px;
 }
 
+.disabled {
+	pointer-events: none;
+	opacity: 0.65;
+}
+
 #nprogress .bar {
 	border-top-right-radius: 10px !important;
 	border-bottom-right-radius: 10px !important;
