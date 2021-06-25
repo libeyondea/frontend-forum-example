@@ -60,7 +60,7 @@ const NavBarComponent = () => {
 								height={40}
 								alt={user?.user_name}
 							/>
-							<div className="ml-2 d-none d-sm-block">{user?.user_name}</div>
+							{/* <div className="ml-2 d-none d-sm-block">{user?.user_name}</div> */}
 						</Dropdown.Toggle>
 						<Dropdown.Menu align="right" className="p-0">
 							<Link href={`/u/${user?.user_name}`} passHref>
@@ -82,11 +82,6 @@ const NavBarComponent = () => {
 						</form>
 					</Nav>
 					<Nav className="align-items-md-center">
-						<Nav.Item>
-							<Link href="/" passHref>
-								<Nav.Link>Home</Nav.Link>
-							</Link>
-						</Nav.Item>
 						<Dropdown as={NavItem}>
 							<Dropdown.Toggle as={NavLink} id="dropdown-locale">
 								{router.locale === 'vi' ? 'Vietnamese' : 'English'}
@@ -116,7 +111,7 @@ const NavBarComponent = () => {
 											height={40}
 											alt={user?.user_name}
 										/>
-										<div className="ml-2">{user?.user_name}</div>
+										<div className="ml-2 d-none d-xl-block">{user?.user_name}</div>
 									</Dropdown.Toggle>
 									<Dropdown.Menu align="right" className="p-0">
 										<Link href={`/u/${user?.user_name}`} passHref>
