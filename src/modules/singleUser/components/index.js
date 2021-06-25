@@ -15,11 +15,11 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 				<div className="col-12 mb-4">
 					<div className={`text-center bg-light rounded-lg shadow-sm px-4 pb-4 pt-4 ${style.info__user}`}>
 						<div className={`mb-2 ${style.avt}`}>
-							<span className="d-inline-flex p-3 rounded-circle">
+							<span className="d-inline-flex p-3">
 								<CustomImage
 									src={`${process.env.IMAGES_URL}/${singleUser.data?.avatar}`}
 									alt={singleUser.data?.user_name}
-									className="avatar rounded-circle img-thumbnail"
+									className="avatar rounded-circle"
 									width="166"
 									height="166"
 								/>
