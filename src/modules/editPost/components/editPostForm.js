@@ -21,7 +21,6 @@ const EditPostFormComponent = ({ editPost, isPreview }) => {
 	const [isLoading, setLoading] = useState(false);
 	const [tags, setTag] = useState(editPost.data.tags);
 	const [errors, setErrors] = useState({});
-
 	const [isRemoveImg, setIsRemoveImg] = useState(false);
 	const [loadImg, setLoadImg] = useState(
 		editPost.data.image ? `${process.env.IMAGES_URL}/${editPost.data.image}` : null
@@ -71,6 +70,9 @@ const EditPostFormComponent = ({ editPost, isPreview }) => {
 			if (response.data.success) {
 				showToast.success('Update post success');
 				router.push(`/u/${response.data.data.user.user_name}/${response.data.data.slug}`);
+			} else {
+				showToast.warn('Update post warn');
+				setLoading(false);
 			}
 		} catch (error) {
 			console.log(error);
@@ -78,8 +80,9 @@ const EditPostFormComponent = ({ editPost, isPreview }) => {
 			if (!error.response.data.success) {
 				setErrors(error.response.data);
 			}
-		} finally {
 			setLoading(false);
+		} finally {
+			//setLoading(false);
 		}
 	};
 
@@ -191,8 +194,8 @@ const EditPostFormComponent = ({ editPost, isPreview }) => {
 										<h1>{values.title}</h1>
 									</div>
 									<div className="mb-3">
-										{tags.map((tag) => (
-											<span key={tag.id} className="p-1 text-secondary">
+										{tags.map((tag, index) => (
+											<span key={index} className="p-1 text-secondary">
 												<span className="text-muted">#</span>
 												{tag.slug}
 											</span>
