@@ -65,16 +65,20 @@ const NewPostFormComponent = ({ isPreview }) => {
 			});
 			if (response.data.success) {
 				showToast.success('Create post success');
-				router.push(`/u/${response.data.data.user.user_name}/${response.data.data.slug}`);
+				await router.push(`/u/${response.data.data.user.user_name}/${response.data.data.slug}`);
+			} else {
+				showToast.warn('Create post warn');
+				setLoading(false);
 			}
 		} catch (error) {
 			console.log(error);
+			showToast.error('Create post fail');
 			if (!error.response.data.success) {
 				setErrors(error.response.data);
 			}
-			showToast.error('Create post fail');
-		} finally {
 			setLoading(false);
+		} finally {
+			//setLoading(false);
 		}
 	};
 
@@ -189,8 +193,8 @@ const NewPostFormComponent = ({ isPreview }) => {
 										<h1>{values.title}</h1>
 									</div>
 									<div className="mb-3">
-										{tags.map((tag) => (
-											<span key={tag.id} className="p-1 text-secondary">
+										{tags.map((tag, index) => (
+											<span key={index} className="p-1 text-secondary">
 												<span className="text-muted">#</span>
 												{tag.slug}
 											</span>
