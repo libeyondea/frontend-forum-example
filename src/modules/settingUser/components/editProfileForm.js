@@ -21,7 +21,6 @@ const EditProfileFormComponent = ({ editProfile }) => {
 	const [isLoadingResend, setLoadingResend] = useState(false);
 	const [loadImg, setLoadImg] = useState(`${process.env.IMAGES_URL}/${editProfile.data.avatar}`);
 	const [errors, setErrors] = useState({});
-	const [errorsVerify, setErrorsVerify] = useState({});
 	const gender = ['', 'male', 'female', 'unknown'];
 	const FILE_SIZE = 2048 * 1024;
 	const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
@@ -103,15 +102,15 @@ const EditProfileFormComponent = ({ editProfile }) => {
 			});
 			if (response.data.success) {
 				await mutateUser();
-				router.replace(`/settings/profile`);
 				showToast.success(`Update profile success`);
+				router.replace(`/settings/profile`);
 			}
 		} catch (error) {
-			console.log(error.response);
-			if (!error.response.data.success) {
+			console.log(error);
+			showToast.error('Update profile error');
+			if (!error?.response?.data?.success) {
 				setErrors(error.response.data);
 			}
-			showToast.error('Update profile fail');
 		} finally {
 			setLoading(false);
 		}
@@ -154,10 +153,8 @@ const EditProfileFormComponent = ({ editProfile }) => {
 				showToast.success(`Resend email '${response.data.data.email}' success`);
 			}
 		} catch (error) {
-			if (!error.response.data.success) {
-				setErrorsVerify(error.response.data);
-			}
-			showToast.error('Resend fail');
+			console.log(error);
+			showToast.error('Resend error');
 		} finally {
 			setLoadingResend(false);
 		}

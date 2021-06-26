@@ -1,9 +1,9 @@
+import { isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 import Pagination from '@/common/components/Pagination/components';
 import TabPost from '@/common/components/TabPost/components';
-import isEmpty from '@/common/utils/isEmpty';
 import Language from '@/modules/home/languages';
 import PostCardComponent from '@/modules/postCard/components';
 import SideBarLeftComponent from '@/modules/sidebarLeft/components';
@@ -15,7 +15,6 @@ const HomeComponent = ({ listPostGhim, listPost, pid }) => {
 		<div className="container-xl my-4">
 			<div className="row">
 				<div className="col-xl-7 col-lg-7 col-md-9 order-xl-2 order-lg-2 order-md-2">
-					{/* Ghim post - start */}
 					{!isEmpty(listPostGhim?.data) && (
 						<>
 							<h4 className="mb-3">Ghim</h4>
@@ -28,7 +27,6 @@ const HomeComponent = ({ listPostGhim, listPost, pid }) => {
 							</div>
 						</>
 					)}
-					{/* Ghim post - end */}
 					<div className="d-flex align-items-center mb-3">
 						<h4 className="mr-auto mb-0">{Language.titleListPost(router.locale)}</h4>
 						<TabPost
@@ -66,9 +64,9 @@ const HomeComponent = ({ listPostGhim, listPost, pid }) => {
 										<PostCardComponent post={post} />
 									</div>
 								))}
+								<Pagination total={listPost?.meta?.total} limit={process.env.LIMIT_PAGE.LIST_POST_HOME} />
 							</>
 						)}
-						<Pagination total={listPost?.meta?.total} limit={process.env.LIMIT_PAGE.LIST_POST_HOME} />
 					</div>
 				</div>
 				<div className="d-none d-md-block col-xl-2 col-lg-2 col-md-3 order-xl-1 order-lg-1 order-md-1">

@@ -22,6 +22,7 @@
 		"simple-import-sort"
 	],
 	"extends": [
+		"eslint:recommended",
 		"next",
 		"next/core-web-vitals",
 		"plugin:prettier/recommended"

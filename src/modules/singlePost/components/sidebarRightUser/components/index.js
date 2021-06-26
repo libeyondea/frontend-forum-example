@@ -3,7 +3,7 @@ import React from 'react';
 import CustomImage from '@/common/components/CustomImage/components';
 import CustomLink from '@/common/components/CustomLink/components';
 import useUser from '@/common/hooks/useUser';
-import isEmpty from '@/common/utils/isEmpty';
+import { isEmpty } from 'lodash';
 import timeFormat from '@/common/utils/timeFormat';
 import style from '@/modules/singlePost/components/sidebarRightUser/styles/style.module.scss';
 import FollowUserButtonComponent from '@/modules/singleUser/components/followUserButton';

@@ -24,12 +24,12 @@ const SingleComment = ({ singleComment }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const { user_name, pid, comment_slug } = query;
+		const { user_name, post_slug, comment_slug } = query;
 		const resSingleComment = await httpRequest.get({
 			url: `/comments/${comment_slug}`,
 			params: {
 				user_name: user_name,
-				post_slug: pid
+				post_slug: post_slug
 			},
 			token: getCookie('token', req)
 		});

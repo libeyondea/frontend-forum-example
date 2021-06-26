@@ -5,6 +5,7 @@ import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import LayoutComponent from '@/modules/layout/components';
 import SingleUserComponent from '@/modules/singleUser/components';
+import pageNumber from '@/common/utils/pageNumber';
 
 const SingleUser = ({ singleUser, listPostUser }) => {
 	return (
@@ -19,10 +20,7 @@ const SingleUser = ({ singleUser, listPostUser }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const initialpage = query.page;
-		const user_name = query.user_name;
-		const page = Number.isInteger(parseInt(initialpage)) && initialpage >= 1 ? initialpage : 1;
-
+		const { user_name } = query;
 		const [resSingleUser, resListPostUser] = await Promise.all([
 			httpRequest.get({
 				url: `/users/${user_name}`,
@@ -33,7 +31,7 @@ export async function getServerSideProps({ req, query }) {
 				token: getCookie('token', req),
 				params: {
 					user: user_name,
-					offset: (page - 1) * process.env.LIMIT_PAGE.LIST_POST_USER,
+					offset: (pageNumber(query.page) - 1) * process.env.LIMIT_PAGE.LIST_POST_USER,
 					limit: process.env.LIMIT_PAGE.LIST_POST_USER
 				}
 			})

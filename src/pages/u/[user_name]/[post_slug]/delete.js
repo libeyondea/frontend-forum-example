@@ -19,9 +19,9 @@ const DeletePost = ({ deletePost }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const { user_name, pid } = query;
+		const { user_name, post_slug } = query;
 		const resDeletePost = await httpRequest.get({
-			url: `/posts/${pid}/delete`,
+			url: `/posts/${post_slug}/delete`,
 			params: {
 				user_name: user_name
 			},

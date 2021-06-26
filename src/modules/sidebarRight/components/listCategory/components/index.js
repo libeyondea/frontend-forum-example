@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import useSWR from 'swr';
 
 import CustomLink from '@/common/components/CustomLink/components';
-import isEmpty from '@/common/utils/isEmpty';
+import { isEmpty } from 'lodash';
 import style from '@/modules/sidebarRight/components/listCategory/styles/style.module.scss';
 
 const ListCategoryComponent = () => {

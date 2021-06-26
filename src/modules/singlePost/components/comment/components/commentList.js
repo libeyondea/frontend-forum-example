@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import httpRequest from '@/common/utils/httpRequest';
-import isEmpty from '@/common/utils/isEmpty';
+import { isEmpty } from 'lodash';
 import { getCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
 import CommentLoopComponent from '@/modules/singlePost/components/comment/components/commentLoop';

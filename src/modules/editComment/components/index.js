@@ -22,9 +22,11 @@ const EditCommentComponent = ({ editComment }) => {
 	const initialValues = {
 		content: editComment.data.content
 	};
+
 	const validationSchema = Yup.object({
-		content: Yup.string().required('Comment is required').max(1000, 'Comment must be at most 1000 characters')
+		content: Yup.string().required('Comment is required').max(6666, 'Comment must be at most 6666 characters')
 	});
+
 	const onSubmit = async (values) => {
 		try {
 			const comment = {
@@ -39,18 +41,14 @@ const EditCommentComponent = ({ editComment }) => {
 			});
 			if (response.data.success) {
 				showToast.success(`Update comment success`);
-				await router.push(
+				router.push(
 					`/u/${editComment.data.post.user.user_name}/${editComment.data.post.slug}/comment/${editComment.data.slug}`
 				);
-			} else {
-				showToast.warn('Update comment warn');
-				setLoading(false);
 			}
 		} catch (error) {
-			showToast.error();
-			setLoading(false);
+			showToast.error(`Update comment error`);
 		} finally {
-			//setLoading(false);
+			setLoading(false);
 		}
 	};
 

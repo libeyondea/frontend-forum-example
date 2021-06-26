@@ -14,7 +14,6 @@ import { SWRConfig } from 'swr';
 import fetcher from '@/common/utils/fetcher';
 import { removeCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
-import Error from '@/pages/_error';
 
 const TopProgressBar = dynamic(
 	() => {
@@ -25,9 +24,7 @@ const TopProgressBar = dynamic(
 
 const App = ({ Component, pageProps }) => {
 	const router = useRouter();
-	if (pageProps.statusCode) {
-		return <Error statusCode={pageProps.statusCode} />;
-	}
+
 	return (
 		<>
 			<Head>

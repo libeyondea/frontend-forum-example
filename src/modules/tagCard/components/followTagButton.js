@@ -18,31 +18,31 @@ const FollowTagButtonComponent = ({ following, slug }) => {
 		try {
 			if (!user) {
 				router.push('/login');
-				return;
-			}
-			setLoading(true);
-			const response = isFollow
-				? await httpRequest.delete({
-						url: `/follow_tag`,
-						params: {
-							slug: slug
-						},
-						token: getCookie('token')
-				  })
-				: await httpRequest.post({
-						url: `/follow_tag`,
-						data: {
-							slug: slug
-						},
-						token: getCookie('token')
-				  });
-			if (response.data.success) {
-				mutate(`/tags_followed?offset=0&limit=${process.env.LIMIT_PAGE.LIST_TAG_FOLLOWED}`);
-				setFollow(!isFollow);
-				showToast.success(`${!isFollow ? 'Follow' : 'Unfollow'}`);
+			} else {
+				setLoading(true);
+				const response = isFollow
+					? await httpRequest.delete({
+							url: `/follow_tag`,
+							params: {
+								slug: slug
+							},
+							token: getCookie('token')
+					  })
+					: await httpRequest.post({
+							url: `/follow_tag`,
+							data: {
+								slug: slug
+							},
+							token: getCookie('token')
+					  });
+				if (response.data.success) {
+					showToast.success(`${!isFollow ? 'Follow' : 'Unfollow'}`);
+					setFollow(!isFollow);
+					mutate(`/tags_followed?offset=0&limit=${process.env.LIMIT_PAGE.LIST_TAG_FOLLOWED}`);
+				}
 			}
 		} catch (error) {
-			console.log(error.response);
+			console.log(error);
 			showToast.error();
 		} finally {
 			setLoading(false);

@@ -3,7 +3,7 @@ import useSWR from 'swr';
 
 import CustomLink from '@/common/components/CustomLink/components';
 import useUser from '@/common/hooks/useUser';
-import isEmpty from '@/common/utils/isEmpty';
+import { isEmpty } from 'lodash';
 import style from '@/modules/sidebarLeft/components/listTagFollowed/styles/style.module.scss';
 
 const ListTagFollowedComponent = () => {

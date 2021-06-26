@@ -2,6 +2,8 @@ import React from 'react';
 
 import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
+import pageNumber from '@/common/utils/pageNumber';
+import parseArray from '@/common/utils/parseArray';
 import { getCookie } from '@/common/utils/session';
 import LayoutComponent from '@/modules/layout/components';
 import SingleCategoryComponent from '@/modules/singleCategory/components';
@@ -19,10 +21,7 @@ const SingleCategory = ({ singleCategory, listPostCategory, pid }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const initialpage = query.page;
-		const initialPid = query.pid;
-		const page = Number.isInteger(parseInt(initialpage)) && initialpage >= 1 ? initialpage : 1;
-		const pid = Array.isArray(initialPid) ? initialPid : [];
+		const pid = parseArray(query.pid);
 		if (pid.length > 2) {
 			return {
 				notFound: true
@@ -39,7 +38,7 @@ export async function getServerSideProps({ req, query }) {
 				params: {
 					category: pid[0],
 					tab: pid[1] || 'feed',
-					offset: (page - 1) * process.env.LIMIT_PAGE.LIST_POST_TAG,
+					offset: (pageNumber(query.page) - 1) * process.env.LIMIT_PAGE.LIST_POST_TAG,
 					limit: process.env.LIMIT_PAGE.LIST_POST_TAG
 				}
 			})

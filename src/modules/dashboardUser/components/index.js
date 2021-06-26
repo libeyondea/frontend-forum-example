@@ -2,6 +2,7 @@ import React from 'react';
 
 import LoadingSpinner from '@/common/components/LoadingSpinner/components';
 import TabDashboard from '@/common/components/TabDashboard/components';
+import useUser from '@/common/hooks/useUser';
 import ListFavoritedPostComponent from '@/modules/dashboardUser/components/listFavoritedPost';
 import ListFollowingTagComponent from '@/modules/dashboardUser/components/listFollowingTag';
 import ListFollowingUserComponent from '@/modules/dashboardUser/components/listFollowingUser';
@@ -9,9 +10,10 @@ import ListPostComponent from '@/modules/dashboardUser/components/listPost';
 import ListUserFollowerComponent from '@/modules/dashboardUser/components/listUserFollower';
 
 const DashboardUserComponent = ({ dashboardUser, pid }) => {
+	const { user } = useUser();
 	return (
 		<div className="container-xl my-4">
-			{!dashboardUser ? (
+			{!user ? (
 				<LoadingSpinner />
 			) : (
 				<>

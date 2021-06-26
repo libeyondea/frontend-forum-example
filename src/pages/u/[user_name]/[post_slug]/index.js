@@ -24,10 +24,10 @@ const SinglePost = ({ singlePost, listPostUser, listComment }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const { user_name, pid } = query;
+		const { user_name, post_slug } = query;
 		const [resSinglePost, resListComment] = await Promise.all([
 			httpRequest.get({
-				url: `/posts/${pid}`,
+				url: `/posts/${post_slug}`,
 				params: {
 					user_name: user_name
 				},
@@ -37,7 +37,7 @@ export async function getServerSideProps({ req, query }) {
 				url: `/comments`,
 				token: getCookie('token', req),
 				params: {
-					post_slug: pid,
+					post_slug: post_slug,
 					offset: (1 - 1) * process.env.LIMIT_PAGE.LIST_COMMENT,
 					limit: process.env.LIMIT_PAGE.LIST_COMMENT
 				}

@@ -65,20 +65,16 @@ const NewPostFormComponent = ({ isPreview }) => {
 			});
 			if (response.data.success) {
 				showToast.success('Create post success');
-				await router.push(`/u/${response.data.data.user.user_name}/${response.data.data.slug}`);
-			} else {
-				showToast.warn('Create post warn');
-				setLoading(false);
+				router.push(`/u/${response.data.data.user.user_name}/${response.data.data.slug}`);
 			}
 		} catch (error) {
 			console.log(error);
-			showToast.error('Create post fail');
-			if (!error.response.data.success) {
+			showToast.error('Create post error');
+			if (!error?.response?.data?.success && error?.response?.data?.error?.status === 422) {
 				setErrors(error.response.data);
 			}
-			setLoading(false);
 		} finally {
-			//setLoading(false);
+			setLoading(false);
 		}
 	};
 

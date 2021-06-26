@@ -37,7 +37,7 @@ const VerifyUserComponent = ({ verifyUser }) => {
 			}
 		} catch (error) {
 			showToast.error('Resend fail');
-			if (!error.response.data.success && error.response.data.error.status === 422) {
+			if (!error?.response?.data?.success && error?.response?.data?.error?.status === 422) {
 				setErrors(error.response.data);
 			}
 		} finally {

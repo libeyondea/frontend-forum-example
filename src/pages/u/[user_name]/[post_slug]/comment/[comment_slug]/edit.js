@@ -3,15 +3,15 @@ import React from 'react';
 import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
-import DeleteCommentComponent from '@/modules/deleteComment/components';
+import EditCommentComponent from '@/modules/editComment/components';
 import Layout from '@/modules/layout/components';
 
-const DeleteComment = ({ deleteComment }) => {
+const EditComment = ({ editComment }) => {
 	return (
 		<>
-			<MetaWebsite title="Delete Comment" isNoneMeta />
+			<MetaWebsite title="Edit Comment" isNoneMeta />
 			<Layout>
-				<DeleteCommentComponent deleteComment={deleteComment} />
+				<EditCommentComponent editComment={editComment} />
 			</Layout>
 		</>
 	);
@@ -19,19 +19,19 @@ const DeleteComment = ({ deleteComment }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const { user_name, pid, comment_slug } = query;
-		const resDeleteComment = await httpRequest.get({
-			url: `/comments/${comment_slug}/delete`,
+		const { user_name, post_slug, comment_slug } = query;
+		const resEditComment = await httpRequest.get({
+			url: `/comments/${comment_slug}/edit`,
 			params: {
 				user_name: user_name,
-				post_slug: pid
+				post_slug: post_slug
 			},
 			token: getCookie('token', req)
 		});
-		if (resDeleteComment.data.success) {
+		if (resEditComment.data.success) {
 			return {
 				props: {
-					deleteComment: resDeleteComment.data
+					editComment: resEditComment.data
 				}
 			};
 		}
@@ -42,4 +42,4 @@ export async function getServerSideProps({ req, query }) {
 	}
 }
 
-export default DeleteComment;
+export default EditComment;

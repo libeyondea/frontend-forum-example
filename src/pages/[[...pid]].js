@@ -2,11 +2,13 @@ import React from 'react';
 
 import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
+import pageNumber from '@/common/utils/pageNumber';
+import parseArray from '@/common/utils/parseArray';
 import { getCookie } from '@/common/utils/session';
 import HomeComponent from '@/modules/home/components';
 import LayoutComponent from '@/modules/layout/components';
 
-const Index = ({ listPostGhim, listPost, pid }) => {
+const Home = ({ listPostGhim, listPost, pid }) => {
 	return (
 		<>
 			<MetaWebsite />
@@ -19,10 +21,7 @@ const Index = ({ listPostGhim, listPost, pid }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const initialpage = query.page;
-		const initialPid = query.pid;
-		const page = Number.isInteger(parseInt(initialpage)) && initialpage >= 1 ? initialpage : 1;
-		const pid = Array.isArray(initialPid) ? initialPid : [];
+		const pid = parseArray(query.pid);
 		if (pid.length > 1) {
 			return {
 				notFound: true
@@ -38,7 +37,7 @@ export async function getServerSideProps({ req, query }) {
 				token: getCookie('token', req),
 				params: {
 					tab: pid[0] || 'feed',
-					offset: (page - 1) * process.env.LIMIT_PAGE.LIST_POST_HOME,
+					offset: (pageNumber(query.page) - 1) * process.env.LIMIT_PAGE.LIST_POST_HOME,
 					limit: process.env.LIMIT_PAGE.LIST_POST_HOME
 				}
 			})
@@ -53,10 +52,11 @@ export async function getServerSideProps({ req, query }) {
 			};
 		}
 	} catch (error) {
+		console.log(error);
 		return {
 			notFound: true
 		};
 	}
 }
 
-export default Index;
+export default Home;

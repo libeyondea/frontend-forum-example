@@ -36,15 +36,15 @@ const LoginFormComponent = () => {
 				data: user
 			});
 			if (response.data.success) {
-				setCookie('token', response.data.data.access_token);
 				showToast.success('Login success');
+				setCookie('token', response.data.data.access_token);
 				router.back();
 			}
 		} catch (error) {
-			if (!error.response.data.success) {
+			showToast.error('Login error');
+			if (!error?.response?.data?.success) {
 				setErrors(error.response.data);
 			}
-			showToast.error('Login failed');
 		} finally {
 			setLoading(false);
 		}

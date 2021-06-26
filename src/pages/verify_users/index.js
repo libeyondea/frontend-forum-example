@@ -19,7 +19,7 @@ const VerifyUser = ({ verifyUser }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const url = query.url;
+		const { url } = query;
 		if (url) {
 			const resVerifyUser = await httpRequest.get({
 				url: decodeURIComponent(url),

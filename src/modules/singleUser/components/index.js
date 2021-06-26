@@ -51,9 +51,6 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 				</div>
 				<div className="col-lg-4 col-md-4 mb-4 mb-md-0">
 					<ul className="wapper__card list-group rounded-lg shadow-sm">
-						<li className="list-group-item text-muted">
-							Activity <i className="fa fa-dashboard fa-1x" />
-						</li>
 						<li className="list-group-item text-right">
 							<span className="pull-left">
 								<strong>Posts published</strong>

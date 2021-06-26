@@ -70,19 +70,15 @@ const EditPostFormComponent = ({ editPost, isPreview }) => {
 			if (response.data.success) {
 				showToast.success('Update post success');
 				router.push(`/u/${response.data.data.user.user_name}/${response.data.data.slug}`);
-			} else {
-				showToast.warn('Update post warn');
-				setLoading(false);
 			}
 		} catch (error) {
 			console.log(error);
-			showToast.error('Update post fail');
+			showToast.error('Update post error');
 			if (!error.response.data.success) {
 				setErrors(error.response.data);
 			}
-			setLoading(false);
 		} finally {
-			//setLoading(false);
+			setLoading(false);
 		}
 	};
 

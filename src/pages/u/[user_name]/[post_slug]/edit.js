@@ -19,9 +19,9 @@ const EditPost = ({ editPost }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const { user_name, pid } = query;
+		const { user_name, post_slug } = query;
 		const resEditPost = await httpRequest.get({
-			url: `posts/${pid}/edit`,
+			url: `posts/${post_slug}/edit`,
 			params: {
 				user_name: user_name
 			},

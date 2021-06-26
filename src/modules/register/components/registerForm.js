@@ -110,10 +110,10 @@ const RegisterFormComponent = () => {
 				showToast.success('Register success');
 			}
 		} catch (error) {
-			if (!error.response.data.success) {
+			showToast.error('Register error');
+			if (!error?.response?.data?.success) {
 				setErrors(error.response.data);
 			}
-			showToast.error('Register failed');
 		} finally {
 			setLoading(false);
 		}

@@ -2,6 +2,7 @@ import React from 'react';
 
 import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
+import parseArray from '@/common/utils/parseArray';
 import { getCookie } from '@/common/utils/session';
 import DashboardUserComponent from '@/modules/dashboardUser/components';
 import LayoutComponent from '@/modules/layout/components';
@@ -19,8 +20,7 @@ const DashboardUser = ({ dashboardUser, pid }) => {
 
 export async function getServerSideProps({ req, query }) {
 	try {
-		const initialPid = query.pid;
-		const pid = Array.isArray(initialPid) ? initialPid : [];
+		const pid = parseArray(query.pid);
 		if (pid.length > 1) {
 			return {
 				notFound: true
@@ -39,7 +39,7 @@ export async function getServerSideProps({ req, query }) {
 			};
 		}
 	} catch (error) {
-		if (error.response.status === 401) {
+		if (error?.response?.status === 401) {
 			return {
 				redirect: {
 					destination: '/login',

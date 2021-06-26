@@ -2,7 +2,7 @@ import React from 'react';
 
 import Pagination from '@/common/components/Pagination/components';
 import TabPost from '@/common/components/TabPost/components';
-import isEmpty from '@/common/utils/isEmpty';
+import { isEmpty } from 'lodash';
 import PostCardComponent from '@/modules/postCard/components';
 import SideBarRightComponent from '@/modules/sidebarRight/components';
 import TagCardComponent from '@/modules/tagCard/components';
