@@ -1,6 +1,8 @@
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { FaRegComment } from 'react-icons/fa';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import * as Yup from 'yup';
 
 import ReactMarkdownComponent from '@/common/components/ReactMarkdown/components';
@@ -28,6 +30,7 @@ const CommentMetaComponent = ({
 	const { user } = useUser();
 	const router = useRouter();
 	const [isLoading, setLoading] = useState(false);
+	const [isLoadingFav, setLoadingFav] = useState(false);
 	const [replyBox, setReplyBox] = useState(false);
 	const [isFavorited, setFavorited] = useState(favorited);
 	const [sumFavorited, setSumFavorited] = useState(totalFavorited);
@@ -83,9 +86,7 @@ const CommentMetaComponent = ({
 			if (!user) {
 				router.push('/login');
 			} else {
-				setFavorited(!isFavorited);
-				setSumFavorited(!isFavorited ? sumFavorited + 1 : sumFavorited - 1);
-				showToast.success(`${!isFavorited ? 'Liked' : 'Unliked '}`, commentSlug);
+				setLoadingFav(true);
 				const response = isFavorited
 					? await httpRequest.delete({
 							url: `/favorite_comment`,
@@ -102,11 +103,15 @@ const CommentMetaComponent = ({
 							token: getCookie('token')
 					  });
 				if (response.data.success) {
-					// success
+					setFavorited(!isFavorited);
+					setSumFavorited(!isFavorited ? sumFavorited + 1 : sumFavorited - 1);
+					showToast.success(`${!isFavorited ? 'Liked' : 'Unliked '}`, commentSlug);
 				}
 			}
 		} catch (error) {
 			showToast.error();
+		} finally {
+			setLoadingFav(false);
 		}
 	};
 
@@ -127,10 +132,10 @@ const CommentMetaComponent = ({
 					<button
 						className={`d-flex align-items-center border-0 bg-transparent mr-3 ${
 							isFavorited ? 'text-danger' : 'text-secondary'
-						}`}
+						} ${isLoadingFav ? 'disabled' : ''}`}
 						onClick={onFavoriteCommentClick}
 					>
-						{isFavorited ? <i className="fa fa-heart fa-sm mr-1" /> : <i className="fa fa-heart-o fa-sm mr-1" />}
+						{isFavorited ? <FaHeart className="mr-1" /> : <FaRegHeart className="mr-1" />}
 						<span className="mr-1">{sumFavorited}</span>
 						<span className="d-none d-sm-block">likes</span>
 					</button>
@@ -139,7 +144,7 @@ const CommentMetaComponent = ({
 						className="p-0 text-secondary border-0 bg-transparent d-flex align-items-center"
 						onClick={onBoxReplyCommentClick}
 					>
-						<i className="fa fa-comment-o fa-sm mr-1"></i>
+						<FaRegComment className="mr-1" />
 						{/* <span className="mr-1">666</span> */}
 						<span className="d-none d-sm-block">reply</span>
 					</button>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaTimes } from 'react-icons/fa';
 
 import convertTextToSlug from '@/common/utils/convertTextToSlug ';
 
@@ -78,7 +79,7 @@ const TagListFormComponent = ({ errors, tags, setTag, ...props }) => {
 						item.slug && (
 							<span className="badge badge-secondary my-1 mr-1 d-flex align-items-center font-weight-normal" key={i}>
 								{item.slug}
-								<i className="fa fa-times p-1 cursor-pointer" onClick={() => handleRemoveItem(i)} aria-hidden="true" />
+								<FaTimes className="cursor-pointer ml-1" onClick={() => handleRemoveItem(i)} />
 							</span>
 						)
 				)}

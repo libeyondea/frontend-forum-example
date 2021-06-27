@@ -21,10 +21,7 @@ class MyDocument extends Document {
 					<meta name="theme-color" content="#000" />
 					<link rel="shortcut icon" href="/favicon.ico" />
 					<link rel="manifest" href="/manifest.json" />
-					<link
-						rel="stylesheet"
-						href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-					/>
+					<meta name="google-site-verification" content="9YzX8i754FQ0s-m0_uzsr8GtPuXBdchifjMeMRPQ-t0" />
 				</Head>
 				<body>
 					<Main />

@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 import { mutate } from 'swr';
 
 import useUser from '@/common/hooks/useUser';
@@ -52,30 +53,33 @@ const FollowTagButtonComponent = ({ following, slug }) => {
 	return (
 		<>
 			{isLoading ? (
-				<button className={`btn btn-sm ${isFollow ? 'btn-secondary' : 'btn-outline-secondary'}`} disabled>
+				<button
+					className={`d-flex align-items-center btn btn-sm ${isFollow ? 'btn-secondary' : 'btn-outline-secondary'}`}
+					disabled
+				>
 					<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
 					{isFollow ? (
 						<>
-							<i className="fa fa-minus" /> UnFollow
+							<FaMinus className="mr-1" /> UnFollow
 						</>
 					) : (
 						<>
-							<i className="fa fa-plus" /> Follow
+							<FaPlus className="mr-1" /> Follow
 						</>
 					)}
 				</button>
 			) : (
 				<button
-					className={`btn btn-sm ${isFollow ? 'btn-secondary' : 'btn-outline-secondary'}`}
+					className={`d-flex align-items-center btn btn-sm ${isFollow ? 'btn-secondary' : 'btn-outline-secondary'}`}
 					onClick={onFollowTagClick}
 				>
 					{isFollow ? (
 						<>
-							<i className="fa fa-minus" /> UnFollow
+							<FaMinus className="mr-1" /> UnFollow
 						</>
 					) : (
 						<>
-							<i className="fa fa-plus" /> Follow
+							<FaPlus className="mr-1" /> Follow
 						</>
 					)}
 				</button>

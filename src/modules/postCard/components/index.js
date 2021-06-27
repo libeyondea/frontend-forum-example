@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaRegComment } from 'react-icons/fa';
 
 import CustomImage from '@/common/components/CustomImage/components';
 import CustomLink from '@/common/components/CustomLink/components';
@@ -64,7 +65,7 @@ const PostCardComponent = ({ post }) => {
 							href={`/u/${post.user.user_name}/${post.slug}#comment-post`}
 							className="d-flex align-items-center text-decoration-none text-secondary mr-2"
 						>
-							<i className="fa fa-comment-o fa-sm mr-1" />
+							<FaRegComment className="mr-1" />
 							<span className="mr-1">{post.total_comments}</span>
 							<span className="d-none d-sm-block">comments</span>
 						</CustomLink>

@@ -44,7 +44,6 @@ const MetaWebsite = ({
 							content={`${process.env.IMAGES_URL}/${image ? image : process.env.META.IMAGE}`}
 						/>
 						{creatorTwitter && <meta name="twitter:creator" content={creatorTwitter} />}
-						<meta name="google-site-verification" content="9YzX8i754FQ0s-m0_uzsr8GtPuXBdchifjMeMRPQ-t0" />
 					</>
 				)}
 			</Head>

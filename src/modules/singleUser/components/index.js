@@ -36,7 +36,7 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 							</div>
 						)}
 						{singleUser.data?.user_name !== user?.user_name && (
-							<div>
+							<div className="d-flex justify-content-center">
 								<FollowUserButtonComponent
 									user_name={singleUser.data?.user_name}
 									following={singleUser.data?.following}

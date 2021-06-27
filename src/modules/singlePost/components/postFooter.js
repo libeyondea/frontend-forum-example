@@ -4,9 +4,8 @@ import React, { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import NavItem from 'react-bootstrap/NavItem';
 import NavLink from 'react-bootstrap/NavLink';
+import { FaEllipsisH, FaHeart, FaRegHeart } from 'react-icons/fa';
 
-import CustomImage from '@/common/components/CustomImage/components';
-import CustomLink from '@/common/components/CustomLink/components';
 import useUser from '@/common/hooks/useUser';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
@@ -62,11 +61,11 @@ const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName
 			>
 				{isFavorited ? (
 					<>
-						<i className="fa fa-heart fa-sm mr-1" />
+						<FaHeart className="mr-1" />
 					</>
 				) : (
 					<>
-						<i className="fa fa-heart-o fa-sm mr-1" />
+						<FaRegHeart className="mr-1" />
 					</>
 				)}
 				<span className="mr-1">{sumFavorited}</span>
@@ -78,12 +77,7 @@ const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName
 					id="dropdown-custom-single-post"
 					className={`d-flex align-items-center text-secondary p-0 ${style.custom__dropdown__toggle}`}
 				>
-					<svg width={25} height={25}>
-						<path
-							d="M5 12.5c0 .55.2 1.02.59 1.41.39.4.86.59 1.41.59.55 0 1.02-.2 1.41-.59.4-.39.59-.86.59-1.41 0-.55-.2-1.02-.59-1.41A1.93 1.93 0 0 0 7 10.5c-.55 0-1.02.2-1.41.59-.4.39-.59.86-.59 1.41zm5.62 0c0 .55.2 1.02.58 1.41.4.4.87.59 1.42.59.55 0 1.02-.2 1.41-.59.4-.39.59-.86.59-1.41 0-.55-.2-1.02-.59-1.41a1.93 1.93 0 0 0-1.41-.59c-.55 0-1.03.2-1.42.59-.39.39-.58.86-.58 1.41zm5.6 0c0 .55.2 1.02.58 1.41.4.4.87.59 1.43.59.56 0 1.03-.2 1.42-.59.39-.39.58-.86.58-1.41 0-.55-.2-1.02-.58-1.41a1.93 1.93 0 0 0-1.42-.59c-.56 0-1.04.2-1.43.59-.39.39-.58.86-.58 1.41z"
-							fillRule="evenodd"
-						/>
-					</svg>
+					<FaEllipsisH />
 				</Dropdown.Toggle>
 				<Dropdown.Menu align="right" className="p-0 rounded-lg shadow-sm">
 					<Link href={`/report-abuse`} passHref>

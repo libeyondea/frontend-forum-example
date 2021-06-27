@@ -6,6 +6,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavItem from 'react-bootstrap/NavItem';
 import NavLink from 'react-bootstrap/NavLink';
+import { FaTags } from 'react-icons/fa';
+import { FcAbout, FcContacts, FcFaq, FcHome } from 'react-icons/fc';
 
 import CustomImage from '@/common/components/CustomImage/components';
 import useUser from '@/common/hooks/useUser';
@@ -146,28 +148,28 @@ const NavBarComponent = () => {
 							</Dropdown.Toggle>
 							<Dropdown.Menu align="right" className="p-0">
 								<Link href="/" passHref>
-									<Dropdown.Item className="text-dark">
-										<i className="fa fa-home fa-sm" /> Home
+									<Dropdown.Item className="d-flex align-items-center">
+										<FcHome className="h5 mb-0 mr-1" /> Home
 									</Dropdown.Item>
 								</Link>
 								<Link href="/tags" passHref>
-									<Dropdown.Item>
-										<i className="fa fa-tags fa-sm" /> Tags
+									<Dropdown.Item className="d-flex align-items-center">
+										<FaTags className="h5 mb-0 mr-1" /> Tags
 									</Dropdown.Item>
 								</Link>
 								<Link href="/about" passHref>
-									<Dropdown.Item>
-										<i className="fa fa-question fa-sm" /> About
+									<Dropdown.Item className="d-flex align-items-center">
+										<FcAbout className="h5 mb-0 mr-1" /> About
 									</Dropdown.Item>
 								</Link>
 								<Link href="/faq" passHref>
-									<Dropdown.Item>
-										<i className="fa fa-question-circle fa-sm" /> FAQ
+									<Dropdown.Item className="d-flex align-items-center">
+										<FcFaq className="h5 mb-0 mr-1" /> FAQ
 									</Dropdown.Item>
 								</Link>
 								<Link href="/contact" passHref>
-									<Dropdown.Item>
-										<i className="fa fa-info fa-sm" /> Contact
+									<Dropdown.Item className="d-flex align-items-center">
+										<FcContacts className="h5 mb-0 mr-1" /> Contact
 									</Dropdown.Item>
 								</Link>
 							</Dropdown.Menu>

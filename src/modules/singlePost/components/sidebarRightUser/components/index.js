@@ -1,9 +1,9 @@
+import { isEmpty } from 'lodash';
 import React from 'react';
 
 import CustomImage from '@/common/components/CustomImage/components';
 import CustomLink from '@/common/components/CustomLink/components';
 import useUser from '@/common/hooks/useUser';
-import { isEmpty } from 'lodash';
 import timeFormat from '@/common/utils/timeFormat';
 import style from '@/modules/singlePost/components/sidebarRightUser/styles/style.module.scss';
 import FollowUserButtonComponent from '@/modules/singleUser/components/followUserButton';
@@ -28,7 +28,7 @@ const SideBarRightUserComponent = ({ postUser, listPostUser }) => {
 						<h5 className="text-break mb-2">{postUser.user_name}</h5>
 					</CustomLink>
 					{postUser?.user_name !== user?.user_name && (
-						<div>
+						<div className="d-flex justify-content-center">
 							<FollowUserButtonComponent user_name={postUser?.user_name} following={postUser?.following} />
 						</div>
 					)}
