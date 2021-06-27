@@ -8,7 +8,8 @@
 		"dev": "next dev -p 999",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"postbuild": "next-sitemap"
 	},
 	"dependencies": {
 		"axios": "^0.21.1",
@@ -21,6 +22,7 @@
 		"marked": "^2.1.1",
 		"moment": "^2.29.1",
 		"next": "^11.0.0",
+		"next-sitemap": "^1.6.124",
 		"nprogress": "^0.2.0",
 		"postcss": "^8.3.5",
 		"qs": "^6.10.1",
