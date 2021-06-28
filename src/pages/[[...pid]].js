@@ -8,12 +8,12 @@ import { getCookie } from '@/common/utils/session';
 import HomeComponent from '@/modules/home/components';
 import LayoutComponent from '@/modules/layout/components';
 
-const Home = ({ listPostGhim, listPost, pid }) => {
+const Home = ({ listPostPinned, listPost, pid }) => {
 	return (
 		<>
 			<MetaWebsite />
 			<LayoutComponent>
-				<HomeComponent listPostGhim={listPostGhim} listPost={listPost} pid={pid} />
+				<HomeComponent listPostPinned={listPostPinned} listPost={listPost} pid={pid} />
 			</LayoutComponent>
 		</>
 	);
@@ -27,9 +27,9 @@ export async function getServerSideProps({ req, query }) {
 				notFound: true
 			};
 		}
-		const [resListPostGhim, resListPost] = await Promise.all([
+		const [resListPostPinned, resListPost] = await Promise.all([
 			httpRequest.get({
-				url: `/posts_ghim`,
+				url: `/posts_pinned`,
 				token: getCookie('token', req)
 			}),
 			httpRequest.get({
@@ -42,10 +42,10 @@ export async function getServerSideProps({ req, query }) {
 				}
 			})
 		]);
-		if (resListPostGhim.data.success && resListPost.data.success) {
+		if (resListPostPinned.data.success && resListPost.data.success) {
 			return {
 				props: {
-					listPostGhim: resListPostGhim.data,
+					listPostPinned: resListPostPinned.data,
 					listPost: resListPost.data,
 					pid: pid
 				}
