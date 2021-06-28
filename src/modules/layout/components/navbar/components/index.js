@@ -88,6 +88,7 @@ const NavBarComponent = () => {
 					width={40}
 					height={40}
 					alt={user?.user_name}
+					layout="fixed"
 				/>
 			</Dropdown.Toggle>
 			<Dropdown.Menu align="right" className="p-0">

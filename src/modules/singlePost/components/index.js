@@ -24,6 +24,7 @@ const SinglePostComponent = ({ singlePost, listPostUser, listComment }) => {
 									layout="responsive"
 									width={500}
 									height={280}
+									isBlur
 								/>
 							</div>
 						)}

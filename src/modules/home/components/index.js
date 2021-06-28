@@ -17,7 +17,7 @@ const HomeComponent = ({ listPostPinned, listPost, pid }) => {
 				<div className="col-xl-7 col-lg-7 col-md-9 order-xl-2 order-lg-2 order-md-2">
 					{!isEmpty(listPostPinned?.data) && (
 						<>
-							<h4 className="mb-3">Pinned</h4>
+							<h4 className="mb-3">{Language.titleListPostPinned(router.locale)}</h4>
 							<div className="row">
 								{listPostPinned?.data?.map((post) => (
 									<div className="col-12 mb-3" key={post?.id}>
