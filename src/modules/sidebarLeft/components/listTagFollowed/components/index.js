@@ -1,9 +1,9 @@
+import { isEmpty } from 'lodash';
 import React, { memo } from 'react';
 import useSWR from 'swr';
 
 import CustomLink from '@/common/components/CustomLink/components';
 import useUser from '@/common/hooks/useUser';
-import { isEmpty } from 'lodash';
 import style from '@/modules/sidebarLeft/components/listTagFollowed/styles/style.module.scss';
 
 const ListTagFollowedComponent = () => {

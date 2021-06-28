@@ -41,6 +41,13 @@ body {
 	opacity: 0.65;
 }
 
+.dropdown-item.active,
+.dropdown-item:active {
+	color: #212529;
+	text-decoration: none;
+	background-color: #e9ecef;
+}
+
 #nprogress .bar {
 	border-top-right-radius: 10px !important;
 	border-bottom-right-radius: 10px !important;

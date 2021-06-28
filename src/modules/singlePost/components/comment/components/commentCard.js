@@ -28,7 +28,7 @@ const CommentCard = ({
 	const [minimized, setMinimized] = useState(false);
 
 	return (
-		<div className={`d-flex ${!isSingleComment ? 'mt-4' : ''}`}>
+		<div className={`d-flex ${!isSingleComment ? 'mt-3 mt-sm-4' : ''}`}>
 			<>
 				<div className={`flex-shrink-0 mr-2 mr-sm-3 flex-column ${minimized ? 'd-none' : 'd-flex'}`}>
 					<CustomLink href={`/u/${comment.user?.user_name}`} className="mb-2 text-decoration-none d-inline-flex">

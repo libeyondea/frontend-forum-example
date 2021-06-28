@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import NavItem from 'react-bootstrap/NavItem';
 import NavLink from 'react-bootstrap/NavLink';
-import { FaEllipsisH, FaHeart, FaRegHeart } from 'react-icons/fa';
+import { FaEllipsisH, FaFacebookF, FaHeart, FaRegHeart, FaTwitter } from 'react-icons/fa';
+import { GoReport } from 'react-icons/go';
 
 import useUser from '@/common/hooks/useUser';
 import httpRequest from '@/common/utils/httpRequest';
@@ -15,6 +16,7 @@ import style from '@/modules/singlePost/styles/style.module.scss';
 const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName, postTitle }) => {
 	const { user } = useUser();
 	const router = useRouter();
+	const [isLoading, setLoading] = useState(false);
 	const [isFavorited, setFavorited] = useState(favorited);
 	const [sumFavorited, setSumFavorited] = useState(totalFavorited);
 
@@ -23,31 +25,33 @@ const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName
 		try {
 			if (!user) {
 				router.push('/login');
-				return;
-			}
-			setFavorited(!isFavorited);
-			setSumFavorited(!isFavorited ? sumFavorited + 1 : sumFavorited - 1);
-			showToast.success(`${!isFavorited ? 'Liked' : 'Unliked '}`, postSlug);
-			const response = isFavorited
-				? await httpRequest.delete({
-						url: `/favorite_post`,
-						params: {
-							slug: postSlug
-						},
-						token: getCookie('token')
-				  })
-				: await httpRequest.post({
-						url: `/favorite_post`,
-						data: {
-							slug: postSlug
-						},
-						token: getCookie('token')
-				  });
-			if (response.data.success) {
-				// success
+			} else {
+				setLoading(true);
+				const response = isFavorited
+					? await httpRequest.delete({
+							url: `/favorite_post`,
+							params: {
+								slug: postSlug
+							},
+							token: getCookie('token')
+					  })
+					: await httpRequest.post({
+							url: `/favorite_post`,
+							data: {
+								slug: postSlug
+							},
+							token: getCookie('token')
+					  });
+				if (response.data.success) {
+					setFavorited(!isFavorited);
+					setSumFavorited(!isFavorited ? sumFavorited + 1 : sumFavorited - 1);
+					showToast.success(`${!isFavorited ? 'Liked' : 'Unliked '}`, postSlug);
+				}
 			}
 		} catch (error) {
 			showToast.error();
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -56,7 +60,7 @@ const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName
 			<button
 				className={`d-flex align-items-center border-0 bg-transparent p-0 mr-auto ${
 					isFavorited ? 'text-danger' : 'text-secondary'
-				}`}
+				} ${isLoading ? 'disabled' : ''}`}
 				onClick={onFavoritePostClick}
 			>
 				{isFavorited ? (
@@ -81,13 +85,18 @@ const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName
 				</Dropdown.Toggle>
 				<Dropdown.Menu align="right" className="p-0 rounded-lg shadow-sm">
 					<Link href={`/report-abuse`} passHref>
-						<Dropdown.Item>Report abuse</Dropdown.Item>
+						<Dropdown.Item className="d-flex align-items-center">
+							<GoReport className="mr-1" />
+							Report abuse
+						</Dropdown.Item>
 					</Link>
 					<Dropdown.Item
 						target="_blank"
 						rel="noopener noreferrer"
 						href={`https://www.facebook.com/sharer.php?u=${process.env.WEBSITE_URL}/u/${postUserName}/${postSlug}`}
+						className="d-flex align-items-center"
 					>
+						<FaFacebookF className="mr-1" />
 						Share to Facebook
 					</Dropdown.Item>
 					<Dropdown.Item
@@ -96,7 +105,9 @@ const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName
 						href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(postTitle)} ${
 							process.env.WEBSITE_URL
 						}/u/${postUserName}/${postSlug}`}
+						className="d-flex align-items-center"
 					>
+						<FaTwitter className="mr-1" />
 						Share to Twitter
 					</Dropdown.Item>
 				</Dropdown.Menu>

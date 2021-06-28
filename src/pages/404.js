@@ -16,7 +16,7 @@ const Error404 = () => {
 							<div className="col-md-12 text-center">
 								<span className="display-404 d-block">404</span>
 								<div className="mb-4 lead">The page you are looking for was not found.</div>
-								<a href="/" className="btn-link">
+								<a href="/" className="btn-link text-decoration-none">
 									Back to Home
 								</a>
 							</div>

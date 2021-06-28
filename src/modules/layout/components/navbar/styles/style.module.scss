@@ -1,1 +1,5 @@
-
+.custom__dropdown__toggle {
+	&:after {
+		display: none;
+	}
+}

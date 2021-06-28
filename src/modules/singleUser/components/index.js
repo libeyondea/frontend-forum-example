@@ -1,4 +1,6 @@
 import React from 'react';
+import { FaHashtag, FaRegComment, FaRegHeart } from 'react-icons/fa';
+import { GrArticle } from 'react-icons/gr';
 
 import CustomImage from '@/common/components/CustomImage/components';
 import useUser from '@/common/hooks/useUser';
@@ -51,29 +53,21 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 				</div>
 				<div className="col-lg-4 col-md-4 mb-4 mb-md-0">
 					<ul className="wapper__card list-group rounded-lg shadow-sm">
-						<li className="list-group-item text-right">
-							<span className="pull-left">
-								<strong>Posts published</strong>
-							</span>
-							{singleUser.data?.total_posts}
+						<li className="list-group-item d-flex flex-wrap align-items-center">
+							<GrArticle className="mr-1" />
+							<span>{singleUser.data?.total_posts} Posts published</span>
 						</li>
-						<li className="list-group-item text-right">
-							<span className="pull-left">
-								<strong>Comment written</strong>
-							</span>
-							{singleUser.data?.total_comments}
+						<li className="list-group-item d-flex flex-wrap align-items-center">
+							<FaRegComment className="mr-1" />
+							<span>{singleUser.data?.total_comments} comment written</span>
 						</li>
-						<li className="list-group-item text-right">
-							<span className="pull-left">
-								<strong>Likes</strong>
-							</span>
-							{singleUser.data?.total_favorited}
+						<li className="list-group-item d-flex flex-wrap align-items-center">
+							<FaRegHeart className="mr-1" />
+							<span>{singleUser.data?.total_favorited} Posts favorited</span>
 						</li>
-						<li className="list-group-item text-right">
-							<span className="pull-left">
-								<strong>Tags followed</strong>
-							</span>
-							{singleUser.data?.total_tags_followed}
+						<li className="list-group-item d-flex flex-wrap align-items-center">
+							<FaHashtag className="mr-1" />
+							<span>{singleUser.data?.total_tags_followed} Tags followed</span>
 						</li>
 					</ul>
 				</div>

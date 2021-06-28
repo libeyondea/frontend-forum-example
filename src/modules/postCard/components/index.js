@@ -24,6 +24,7 @@ const PostCardComponent = ({ post }) => {
 									width={33}
 									height={33}
 									alt={post.user.user_name}
+									layout="fixed"
 								/>
 							</CustomLink>
 						</div>

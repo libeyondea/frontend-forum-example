@@ -6,14 +6,15 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavItem from 'react-bootstrap/NavItem';
 import NavLink from 'react-bootstrap/NavLink';
-import { FaTags } from 'react-icons/fa';
-import { FcAbout, FcContacts, FcFaq, FcHome } from 'react-icons/fc';
+import { FaRegBell } from 'react-icons/fa';
 
 import CustomImage from '@/common/components/CustomImage/components';
 import useUser from '@/common/hooks/useUser';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie, removeCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
+import optionsMenu from '@/modules/layout/components/navbar/components/optionsMenu';
+import style from '@/modules/layout/components/navbar/styles/style.module.scss';
 
 const NavBarComponent = () => {
 	const router = useRouter();
@@ -37,6 +38,80 @@ const NavBarComponent = () => {
 		}
 	};
 
+	const DropdownMenuNoti = (classNameWrapper) => (
+		<Dropdown as={NavItem} className={`${classNameWrapper}`}>
+			<Dropdown.Toggle
+				as={NavLink}
+				className={`d-flex align-items-center text-secondary p-2 ${style.custom__dropdown__toggle}`}
+			>
+				<FaRegBell className="h3 mb-0" />
+			</Dropdown.Toggle>
+			<Dropdown.Menu align="right" className="p-0" style={{ width: '333px' }}>
+				<Link href={`/`} passHref>
+					<Dropdown.Item className="p-3">
+						<div className="d-flex align-items-center">
+							<div className="mr-2">
+								<div className="text-decoration-none d-inline-block d-flex align-items-center">
+									<CustomImage
+										src={`${process.env.IMAGES_URL}/6666666666.jpg`}
+										className="rounded-circle"
+										width={40}
+										height={40}
+										alt={``}
+										layout="fixed"
+									/>
+								</div>
+							</div>
+							<div className="lh-100 text-wrap">
+								<div className="text-decoration-none text-dark">
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit
+								</div>
+								<span className="text-muted small">{`6 years ago`}</span>
+							</div>
+						</div>
+					</Dropdown.Item>
+				</Link>
+				<Dropdown.Divider className="m-0" />
+				<Link href={`/`} passHref>
+					<Dropdown.Item className="text-center">View all</Dropdown.Item>
+				</Link>
+			</Dropdown.Menu>
+		</Dropdown>
+	);
+
+	const DropdownMenuUser = (classNameWrapper) => (
+		<Dropdown as={NavItem} className={`${classNameWrapper}`}>
+			<Dropdown.Toggle as={NavLink} className={`d-flex align-items-center p-2 ${style.custom__dropdown__toggle}`}>
+				<CustomImage
+					className="rounded-circle"
+					src={`${process.env.IMAGES_URL}/${user?.avatar}`}
+					width={40}
+					height={40}
+					alt={user?.user_name}
+				/>
+			</Dropdown.Toggle>
+			<Dropdown.Menu align="right" className="p-0">
+				<Link href={`/u/${user?.user_name}`} passHref>
+					<Dropdown.Item>
+						<span className="d-block h6 mb-0">
+							{user?.first_name} {user?.last_name}
+						</span>
+						<small className="text-secondary">@{user?.user_name}</small>
+					</Dropdown.Item>
+				</Link>
+				<Dropdown.Divider className="m-0" />
+				<Link href={`/dashboard`} passHref>
+					<Dropdown.Item>Dashboard</Dropdown.Item>
+				</Link>
+				<Link href="/new" passHref>
+					<Dropdown.Item>New Post</Dropdown.Item>
+				</Link>
+				<Dropdown.Divider className="m-0" />
+				<Dropdown.Item onClick={onLogoutClick}>Logout</Dropdown.Item>
+			</Dropdown.Menu>
+		</Dropdown>
+	);
+
 	return (
 		<Navbar collapseOnSelect expand="md" bg="light" variant="light" fixed="top" className="shadow-sm">
 			<div className="container-xl">
@@ -48,37 +123,20 @@ const NavBarComponent = () => {
 							width={44}
 							height={44}
 							alt="Logo"
+							layout="fixed"
 						/>
 						<div className="ml-2">De4thZone</div>
 					</Navbar.Brand>
 				</Link>
 				{user && (
-					<Dropdown as={NavItem} className="d-block d-md-none">
-						<Dropdown.Toggle as={NavLink} id="dropdown-res" className="d-flex align-items-center text-secondary">
-							<CustomImage
-								className="rounded-circle"
-								src={`${process.env.IMAGES_URL}/${user?.avatar}`}
-								width={40}
-								height={40}
-								alt={user?.user_name}
-							/>
-							{/* <div className="ml-2 d-none d-sm-block">{user?.user_name}</div> */}
-						</Dropdown.Toggle>
-						<Dropdown.Menu align="right" className="p-0">
-							<Link href={`/u/${user?.user_name}`} passHref>
-								<Dropdown.Item>Profile</Dropdown.Item>
-							</Link>
-							<Link href={`/dashboard`} passHref>
-								<Dropdown.Item>Dashboard</Dropdown.Item>
-							</Link>
-							<Dropdown.Divider className="m-0" />
-							<Dropdown.Item onClick={onLogoutClick}>Logout</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
+					<>
+						{DropdownMenuNoti('d-block d-md-none')}
+						{DropdownMenuUser('d-block d-md-none')}
+					</>
 				)}
-				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
+				<Navbar.Toggle aria-controls="responsive-navbar-nav" className="ml-2" />
 				<Navbar.Collapse id="responsive-navbar-nav">
-					<Nav className="mr-auto ml-0 ml-md-3 mt-2 mt-md-0">
+					<Nav className="mr-auto ml-0 ml-md-3 my-2 my-md-0">
 						<form className="form-inline">
 							<input placeholder="Search" type="text" className="form-control w-100" />
 						</form>
@@ -99,33 +157,13 @@ const NavBarComponent = () => {
 						</Dropdown>
 						{user && (
 							<>
-								<Nav.Item>
+								<Nav.Item className="d-none d-md-block px-2">
 									<Link href="/new" passHref>
-										<Nav.Link>New Post</Nav.Link>
+										<Nav.Link className="btn btn-primary text-white font-weight-bold">New Post</Nav.Link>
 									</Link>
 								</Nav.Item>
-								<Dropdown as={NavItem} className="d-none d-md-block">
-									<Dropdown.Toggle as={NavLink} id="dropdown-custom-2" className="d-flex align-items-center">
-										<CustomImage
-											className="rounded-circle"
-											src={`${process.env.IMAGES_URL}/${user?.avatar}`}
-											width={40}
-											height={40}
-											alt={user?.user_name}
-										/>
-										<div className="ml-2 d-none d-xl-block">{user?.user_name}</div>
-									</Dropdown.Toggle>
-									<Dropdown.Menu align="right" className="p-0">
-										<Link href={`/u/${user?.user_name}`} passHref>
-											<Dropdown.Item>Profile</Dropdown.Item>
-										</Link>
-										<Link href={`/dashboard`} passHref>
-											<Dropdown.Item>Dashboard</Dropdown.Item>
-										</Link>
-										<Dropdown.Divider className="m-0" />
-										<Dropdown.Item onClick={onLogoutClick}>Logout</Dropdown.Item>
-									</Dropdown.Menu>
-								</Dropdown>
+								{DropdownMenuNoti('d-none d-md-block')}
+								{DropdownMenuUser('d-none d-md-block')}
 							</>
 						)}
 						{!user && (
@@ -147,31 +185,14 @@ const NavBarComponent = () => {
 								Options
 							</Dropdown.Toggle>
 							<Dropdown.Menu align="right" className="p-0">
-								<Link href="/" passHref>
-									<Dropdown.Item className="d-flex align-items-center">
-										<FcHome className="h5 mb-0 mr-1" /> Home
-									</Dropdown.Item>
-								</Link>
-								<Link href="/tags" passHref>
-									<Dropdown.Item className="d-flex align-items-center">
-										<FaTags className="h5 mb-0 mr-1" /> Tags
-									</Dropdown.Item>
-								</Link>
-								<Link href="/about" passHref>
-									<Dropdown.Item className="d-flex align-items-center">
-										<FcAbout className="h5 mb-0 mr-1" /> About
-									</Dropdown.Item>
-								</Link>
-								<Link href="/faq" passHref>
-									<Dropdown.Item className="d-flex align-items-center">
-										<FcFaq className="h5 mb-0 mr-1" /> FAQ
-									</Dropdown.Item>
-								</Link>
-								<Link href="/contact" passHref>
-									<Dropdown.Item className="d-flex align-items-center">
-										<FcContacts className="h5 mb-0 mr-1" /> Contact
-									</Dropdown.Item>
-								</Link>
+								{optionsMenu.map((m, index) => (
+									<Link href={m.href} key={index} passHref>
+										<Dropdown.Item className="d-flex align-items-center">
+											{m.icon}
+											{m.name}
+										</Dropdown.Item>
+									</Link>
+								))}
 							</Dropdown.Menu>
 						</Dropdown>
 					</Nav>

@@ -1,8 +1,7 @@
-import React, { memo } from 'react';
-import { FaTags } from 'react-icons/fa';
-import { FcAbout, FcContacts, FcFaq, FcHome } from 'react-icons/fc';
+import React from 'react';
 
 import CustomLink from '@/common/components/CustomLink/components';
+import optionsMenu from '@/modules/layout/components/navbar/components/optionsMenu';
 import ListTagFollowedComponent from '@/modules/sidebarLeft/components/listTagFollowed/components';
 
 const SideBarLeftComponent = () => {
@@ -13,31 +12,14 @@ const SideBarLeftComponent = () => {
 					<h5 className="mb-0">Options</h5>
 				</div>
 				<ul className="list-group">
-					<li className="d-flex align-items-center border-0 px-2 py-2">
-						<CustomLink href="/" className="text-decoration-none text-dark d-flex align-items-center">
-							<FcHome className="h4 mb-0 mr-1" /> Home
-						</CustomLink>
-					</li>
-					<li className="d-flex align-items-center border-0 px-2 py-2">
-						<CustomLink href="/tags" className="text-decoration-none text-dark d-flex align-items-center">
-							<FaTags className="h4 mb-0 mr-1" /> Tags
-						</CustomLink>
-					</li>
-					<li className="d-flex align-items-center border-0 px-2 py-2">
-						<CustomLink href="/about" className="text-decoration-none text-dark d-flex align-items-center">
-							<FcAbout className="h4 mb-0 mr-1" /> About
-						</CustomLink>
-					</li>
-					<li className="d-flex align-items-center border-0 px-2 py-2">
-						<CustomLink href="/faq" className="text-decoration-none text-dark d-flex align-items-center">
-							<FcFaq className="h4 mb-0 mr-1" /> FAQ
-						</CustomLink>
-					</li>
-					<li className="d-flex align-items-center border-0 px-2 py-2">
-						<CustomLink href="/contact" className="text-decoration-none text-dark d-flex align-items-center">
-							<FcContacts className="h4 mb-0 mr-1" /> Contact
-						</CustomLink>
-					</li>
+					{optionsMenu.map((m, index) => (
+						<li className="d-flex align-items-center border-0 px-2 py-2" key={index}>
+							<CustomLink href={m.href} className="text-decoration-none text-dark d-flex align-items-center">
+								{m.icon}
+								{m.name}
+							</CustomLink>
+						</li>
+					))}
 				</ul>
 			</div>
 			<ListTagFollowedComponent />
@@ -45,4 +27,4 @@ const SideBarLeftComponent = () => {
 	);
 };
 
-export default memo(SideBarLeftComponent);
+export default SideBarLeftComponent;
