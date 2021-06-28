@@ -9,17 +9,17 @@ import PostCardComponent from '@/modules/postCard/components';
 import SideBarLeftComponent from '@/modules/sidebarLeft/components';
 import SideBarRightComponent from '@/modules/sidebarRight/components';
 
-const HomeComponent = ({ listPostGhim, listPost, pid }) => {
+const HomeComponent = ({ listPostPinned, listPost, pid }) => {
 	const router = useRouter();
 	return (
 		<div className="container-xl my-4">
 			<div className="row">
 				<div className="col-xl-7 col-lg-7 col-md-9 order-xl-2 order-lg-2 order-md-2">
-					{!isEmpty(listPostGhim?.data) && (
+					{!isEmpty(listPostPinned?.data) && (
 						<>
-							<h4 className="mb-3">Ghim</h4>
+							<h4 className="mb-3">Pinned</h4>
 							<div className="row">
-								{listPostGhim?.data?.map((post) => (
+								{listPostPinned?.data?.map((post) => (
 									<div className="col-12 mb-3" key={post?.id}>
 										<PostCardComponent post={post} />
 									</div>
