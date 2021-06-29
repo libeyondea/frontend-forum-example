@@ -61,12 +61,18 @@ const CommentCard = ({
 								>
 									<h6 className="my-0">{comment.user?.user_name}</h6>
 								</CustomLink>
-								<span className="font-weight-bold d-none d-sm-block">・</span>
-								<div className="mx-0 my-0 text-muted">
-									<time dateTime={comment.created_at} className="">
-										{timeFormat(comment.created_at)}
-									</time>
-								</div>
+								<span className="font-weight-bold d-none d-sm-block mx-1">•</span>
+								<CustomLink
+									href={`/u/${postUserName}/${comment.post.slug}/comment/${comment.slug}`}
+									className="text-decoration-none text-secondary d-inline-block"
+								>
+									<time dateTime={comment.created_at}>{timeFormat(comment.created_at)}</time>
+									{comment.updated_at > comment.created_at && (
+										<>
+											{` `}• Edited on <time dateTime={comment.updated_at}>{timeFormat(comment.updated_at)}</time>
+										</>
+									)}
+								</CustomLink>
 							</div>
 							<div className="">
 								<Dropdown>

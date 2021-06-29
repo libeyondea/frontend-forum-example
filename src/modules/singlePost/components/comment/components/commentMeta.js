@@ -128,7 +128,7 @@ const CommentMetaComponent = ({
 	return (
 		<>
 			{!replyBox ? (
-				<div className="d-flex justify-content-start align-items-center p-2">
+				<div className="d-flex justify-content-start align-items-center mt-2">
 					<button
 						className={`d-flex align-items-center border-0 bg-transparent mr-3 ${
 							isFavorited ? 'text-danger' : 'text-secondary'

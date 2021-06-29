@@ -1,5 +1,5 @@
 import { FaTags } from 'react-icons/fa';
-import { FcAbout, FcContacts, FcFaq, FcHome } from 'react-icons/fc';
+import { FcAbout, FcContacts, FcFaq, FcHome, FcPrivacy } from 'react-icons/fc';
 
 const optionsMenu = [
 	{
@@ -26,6 +26,12 @@ const optionsMenu = [
 		icon: <FcContacts className="h4 mb-0 mr-1" />,
 		name: 'Contact',
 		href: '/'
+	},
+	{
+		icon: <FcPrivacy className="h4 mb-0 mr-1" />,
+		name: 'Privacy Policy',
+		href: '/',
+		hidden: true
 	}
 ];
 

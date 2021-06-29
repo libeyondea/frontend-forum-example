@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -19,6 +19,21 @@ import style from '@/modules/layout/components/navbar/styles/style.module.scss';
 const NavBarComponent = () => {
 	const router = useRouter();
 	const { user } = useUser();
+
+	const [search, setSearch] = useState(router.query?.q || '');
+
+	const onSearchSubmit = (e) => {
+		e.preventDefault();
+		try {
+			router.push(`/search?q=${search}${router.query?.type ? `&type=${router.query?.type}` : ''}`);
+		} catch (error) {
+			showToast.error();
+		}
+	};
+
+	const handleChangeSearch = (event) => {
+		setSearch(event.target.value);
+	};
 
 	const onLogoutClick = async (e) => {
 		e.preventDefault();
@@ -138,8 +153,14 @@ const NavBarComponent = () => {
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" className="ml-2" />
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav className="mr-auto ml-0 ml-md-3 my-2 my-md-0">
-						<form className="form-inline">
-							<input placeholder="Search" type="text" className="form-control w-100" />
+						<form className="form-inline" onSubmit={onSearchSubmit}>
+							<input
+								placeholder="Search"
+								type="text"
+								value={search}
+								onChange={handleChangeSearch}
+								className="form-control w-100"
+							/>
 						</form>
 					</Nav>
 					<Nav className="align-items-md-center">

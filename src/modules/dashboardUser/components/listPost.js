@@ -1,8 +1,8 @@
+import { isEmpty } from 'lodash';
 import React from 'react';
 
 import CustomLink from '@/common/components/CustomLink/components';
 import Pagination from '@/common/components/Pagination/components';
-import { isEmpty } from 'lodash';
 import ListPostMetaComponent from '@/modules/dashboardUser/components/listPostMeta';
 
 const ListPostComponent = ({ listPost }) => {

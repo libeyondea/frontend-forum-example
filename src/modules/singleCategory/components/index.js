@@ -1,8 +1,8 @@
+import { isEmpty } from 'lodash';
 import React from 'react';
 
 import Pagination from '@/common/components/Pagination/components';
-import TabPost from '@/common/components/TabPost/components';
-import { isEmpty } from 'lodash';
+import TabHorizontal from '@/common/components/TabHorizontal/components';
 import PostCardComponent from '@/modules/postCard/components';
 import SideBarRightComponent from '@/modules/sidebarRight/components';
 
@@ -14,7 +14,7 @@ const SingleCategoryComponent = ({ singleCategory, listPostCategory, pid }) => {
 					<h1 className="mb-3">{singleCategory.data?.title}</h1>
 					<div className="d-flex align-items-center mb-3">
 						<h4 className="mr-auto mb-0">Posts</h4>
-						<TabPost
+						<TabHorizontal
 							pidTab={pid[1]}
 							items={[
 								{

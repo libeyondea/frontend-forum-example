@@ -1,16 +1,16 @@
 import CustomLink from '@/common/components/CustomLink/components';
-import style from '@/common/components/TabPost/styles/style.module.scss';
+import style from '@/common/components/TabVertical/styles/style.module.scss';
 
-const TabPostComponent = ({ pidTab, items = [] }) => {
+const TabVerticalComponent = ({ pidTab, items = [] }) => {
 	return (
-		<ul className="nav nav-pills">
+		<ul className={`nav flex-column nav-pills ${style.nav__pills}`}>
 			{items.map((item, index) =>
 				items.indexOf(item) === 0 ? (
 					<li className="nav-item" key={index}>
 						<CustomLink
 							href={`${item.href}`}
-							className={`text-decoration-none py-1 px-3 text-dark ${style.nav_link} ${
-								(!pidTab || pidTab === item.slug) && style.active
+							className={`nav-link text-dark ${style.nav__link} ${
+								(!pidTab || pidTab === item.slug) && `${style.active}`
 							}`}
 						>
 							{item.title}
@@ -20,9 +20,7 @@ const TabPostComponent = ({ pidTab, items = [] }) => {
 					<li className="nav-item" key={index}>
 						<CustomLink
 							href={`${item.href}`}
-							className={`text-decoration-none py-1 px-3 text-dark ${style.nav_link} ${
-								pidTab === item.slug && style.active
-							}`}
+							className={`nav-link text-dark ${style.nav__link} ${pidTab === item.slug && `${style.active}`}`}
 						>
 							{item.title}
 						</CustomLink>
@@ -33,4 +31,4 @@ const TabPostComponent = ({ pidTab, items = [] }) => {
 	);
 };
 
-export default TabPostComponent;
+export default TabVerticalComponent;

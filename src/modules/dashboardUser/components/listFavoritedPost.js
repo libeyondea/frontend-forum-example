@@ -1,9 +1,9 @@
+import { isEmpty } from 'lodash';
 import React from 'react';
 
 import CustomImage from '@/common/components/CustomImage/components';
 import CustomLink from '@/common/components/CustomLink/components';
 import Pagination from '@/common/components/Pagination/components';
-import { isEmpty } from 'lodash';
 import timeAgo from '@/common/utils/timeAgo';
 
 const ListFavoritedPostComponent = ({ listPost }) => {

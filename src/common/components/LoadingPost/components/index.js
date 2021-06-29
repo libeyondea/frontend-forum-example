@@ -2,11 +2,11 @@ import React from 'react';
 
 import style from '@/common/components/LoadingPost/styles/style.module.scss';
 
-const LoadingPost = ({ lengthArr = 1 }) => {
+const LoadingPost = ({ lengthArr = 10 }) => {
 	let postSpinnerList = [];
 	const SpinnerPost = (i) => {
 		return (
-			<div className="col-12 mb-2" key={i}>
+			<div className="col-12 mb-3" key={i}>
 				<div className={`card ${style.loading_post_card}`}>
 					<div className="p-3">
 						<div className="d-flex align-items-center mb-2">

@@ -1,5 +1,8 @@
+import Link from 'next/link';
 import React from 'react';
-import { FaHashtag, FaRegComment, FaRegHeart } from 'react-icons/fa';
+import Dropdown from 'react-bootstrap/Dropdown';
+import NavLink from 'react-bootstrap/NavLink';
+import { FaEllipsisH, FaHashtag, FaRegComment, FaRegHeart } from 'react-icons/fa';
 import { GrArticle } from 'react-icons/gr';
 
 import CustomImage from '@/common/components/CustomImage/components';
@@ -15,17 +18,35 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 		<div className="container-xl my-4">
 			<div className="row">
 				<div className="col-12 mb-4">
-					<div className={`text-center bg-light rounded-lg shadow-sm px-4 pb-4 pt-4 ${style.info__user}`}>
-						<div className={`mb-2 ${style.avt}`}>
+					<div className={`text-left text-sm-center bg-light rounded-lg shadow-sm px-4 pb-4 pt-4 ${style.info__user}`}>
+						<div className={`position-relative mb-2 ${style.avt}`}>
 							<span className="d-inline-flex p-3 rounded-circle">
 								<CustomImage
 									src={`${process.env.IMAGES_URL}/${singleUser.data?.avatar}`}
 									alt={singleUser.data?.user_name}
 									className="avatar rounded-circle"
-									width="166"
-									height="166"
+									width="133"
+									height="133"
 								/>
 							</span>
+							{singleUser.data?.user_name !== user?.user_name && (
+								<div className={`d-flex position-absolute ${style.more__user}`}>
+									<Dropdown>
+										<Dropdown.Toggle
+											as={NavLink}
+											id="dropdown-more-user"
+											className={`d-flex align-items-center text-secondary p-0 ${style.custom__dropdown__toggle}`}
+										>
+											<FaEllipsisH className="h4 mb-0" />
+										</Dropdown.Toggle>
+										<Dropdown.Menu alignRight="right" className="p-0 rounded-lg shadow-sm">
+											<Link href={`/report-abuse`} passHref>
+												<Dropdown.Item>Report abuse</Dropdown.Item>
+											</Link>
+										</Dropdown.Menu>
+									</Dropdown>
+								</div>
+							)}
 						</div>
 						<h4 className="text-break mb-1">
 							{singleUser.data?.first_name} {singleUser.data?.last_name}
@@ -38,7 +59,7 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 							</div>
 						)}
 						{singleUser.data?.user_name !== user?.user_name && (
-							<div className="d-flex justify-content-center">
+							<div className="d-flex justify-content-sm-center">
 								<FollowUserButtonComponent
 									user_name={singleUser.data?.user_name}
 									following={singleUser.data?.following}

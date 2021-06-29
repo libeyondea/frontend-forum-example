@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import Pagination from '@/common/components/Pagination/components';
-import TabPost from '@/common/components/TabPost/components';
+import TabHorizontal from '@/common/components/TabHorizontal/components';
 import Language from '@/modules/home/languages';
 import PostCardComponent from '@/modules/postCard/components';
 import SideBarLeftComponent from '@/modules/sidebarLeft/components';
@@ -29,7 +29,7 @@ const HomeComponent = ({ listPostPinned, listPost, pid }) => {
 					)}
 					<div className="d-flex align-items-center mb-3">
 						<h4 className="mr-auto mb-0">{Language.titleListPost(router.locale)}</h4>
-						<TabPost
+						<TabHorizontal
 							pidTab={pid[0]}
 							items={[
 								{
@@ -64,9 +64,9 @@ const HomeComponent = ({ listPostPinned, listPost, pid }) => {
 										<PostCardComponent post={post} />
 									</div>
 								))}
-								<Pagination total={listPost?.meta?.total} limit={process.env.LIMIT_PAGE.LIST_POST_HOME} />
 							</>
 						)}
+						<Pagination total={listPost?.meta?.total} limit={process.env.LIMIT_PAGE.LIST_POST_HOME} />
 					</div>
 				</div>
 				<div className="d-none d-md-block col-xl-2 col-lg-2 col-md-3 order-xl-1 order-lg-1 order-md-1">

@@ -1,7 +1,7 @@
+import { isEmpty } from 'lodash';
 import React from 'react';
 
 import Pagination from '@/common/components/Pagination/components';
-import { isEmpty } from 'lodash';
 import PostCardComponent from '@/modules/postCard/components';
 
 const ListPostUserComponent = ({ listPostUser }) => {

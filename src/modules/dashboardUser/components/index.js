@@ -1,7 +1,7 @@
 import React from 'react';
 
 import LoadingSpinner from '@/common/components/LoadingSpinner/components';
-import TabDashboard from '@/common/components/TabDashboard/components';
+import TabVertical from '@/common/components/TabVertical/components';
 import useUser from '@/common/hooks/useUser';
 import ListFavoritedPostComponent from '@/modules/dashboardUser/components/listFavoritedPost';
 import ListFollowingTagComponent from '@/modules/dashboardUser/components/listFollowingTag';
@@ -33,8 +33,7 @@ const DashboardUserComponent = ({ dashboardUser, pid }) => {
 					</h3>
 					<div className="row">
 						<div className="col-lg-3 mb-4">
-							<TabDashboard
-								url={`/dashboard`}
+							<TabVertical
 								pidTab={pid[0]}
 								items={[
 									{

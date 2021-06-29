@@ -2,7 +2,7 @@ import React from 'react';
 
 import CustomLink from '@/common/components/CustomLink/components';
 import LoadingSpinner from '@/common/components/LoadingSpinner/components';
-import TabSetting from '@/common/components/TabSetting/components';
+import TabVertical from '@/common/components/TabVertical/components';
 import useUser from '@/common/hooks/useUser';
 import EditCustomizationComponent from '@/modules/settingUser/components/editCustomization';
 import EditProfileFormComponent from '@/modules/settingUser/components/editProfileForm';
@@ -23,8 +23,7 @@ const SettingUserComponent = ({ settingUser, pid }) => {
 					</h3>
 					<div className="row">
 						<div className="col-lg-3 mb-4">
-							<TabSetting
-								url={`/settings`}
+							<TabVertical
 								pidTab={pid[0]}
 								items={[
 									{

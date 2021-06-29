@@ -1,7 +1,7 @@
+import { isEmpty } from 'lodash';
 import React from 'react';
 
 import Pagination from '@/common/components/Pagination/components';
-import { isEmpty } from 'lodash';
 import SideBarLeftComponent from '@/modules/sidebarLeft/components';
 import TagCardComponent from '@/modules/tagCard/components';
 
@@ -9,7 +9,7 @@ const ListTag = ({ listTag }) => {
 	return (
 		<div className="container-xl my-4">
 			<div className="row">
-				<div className="col-xl-9 col-md-9 order-md-2">
+				<div className="col-xl-10 col-md-9 order-md-2">
 					<h1 className="mb-3">Tags</h1>
 					<div className="row">
 						{isEmpty(listTag.data) ? (

@@ -7,3 +7,14 @@
 		}
 	}
 }
+
+.more__user {
+	right: 0px;
+	top: 6.5rem;
+}
+
+.custom__dropdown__toggle {
+	&:after {
+		display: none;
+	}
+}
