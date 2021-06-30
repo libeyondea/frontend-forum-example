@@ -41,10 +41,7 @@ const App = ({ Component, pageProps }) => {
 						}
 						return error.response;
 					},
-					onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
-						if (error?.response?.status === 404 || key === '/current_user' || retryCount > 1) return;
-						setTimeout(() => revalidate({ retryCount }), 5000);
-					}
+					shouldRetryOnError: false
 				}}
 			>
 				<Component {...pageProps} key={router.asPath} />

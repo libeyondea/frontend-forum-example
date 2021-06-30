@@ -1,15 +1,9 @@
-import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import * as Yup from 'yup';
 
 import CustomImage from '@/common/components/CustomImage/components';
 import CustomLink from '@/common/components/CustomLink/components';
-import ReactMarkdownComponent from '@/common/components/ReactMarkdown/components';
-import TextForm from '@/common/components/TextForm/components';
 import useUser from '@/common/hooks/useUser';
-import httpRequest from '@/common/utils/httpRequest';
-import { getCookie } from '@/common/utils/session';
-import showToast from '@/common/utils/showToast';
+import CommentFormComponent from '@/modules/singlePost/components/comment/components/commentForm';
 import CommentLoadingComponent from '@/modules/singlePost/components/comment/components/commentLoading';
 import style from '@/modules/singlePost/components/comment/styles/style.module.scss';
 
@@ -17,43 +11,6 @@ const CommentInput = ({ listCommentClient, setListCommentClient, meta, setMeta, 
 	const { user } = useUser();
 	const [isLoading, setLoading] = useState(false);
 	const [isPreview, setIsPreview] = useState(false);
-
-	const initialValues = {
-		content: ''
-	};
-	const validationSchema = Yup.object({
-		content: Yup.string().required('Comment is required').max(6666, 'Comment must be at most 6666 characters')
-	});
-	const onSubmit = async (values, { resetForm }) => {
-		try {
-			const comment = {
-				post_slug: postSlug,
-				content: values.content
-			};
-			setLoading(true);
-			const response = await httpRequest.post({
-				url: `/comments`,
-				token: getCookie('token'),
-				data: comment
-			});
-			if (response.data.success) {
-				setListCommentClient([response.data.data].concat(listCommentClient));
-				setMeta({
-					...meta,
-					total: meta.total + 1,
-					total_parent: meta.total_parent + 1
-				});
-				showToast.success(`Add comment success`);
-			}
-		} catch (error) {
-			console.log(error);
-			showToast.error();
-		} finally {
-			setLoading(false);
-			resetForm();
-			setIsPreview(false);
-		}
-	};
 
 	return (
 		<>
@@ -71,56 +28,17 @@ const CommentInput = ({ listCommentClient, setListCommentClient, meta, setMeta, 
 						</CustomLink>
 					</div>
 					<div className={`w-100 ${style.comment__detail}`}>
-						<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-							{({ values }) => (
-								<Form>
-									{isPreview ? (
-										<div className={`rounded-lg shadow-sm border bg-white p-2 p-sm-3 mb-3`}>
-											<ReactMarkdownComponent text={values.content} />
-										</div>
-									) : (
-										<div className="form-group">
-											<TextForm
-												rows={5}
-												placeholder="Write a comment..."
-												id="content"
-												name="content"
-												disabled={isLoading ? true : false}
-											/>
-										</div>
-									)}
-									{isLoading ? (
-										<button type="submit" className="btn btn-primary mr-2" disabled>
-											<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
-											Submit
-										</button>
-									) : (
-										<button type="submit" className="btn btn-primary mr-2">
-											Submit
-										</button>
-									)}
-									{isPreview ? (
-										<button
-											type="button"
-											className="btn btn-secondary"
-											onClick={() => setIsPreview(false)}
-											disabled={isLoading ? true : false}
-										>
-											Continue editing
-										</button>
-									) : (
-										<button
-											type="button"
-											className="btn btn-secondary"
-											onClick={() => setIsPreview(true)}
-											disabled={isLoading ? true : false}
-										>
-											Preview
-										</button>
-									)}
-								</Form>
-							)}
-						</Formik>
+						<CommentFormComponent
+							isLoading={isLoading}
+							setLoading={setLoading}
+							isPreview={isPreview}
+							setIsPreview={setIsPreview}
+							listCommentClient={listCommentClient}
+							setListCommentClient={setListCommentClient}
+							meta={meta}
+							setMeta={setMeta}
+							postSlug={postSlug}
+						/>
 					</div>
 				</div>
 			)}
