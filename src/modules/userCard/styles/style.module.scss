@@ -1,17 +1,17 @@
 @media (min-width: 768px) {
-	.post_card {
-		.body_post_card {
+	.user_card {
+		.body_user_card {
 			padding-left: calc(33px + 0.25rem);
 		}
 	}
 }
 
-.post_card {
-	.body_post_card {
+.user_card {
+	.body_user_card {
 		.tags {
 			margin-left: calc(0.25rem * -1);
 		}
-		.title_post_card:hover {
+		.title_user_card:hover {
 			color: #323ebe !important;
 		}
 	}

@@ -37,7 +37,7 @@ const NewPostFormComponent = ({ isPreview }) => {
 	};
 	const validationSchema = Yup.object({
 		title: Yup.string().required('Title is required').max(150, 'Title is maximum 128 characters'),
-		content: Yup.string().required('Content is required').max(6666, 'Excerpt is maximum 6666 characters'),
+		content: Yup.string().required('Content is required').max(60000, 'Excerpt is maximum 60000 characters'),
 		category_id: Yup.number().integer('Invaild category').required('Select category'),
 		image: Yup.mixed()
 			.test('fileSize', 'File too large', (value) => value === null || (value && value.size <= FILE_SIZE))

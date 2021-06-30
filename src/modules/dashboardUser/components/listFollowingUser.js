@@ -35,11 +35,16 @@ const ListFollowingUserComponent = ({ listUser }) => {
 									/>
 								</CustomLink>
 								<div className="mt-2">
-									<h6 className="mb-0">
+									<h5 className="mb-2">
 										<CustomLink href={`/u/${user.user_name}`} className="text-decoration-none">
+											{user.first_name} {user.last_name}
+										</CustomLink>
+									</h5>
+									<p className="m-0">
+										<CustomLink href={`/u/${user.user_name}`} className="text-decoration-none text-secondary">
 											{user.user_name}
 										</CustomLink>
-									</h6>
+									</p>
 								</div>
 							</div>
 						</div>

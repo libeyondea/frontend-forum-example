@@ -7,7 +7,7 @@ import style from '@/modules/tagCard/styles/style.module.scss';
 const TagCardComponent = ({ tag, classNameContainer = '', isSingle = false }) => {
 	if (!tag) return null;
 	return (
-		<div className={`card ${style.tag_card} ${classNameContainer} ${!isSingle ? 'h-100' : ''}`}>
+		<div className={`card shadow-sm ${style.tag_card} ${classNameContainer} ${!isSingle ? 'h-100' : ''}`}>
 			<div className="p-3">
 				<div className={`${style.body_tag_card}`}>
 					{isSingle ? (
