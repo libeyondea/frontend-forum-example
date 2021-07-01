@@ -49,6 +49,8 @@ export async function getServerSideProps({ req, query }) {
 				token: getCookie('token', req),
 				params: {
 					user: resSinglePost.data.data.user.user_name,
+					sort_by: 'published_at',
+					sort_direction: 'desc',
 					offset: 0,
 					limit: 5
 				}
@@ -64,6 +66,7 @@ export async function getServerSideProps({ req, query }) {
 			}
 		}
 	} catch (error) {
+		console.log(error.response);
 		return {
 			notFound: true
 		};
