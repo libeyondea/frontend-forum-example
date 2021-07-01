@@ -2,10 +2,10 @@ import React from 'react';
 
 import MetaWebsite from '@/common/meta/MetaWebsite';
 import httpRequest from '@/common/utils/httpRequest';
+import pageNumber from '@/common/utils/pageNumber';
 import { getCookie } from '@/common/utils/session';
 import LayoutComponent from '@/modules/layout/components';
 import SingleUserComponent from '@/modules/singleUser/components';
-import pageNumber from '@/common/utils/pageNumber';
 
 const SingleUser = ({ singleUser, listPostUser }) => {
 	return (
@@ -31,6 +31,8 @@ export async function getServerSideProps({ req, query }) {
 				token: getCookie('token', req),
 				params: {
 					user: user_name,
+					sort_by: 'published_at',
+					sort_direction: 'desc',
 					offset: (pageNumber(query.page) - 1) * process.env.LIMIT_PAGE.LIST_POST_USER,
 					limit: process.env.LIMIT_PAGE.LIST_POST_USER
 				}

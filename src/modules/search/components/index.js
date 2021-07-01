@@ -18,10 +18,10 @@ const SearchComponent = () => {
 	const { query } = useRouter();
 	const q = query?.q || '';
 	const type = query?.type || 'post';
-	const sort = query?.sort || 'latest';
+	const sort = query?.sort === 'latest' ? 'desc' : query?.sort === 'oldest' ? 'asc' : 'desc';
 
 	const { data: listSearch, error } = useSWR(
-		`/search?offset=0&limit=${process.env.LIMIT_PAGE.LIST_POST_HOME}&search_fields=${q}&type=${type}&sort=${sort}`,
+		`/search?offset=0&limit=${process.env.LIMIT_PAGE.LIST_POST_HOME}&search_fields=${q}&type=${type}&sort_direction=${sort}`,
 		{
 			revalidateOnFocus: false
 		}
@@ -69,7 +69,7 @@ const SearchComponent = () => {
 					<div className="d-flex align-items-center mb-3">
 						<div className="ml-auto">
 							<TabHorizontalComponent
-								pidTab={sort}
+								pidTab={query?.sort}
 								items={[
 									{
 										title: 'Latest',
