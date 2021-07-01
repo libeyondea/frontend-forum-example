@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 import * as Yup from 'yup';
 
 import ReactMarkdownComponent from '@/common/components/ReactMarkdown/components';
@@ -21,6 +21,9 @@ const CommentFormComponent = ({
 	meta,
 	setMeta,
 	postSlug,
+	isOpenComment,
+	setIsOpenComment,
+	onCloseCommentClick,
 	isChild = false,
 	onBoxReplyCommentClick,
 	commentId,
@@ -112,7 +115,7 @@ const CommentFormComponent = ({
 				validationSchema={validationSchema}
 				onSubmit={isChild ? onSubmitChild : onSubmit}
 			>
-				{({ values }) => (
+				{({ values, resetForm }) => (
 					<Form>
 						{isPreview ? (
 							<div className={`rounded-lg shadow-sm border bg-white p-2 p-sm-3 mb-3`}>
@@ -121,52 +124,64 @@ const CommentFormComponent = ({
 						) : (
 							<div className="form-group">
 								<TextForm
+									onFocus={() => (!isChild ? setIsOpenComment(true) : {})}
 									rows={5}
 									placeholder="Write a comment..."
 									id="content"
 									name="content"
+									onBlur={() => {}}
 									disabled={isLoading ? true : false}
+									style={!isChild && !isOpenComment ? { height: '66px', resize: 'none' } : {}}
 								/>
 							</div>
 						)}
-						{isLoading ? (
-							<button type="submit" className="btn btn-primary mr-2" disabled>
-								<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
-								Submit
-							</button>
-						) : (
-							<button type="submit" className="btn btn-primary mr-2">
-								Submit
-							</button>
-						)}
-						{isPreview ? (
-							<button
-								type="button"
-								className="btn btn-secondary"
-								onClick={() => setIsPreview(false)}
-								disabled={isLoading ? true : false}
-							>
-								Continue editing
-							</button>
-						) : (
-							<button
-								type="button"
-								className="btn btn-secondary"
-								onClick={() => setIsPreview(true)}
-								disabled={isLoading ? true : false}
-							>
-								Preview
-							</button>
-						)}
-						{isChild && (
-							<button
-								type="button"
-								className="btn btn-light"
-								onClick={onBoxReplyCommentClick}
-								disabled={isLoading ? true : false}
-							>
-								Cancel
-							</button>
+						{((!isChild && isOpenComment) || isChild) && (
+							<>
+								{isLoading ? (
+									<button type="submit" className="btn btn-primary mr-2" disabled>
+										<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+										Submit
+									</button>
+								) : (
+									<button type="submit" className="btn btn-primary mr-2">
+										Submit
+									</button>
+								)}
+								{isPreview ? (
+									<button
+										type="button"
+										className="btn btn-secondary"
+										onClick={() => setIsPreview(false)}
+										disabled={isLoading ? true : false}
+									>
+										Continue editing
+									</button>
+								) : (
+									<button
+										type="button"
+										className="btn btn-secondary mr-2"
+										onClick={() => setIsPreview(true)}
+										disabled={isLoading ? true : false}
+									>
+										Preview
+									</button>
+								)}
+								<button
+									type="button"
+									className="btn btn-light"
+									onClick={
+										isChild
+											? onBoxReplyCommentClick
+											: () => {
+													onCloseCommentClick();
+													resetForm();
+											  }
+									}
+									disabled={isLoading ? true : false}
+								>
+									Cancel
+								</button>
+							</>
 						)}
 					</Form>
 				)}

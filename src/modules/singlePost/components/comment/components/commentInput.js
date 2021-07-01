@@ -11,6 +11,12 @@ const CommentInput = ({ listCommentClient, setListCommentClient, meta, setMeta, 
 	const { user } = useUser();
 	const [isLoading, setLoading] = useState(false);
 	const [isPreview, setIsPreview] = useState(false);
+	const [isOpenComment, setIsOpenComment] = useState(false);
+
+	const onCloseCommentClick = () => {
+		setIsOpenComment(false);
+		setIsPreview(false);
+	};
 
 	return (
 		<>
@@ -38,6 +44,9 @@ const CommentInput = ({ listCommentClient, setListCommentClient, meta, setMeta, 
 							meta={meta}
 							setMeta={setMeta}
 							postSlug={postSlug}
+							isOpenComment={isOpenComment}
+							setIsOpenComment={setIsOpenComment}
+							onCloseCommentClick={onCloseCommentClick}
 						/>
 					</div>
 				</div>

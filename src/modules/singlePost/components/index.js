@@ -13,7 +13,7 @@ const SinglePostComponent = ({ singlePost, listPostUser, listComment }) => {
 	return (
 		<div className="container-xl py-4">
 			<div className="row">
-				<div className="col-xl-9 mb-4 mb-xl-0">
+				<div className="col-lg-9 mb-4 mb-lg-0">
 					<article className="wapper__card single-post bg-light rounded-lg shadow-sm">
 						{singlePost.data?.image && (
 							<div>
@@ -54,7 +54,7 @@ const SinglePostComponent = ({ singlePost, listPostUser, listComment }) => {
 						</div>
 					</article>
 				</div>
-				<div className="col-xl-3">
+				<div className="col-lg-3">
 					<SideBarRightUserComponent postUser={singlePost.data.user} listPostUser={listPostUser} />
 				</div>
 			</div>

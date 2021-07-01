@@ -1,10 +1,11 @@
+import { isEmpty } from 'lodash';
 import React, { useState } from 'react';
 
 import httpRequest from '@/common/utils/httpRequest';
-import { isEmpty } from 'lodash';
 import { getCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
 import CommentLoopComponent from '@/modules/singlePost/components/comment/components/commentLoop';
+
 const CommentList = ({ listCommentClient, setListCommentClient, meta, setMeta, postUserName, postSlug }) => {
 	const [isLoading, setLoading] = useState(false);
 	const [page, setPage] = useState(2);
