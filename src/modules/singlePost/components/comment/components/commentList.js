@@ -53,14 +53,14 @@ const CommentList = ({ listCommentClient, setListCommentClient, meta, setMeta, p
 						postSlug={postSlug}
 					/>
 					{meta.total_parent > listCommentClient.length && (
-						<div className="mt-4">
+						<div className="mt-4 d-grid">
 							{isLoading ? (
-								<button type="submit" className="btn btn-info btn-block btn-sm" disabled>
+								<button type="submit" className="btn btn-primary btn-sm" disabled>
 									<span className="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" />
 									Load more
 								</button>
 							) : (
-								<button type="submit" className="btn btn-info btn-block btn-sm" onClick={onLoadMoreCommentClicked}>
+								<button type="submit" className="btn btn-primary btn-sm" onClick={onLoadMoreCommentClicked}>
 									Load more
 								</button>
 							)}
