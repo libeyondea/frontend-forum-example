@@ -7,7 +7,7 @@ const FooterComponent = () => {
 		<footer className="py-5 bg-dark">
 			<div className="container">
 				<div className="row">
-					<div className="col-12 col-md mb-4">
+					<div className="col-12 col-md-3 mb-4">
 						<CustomImage
 							className="rounded-circle"
 							src={`${process.env.IMAGES_URL}/6666666666.jpg`}
@@ -17,7 +17,7 @@ const FooterComponent = () => {
 						/>
 						<small className="d-block text-light">Copyright © Your Website 2020</small>
 					</div>
-					<div className="col-6 col-md mb-4">
+					<div className="col-6 col-md-3 mb-4">
 						<h5 className="text-white">Features</h5>
 						<ul className="list-unstyled text-small mb-0">
 							<li>
@@ -52,7 +52,7 @@ const FooterComponent = () => {
 							</li>
 						</ul>
 					</div>
-					<div className="col-6 col-md mb-4">
+					<div className="col-6 col-md-3 mb-4">
 						<h5 className="text-white">Resources</h5>
 						<ul className="list-unstyled text-small mb-0">
 							<li>
@@ -77,7 +77,7 @@ const FooterComponent = () => {
 							</li>
 						</ul>
 					</div>
-					<div className="col-6 col-md mb-4">
+					<div className="col-6 col-md-3 mb-4">
 						<h5 className="text-white">About</h5>
 						<ul className="list-unstyled text-small mb-0">
 							<li>
