@@ -58,9 +58,12 @@ const NavBarComponent = () => {
 			<Dropdown.Toggle
 				as={NavLink}
 				id="dropdown-noti"
-				className={`d-flex align-items-center text-secondary p-2 ${style.custom__dropdown__toggle}`}
+				className={`position-relative d-flex align-items-center text-secondary p-0 my-2 ms-2 me-3 ${style.custom__dropdown__toggle}`}
 			>
 				<FaRegBell className="h3 mb-0" />
+				<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					+99 <span className="visually-hidden">unread messages</span>
+				</span>
 			</Dropdown.Toggle>
 			<Dropdown.Menu align="end" className="p-0 dropdown-menu-end" style={{ width: '333px' }}>
 				<Link href={`/`} passHref>
