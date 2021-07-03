@@ -38,7 +38,7 @@ const CommentList = ({ listCommentClient, setListCommentClient, meta, setMeta, p
 	return (
 		<>
 			{isEmpty(listCommentClient) ? (
-				<div className="text-center font-weight-bold mt-4">
+				<div className="text-center fw-bold mt-4">
 					<span>Empty comments</span>
 				</div>
 			) : (
@@ -56,7 +56,7 @@ const CommentList = ({ listCommentClient, setListCommentClient, meta, setMeta, p
 						<div className="mt-4">
 							{isLoading ? (
 								<button type="submit" className="btn btn-info btn-block btn-sm" disabled>
-									<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+									<span className="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" />
 									Load more
 								</button>
 							) : (

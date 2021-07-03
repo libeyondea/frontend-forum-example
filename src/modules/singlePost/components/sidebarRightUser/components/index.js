@@ -12,11 +12,11 @@ const SideBarRightUserComponent = ({ postUser, listPostUser }) => {
 	const { user } = useUser();
 	return (
 		<div className="sticky-top">
-			<div className={`wapper__card bg-light rounded-lg shadow-sm pt-0 pb-3 px-3 mb-4 ${style.border__top__user}`}>
+			<div className={`wapper__card bg-light rounded-3 shadow-sm pt-0 pb-3 px-3 mb-4 ${style.border__top__user}`}>
 				<div className="text-center mb-2 mt-n4">
 					<CustomLink
 						href={`/u/${postUser?.user_name}`}
-						className="text-decoration-none d-inline-block text-dark font-weight-bold"
+						className="text-decoration-none d-inline-block text-dark fw-bold"
 					>
 						<CustomImage
 							src={`${process.env.IMAGES_URL}/${postUser.avatar}`}
@@ -36,11 +36,11 @@ const SideBarRightUserComponent = ({ postUser, listPostUser }) => {
 				<div>
 					<ul className="list-group list-group-flush">
 						<li className="bg-light list-group-item border-0 p-0 mb-2">
-							<div className="text-secondary font-weight-bold small">ROLE</div>
+							<div className="text-secondary fw-bold small">ROLE</div>
 							<div className="small">{postUser.role.title}</div>
 						</li>
 						<li className="bg-light list-group-item border-0 p-0">
-							<div className="text-secondary font-weight-bold small">JOINED</div>
+							<div className="text-secondary fw-bold small">JOINED</div>
 							<div className="small">
 								<time dateTime={postUser.created_at}>{timeFormat(postUser.created_at)}</time>
 							</div>
@@ -48,13 +48,13 @@ const SideBarRightUserComponent = ({ postUser, listPostUser }) => {
 					</ul>
 				</div>
 			</div>
-			<div className="wapper__card bg-light rounded-lg shadow-sm border">
+			<div className="wapper__card bg-light rounded-3 shadow-sm border">
 				<div className="px-3 py-2 border-bottom">
 					<h5 className="mb-0">
 						More from
 						<CustomLink
 							href={`/u/${postUser?.user_name}`}
-							className="text-decoration-none d-inline-block font-weight-bold ml-1"
+							className="text-decoration-none d-inline-block fw-bold ms-1"
 						>
 							{postUser?.user_name}
 						</CustomLink>

@@ -38,30 +38,30 @@ const DeleteCommentComponent = ({ deleteComment }) => {
 	};
 
 	return (
-		<div className="container-xl my-4">
+		<div className="container-xl py-4">
 			{!user ? (
 				<LoadingSpinnerComponent />
 			) : (
 				<div className="row">
 					<div className="col-md-8 mx-auto">
-						<div className="wapper__card bg-light rounded-lg shadow-sm p-3 p-sm-5">{deleteComment.data.content}</div>
+						<div className="wapper__card bg-light rounded-3 shadow-sm p-3 p-sm-5">{deleteComment.data.content}</div>
 					</div>
 					<div className="col-md-10 mx-auto">
-						<div className="wapper__card bg-light rounded-lg shadow-sm p-3 p-sm-5">
+						<div className="wapper__card bg-light rounded-3 shadow-sm p-3 p-sm-5">
 							<h4 className="mb-4">Are you sure you want to delete this comment?</h4>
 							<div>
 								{isLoading ? (
-									<button type="submit" className="btn btn-danger mr-2" disabled>
-										<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+									<button type="submit" className="btn btn-danger me-2" disabled>
+										<span className="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" />
 										Delete
 									</button>
 								) : (
-									<button type="submit" className="btn btn-danger mr-2" onClick={onDeleteCommentClicked}>
+									<button type="submit" className="btn btn-danger me-2" onClick={onDeleteCommentClicked}>
 										Delete
 									</button>
 								)}
 								<CustomLink
-									className={`btn btn-secondary mr-2 ${isLoading ? 'disabled' : ''}`}
+									className={`btn btn-secondary me-2 ${isLoading ? 'disabled' : ''}`}
 									href={`/u/${deleteComment.data.post.user.user_name}/${deleteComment.data.post.slug}/comment/${deleteComment.data.slug}/edit`}
 								>
 									Edit

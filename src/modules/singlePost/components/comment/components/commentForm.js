@@ -118,11 +118,11 @@ const CommentFormComponent = ({
 				{({ values, resetForm }) => (
 					<Form>
 						{isPreview ? (
-							<div className={`rounded-lg shadow-sm border bg-white p-2 p-sm-3 mb-3`}>
+							<div className={`rounded-3 shadow-sm border bg-white p-2 p-sm-3 mb-3`}>
 								<ReactMarkdownComponent text={values.content} />
 							</div>
 						) : (
-							<div className="form-group">
+							<div className="mb-3">
 								<TextForm
 									onFocus={() => (!isChild ? setIsOpenComment(true) : {})}
 									rows={5}
@@ -138,12 +138,12 @@ const CommentFormComponent = ({
 						{((!isChild && isOpenComment) || isChild) && (
 							<>
 								{isLoading ? (
-									<button type="submit" className="btn btn-primary mr-2" disabled>
-										<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+									<button type="submit" className="btn btn-primary me-2" disabled>
+										<span className="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" />
 										Submit
 									</button>
 								) : (
-									<button type="submit" className="btn btn-primary mr-2">
+									<button type="submit" className="btn btn-primary me-2">
 										Submit
 									</button>
 								)}
@@ -159,7 +159,7 @@ const CommentFormComponent = ({
 								) : (
 									<button
 										type="button"
-										className="btn btn-secondary mr-2"
+										className="btn btn-secondary me-2"
 										onClick={() => setIsPreview(true)}
 										disabled={isLoading ? true : false}
 									>

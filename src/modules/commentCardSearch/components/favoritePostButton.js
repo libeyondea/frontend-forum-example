@@ -58,14 +58,14 @@ const FavoritePostButtonComponent = ({ favorited, slug, totalFavorited }) => {
 		>
 			{isFavorited ? (
 				<>
-					<FaHeart className="mr-1" />
+					<FaHeart className="me-1" />
 				</>
 			) : (
 				<>
-					<FaRegHeart className="mr-1" />
+					<FaRegHeart className="me-1" />
 				</>
 			)}
-			<span className="mr-1">{sumFavorited}</span>
+			<span className="me-1">{sumFavorited}</span>
 			<span className="d-none d-sm-block">likes</span>
 		</button>
 	);

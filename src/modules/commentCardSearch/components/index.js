@@ -14,7 +14,7 @@ const CommentCardSearchComponent = ({ comment }) => {
 			<div className="p-3">
 				<div className="mb-2">
 					<div className="d-flex align-items-center">
-						<div className="mr-1">
+						<div className="me-1">
 							<CustomLink
 								href={`/u/${comment.user.user_name}`}
 								className="text-decoration-none d-inline-block d-flex align-items-center"
@@ -29,7 +29,7 @@ const CommentCardSearchComponent = ({ comment }) => {
 								/>
 							</CustomLink>
 						</div>
-						<div className="lh-100">
+						<div className="lh-1">
 							<div className="d-flex align-items-center">
 								<CustomLink href={`/u/${comment.user.user_name}`} className="text-decoration-none text-dark">
 									{comment.user.user_name}
@@ -43,7 +43,7 @@ const CommentCardSearchComponent = ({ comment }) => {
 						href={`/u/${comment.user.user_name}/${comment.post.slug}/comment/${comment.slug}`}
 						className={`text-decoration-none text-dark card-title mb-2 d-block ${style.title_comment_card}`}
 					>
-						<h5 className="font-weight-bold mb-0">{comment.post.title}</h5>
+						<h5 className="fw-bold mb-0">{comment.post.title}</h5>
 					</CustomLink>
 					<div className="card-text mb-0 text-secondary">
 						<HighlightSearch text={comment.content} highlight={query.q} />

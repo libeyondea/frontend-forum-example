@@ -28,8 +28,8 @@ const SearchComponent = () => {
 	);
 
 	return (
-		<div className="container-xl my-4">
-			<h3 className="mb-4 font-weight-bold">Search results</h3>
+		<div className="container-xl py-4">
+			<h3 className="mb-4 fw-bold">Search results</h3>
 			<div className="row">
 				<div className="col-lg-3 mb-4">
 					<TabVertical
@@ -67,7 +67,7 @@ const SearchComponent = () => {
 				</div>
 				<div className="col-lg-9">
 					<div className="d-flex align-items-center mb-3">
-						<div className="ml-auto">
+						<div className="ms-auto">
 							<TabHorizontalComponent
 								pidTab={query?.sort}
 								items={[
@@ -88,7 +88,7 @@ const SearchComponent = () => {
 					<div className="row">
 						{!error?.response?.data?.success && error?.response?.data?.error?.status === 422 ? (
 							<div className="col-12">
-								<div className="card text-center font-weight-bold">
+								<div className="card text-center fw-bold">
 									<div className="p-5">Please enter a search keyword</div>
 								</div>
 							</div>

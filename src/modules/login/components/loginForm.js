@@ -81,7 +81,7 @@ const LoginFormComponent = () => {
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 			<Form>
 				<h2 className="text-center mb-3">Login</h2>
-				<div className="form-group">
+				<div className="mb-3">
 					<InputForm
 						label="User name"
 						placeholder="Enter user name"
@@ -91,7 +91,7 @@ const LoginFormComponent = () => {
 						errors={errors.error?.message}
 					/>
 				</div>
-				<div className="form-group">
+				<div className="mb-3">
 					<InputForm
 						label="Password"
 						placeholder="Password"
@@ -102,7 +102,7 @@ const LoginFormComponent = () => {
 					/>
 				</div>
 				<div className="d-flex justify-content-between mb-3">
-					<div className="form-group form-check">
+					<div className="mb-3 form-check">
 						<input type="checkbox" className="form-check-input" id="remember" />
 						<label className="form-check-label" htmlFor="remember">
 							Remember
@@ -116,12 +116,12 @@ const LoginFormComponent = () => {
 				</div>
 				<div className="text-center">
 					{isLoading ? (
-						<button type="submit" className="btn btn-info" disabled>
-							<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+						<button type="submit" className="btn btn-primary" disabled>
+							<span className="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" />
 							Login
 						</button>
 					) : (
-						<button type="submit" className="btn btn-info">
+						<button type="submit" className="btn btn-primary">
 							Login
 						</button>
 					)}

@@ -46,22 +46,22 @@ const VerifyUserComponent = ({ verifyUser }) => {
 	};
 
 	return (
-		<div className="container-xl my-4">
+		<div className="container-xl py-4">
 			<div className="row">
 				<div className="col-lg-8 col-md-10 mx-auto">
-					<div className="bg-light rounded-lg shadow-sm p-4">
+					<div className="bg-light rounded-3 shadow-sm p-4">
 						<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 							<Form>
 								<h2 className="text-center mb-3">Verify email</h2>
 								{verifyUser && (
 									<div className="alert alert-success" role="alert">
-										<span className="mr-1 text-dark">Verify success</span>
+										<span className="me-1 text-dark">Verify success</span>
 										<CustomLink className="text-decoration-none" href="/login">
 											Login account
 										</CustomLink>
 									</div>
 								)}
-								<div className="form-group">
+								<div className="mb-3">
 									<InputForm
 										label="Email"
 										placeholder="Enter email"
@@ -74,7 +74,7 @@ const VerifyUserComponent = ({ verifyUser }) => {
 								<div className="text-center">
 									{isLoading ? (
 										<button type="submit" className="btn btn-info" disabled>
-											<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+											<span className="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" />
 											Resend
 										</button>
 									) : (

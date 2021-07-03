@@ -13,7 +13,7 @@ const ListTagComponent = () => {
 	return (
 		<>
 			{!listTag ? (
-				<div className="wapper__card bg-light rounded-lg shadow-sm border">
+				<div className="wapper__card bg-light rounded-3 shadow-sm border">
 					<ul className="list-group">
 						<li className="loading-animation py-3 d-flex"></li>
 					</ul>
@@ -21,13 +21,10 @@ const ListTagComponent = () => {
 			) : (
 				!isEmpty(listTag?.data) &&
 				listTag?.data?.map((tag) => (
-					<div className="wapper__card bg-light rounded-lg shadow-sm border mb-4" key={tag.id}>
+					<div className="wapper__card bg-light rounded-3 shadow-sm border mb-4" key={tag.id}>
 						<div className="px-3 py-2 border-bottom">
 							<h5 className="mb-0">
-								<CustomLink
-									href={`/t/${tag.slug}`}
-									className="text-decoration-none d-inline-block font-weight-bold text-dark"
-								>
+								<CustomLink href={`/t/${tag.slug}`} className="text-decoration-none d-inline-block fw-bold text-dark">
 									#{tag.slug}
 								</CustomLink>
 							</h5>

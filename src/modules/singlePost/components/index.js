@@ -14,16 +14,16 @@ const SinglePostComponent = ({ singlePost, listPostUser, listComment }) => {
 		<div className="container-xl py-4">
 			<div className="row">
 				<div className="col-lg-9 mb-4 mb-lg-0">
-					<article className="wapper__card single-post bg-light rounded-lg shadow-sm">
+					<article className="wapper__card single-post bg-light rounded-3 shadow-sm">
 						{singlePost.data?.image && (
 							<div>
 								<CustomImage
 									src={`${process.env.IMAGES_URL}/${singlePost.data?.image}`}
-									className="rounded-lg"
+									className="rounded-3"
 									alt={singlePost.data?.title}
 									layout="responsive"
 									width={500}
-									height={280}
+									height={200}
 									isBlur
 								/>
 							</div>

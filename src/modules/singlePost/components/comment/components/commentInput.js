@@ -22,7 +22,7 @@ const CommentInput = ({ listCommentClient, setListCommentClient, meta, setMeta, 
 		<>
 			{user && (
 				<div className="my-4 d-flex">
-					<div className="flex-shrink-0 mr-2 mr-sm-3 d-flex flex-column">
+					<div className="flex-shrink-0 me-2 me-sm-3 d-flex flex-column">
 						<CustomLink href={`/u/${user?.user_name}`} className="d-inline-flex">
 							<CustomImage
 								width="33"

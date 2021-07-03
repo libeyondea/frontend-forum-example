@@ -12,12 +12,12 @@ import ListUserFollowerComponent from '@/modules/dashboardUser/components/listUs
 const DashboardUserComponent = ({ dashboardUser, pid }) => {
 	const { user } = useUser();
 	return (
-		<div className="container-xl my-4">
+		<div className="container-xl py-4">
 			{!user ? (
 				<LoadingSpinner />
 			) : (
 				<>
-					<h3 className="mb-4 font-weight-bold">
+					<h3 className="mb-4 fw-bold">
 						Dashboard »{' '}
 						{!pid[0] || pid[0] === 'posts'
 							? 'Posts'

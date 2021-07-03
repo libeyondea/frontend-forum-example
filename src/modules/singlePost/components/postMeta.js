@@ -10,7 +10,7 @@ const PostMetaComponent = ({ singlePost }) => {
 			<div className="d-flex justify-content-start align-items-center flex-wrap">
 				<CustomLink
 					href={`/u/${singlePost.data.user?.user_name}`}
-					className="text-decoration-none d-inline-block d-flex align-items-center text-dark font-weight-bold mr-3"
+					className="text-decoration-none d-inline-block d-flex align-items-center text-dark fw-bold me-3"
 				>
 					<CustomImage
 						width="40"
@@ -20,7 +20,7 @@ const PostMetaComponent = ({ singlePost }) => {
 						alt={singlePost.data.user?.user_name}
 						layout="fixed"
 					/>
-					<span className="ml-2">{singlePost.data.user?.user_name}</span>
+					<span className="ms-2">{singlePost.data.user?.user_name}</span>
 				</CustomLink>
 				<span className="text-secondary">
 					<time dateTime={singlePost.data.created_at}>{timeFormat(singlePost.data.created_at)}</time>

@@ -9,7 +9,7 @@ const ListTagComponent = ({ listTag }) => {
 		<>
 			{isEmpty(listTag.data) ? (
 				<div className="col-12">
-					<div className="text-center font-weight-bold">
+					<div className="text-center fw-bold">
 						<span>No results match</span>
 					</div>
 				</div>

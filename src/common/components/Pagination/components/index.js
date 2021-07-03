@@ -80,56 +80,58 @@ const Pagination = ({ total, limit }) => {
 		})}`;
 
 	return (
-		<div className="col-12">
-			<nav aria-label="pagination">
-				<List>
-					{currentPage !== 1 ? (
-						<Item>
-							<NextLink href={url(currentPage - 1)} passHref scroll={false}>
-								<Link label="Previous page">&lsaquo;</Link>
-							</NextLink>
-						</Item>
-					) : (
-						<Item disabled>
-							<Link label="No previous page available" disabled>
-								&lsaquo;
-							</Link>
-						</Item>
-					)}
-					{pageNumbers.map((pageNumber, i) =>
-						pageNumber === '...' ? (
-							<Item disabled key={`${pageNumber}${i}`} hellip>
-								<Link label="ellipsis">&hellip;</Link>
-							</Item>
-						) : pageNumber === currentPage ? (
-							<Item current key={pageNumber}>
-								<Link label={`Page ${pageNumber}`} current="Page">
-									{pageNumber}
-								</Link>
-							</Item>
-						) : (
-							<Item key={pageNumber}>
-								<NextLink href={url(pageNumber)} passHref scroll={false}>
-									<Link label={`Page ${pageNumber}`}>{pageNumber}</Link>
+		<div className="row">
+			<div className="col">
+				<nav aria-label="pagination">
+					<List>
+						{currentPage !== 1 ? (
+							<Item>
+								<NextLink href={url(currentPage - 1)} passHref scroll={false}>
+									<Link label="Previous page">&lsaquo;</Link>
 								</NextLink>
 							</Item>
-						)
-					)}
-					{!isLastPage ? (
-						<Item>
-							<NextLink href={url(currentPage + 1)} passHref scroll={false}>
-								<Link label="Next page">&rsaquo;</Link>
-							</NextLink>
-						</Item>
-					) : (
-						<Item disabled>
-							<Link label="No next page available" disabled>
-								&rsaquo;
-							</Link>
-						</Item>
-					)}
-				</List>
-			</nav>
+						) : (
+							<Item disabled>
+								<Link label="No previous page available" disabled>
+									&lsaquo;
+								</Link>
+							</Item>
+						)}
+						{pageNumbers.map((pageNumber, i) =>
+							pageNumber === '...' ? (
+								<Item disabled key={`${pageNumber}${i}`} hellip>
+									<Link label="ellipsis">&hellip;</Link>
+								</Item>
+							) : pageNumber === currentPage ? (
+								<Item current key={pageNumber}>
+									<Link label={`Page ${pageNumber}`} current="Page">
+										{pageNumber}
+									</Link>
+								</Item>
+							) : (
+								<Item key={pageNumber}>
+									<NextLink href={url(pageNumber)} passHref scroll={false}>
+										<Link label={`Page ${pageNumber}`}>{pageNumber}</Link>
+									</NextLink>
+								</Item>
+							)
+						)}
+						{!isLastPage ? (
+							<Item>
+								<NextLink href={url(currentPage + 1)} passHref scroll={false}>
+									<Link label="Next page">&rsaquo;</Link>
+								</NextLink>
+							</Item>
+						) : (
+							<Item disabled>
+								<Link label="No next page available" disabled>
+									&rsaquo;
+								</Link>
+							</Item>
+						)}
+					</List>
+				</nav>
+			</div>
 		</div>
 	);
 };

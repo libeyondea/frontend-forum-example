@@ -31,7 +31,7 @@ const SideBarLeftComponent = () => {
 							className="border-0 p-0 bg-transparent d-flex align-items-center text-secondary"
 							onClick={() => setHiddenMenu(false)}
 						>
-							<FaEllipsisH className="h4 mb-0 mr-1" />
+							<FaEllipsisH className="h4 mb-0 me-1" />
 							More
 						</button>
 					</li>

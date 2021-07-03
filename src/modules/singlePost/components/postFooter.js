@@ -1,17 +1,15 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
-import NavItem from 'react-bootstrap/NavItem';
-import NavLink from 'react-bootstrap/NavLink';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 import { FaEllipsisH, FaFacebookF, FaHeart, FaRegHeart, FaTwitter } from 'react-icons/fa';
 import { GoReport } from 'react-icons/go';
 
+import CustomLink from '@/common/components/CustomLink/components';
 import useUser from '@/common/hooks/useUser';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
-import style from '@/modules/singlePost/styles/style.module.scss';
 
 const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName, postTitle }) => {
 	const { user } = useUser();
@@ -58,60 +56,65 @@ const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName
 	return (
 		<div className="d-flex justify-content-start align-items-center">
 			<button
-				className={`d-flex align-items-center border-0 bg-transparent p-0 mr-auto ${
+				className={`d-flex align-items-center border-0 bg-transparent p-0 me-auto ${
 					isFavorited ? 'text-danger' : 'text-secondary'
 				} ${isLoading ? 'disabled' : ''}`}
 				onClick={onFavoritePostClick}
 			>
 				{isFavorited ? (
 					<>
-						<FaHeart className="mr-1" />
+						<FaHeart className="me-1" />
 					</>
 				) : (
 					<>
-						<FaRegHeart className="mr-1" />
+						<FaRegHeart className="me-1" />
 					</>
 				)}
-				<span className="mr-1">{sumFavorited}</span>
+				<span className="me-1">{sumFavorited}</span>
 				<span className="d-none d-sm-block">likes</span>
 			</button>
-			<Dropdown as={NavItem}>
-				<Dropdown.Toggle
-					as={NavLink}
-					id="dropdown-custom-single-post"
-					className={`d-flex align-items-center text-secondary p-0 ${style.custom__dropdown__toggle}`}
-				>
+			<OverlayTrigger
+				trigger="click"
+				key="options-single-post"
+				placement="left"
+				overlay={
+					<Popover id={`popover-positioned-options-single-post`}>
+						<Popover.Header as="h3" className="text-center">
+							Options
+						</Popover.Header>
+						<Popover.Body className="p-0">
+							<CustomLink href="/report_abuse" className="d-flex align-items-center dropdown-item">
+								<GoReport className="me-1" />
+								Report abuse
+							</CustomLink>
+							<CustomLink
+								target="_blank"
+								rel="noopener noreferrer"
+								href={`https://www.facebook.com/sharer.php?u=${process.env.WEBSITE_URL}/u/${postUserName}/${postSlug}`}
+								className="d-flex align-items-center dropdown-item"
+							>
+								<FaFacebookF className="me-1" />
+								Share to Facebook
+							</CustomLink>
+							<CustomLink
+								target="_blank"
+								rel="noopener noreferrer"
+								href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(postTitle)} ${
+									process.env.WEBSITE_URL
+								}/u/${postUserName}/${postSlug}`}
+								className="d-flex align-items-center dropdown-item"
+							>
+								<FaTwitter className="me-1" />
+								Share to Twitter
+							</CustomLink>
+						</Popover.Body>
+					</Popover>
+				}
+			>
+				<button type="button" className="d-flex align-items-center p-0 border-0 bg-transparent">
 					<FaEllipsisH />
-				</Dropdown.Toggle>
-				<Dropdown.Menu align="right" className="p-0 rounded-lg shadow-sm">
-					<Link href={`/report-abuse`} passHref>
-						<Dropdown.Item className="d-flex align-items-center">
-							<GoReport className="mr-1" />
-							Report abuse
-						</Dropdown.Item>
-					</Link>
-					<Dropdown.Item
-						target="_blank"
-						rel="noopener noreferrer"
-						href={`https://www.facebook.com/sharer.php?u=${process.env.WEBSITE_URL}/u/${postUserName}/${postSlug}`}
-						className="d-flex align-items-center"
-					>
-						<FaFacebookF className="mr-1" />
-						Share to Facebook
-					</Dropdown.Item>
-					<Dropdown.Item
-						target="_blank"
-						rel="noopener noreferrer"
-						href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(postTitle)} ${
-							process.env.WEBSITE_URL
-						}/u/${postUserName}/${postSlug}`}
-						className="d-flex align-items-center"
-					>
-						<FaTwitter className="mr-1" />
-						Share to Twitter
-					</Dropdown.Item>
-				</Dropdown.Menu>
-			</Dropdown>
+				</button>
+			</OverlayTrigger>
 		</div>
 	);
 };

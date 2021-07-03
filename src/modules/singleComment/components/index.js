@@ -11,10 +11,10 @@ const SingleCommentComponent = ({ singleComment }) => {
 	});
 
 	return (
-		<div className="container-xl my-4">
+		<div className="container-xl py-4">
 			<div className="row">
 				<div className="col-md-8 mx-auto">
-					<div className="wapper__card bg-light rounded-lg shadow-sm p-3 p-sm-4">
+					<div className="wapper__card bg-light rounded-3 shadow-sm p-3 p-sm-4">
 						<h4 className="mb-3">
 							<span className="text-secondary">Comment on: </span>
 							{singleComment.data.post.title}
@@ -29,7 +29,7 @@ const SingleCommentComponent = ({ singleComment }) => {
 				</div>
 				{singleComment.data.parent_comment?.content && (
 					<div className="col-md-9 mx-auto">
-						<div className="wapper__card bg-light rounded-lg shadow-sm p-3 p-sm-4">
+						<div className="wapper__card bg-light rounded-3 shadow-sm p-3 p-sm-4">
 							<h4 className="mb-0">
 								<span className="text-secondary">Replies for: </span>
 								<CustomLink
@@ -43,7 +43,7 @@ const SingleCommentComponent = ({ singleComment }) => {
 					</div>
 				)}
 				<div className="col-md-10 mx-auto">
-					<div className="wapper__card bg-light rounded-lg shadow-sm p-3 p-sm-5">
+					<div className="wapper__card bg-light rounded-3 shadow-sm p-3 p-sm-5">
 						<CommentCard
 							comment={singleComment.data}
 							listCommentClient={listCommentClient}

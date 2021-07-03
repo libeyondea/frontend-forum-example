@@ -10,7 +10,7 @@ const LoadingPost = ({ lengthArr = 10 }) => {
 				<div className={`card ${style.loading_post_card}`}>
 					<div className="p-3">
 						<div className="d-flex align-items-center mb-2">
-							<div className="rounded-circle mr-1 p-3 loading-animation"></div>
+							<div className="rounded-circle me-1 p-3 loading-animation"></div>
 							<div className="py-2 w-25 loading-animation"></div>
 						</div>
 						<div className={`${style.body_loading_post}`}>

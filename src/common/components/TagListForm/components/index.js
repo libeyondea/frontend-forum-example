@@ -72,14 +72,16 @@ const TagListFormComponent = ({ errors, tags, setTag, ...props }) => {
 
 	return (
 		<>
-			<label htmlFor="tags">Tags</label>
-			<ul className="border rounded px-1 flex-wrap d-flex border mb-0">
+			<label htmlFor="tags" className="form-label">
+				Tags
+			</label>
+			<ul className="border rounded px-2 flex-wrap d-flex border mb-0">
 				{tags.map(
 					(item, i) =>
 						item.slug && (
-							<span className="badge badge-secondary my-1 mr-1 d-flex align-items-center font-weight-normal" key={i}>
+							<span className="badge bg-secondary my-1 me-1 d-flex align-items-center font-weight-normal" key={i}>
 								{item.slug}
-								<FaTimes className="cursor-pointer ml-1" onClick={() => handleRemoveItem(i)} />
+								<FaTimes className="cursor-pointer ms-1" onClick={() => handleRemoveItem(i)} />
 							</span>
 						)
 				)}

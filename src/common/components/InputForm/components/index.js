@@ -6,7 +6,9 @@ const InuputFormComponent = ({ errors, label, ...props }) => {
 	const [field, meta] = useField(props);
 	return (
 		<>
-			<label htmlFor={props.id || props.name}>{label}</label>
+			<label htmlFor={props.id || props.name} className="form-label">
+				{label}
+			</label>
 			<input
 				{...field}
 				{...props}

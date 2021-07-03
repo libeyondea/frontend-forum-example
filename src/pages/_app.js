@@ -1,5 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '@/styles/global.css';
+import '@/styles/globals.scss';
 import '@/styles/github-markdown.css';
 import 'nprogress/nprogress.css';
 import 'react-toastify/dist/ReactToastify.css';

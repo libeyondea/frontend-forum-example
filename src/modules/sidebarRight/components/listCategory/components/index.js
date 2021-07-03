@@ -13,24 +13,24 @@ const ListCategoryComponent = () => {
 	return (
 		<>
 			{!listCategory ? (
-				<div className="wapper__card bg-light rounded-lg shadow-sm border mb-4">
+				<div className="wapper__card bg-light rounded-3 shadow-sm border mb-4">
 					<ul className="list-group">
 						<li className="loading-animation py-3 d-flex"></li>
 					</ul>
 				</div>
 			) : (
 				!isEmpty(listCategory?.data) && (
-					<div className="wapper__card bg-light rounded-lg shadow-sm border mb-4">
+					<div className="wapper__card bg-light rounded-3 shadow-sm border mb-4">
 						<div className="px-3 py-2 border-bottom">
 							<h5 className="mb-0">Categories</h5>
 						</div>
 						<ul className="list-group">
 							{listCategory?.data?.map((category) => (
 								<li className={`bg-light border-bottom px-3 py-2 ${style.list_group_item_custom}`} key={category.id}>
-									<CustomLink href={`/c/${category.slug}`} className="text-decoration-none text-dark mr-2">
+									<CustomLink href={`/c/${category.slug}`} className="text-decoration-none text-dark me-2">
 										{category.title}
 									</CustomLink>
-									<span className="badge badge-pill badge-secondary">{category.total_posts}</span>
+									<span className="badge bg-secondary">{category.total_posts}</span>
 								</li>
 							))}
 						</ul>

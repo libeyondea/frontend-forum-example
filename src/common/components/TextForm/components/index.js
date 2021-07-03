@@ -6,7 +6,11 @@ const TextFormComponent = ({ errors, label, ...props }) => {
 	const [field, meta] = useField(props);
 	return (
 		<>
-			{label && <label htmlFor={props.id || props.name}>{label}</label>}
+			{label && (
+				<label htmlFor={props.id || props.name} className="form-label">
+					{label}
+				</label>
+			)}
 			<textarea
 				{...field}
 				{...props}

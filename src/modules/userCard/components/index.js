@@ -15,7 +15,7 @@ const UserCardComponent = ({ user }) => {
 			<div className="p-3">
 				<div className="mb-2">
 					<div className="d-flex align-items-center">
-						<div className="mr-1">
+						<div className="me-1">
 							<CustomLink
 								href={`/u/${user.user_name}`}
 								className="text-decoration-none d-inline-block d-flex align-items-center"
@@ -30,7 +30,7 @@ const UserCardComponent = ({ user }) => {
 								/>
 							</CustomLink>
 						</div>
-						<div className="lh-100">
+						<div className="lh-1">
 							<div className="d-flex align-items-center">
 								<CustomLink href={`/u/${user.user_name}`} className="text-decoration-none text-dark">
 									{user.user_name}
@@ -44,7 +44,7 @@ const UserCardComponent = ({ user }) => {
 						href={`/u/${user.user_name}`}
 						className={`text-decoration-none text-dark card-title mb-2 d-block ${style.title_user_card}`}
 					>
-						<h5 className="font-weight-bold mb-0">
+						<h5 className="fw-bold mb-0">
 							{user.first_name} {user.last_name}
 						</h5>
 					</CustomLink>

@@ -82,13 +82,13 @@ const CommentMetaComponent = ({
 			{!replyBox ? (
 				<div className="d-flex justify-content-start align-items-center mt-2">
 					<button
-						className={`d-flex align-items-center border-0 bg-transparent mr-3 ${
+						className={`d-flex align-items-center border-0 bg-transparent me-3 ${
 							isFavorited ? 'text-danger' : 'text-secondary'
 						} ${isLoadingFav ? 'disabled' : ''}`}
 						onClick={onFavoriteCommentClick}
 					>
-						{isFavorited ? <FaHeart className="mr-1" /> : <FaRegHeart className="mr-1" />}
-						<span className="mr-1">{sumFavorited}</span>
+						{isFavorited ? <FaHeart className="me-1" /> : <FaRegHeart className="me-1" />}
+						<span className="me-1">{sumFavorited}</span>
 						<span className="d-none d-sm-block">likes</span>
 					</button>
 					<button
@@ -96,8 +96,8 @@ const CommentMetaComponent = ({
 						className="p-0 text-secondary border-0 bg-transparent d-flex align-items-center"
 						onClick={onBoxReplyCommentClick}
 					>
-						<FaRegComment className="mr-1" />
-						{/* <span className="mr-1">666</span> */}
+						<FaRegComment className="me-1" />
+						{/* <span className="me-1">666</span> */}
 						<span className="d-none d-sm-block">reply</span>
 					</button>
 				</div>

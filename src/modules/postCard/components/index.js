@@ -13,7 +13,7 @@ const PostCardComponent = ({ post }) => {
 			<div className="p-3">
 				<div className="mb-2">
 					<div className="d-flex align-items-center">
-						<div className="mr-1">
+						<div className="me-1">
 							<CustomLink
 								href={`/u/${post.user.user_name}`}
 								className="text-decoration-none d-inline-block d-flex align-items-center"
@@ -28,7 +28,7 @@ const PostCardComponent = ({ post }) => {
 								/>
 							</CustomLink>
 						</div>
-						<div className="lh-100">
+						<div className="lh-1">
 							<div className="d-flex align-items-center">
 								<CustomLink href={`/u/${post.user.user_name}`} className="text-decoration-none text-dark">
 									{post.user.user_name}
@@ -43,7 +43,7 @@ const PostCardComponent = ({ post }) => {
 						href={`/u/${post.user.user_name}/${post.slug}`}
 						className={`text-decoration-none text-dark card-title mb-2 d-block ${style.title_post_card}`}
 					>
-						<h5 className="font-weight-bold mb-0">{post.title}</h5>
+						<h5 className="fw-bold mb-0">{post.title}</h5>
 					</CustomLink>
 					<div className="mb-1">
 						<p className="card-text mb-0 text-secondary">{post.excerpt}</p>
@@ -64,10 +64,10 @@ const PostCardComponent = ({ post }) => {
 					<div className="d-flex justify-content-end align-items-center">
 						<CustomLink
 							href={`/u/${post.user.user_name}/${post.slug}#comment-post`}
-							className="d-flex align-items-center text-decoration-none text-secondary mr-2"
+							className="d-flex align-items-center text-decoration-none text-secondary me-2"
 						>
-							<FaRegComment className="mr-1" />
-							<span className="mr-1">{post.total_comments}</span>
+							<FaRegComment className="me-1" />
+							<span className="me-1">{post.total_comments}</span>
 							<span className="d-none d-sm-block">comments</span>
 						</CustomLink>
 						<FavoritePostButtonComponent

@@ -37,7 +37,14 @@ export async function getServerSideProps({ req, query }) {
 				token: getCookie('token', req),
 				params: {
 					tag: pid[0],
-					sort_by: pid[1] === 'latest' ? 'published_at' : pid[1] === 'oldest' ? 'published_at' : 'feed',
+					sort_by:
+						pid[1] === 'feed' || !pid[1]
+							? 'feed'
+							: pid[1] === 'latest'
+							? 'published_at'
+							: pid[1] === 'oldest'
+							? 'published_at'
+							: '',
 					sort_direction: pid[1] === 'latest' ? 'desc' : pid[1] === 'oldest' ? 'asc' : 'desc',
 					offset: (pageNumber(query.page) - 1) * process.env.LIMIT_PAGE.LIST_POST_TAG,
 					limit: process.env.LIMIT_PAGE.LIST_POST_TAG

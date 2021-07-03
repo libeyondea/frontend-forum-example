@@ -57,14 +57,14 @@ const FollowTagButtonComponent = ({ following, slug }) => {
 					className={`d-flex align-items-center btn btn-sm ${isFollow ? 'btn-secondary' : 'btn-outline-secondary'}`}
 					disabled
 				>
-					<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+					<span className="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" />
 					{isFollow ? (
 						<>
-							<FaMinus className="mr-1" /> UnFollow
+							<FaMinus className="me-1" /> UnFollow
 						</>
 					) : (
 						<>
-							<FaPlus className="mr-1" /> Follow
+							<FaPlus className="me-1" /> Follow
 						</>
 					)}
 				</button>
@@ -75,11 +75,11 @@ const FollowTagButtonComponent = ({ following, slug }) => {
 				>
 					{isFollow ? (
 						<>
-							<FaMinus className="mr-1" /> UnFollow
+							<FaMinus className="me-1" /> UnFollow
 						</>
 					) : (
 						<>
-							<FaPlus className="mr-1" /> Follow
+							<FaPlus className="me-1" /> Follow
 						</>
 					)}
 				</button>

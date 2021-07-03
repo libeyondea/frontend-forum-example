@@ -57,15 +57,16 @@ const NavBarComponent = () => {
 		<Dropdown as={NavItem} className={`${classNameWrapper}`}>
 			<Dropdown.Toggle
 				as={NavLink}
+				id="dropdown-noti"
 				className={`d-flex align-items-center text-secondary p-2 ${style.custom__dropdown__toggle}`}
 			>
 				<FaRegBell className="h3 mb-0" />
 			</Dropdown.Toggle>
-			<Dropdown.Menu align="right" className="p-0" style={{ width: '333px' }}>
+			<Dropdown.Menu align="end" className="p-0 dropdown-menu-end" style={{ width: '333px' }}>
 				<Link href={`/`} passHref>
 					<Dropdown.Item className="p-3">
 						<div className="d-flex align-items-center">
-							<div className="mr-2">
+							<div className="me-2">
 								<div className="text-decoration-none d-inline-block d-flex align-items-center">
 									<CustomImage
 										src={`${process.env.IMAGES_URL}/6666666666.jpg`}
@@ -77,7 +78,7 @@ const NavBarComponent = () => {
 									/>
 								</div>
 							</div>
-							<div className="lh-100 text-wrap">
+							<div className="lh-1 text-wrap">
 								<div className="text-decoration-none text-dark">
 									Lorem ipsum dolor sit amet, consectetur adipiscing elit
 								</div>
@@ -96,17 +97,21 @@ const NavBarComponent = () => {
 
 	const DropdownMenuUser = (classNameWrapper) => (
 		<Dropdown as={NavItem} className={`${classNameWrapper}`}>
-			<Dropdown.Toggle as={NavLink} className={`d-flex align-items-center p-2 ${style.custom__dropdown__toggle}`}>
+			<Dropdown.Toggle
+				as={NavLink}
+				id="dropdown-user"
+				className={`d-flex align-items-center p-2 pe-md-2 pe-3 ${style.custom__dropdown__toggle}`}
+			>
 				<CustomImage
 					className="rounded-circle"
 					src={`${process.env.IMAGES_URL}/${user?.avatar}`}
-					width={40}
-					height={40}
+					width={34}
+					height={34}
 					alt={user?.user_name}
 					layout="fixed"
 				/>
 			</Dropdown.Toggle>
-			<Dropdown.Menu align="right" className="p-0">
+			<Dropdown.Menu align={'end'} className="p-0 dropdown-menu-end">
 				<Link href={`/u/${user?.user_name}`} passHref>
 					<Dropdown.Item>
 						<span className="d-block h6 mb-0">
@@ -132,7 +137,7 @@ const NavBarComponent = () => {
 		<Navbar collapseOnSelect expand="md" bg="light" variant="light" fixed="top" className="shadow-sm">
 			<div className="container-xl">
 				<Link href="/" passHref>
-					<Navbar.Brand className="d-flex align-items-center mr-auto">
+					<Navbar.Brand className="d-flex align-items-center me-md-3 me-auto">
 						<CustomImage
 							className="rounded-circle"
 							src={`${process.env.IMAGES_URL}/6666666666.jpg`}
@@ -141,19 +146,19 @@ const NavBarComponent = () => {
 							alt="Logo"
 							layout="fixed"
 						/>
-						<div className="ml-2">De4thZone</div>
+						<div className="ms-2 d-none d-sm-block">De4thZone</div>
 					</Navbar.Brand>
 				</Link>
 				{user && (
-					<>
-						{DropdownMenuNoti('d-block d-md-none')}
-						{DropdownMenuUser('d-block d-md-none')}
-					</>
+					<div className="d-flex align-items-center order-md-2">
+						{DropdownMenuNoti('')}
+						{DropdownMenuUser('')}
+					</div>
 				)}
-				<Navbar.Toggle aria-controls="responsive-navbar-nav" className="ml-2" />
-				<Navbar.Collapse id="responsive-navbar-nav">
-					<Nav className="mr-auto ml-0 ml-md-3 my-2 my-md-0">
-						<form className="form-inline" onSubmit={onSearchSubmit}>
+				<Navbar.Toggle aria-controls="responsive-navbar-nav" className="" />
+				<Navbar.Collapse id="responsive-navbar-nav" className="order-md-1">
+					<Nav className="align-items-md-center">
+						<form className="form-inline py-md-0 py-2" onSubmit={onSearchSubmit}>
 							<input
 								placeholder="Search"
 								type="text"
@@ -163,12 +168,12 @@ const NavBarComponent = () => {
 							/>
 						</form>
 					</Nav>
-					<Nav className="align-items-md-center">
+					<Nav className="align-items-md-center ms-auto">
 						<Dropdown as={NavItem}>
-							<Dropdown.Toggle as={NavLink} id="dropdown-locale">
+							<Dropdown.Toggle as={NavLink} id="dropdown-locale" className="py-2">
 								{router.locale === 'vi' ? 'Vietnamese' : 'English'}
 							</Dropdown.Toggle>
-							<Dropdown.Menu align="right" className="p-0">
+							<Dropdown.Menu align="end" className="p-0 dropdown-menu-end">
 								<Link href={router.asPath} locale="en" passHref>
 									<Dropdown.Item>English</Dropdown.Item>
 								</Link>
@@ -181,11 +186,9 @@ const NavBarComponent = () => {
 							<>
 								<Nav.Item className="d-none d-md-block px-2">
 									<Link href="/new" passHref>
-										<Nav.Link className="btn btn-primary text-white font-weight-bold">New Post</Nav.Link>
+										<Nav.Link className="btn btn-primary text-white fw-bold">New Post</Nav.Link>
 									</Link>
 								</Nav.Item>
-								{DropdownMenuNoti('d-none d-md-block')}
-								{DropdownMenuUser('d-none d-md-block')}
 							</>
 						)}
 						{!user && (
@@ -203,10 +206,10 @@ const NavBarComponent = () => {
 							</>
 						)}
 						<Dropdown as={NavItem} className="d-block d-md-none">
-							<Dropdown.Toggle as={NavLink} id="dropdown-custom-5">
+							<Dropdown.Toggle as={NavLink} id="dropdown-options" className="py-2">
 								Options
 							</Dropdown.Toggle>
-							<Dropdown.Menu align="right" className="p-0">
+							<Dropdown.Menu align="end" className="p-0 dropdown-menu-end">
 								{optionsMenu.map((m, index) => (
 									<Link href={m.href} key={index} passHref>
 										<Dropdown.Item className="d-flex align-items-center">

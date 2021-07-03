@@ -10,12 +10,12 @@ import EditProfileFormComponent from '@/modules/settingUser/components/editProfi
 const SettingUserComponent = ({ settingUser, pid }) => {
 	const { user } = useUser();
 	return (
-		<div className="container-xl my-4">
+		<div className="container-xl py-4">
 			{!settingUser || !user ? (
 				<LoadingSpinner />
 			) : (
 				<>
-					<h3 className="mb-4 font-weight-bold">
+					<h3 className="mb-4 fw-bold">
 						Settings for{' '}
 						<CustomLink href={`/u/${user.user_name}`} className="text-decoration-none">
 							@{user.user_name}
@@ -40,7 +40,7 @@ const SettingUserComponent = ({ settingUser, pid }) => {
 							/>
 						</div>
 						<div className="col-lg-9">
-							<div className="bg-light p-4 rounded-lg shadow-sm">
+							<div className="bg-light p-4 rounded-3 shadow-sm">
 								{(!pid[0] || pid[0] === 'profile') && <EditProfileFormComponent editProfile={settingUser} />}
 								{pid[0] === 'customization' && <EditCustomizationComponent />}
 							</div>

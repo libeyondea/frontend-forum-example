@@ -117,11 +117,11 @@ const EditPostFormComponent = ({ editPost, isPreview }) => {
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 			{({ setFieldValue, setFieldTouched, errors: error, touched, values }) => (
 				<Form>
-					<div className="bg-light rounded-lg shadow-sm">
+					<div className="bg-light rounded-3 shadow-sm">
 						{!isPreview ? (
 							<div className="p-3 p-sm-5">
-								<div className="form-row">
-									<div className="form-group col-md-12">
+								<div className="row">
+									<div className="mb-3 col-md-12">
 										<ImagePostForm
 											label="Image (.png, .jpg, .jpeg .gif)"
 											id="image"
@@ -137,13 +137,13 @@ const EditPostFormComponent = ({ editPost, isPreview }) => {
 											removeImage={() => onChangeRemoveImage(setFieldValue)}
 										/>
 									</div>
-									<div className="form-group col-md-12">
+									<div className="mb-3 col-md-12">
 										<InputForm label="Title" placeholder="Enter title" id="title" name="title" type="text" />
 									</div>
-									<div className="form-group col-md-12">
+									<div className="mb-3 col-md-12">
 										<TagListForm tags={tags} setTag={setTag} errors={errors.error?.message?.tags} />
 									</div>
-									<div className="form-group col-12">
+									<div className="mb-3 col-12">
 										<TextForm
 											rows="16"
 											label="Content (Markdown)"
@@ -153,7 +153,7 @@ const EditPostFormComponent = ({ editPost, isPreview }) => {
 											type="text"
 										/>
 									</div>
-									<div className="form-group col-md-12 mb-0">
+									<div className="mb-3 col-md-12 mb-0">
 										<SelectForm label="Category" name="category_id">
 											<option value="">Select category</option>
 											{!listCategory ? (
@@ -177,7 +177,7 @@ const EditPostFormComponent = ({ editPost, isPreview }) => {
 									<div>
 										<CustomImage
 											src={loadImg}
-											className="rounded-lg"
+											className="rounded-3"
 											alt={``}
 											layout="responsive"
 											width={500}
@@ -207,7 +207,7 @@ const EditPostFormComponent = ({ editPost, isPreview }) => {
 					<div className="text-left mt-3">
 						{isLoading ? (
 							<button type="submit" className="btn btn-primary" disabled>
-								<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+								<span className="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" />
 								Submit
 							</button>
 						) : (

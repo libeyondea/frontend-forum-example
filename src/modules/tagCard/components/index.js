@@ -20,7 +20,7 @@ const TagCardComponent = ({ tag, classNameContainer = '', isSingle = false }) =>
 							href={`/t/${tag.slug}`}
 							className={`card-title text-decoration-none d-block mb-2 text-dark ${style.title_tag_card}`}
 						>
-							<h5 className="font-weight-bold mb-0">
+							<h5 className="fw-bold mb-0">
 								<span className="text-secondary">#</span>
 								{tag.title}
 							</h5>

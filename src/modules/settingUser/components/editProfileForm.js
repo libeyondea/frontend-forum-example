@@ -168,20 +168,20 @@ const EditProfileFormComponent = ({ editProfile }) => {
 						<div className="alert alert-danger text-break" role="alert">
 							<h5 className="text-dark mb-0">Confirm your email to complete your profile.</h5>
 							<div className="d-flex align-items-center flex-wrap">
-								<CustomLink className="text-decoration-none mr-1" href={`mailto:${editProfile.data.email}`}>
+								<CustomLink className="text-decoration-none me-1" href={`mailto:${editProfile.data.email}`}>
 									{editProfile.data.email}
 								</CustomLink>
 							</div>
 						</div>
 					)}
-					<div className="form-row">
-						<div className="form-group col-md-6">
+					<div className="row">
+						<div className="mb-3 col-md-6">
 							<InputForm label="First name" placeholder="First name" id="first_name" name="first_name" type="text" />
 						</div>
-						<div className="form-group col-md-6">
+						<div className="mb-3 col-md-6">
 							<InputForm label="Last name" placeholder="Last name" id="last_name" name="last_name" type="text" />
 						</div>
-						<div className="form-group col-md-6">
+						<div className="mb-3 col-md-6">
 							<div className="d-flex flex-column flex-sm-row">
 								<div className="w-100">
 									<InputForm
@@ -197,7 +197,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 									(isLoadingResend ? (
 										<button
 											type="button"
-											className={`d-flex align-items-center btn btn-info ml-0 ml-sm-2 mt-2 ${style.btn__resend}`}
+											className={`d-flex align-items-center btn btn-info ms-0 ms-sm-2 mt-2 ${style.btn__resend}`}
 											disabled
 										>
 											<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
@@ -205,7 +205,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 									) : (
 										<button
 											type="button"
-											className={`btn btn-info ml-0 ml-sm-2 mt-2 ${style.btn__resend}`}
+											className={`btn btn-info ms-0 ms-sm-2 mt-2 ${style.btn__resend}`}
 											onClick={() => onResendClick()}
 										>
 											Resend
@@ -213,7 +213,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 									))}
 							</div>
 						</div>
-						<div className="form-group col-md-6">
+						<div className="mb-3 col-md-6">
 							<InputForm
 								label="User name"
 								placeholder="User name"
@@ -223,7 +223,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 								errors={errors.error?.message?.user_name}
 							/>
 						</div>
-						<div className="form-group col-md-6">
+						<div className="mb-3 col-md-6">
 							<InputForm
 								label="Phone number"
 								placeholder="84 336 077 131"
@@ -232,7 +232,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 								type="text"
 							/>
 						</div>
-						<div className="form-group col-md-6">
+						<div className="mb-3 col-md-6">
 							<SelectForm label="Gender" name="gender">
 								<option value={gender[0]}>Select gender</option>
 								<option value={gender[1]}>Male</option>
@@ -240,13 +240,13 @@ const EditProfileFormComponent = ({ editProfile }) => {
 								<option value={gender[3]}>Unknown</option>
 							</SelectForm>
 						</div>
-						<div className="form-group col-md-12">
+						<div className="mb-3 col-md-12">
 							<TextForm rows="2" label="Address" placeholder="Address" id="address" name="address" />
 						</div>
-						<div className="form-group col-md-12">
+						<div className="mb-3 col-md-12">
 							<TextForm rows="3" label="Biography" placeholder="Biography" id="biography" name="biography" />
 						</div>
-						<div className="form-group col-md-12">
+						<div className="mb-3 col-md-12">
 							<ImageUserForm
 								label="Avatar"
 								id="avatar"
@@ -265,7 +265,7 @@ const EditProfileFormComponent = ({ editProfile }) => {
 					<div className="text-left">
 						{isLoading ? (
 							<button type="submit" className="btn btn-primary" disabled>
-								<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+								<span className="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" />
 								Update
 							</button>
 						) : (

@@ -53,17 +53,17 @@ const EditCommentComponent = ({ editComment }) => {
 	};
 
 	return (
-		<div className="container-xl my-4">
+		<div className="container-xl py-4">
 			{!user ? (
 				<LoadingSpinnerComponent />
 			) : (
 				<div className="row">
 					<div className="col-md-10 mx-auto">
-						<div className="wapper__card bg-light rounded-lg shadow-sm p-3 p-sm-5">
+						<div className="wapper__card bg-light rounded-3 shadow-sm p-3 p-sm-5">
 							<h4 className="mb-4">Editing comment</h4>
 							<div>
 								<div className="my-4 d-flex align-items-start flex-column flex-sm-row">
-									<CustomLink href={`/u/${user?.user_name}`} className={`mr-3 mb-3 ${isLoading ? 'disabled' : ''}`}>
+									<CustomLink href={`/u/${user?.user_name}`} className={`me-3 mb-3 ${isLoading ? 'disabled' : ''}`}>
 										<CustomImage
 											width="33"
 											height="33"
@@ -77,11 +77,11 @@ const EditCommentComponent = ({ editComment }) => {
 											{({ values }) => (
 												<Form>
 													{isPreview ? (
-														<div className={`rounded-lg shadow-sm border bg-white p-2 p-sm-3 mb-3`}>
+														<div className={`rounded-3 shadow-sm border bg-white p-2 p-sm-3 mb-3`}>
 															<ReactMarkdownComponent text={values.content} />
 														</div>
 													) : (
-														<div className="form-group">
+														<div className="mb-3">
 															<TextForm
 																rows={5}
 																placeholder="Write a comment..."
@@ -92,19 +92,19 @@ const EditCommentComponent = ({ editComment }) => {
 														</div>
 													)}
 													{isLoading ? (
-														<button type="submit" className="btn btn-primary mr-2" disabled>
-															<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+														<button type="submit" className="btn btn-primary me-2" disabled>
+															<span className="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" />
 															Submit
 														</button>
 													) : (
-														<button type="submit" className="btn btn-primary mr-2">
+														<button type="submit" className="btn btn-primary me-2">
 															Submit
 														</button>
 													)}
 													{isPreview ? (
 														<button
 															type="button"
-															className="btn btn-secondary mr-2"
+															className="btn btn-secondary me-2"
 															onClick={() => setIsPreview(false)}
 															disabled={isLoading ? true : false}
 														>
@@ -113,7 +113,7 @@ const EditCommentComponent = ({ editComment }) => {
 													) : (
 														<button
 															type="button"
-															className="btn btn-secondary mr-2"
+															className="btn btn-secondary me-2"
 															onClick={() => setIsPreview(true)}
 															disabled={isLoading ? true : false}
 														>

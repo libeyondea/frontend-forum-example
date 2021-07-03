@@ -11,7 +11,7 @@ const ImagePostFormComponent = ({ errors, error, touched, label, imageSrc, imagA
 				{label}
 			</label>
 			<div className="d-flex flex-column flex-md-row">
-				<div className="mb-2 mb-md-0 mr-2 d-flex align-items-center">
+				<div className="mb-2 mb-md-0 me-2 d-flex align-items-center">
 					<div className="">
 						<button type="button" className="btn btn-outline-secondary position-relative">
 							<input
@@ -30,7 +30,7 @@ const ImagePostFormComponent = ({ errors, error, touched, label, imageSrc, imagA
 				</div>
 				{imageSrc && (
 					<div className="d-flex flex-column flex-sm-row">
-						<div className="mr-2 mb-2 mb-sm-0">
+						<div className="me-2 mb-2 mb-sm-0">
 							<CustomImage className="" src={`${imageSrc}`} width={350} height={150} alt={imagAlt} />
 						</div>
 						<div className="d-flex align-items-center">

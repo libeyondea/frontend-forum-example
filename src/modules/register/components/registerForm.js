@@ -183,14 +183,14 @@ const RegisterFormComponent = () => {
 			{({ setFieldValue, setFieldTouched, errors: error, touched }) => (
 				<Form>
 					<h2 className="text-center mb-3">Register</h2>
-					<div className="form-row">
-						<div className="form-group col-md-6">
+					<div className="row">
+						<div className="mb-3 col-md-6">
 							<InputForm label="First name" placeholder="First name" id="first_name" name="first_name" type="text" />
 						</div>
-						<div className="form-group col-md-6">
+						<div className="mb-3 col-md-6">
 							<InputForm label="Last name" placeholder="Last name" id="last_name" name="last_name" type="text" />
 						</div>
-						<div className="form-group col-md-6">
+						<div className="mb-3 col-md-6">
 							<InputForm
 								label="Email"
 								placeholder="Email"
@@ -200,7 +200,7 @@ const RegisterFormComponent = () => {
 								errors={errors.error?.message?.email}
 							/>
 						</div>
-						<div className="form-group col-md-6">
+						<div className="mb-3 col-md-6">
 							<InputForm
 								label="User name"
 								placeholder="User name"
@@ -210,10 +210,10 @@ const RegisterFormComponent = () => {
 								errors={errors.error?.message?.user_name}
 							/>
 						</div>
-						<div className="form-group col-md-6">
+						<div className="mb-3 col-md-6">
 							<InputForm label="Password" placeholder="Password" id="password" name="password" type="password" />
 						</div>
-						<div className="form-group col-md-6">
+						<div className="mb-3 col-md-6">
 							<InputForm
 								label="Confirm password"
 								placeholder="Confirm password"
@@ -222,7 +222,7 @@ const RegisterFormComponent = () => {
 								type="password"
 							/>
 						</div>
-						<div className="form-group col-md-6">
+						<div className="mb-3 col-md-6">
 							<InputForm
 								label="Phone number"
 								placeholder="84 336 077 131"
@@ -231,7 +231,7 @@ const RegisterFormComponent = () => {
 								type="text"
 							/>
 						</div>
-						<div className="form-group col-md-6">
+						<div className="mb-3 col-md-6">
 							<SelectForm label="Gender" name="gender">
 								<option value={gender[0]}>Select gender</option>
 								<option value={gender[1]}>Male</option>
@@ -239,13 +239,13 @@ const RegisterFormComponent = () => {
 								<option value={gender[3]}>Unknown</option>
 							</SelectForm>
 						</div>
-						<div className="form-group col-md-12">
+						<div className="mb-3 col-md-12">
 							<TextForm rows="2" label="Address" placeholder="Address" id="address" name="address" />
 						</div>
-						<div className="form-group col-md-12">
+						<div className="mb-3 col-md-12">
 							<TextForm rows="3" label="Biography" placeholder="Biography" id="biography" name="biography" />
 						</div>
-						<div className="form-group col-md-12">
+						<div className="mb-3 col-md-12">
 							<ImageUserForm
 								label="Avatar"
 								id="avatar"
@@ -260,7 +260,7 @@ const RegisterFormComponent = () => {
 								imagAlt={`User avatar`}
 							/>
 						</div>
-						<div className="form-group col-md-12">
+						<div className="mb-3 col-md-12">
 							<div className="form-check">
 								<CheckboxForm label="Agree to terms of service" id="agreeterms" name="agreeterms" />
 							</div>
@@ -268,12 +268,12 @@ const RegisterFormComponent = () => {
 					</div>
 					<div className="text-center">
 						{isLoading ? (
-							<button type="submit" className="btn btn-info" disabled>
-								<span className="spinner-grow spinner-grow-sm mr-1" role="status" aria-hidden="true" />
+							<button type="submit" className="btn btn-primary" disabled>
+								<span className="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" />
 								Register
 							</button>
 						) : (
-							<button type="submit" className="btn btn-info">
+							<button type="submit" className="btn btn-primary">
 								Register
 							</button>
 						)}

@@ -1,11 +1,14 @@
 import Link from 'next/link';
 import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import NavLink from 'react-bootstrap/NavLink';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 import { FaEllipsisH, FaHashtag, FaRegComment, FaRegHeart } from 'react-icons/fa';
+import { GoReport } from 'react-icons/go';
 import { GrArticle } from 'react-icons/gr';
 
 import CustomImage from '@/common/components/CustomImage/components';
+import CustomLink from '@/common/components/CustomLink/components';
 import useUser from '@/common/hooks/useUser';
 import EditProfileButtonComponent from '@/modules/singleUser/components/editProfileButton';
 import FollowUserButtonComponent from '@/modules/singleUser/components/followUserButton';
@@ -15,10 +18,10 @@ import style from '@/modules/singleUser/styles/style.module.scss';
 const SingleUserComponent = ({ singleUser, listPostUser }) => {
 	const { user } = useUser();
 	return (
-		<div className="container-xl my-4">
+		<div className="container-xl py-4">
 			<div className="row">
 				<div className="col-12 mb-4">
-					<div className={`text-left text-sm-center bg-light rounded-lg shadow-sm px-4 pb-4 pt-4 ${style.info__user}`}>
+					<div className={`text-left text-sm-center bg-light rounded-3 shadow-sm px-4 pb-4 pt-4 ${style.info__user}`}>
 						<div className={`position-relative mb-2 ${style.avt}`}>
 							<span className="d-inline-flex p-3 rounded-circle">
 								<CustomImage
@@ -31,20 +34,28 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 							</span>
 							{singleUser.data?.user_name !== user?.user_name && (
 								<div className={`d-flex position-absolute ${style.more__user}`}>
-									<Dropdown>
-										<Dropdown.Toggle
-											as={NavLink}
-											id="dropdown-more-user"
-											className={`d-flex align-items-center text-secondary p-0 ${style.custom__dropdown__toggle}`}
-										>
+									<OverlayTrigger
+										trigger="click"
+										key="options-single-user"
+										placement="left"
+										overlay={
+											<Popover id={`popover-positioned-options-single-user`}>
+												<Popover.Header as="h3" className="text-center">
+													Options
+												</Popover.Header>
+												<Popover.Body className="p-0">
+													<CustomLink href="/report_abuse" className="d-flex align-items-center dropdown-item">
+														<GoReport className="me-1" />
+														Report abuse
+													</CustomLink>
+												</Popover.Body>
+											</Popover>
+										}
+									>
+										<button type="button" className="d-flex align-items-center p-0 border-0 bg-transparent">
 											<FaEllipsisH className="h4 mb-0" />
-										</Dropdown.Toggle>
-										<Dropdown.Menu alignRight="right" className="p-0 rounded-lg shadow-sm">
-											<Link href={`/report-abuse`} passHref>
-												<Dropdown.Item>Report abuse</Dropdown.Item>
-											</Link>
-										</Dropdown.Menu>
-									</Dropdown>
+										</button>
+									</OverlayTrigger>
 								</div>
 							)}
 						</div>
@@ -73,21 +84,21 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 					</div>
 				</div>
 				<div className="col-lg-4 col-md-4 mb-4 mb-md-0">
-					<ul className="wapper__card list-group rounded-lg shadow-sm">
+					<ul className="wapper__card list-group rounded-3 shadow-sm">
 						<li className="list-group-item d-flex flex-wrap align-items-center">
-							<GrArticle className="mr-1" />
+							<GrArticle className="me-1" />
 							<span>{singleUser.data?.total_posts} Posts published</span>
 						</li>
 						<li className="list-group-item d-flex flex-wrap align-items-center">
-							<FaRegComment className="mr-1" />
+							<FaRegComment className="me-1" />
 							<span>{singleUser.data?.total_comments} comment written</span>
 						</li>
 						<li className="list-group-item d-flex flex-wrap align-items-center">
-							<FaRegHeart className="mr-1" />
+							<FaRegHeart className="me-1" />
 							<span>{singleUser.data?.total_favorited} Posts favorited</span>
 						</li>
 						<li className="list-group-item d-flex flex-wrap align-items-center">
-							<FaHashtag className="mr-1" />
+							<FaHashtag className="me-1" />
 							<span>{singleUser.data?.total_tags_followed} Tags followed</span>
 						</li>
 					</ul>

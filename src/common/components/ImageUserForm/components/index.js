@@ -11,7 +11,7 @@ const ImageUserFormComponent = ({ errors, error, touched, label, imageSrc, imagA
 				{label}
 			</label>
 			<div className="d-flex">
-				<div className="mr-2 d-flex align-items-center">
+				<div className="me-2 d-flex align-items-center">
 					<div className="">
 						<button type="button" className="btn btn-outline-secondary position-relative">
 							<input
