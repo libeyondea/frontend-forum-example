@@ -76,10 +76,11 @@ const CommentCard = ({
 							<div className="">
 								<OverlayTrigger
 									trigger="click"
-									key="options-comment"
+									key={`options-comment-${comment.slug}`}
 									placement="left"
+									rootClose
 									overlay={
-										<Popover id={`popover-positioned-options-comment`}>
+										<Popover id={`popover-positioned-options-comment-${comment.slug}`}>
 											<Popover.Header as="h3">Options</Popover.Header>
 											<Popover.Body className="p-0">
 												<CustomLink

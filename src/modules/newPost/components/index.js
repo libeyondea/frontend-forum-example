@@ -21,7 +21,7 @@ const NewPostComponent = () => {
 							<ul className="ms-auto nav nav-pills">
 								<li className="nav-item">
 									<button
-										className={`border-0  py-1 px-3 text-dark ${style.nav_link} ${!isPreview && style.active}`}
+										className={`border-0 py-1 px-3 text-dark ${style.nav_link} ${!isPreview ? style.active : ''}`}
 										onClick={() => setIsPreview(false)}
 									>
 										New
@@ -29,7 +29,7 @@ const NewPostComponent = () => {
 								</li>
 								<li className="nav-item">
 									<button
-										className={`border-0  py-1 px-3 text-dark ${style.nav_link} ${isPreview && style.active}`}
+										className={`border-0 py-1 px-3 text-dark ${style.nav_link} ${isPreview ? style.active : ''}`}
 										onClick={() => setIsPreview(true)}
 									>
 										Preview

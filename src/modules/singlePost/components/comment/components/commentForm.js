@@ -138,19 +138,19 @@ const CommentFormComponent = ({
 						{((!isChild && isOpenComment) || isChild) && (
 							<>
 								{isLoading ? (
-									<button type="submit" className="btn btn-primary me-2" disabled>
+									<button type="submit" className="btn btn-primary btn-sm me-2" disabled>
 										<span className="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" />
 										Submit
 									</button>
 								) : (
-									<button type="submit" className="btn btn-primary me-2">
+									<button type="submit" className="btn btn-primary btn-sm me-2">
 										Submit
 									</button>
 								)}
 								{isPreview ? (
 									<button
 										type="button"
-										className="btn btn-secondary me-2"
+										className="btn btn-secondary btn-sm me-2"
 										onClick={() => setIsPreview(false)}
 										disabled={isLoading ? true : false}
 									>
@@ -159,7 +159,7 @@ const CommentFormComponent = ({
 								) : (
 									<button
 										type="button"
-										className="btn btn-secondary me-2"
+										className="btn btn-secondary btn-sm me-2"
 										onClick={() => setIsPreview(true)}
 										disabled={isLoading ? true : false}
 									>
@@ -168,7 +168,7 @@ const CommentFormComponent = ({
 								)}
 								<button
 									type="button"
-									className="btn btn-light"
+									className="btn btn-light btn-sm"
 									onClick={
 										isChild
 											? onBoxReplyCommentClick

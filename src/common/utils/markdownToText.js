@@ -1,11 +1,21 @@
-import { convert } from 'html-to-text';
-import marked from 'marked';
+import remark from 'remark';
+import strip from 'strip-markdown';
 
-const markdownToText = (markdown, limit) => {
-	const tmp = convert(marked(markdown), {
-		selectors: [{ selector: 'h2', options: { uppercase: false } }]
-	}).replace(/(\r\n|\n|\r)/gm, '');
-	return tmp.length > 66 ? tmp.slice(0, limit) + '...' : tmp;
+import showToast from '@/common/utils/showToast';
+
+const markdownToText = (markdown, limit = 66) => {
+	let content = '';
+	remark()
+		.use(strip)
+		.process(markdown, function (err, file) {
+			if (err) {
+				showToast.error('Convert error');
+			}
+			content = String(file)
+				.trim()
+				.replace(/[\r\n]+/gm, ' ');
+		});
+	return content.length > limit ? content.slice(0, limit) + '...' : content;
 };
 
 export default markdownToText;

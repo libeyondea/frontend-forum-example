@@ -77,6 +77,7 @@ const PostFooterComponent = ({ favorited, totalFavorited, postSlug, postUserName
 				trigger="click"
 				key="options-single-post"
 				placement="left"
+				rootClose
 				overlay={
 					<Popover id={`popover-positioned-options-single-post`}>
 						<Popover.Header as="h3" className="text-center">

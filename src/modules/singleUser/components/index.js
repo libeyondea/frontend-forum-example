@@ -38,6 +38,7 @@ const SingleUserComponent = ({ singleUser, listPostUser }) => {
 										trigger="click"
 										key="options-single-user"
 										placement="left"
+										rootClose
 										overlay={
 											<Popover id={`popover-positioned-options-single-user`}>
 												<Popover.Header as="h3" className="text-center">
