@@ -150,7 +150,7 @@ const CommentFormComponent = ({
 								{isPreview ? (
 									<button
 										type="button"
-										className="btn btn-secondary"
+										className="btn btn-secondary me-2"
 										onClick={() => setIsPreview(false)}
 										disabled={isLoading ? true : false}
 									>
