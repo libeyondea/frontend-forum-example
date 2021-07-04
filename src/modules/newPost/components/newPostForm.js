@@ -109,7 +109,7 @@ const NewPostFormComponent = ({ isPreview }) => {
 
 	return (
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-			{({ setFieldValue, setFieldTouched, errors: error, touched, values }) => (
+			{({ setFieldValue, setFieldTouched, errors: error, touched, values, handleChange }) => (
 				<Form>
 					<div className="bg-light rounded-3 shadow-sm">
 						{!isPreview ? (
@@ -127,7 +127,7 @@ const NewPostFormComponent = ({ isPreview }) => {
 											error={error.image}
 											touched={touched.image}
 											imageSrc={loadImg}
-											imagAlt={`Default image`}
+											imagAlt={`Image`}
 											removeImage={() => onChangeRemoveImage(setFieldValue)}
 										/>
 									</div>
@@ -197,7 +197,7 @@ const NewPostFormComponent = ({ isPreview }) => {
 										))}
 									</div>
 									<div className="mt-5">
-										<ReactMarkdownComponent text={values.content} />
+										<ReactMarkdownComponent markdown={values.content} />
 									</div>
 								</div>
 							</article>

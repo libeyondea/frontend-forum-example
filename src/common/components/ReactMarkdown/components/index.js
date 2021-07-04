@@ -20,10 +20,10 @@ const components = {
 	}
 };
 
-const ReactMarkdownComponent = ({ text }) => {
+const ReactMarkdownComponent = ({ markdown }) => {
 	return (
 		<ReactMarkdown className="markdown-body" remarkPlugins={[gfm]} components={components}>
-			{text}
+			{markdown}
 		</ReactMarkdown>
 	);
 };

@@ -118,7 +118,7 @@ const CommentCard = ({
 								</OverlayTrigger>
 							</div>
 						</div>
-						<ReactMarkdownComponent text={comment.content} />
+						<ReactMarkdownComponent markdown={comment.content} />
 					</div>
 					<CommentMetaComponent
 						listCommentClient={listCommentClient}

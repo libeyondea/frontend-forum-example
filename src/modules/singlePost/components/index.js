@@ -36,7 +36,7 @@ const SinglePostComponent = ({ singlePost, listPostUser, listComment }) => {
 							<PostMetaComponent singlePost={singlePost} />
 							<PostActionComponent userName={singlePost.data.user?.user_name} postSlug={singlePost.data.slug} />
 							<div className="my-5">
-								<ReactMarkdownComponent text={singlePost.data?.content} />
+								<ReactMarkdownComponent markdown={singlePost.data?.content} />
 							</div>
 							<PostFooterComponent
 								favorited={singlePost.data.favorited}

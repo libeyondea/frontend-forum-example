@@ -198,7 +198,7 @@ const EditPostFormComponent = ({ editPost, isPreview }) => {
 										))}
 									</div>
 									<div className="mt-5">
-										<ReactMarkdownComponent text={values.content} />
+										<ReactMarkdownComponent markdown={values.content} />
 									</div>
 								</div>
 							</article>

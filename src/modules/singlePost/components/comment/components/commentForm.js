@@ -119,7 +119,7 @@ const CommentFormComponent = ({
 					<Form>
 						{isPreview ? (
 							<div className={`rounded-3 shadow-sm border bg-white p-2 p-sm-3 mb-3`}>
-								<ReactMarkdownComponent text={values.content} />
+								<ReactMarkdownComponent markdown={values.content} />
 							</div>
 						) : (
 							<div className="mb-3">
