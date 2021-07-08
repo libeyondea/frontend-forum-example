@@ -75,7 +75,7 @@ const TagListFormComponent = ({ errors, tags, setTag, ...props }) => {
 			<label htmlFor="tags" className="form-label">
 				Tags
 			</label>
-			<ul className="border rounded px-2 flex-wrap d-flex border mb-0">
+			<ul className="border rounded px-2 flex-wrap d-flex border mb-0 bg-white">
 				{tags.map(
 					(item, i) =>
 						item.slug && (
