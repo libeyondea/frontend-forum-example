@@ -3,7 +3,7 @@ import React from 'react';
 
 import EmptyBoxComponent from '@/common/components/EmptyBox/components';
 import Pagination from '@/common/components/Pagination/components';
-import SideBarLeftComponent from '@/modules/sidebarLeft/components';
+import SideBarLeftComponent from '@/modules/layout/components/sidebarLeft/components';
 import TagCardComponent from '@/modules/tagCard/components';
 
 const ListTag = ({ listTag }) => {

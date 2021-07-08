@@ -1,26 +1,30 @@
 import { isEmpty } from 'lodash';
 import React from 'react';
 
+import EmptyBoxComponent from '@/common/components/EmptyBox/components';
+import LoadingTag from '@/common/components/LoadingTag/components';
 import Pagination from '@/common/components/Pagination/components';
 import TagCardComponent from '@/modules/tagCard/components';
 
 const ListTagComponent = ({ listTag }) => {
 	return (
 		<>
-			{isEmpty(listTag.data) ? (
-				<div className="col-12">
-					<div className="text-center fw-bold">
-						<span>No results match</span>
-					</div>
-				</div>
+			{!listTag ? (
+				<LoadingTag classNameContainer="row-cols-lg-2" />
+			) : isEmpty(listTag.data) ? (
+				<EmptyBoxComponent text="No results match" />
 			) : (
-				listTag.data?.map((tag) => (
-					<div className="col-lg-6 mb-3" key={tag.id}>
-						<TagCardComponent tag={tag} />
+				<>
+					<div className="row row-cols-1 row-cols-lg-2 g-3 mb-3">
+						{listTag.data?.map((tag) => (
+							<div className="col" key={tag.id}>
+								<TagCardComponent tag={tag} />
+							</div>
+						))}
 					</div>
-				))
+					<Pagination total={listTag.meta.total} limit={process.env.LIMIT_PAGE.LIST_POST_HOME} />
+				</>
 			)}
-			<Pagination total={listTag.meta.total} limit={process.env.LIMIT_PAGE.LIST_POST_HOME} />
 		</>
 	);
 };

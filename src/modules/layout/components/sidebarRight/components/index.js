@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ListCategoryComponent from '@/modules/sidebarRight/components/listCategory/components';
-import ListTagComponent from '@/modules/sidebarRight/components/listTag/components';
+import ListCategoryComponent from '@/modules/layout/components/sidebarRight/components/listCategory/components';
+import ListTagComponent from '@/modules/layout/components/sidebarRight/components/listTag/components';
 
 const SideBarRightComponent = () => {
 	return (

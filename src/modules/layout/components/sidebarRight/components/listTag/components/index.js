@@ -1,9 +1,9 @@
+import { isEmpty } from 'lodash';
 import React from 'react';
 import useSWR from 'swr';
 
 import CustomLink from '@/common/components/CustomLink/components';
-import { isEmpty } from 'lodash';
-import style from '@/modules/sidebarRight/components/listTag/styles/style.module.scss';
+import style from '@/modules/layout/components/sidebarRight/components/listTag/styles/style.module.scss';
 
 const ListTagComponent = () => {
 	const { data: listTag } = useSWR(`/tags_with_posts?offset=0&limit=5`, {

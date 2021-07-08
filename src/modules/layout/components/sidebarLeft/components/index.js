@@ -3,7 +3,7 @@ import { FaEllipsisH } from 'react-icons/fa';
 
 import CustomLink from '@/common/components/CustomLink/components';
 import optionsMenu from '@/modules/layout/components/navbar/components/optionsMenu';
-import ListTagFollowedComponent from '@/modules/sidebarLeft/components/listTagFollowed/components';
+import ListTagFollowedComponent from '@/modules/layout/components/sidebarLeft/components/listTagFollowed/components';
 
 const SideBarLeftComponent = () => {
 	const [hiddenMenu, setHiddenMenu] = useState(true);

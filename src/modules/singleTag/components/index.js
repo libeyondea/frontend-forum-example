@@ -4,8 +4,8 @@ import React from 'react';
 import EmptyBox from '@/common/components/EmptyBox/components';
 import Pagination from '@/common/components/Pagination/components';
 import TabHorizontal from '@/common/components/TabHorizontal/components';
+import SideBarRightComponent from '@/modules/layout/components/sidebarRight/components';
 import PostCardComponent from '@/modules/postCard/components';
-import SideBarRightComponent from '@/modules/sidebarRight/components';
 import TagCardComponent from '@/modules/tagCard/components';
 
 const SingleTagComponent = ({ singleTag, listPostTag, pid }) => {

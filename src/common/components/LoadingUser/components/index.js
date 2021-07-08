@@ -2,11 +2,11 @@ import React from 'react';
 
 import style from '@/common/components/LoadingUser/styles/style.module.scss';
 
-const LoadingUser = ({ lengthArr = 10 }) => {
+const LoadingUser = ({ classNameContainer, lengthArr = 10 }) => {
 	let userSpinnerList = [];
 	const SpinnerUser = (i) => {
 		return (
-			<div className="col-lg-6 mb-3" key={i}>
+			<div className="col" key={i}>
 				<div className={`card ${style.loading_user_card}`}>
 					<div className="p-3">
 						<div className="d-flex align-items-center mb-2">
@@ -24,7 +24,7 @@ const LoadingUser = ({ lengthArr = 10 }) => {
 	for (let i = 0; i < lengthArr; i++) {
 		userSpinnerList.push(SpinnerUser(i));
 	}
-	return userSpinnerList;
+	return <div className={`row row-cols-1 g-3 mb-3 ${classNameContainer || ''}`}>{userSpinnerList}</div>;
 };
 
 export default LoadingUser;

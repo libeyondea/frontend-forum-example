@@ -1,9 +1,9 @@
+import { isEmpty } from 'lodash';
 import React, { memo } from 'react';
 import useSWR from 'swr';
 
 import CustomLink from '@/common/components/CustomLink/components';
-import { isEmpty } from 'lodash';
-import style from '@/modules/sidebarRight/components/listCategory/styles/style.module.scss';
+import style from '@/modules/layout/components/sidebarRight/components/listCategory/styles/style.module.scss';
 
 const ListCategoryComponent = () => {
 	const { data: listCategory } = useSWR(`/categories?offset=0&limit=${process.env.LIMIT_PAGE.LIST_CATEGORY}`, {

@@ -5,7 +5,7 @@ import EmptyBox from '@/common/components/EmptyBox/components';
 import Pagination from '@/common/components/Pagination/components';
 import TabHorizontal from '@/common/components/TabHorizontal/components';
 import PostCardComponent from '@/modules/postCard/components';
-import SideBarRightComponent from '@/modules/sidebarRight/components';
+import SideBarRightComponent from '@/modules/layout/components/sidebarRight/components';
 
 const SingleCategoryComponent = ({ singleCategory, listPostCategory, pid }) => {
 	return (

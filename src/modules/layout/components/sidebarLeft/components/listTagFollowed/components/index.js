@@ -4,7 +4,7 @@ import useSWR from 'swr';
 
 import CustomLink from '@/common/components/CustomLink/components';
 import useUser from '@/common/hooks/useUser';
-import style from '@/modules/sidebarLeft/components/listTagFollowed/styles/style.module.scss';
+import style from '@/modules/layout/components/sidebarLeft/components/listTagFollowed/styles/style.module.scss';
 
 const ListTagFollowedComponent = () => {
 	const { user } = useUser();

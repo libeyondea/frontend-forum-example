@@ -6,7 +6,7 @@ const LoadingPost = ({ lengthArr = 10 }) => {
 	let postSpinnerList = [];
 	const SpinnerPost = (i) => {
 		return (
-			<div className="col-12 mb-3" key={i}>
+			<div className="col" key={i}>
 				<div className={`card ${style.loading_post_card}`}>
 					<div className="p-3">
 						<div className="d-flex align-items-center mb-2">
@@ -25,7 +25,7 @@ const LoadingPost = ({ lengthArr = 10 }) => {
 	for (let i = 0; i < lengthArr; i++) {
 		postSpinnerList.push(SpinnerPost(i));
 	}
-	return postSpinnerList;
+	return <div className="row row-cols-1 g-3 mb-3">{postSpinnerList}</div>;
 };
 
 export default LoadingPost;

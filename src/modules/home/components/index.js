@@ -6,9 +6,9 @@ import EmptyBox from '@/common/components/EmptyBox/components';
 import Pagination from '@/common/components/Pagination/components';
 import TabHorizontal from '@/common/components/TabHorizontal/components';
 import Language from '@/modules/home/languages';
+import SideBarLeftComponent from '@/modules/layout/components/sidebarLeft/components';
+import SideBarRightComponent from '@/modules/layout/components/sidebarRight/components';
 import PostCardComponent from '@/modules/postCard/components';
-import SideBarLeftComponent from '@/modules/sidebarLeft/components';
-import SideBarRightComponent from '@/modules/sidebarRight/components';
 
 const HomeComponent = ({ listPostPinned, listPost, pid }) => {
 	const router = useRouter();

@@ -2,9 +2,8 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import useSWR from 'swr';
 
+import EmptyBoxComponent from '@/common/components/EmptyBox/components';
 import LoadingPost from '@/common/components/LoadingPost/components';
-import LoadingTag from '@/common/components/LoadingTag/components';
-import LoadingUser from '@/common/components/LoadingUser/components';
 import TabHorizontalComponent from '@/common/components/TabHorizontal/components';
 import TabVertical from '@/common/components/TabVertical/components';
 import useUser from '@/common/hooks/useUser';
@@ -85,26 +84,16 @@ const SearchComponent = () => {
 							/>
 						</div>
 					</div>
-					<div className="row">
-						{!error?.response?.data?.success && error?.response?.data?.error?.status === 422 ? (
-							<div className="col-12">
-								<div className="card text-center fw-bold">
-									<div className="p-5">Please enter a search keyword</div>
-								</div>
-							</div>
-						) : (
-							<>
-								{(type === 'post' || (type === 'my_post' && user)) && (
-									<>{!listSearch ? <LoadingPost /> : <ListPostComponent listPost={listSearch} />}</>
-								)}
-								{type === 'tag' && <>{!listSearch ? <LoadingTag /> : <ListTagComponent listTag={listSearch} />}</>}
-								{type === 'user' && <>{!listSearch ? <LoadingUser /> : <ListUserComponent listUser={listSearch} />}</>}
-								{type === 'comment' && (
-									<>{!listSearch ? <LoadingPost /> : <ListCommentComponent listComment={listSearch} />}</>
-								)}
-							</>
-						)}
-					</div>
+					{!error?.response?.data?.success && error?.response?.data?.error?.status === 422 ? (
+						<EmptyBoxComponent text="Please enter a search keyword" />
+					) : (
+						<>
+							{(type === 'post' || (type === 'my_post' && user)) && <ListPostComponent listPost={listSearch} />}
+							{type === 'tag' && <ListTagComponent listTag={listSearch} />}
+							{type === 'user' && <ListUserComponent listUser={listSearch} />}
+							{type === 'comment' && <ListCommentComponent listComment={listSearch} />}
+						</>
+					)}
 				</div>
 			</div>
 		</div>
