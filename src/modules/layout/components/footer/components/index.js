@@ -21,32 +21,32 @@ const FooterComponent = () => {
 						<h5 className="text-white">Features</h5>
 						<ul className="list-unstyled text-small mb-0">
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
+								<a className="text-secondary text-decoration-none" href="/">
 									Cool stuff
 								</a>
 							</li>
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
+								<a className="text-secondary text-decoration-none" href="/">
 									Random feature
 								</a>
 							</li>
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
+								<a className="text-secondary text-decoration-none" href="/">
 									Team feature
 								</a>
 							</li>
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
+								<a className="text-secondary text-decoration-none" href="/">
 									Stuff for developers
 								</a>
 							</li>
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
+								<a className="text-secondary text-decoration-none" href="/">
 									Another one
 								</a>
 							</li>
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
+								<a className="text-secondary text-decoration-none" href="/">
 									Last time
 								</a>
 							</li>
@@ -56,22 +56,22 @@ const FooterComponent = () => {
 						<h5 className="text-white">Resources</h5>
 						<ul className="list-unstyled text-small mb-0">
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
+								<a className="text-secondary text-decoration-none" href="/">
 									Resource
 								</a>
 							</li>
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
+								<a className="text-secondary text-decoration-none" href="/">
 									Resource name
 								</a>
 							</li>
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
+								<a className="text-secondary text-decoration-none" href="/">
 									Another resource
 								</a>
 							</li>
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
+								<a className="text-secondary text-decoration-none" href="/">
 									Final resource
 								</a>
 							</li>
@@ -81,22 +81,17 @@ const FooterComponent = () => {
 						<h5 className="text-white">About</h5>
 						<ul className="list-unstyled text-small mb-0">
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
-									Team
+								<a className="text-secondary text-decoration-none" href="/">
+									Contact
 								</a>
 							</li>
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
-									Locations
-								</a>
-							</li>
-							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
+								<a className="text-secondary text-decoration-none" href="/">
 									Privacy
 								</a>
 							</li>
 							<li>
-								<a className="text-secondary text-decoration-none" href="#!">
+								<a className="text-secondary text-decoration-none" href="/">
 									Terms
 								</a>
 							</li>
