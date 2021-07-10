@@ -212,6 +212,20 @@ const NavBarComponent = () => {
 									</Nav.Item>
 								</>
 							)}
+							{!user && (
+								<>
+									<Nav.Item>
+										<Link href="/register" passHref>
+											<Nav.Link>Register</Nav.Link>
+										</Link>
+									</Nav.Item>
+									<Nav.Item>
+										<Link href="/login" passHref>
+											<Nav.Link>Login</Nav.Link>
+										</Link>
+									</Nav.Item>
+								</>
+							)}
 						</Nav>
 					</Navbar.Collapse>
 				</div>
@@ -230,7 +244,7 @@ const NavBarComponent = () => {
 							className="form-control w-100"
 						/>
 					</form>
-					{user && (
+					{!user && (
 						<>
 							<div className="border-top my-3" />
 							<div className="d-grid gap-3">
