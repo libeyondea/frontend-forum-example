@@ -22,6 +22,15 @@ body {
 	padding-top: $height-navbar;
 }
 
+.dropdown-item {
+	&:hover,
+	&:focus,
+	&.active,
+	&:active {
+		border-radius: $border-radius-lg;
+	}
+}
+
 .outline-none {
 	outline: 2px solid transparent;
 	outline-offset: 2px;

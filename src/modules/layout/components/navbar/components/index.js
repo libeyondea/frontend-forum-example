@@ -6,21 +6,26 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavItem from 'react-bootstrap/NavItem';
 import NavLink from 'react-bootstrap/NavLink';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 import { FaRegBell } from 'react-icons/fa';
 
 import CustomImage from '@/common/components/CustomImage/components';
+import CustomLink from '@/common/components/CustomLink/components';
 import useUser from '@/common/hooks/useUser';
 import httpRequest from '@/common/utils/httpRequest';
 import { getCookie, removeCookie } from '@/common/utils/session';
 import showToast from '@/common/utils/showToast';
-import optionsMenu from '@/modules/layout/components/navbar/components/optionsMenu';
+import ListOptionsMenu from '@/modules/layout/components/navbar/components/listOptionsMenu';
 import style from '@/modules/layout/components/navbar/styles/style.module.scss';
 
 const NavBarComponent = () => {
 	const router = useRouter();
 	const { user } = useUser();
-
 	const [search, setSearch] = useState(router.query?.q || '');
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 
 	const onSearchSubmit = (e) => {
 		e.preventDefault();
@@ -136,97 +141,116 @@ const NavBarComponent = () => {
 		</Dropdown>
 	);
 
-	return (
-		<Navbar collapseOnSelect expand="md" bg="light" variant="light" fixed="top" className="shadow-sm">
-			<div className="container-xl">
-				<Link href="/" passHref>
-					<Navbar.Brand className="d-flex align-items-center me-md-3 me-auto">
-						<CustomImage
-							className="rounded-circle"
-							src={`${process.env.IMAGES_URL}/6666666666.jpg`}
-							width={44}
-							height={44}
-							alt="Logo"
-							layout="fixed"
-						/>
-						<div className="ms-2 d-none d-sm-block">De4thZone</div>
-					</Navbar.Brand>
+	const DropdownLocale = () => (
+		<Dropdown>
+			<Dropdown.Toggle as={NavLink} id="dropdown-locale" className="p-2 text-dark">
+				{router.locale === 'vi' ? 'Vietnamese' : 'English'}
+			</Dropdown.Toggle>
+			<Dropdown.Menu align="end" className="p-0 dropdown-menu-end shadow-sm">
+				<Link href={router.asPath} locale="en" passHref>
+					<Dropdown.Item>English</Dropdown.Item>
 				</Link>
-				{user && (
-					<div className="d-flex align-items-center order-md-2">
-						{DropdownMenuNoti('')}
-						{DropdownMenuUser('')}
-					</div>
-				)}
-				<Navbar.Toggle aria-controls="responsive-navbar-nav" className="" />
-				<Navbar.Collapse id="responsive-navbar-nav" className="order-md-1">
-					<Nav className="align-items-md-center">
-						<form className="form-inline py-md-0 py-2" onSubmit={onSearchSubmit}>
-							<input
-								placeholder="Search"
-								type="text"
-								value={search}
-								onChange={handleChangeSearch}
-								className="form-control w-100"
+				<Link href={router.asPath} locale="vi" passHref>
+					<Dropdown.Item>Vietnamese</Dropdown.Item>
+				</Link>
+			</Dropdown.Menu>
+		</Dropdown>
+	);
+
+	return (
+		<>
+			<Navbar collapseOnSelect expand="md" bg="light" variant="light" fixed="top" className="shadow-sm">
+				<div className="container-xl">
+					<Link href="/" passHref>
+						<Navbar.Brand className="d-flex align-items-center me-md-3 me-auto">
+							<CustomImage
+								className="rounded-circle"
+								src={`${process.env.IMAGES_URL}/6666666666.jpg`}
+								width={44}
+								height={44}
+								alt="Logo"
+								layout="fixed"
 							/>
-						</form>
-					</Nav>
-					<Nav className="align-items-md-center ms-auto">
-						<Dropdown as={NavItem}>
-							<Dropdown.Toggle as={NavLink} id="dropdown-locale" className="py-2">
-								{router.locale === 'vi' ? 'Vietnamese' : 'English'}
-							</Dropdown.Toggle>
-							<Dropdown.Menu align="end" className="p-0 dropdown-menu-end">
-								<Link href={router.asPath} locale="en" passHref>
-									<Dropdown.Item>English</Dropdown.Item>
-								</Link>
-								<Link href={router.asPath} locale="vi" passHref>
-									<Dropdown.Item>Vietnamese</Dropdown.Item>
-								</Link>
-							</Dropdown.Menu>
-						</Dropdown>
-						{user && (
-							<>
-								<Nav.Item className="d-none d-md-block px-2">
-									<Link href="/new" passHref>
-										<Nav.Link className="btn btn-primary text-white fw-bold">New Post</Nav.Link>
-									</Link>
-								</Nav.Item>
-							</>
-						)}
-						{!user && (
-							<>
-								<Nav.Item>
-									<Link href="/register" passHref>
-										<Nav.Link>Register</Nav.Link>
-									</Link>
-								</Nav.Item>
-								<Nav.Item>
-									<Link href="/login" passHref>
-										<Nav.Link>Login</Nav.Link>
-									</Link>
-								</Nav.Item>
-							</>
-						)}
-						<Dropdown as={NavItem} className="d-block d-md-none">
-							<Dropdown.Toggle as={NavLink} id="dropdown-options" className="py-2">
-								Options
-							</Dropdown.Toggle>
-							<Dropdown.Menu align="end" className="p-0 dropdown-menu-end">
-								{optionsMenu.map((m, index) => (
-									<Link href={m.href} key={index} passHref>
-										<Dropdown.Item className="d-flex align-items-center">
-											{m.icon}
-											{m.name}
-										</Dropdown.Item>
-									</Link>
-								))}
-							</Dropdown.Menu>
-						</Dropdown>
-					</Nav>
-				</Navbar.Collapse>
-			</div>
-		</Navbar>
+							<div className="ms-2 d-none d-sm-block">De4th Zone</div>
+						</Navbar.Brand>
+					</Link>
+					{user && (
+						<div className="d-flex align-items-center order-md-2">
+							{DropdownMenuNoti('')}
+							{DropdownMenuUser('')}
+						</div>
+					)}
+					<button
+						aria-controls="responsive-navbar-nav"
+						type="button"
+						aria-label="Toggle navigation"
+						className="navbar-toggler collapsed"
+						onClick={handleShow}
+					>
+						<span className="navbar-toggler-icon" />
+					</button>
+					<Navbar.Collapse id="responsive-navbar-nav" className="order-md-1">
+						<Nav className="align-items-md-center">
+							<form className="form-inline py-md-0 py-2" onSubmit={onSearchSubmit}>
+								<input
+									placeholder="Search"
+									type="text"
+									value={search}
+									onChange={handleChangeSearch}
+									className="form-control w-100"
+								/>
+							</form>
+						</Nav>
+						<Nav className="align-items-md-center ms-auto">
+							{DropdownLocale()}
+							{user && (
+								<>
+									<Nav.Item className="d-none d-md-block px-2">
+										<Link href="/new" passHref>
+											<Nav.Link className="btn btn-primary text-white fw-bold">New Post</Nav.Link>
+										</Link>
+									</Nav.Item>
+								</>
+							)}
+						</Nav>
+					</Navbar.Collapse>
+				</div>
+			</Navbar>
+			<Offcanvas show={show} onHide={handleClose} scroll backdrop>
+				<Offcanvas.Header closeButton className="border-bottom">
+					<Offcanvas.Title>De4th Zone</Offcanvas.Title>
+				</Offcanvas.Header>
+				<Offcanvas.Body className="d-flex flex-column">
+					<form className="form-inline mb-3" onSubmit={onSearchSubmit}>
+						<input
+							placeholder="Search"
+							type="text"
+							value={search}
+							onChange={handleChangeSearch}
+							className="form-control w-100"
+						/>
+					</form>
+					{user && (
+						<>
+							<div className="border-top my-3" />
+							<div className="d-grid gap-3">
+								<CustomLink href="/register" className="btn btn-primary">
+									Register
+								</CustomLink>
+								<CustomLink href="/login" className="text-decoration-none dropdown-item p-2 text-center">
+									Login
+								</CustomLink>
+							</div>
+							<div className="border-top my-3" />
+						</>
+					)}
+					<nav className="mb-auto">
+						<ListOptionsMenu />
+					</nav>
+					{DropdownLocale()}
+				</Offcanvas.Body>
+			</Offcanvas>
+		</>
 	);
 };
 
