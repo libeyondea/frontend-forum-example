@@ -3,3 +3,22 @@
 		display: none;
 	}
 }
+
+.offcanvas__custom {
+	max-width: 300px;
+	width: 80%;
+}
+
+.noti__dropdown__menu {
+	width: 266px;
+	max-height: 366px;
+	right: -114px !important;
+}
+
+@media (min-width: 576px) {
+	.noti__dropdown__menu {
+		width: 333px;
+		max-height: 366px;
+		right: 0 !important;
+	}
+}

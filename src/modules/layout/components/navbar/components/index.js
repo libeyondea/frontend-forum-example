@@ -70,7 +70,7 @@ const NavBarComponent = () => {
 					+99 <span className="visually-hidden">unread messages</span>
 				</span>
 			</Dropdown.Toggle>
-			<Dropdown.Menu align="end" className="p-0 dropdown-menu-end" style={{ width: '333px' }}>
+			<Dropdown.Menu align="end" className={`p-0 dropdown-menu-end overflow-auto ${style.noti__dropdown__menu}`}>
 				<Link href={`/`} passHref>
 					<Dropdown.Item className="p-3">
 						<div className="d-flex align-items-center">
@@ -143,7 +143,7 @@ const NavBarComponent = () => {
 
 	const DropdownLocale = () => (
 		<Dropdown>
-			<Dropdown.Toggle as={NavLink} id="dropdown-locale" className="p-2 text-dark">
+			<Dropdown.Toggle as={NavLink} id="dropdown-locale" className="p-2 text-muted">
 				{router.locale === 'vi' ? 'Vietnamese' : 'English'}
 			</Dropdown.Toggle>
 			<Dropdown.Menu align="end" className="p-0 dropdown-menu-end shadow-sm">
@@ -230,7 +230,7 @@ const NavBarComponent = () => {
 					</Navbar.Collapse>
 				</div>
 			</Navbar>
-			<Offcanvas show={show} onHide={handleClose} scroll backdrop>
+			<Offcanvas show={show} onHide={handleClose} scroll backdrop className={style.offcanvas__custom}>
 				<Offcanvas.Header closeButton className="border-bottom">
 					<Offcanvas.Title>De4th Zone</Offcanvas.Title>
 				</Offcanvas.Header>
