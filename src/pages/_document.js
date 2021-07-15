@@ -17,7 +17,7 @@ class MyDocument extends Document {
 					<meta name="google" content="notranslate" />
 					<meta name="mobile-web-app-capable" content="yes" />
 					<meta name="apple-mobile-web-app-capable" content="yes" />
-					<meta name="keywords" content="nextjs, react, redux-saga" />
+					<meta name="keywords" content="nextjs, reactjs, swr, redux" />
 					<meta name="theme-color" content="#000" />
 					<link rel="shortcut icon" href="/favicon.ico" />
 					<link rel="manifest" href="/manifest.json" />
