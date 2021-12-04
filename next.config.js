@@ -14,9 +14,9 @@ module.exports = (phase) => {
 		WEBSITE_URL: (() => {
 			if (isDev) return 'http://localhost:999';
 			if (isProd) {
-				return 'https://de4thzone.com';
+				return 'https://frontend-forum-example.vercel.app';
 			}
-			if (isStaging) return 'https://de4thzone.com';
+			if (isStaging) return 'https://frontend-forum-example.vercel.app';
 			return 'RESTURL_SPEAKERS:not (isDev,isProd && !isStaging,isProd && isStaging)';
 		})(),
 		API_URL: (() => {
@@ -26,9 +26,9 @@ module.exports = (phase) => {
 			return 'RESTURL_SESSIONS:not (isDev,isProd && !isStaging,isProd && isStaging)';
 		})(),
 		IMAGES_URL: (() => {
-			if (isDev) return 'https://elasticbeanstalk-ap-southeast-1-153036539674.s3-ap-southeast-1.amazonaws.com/images';
-			if (isProd) return 'https://de4thzone.s3-ap-southeast-1.amazonaws.com/images';
-			if (isStaging) return 'https://de4thzone.s3-ap-southeast-1.amazonaws.com/images';
+			if (isDev) return 'http://localhost:666/images';
+			if (isProd) return 'https://backend-forum-example.herokuapp.com/images';
+			if (isStaging) return 'https://backend-forum-example.herokuapp.com/images';
 			return 'RESTURL_SESSIONS:not (isDev,isProd && !isStaging,isProd && isStaging)';
 		})(),
 		LIMIT_PAGE: {
@@ -49,9 +49,9 @@ module.exports = (phase) => {
 			DEFAULT_IMAGE_AVATAR: 'default_avatar.png'
 		},
 		META: {
-			TITLE: 'De4th Zone',
+			TITLE: 'Libeyondea',
 			DESCRIPTION: 'A social network for software developers.',
-			TWITTER: '@de4th_zone',
+			TWITTER: '@libeyondea',
 			IMAGE: 'd4z-2000-666.jpg'
 		}
 	};
@@ -59,11 +59,7 @@ module.exports = (phase) => {
 		env,
 		reactStrictMode: true,
 		images: {
-			domains: [
-				'backend-forum-example.herokuapp.com',
-				'elasticbeanstalk-ap-southeast-1-153036539674.s3-ap-southeast-1.amazonaws.com',
-				'de4thzone.s3-ap-southeast-1.amazonaws.com'
-			]
+			domains: ['backend-forum-example.herokuapp.com']
 		},
 		i18n: {
 			locales: ['en', 'vi'],

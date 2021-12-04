@@ -282,7 +282,7 @@ const RegisterFormComponent = () => {
 								Have an account?
 							</CustomLink>
 						</p>
-						<p className="mt-3">or register with:</p>
+						{/* <p className="mt-3">or register with:</p>
 						<div>
 							<SocialButtonLogin
 								handleSocialLogin={handleSocialLogin}
@@ -296,7 +296,7 @@ const RegisterFormComponent = () => {
 								handleSocialLoginFailure={handleSocialLoginFailure}
 								provider="google"
 							/>
-						</div>
+						</div> */}
 					</div>
 				</Form>
 			)}

@@ -131,7 +131,7 @@ const LoginFormComponent = () => {
 							Need an account?
 						</CustomLink>
 					</p>
-					<p>or login in with:</p>
+					{/* <p>or login in with:</p>
 					<div>
 						<SocialButtonLogin
 							handleSocialLogin={handleSocialLogin}
@@ -145,7 +145,7 @@ const LoginFormComponent = () => {
 							handleSocialLoginFailure={handleSocialLoginFailure}
 							provider="google"
 						/>
-					</div>
+					</div> */}
 				</div>
 			</Form>
 		</Formik>
