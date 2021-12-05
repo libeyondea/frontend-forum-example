@@ -1,6 +1,6 @@
 {
-	"short_name": "D4Z",
-	"name": "De4th Zone",
+	"short_name": "Libeyondea Forum",
+	"name": "Libeyondea Forum",
 	"icons": [
 		{
 			"src": "favicon.ico",
@@ -8,12 +8,12 @@
 			"type": "image/x-icon"
 		},
 		{
-			"src": "images/logo192.jpg",
+			"src": "images/logo192.png",
 			"type": "image/jpg",
 			"sizes": "192x192"
 		},
 		{
-			"src": "images/logo512.jpg",
+			"src": "images/logo512.png",
 			"type": "image/jpg",
 			"sizes": "512x512"
 		}

@@ -49,10 +49,10 @@ module.exports = (phase) => {
 			DEFAULT_IMAGE_AVATAR: 'default_avatar.png'
 		},
 		META: {
-			TITLE: 'Libeyondea',
+			TITLE: 'Libeyondea Forum',
 			DESCRIPTION: 'A social network for software developers.',
 			TWITTER: '@libeyondea',
-			IMAGE: 'd4z-2000-666.jpg'
+			IMAGE: 'libeyondea-background-night.png'
 		}
 	};
 	return {
