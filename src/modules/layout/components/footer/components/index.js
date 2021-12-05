@@ -10,7 +10,7 @@ const FooterComponent = () => {
 					<div className="col-12 col-md-3 mb-4">
 						<CustomImage
 							className="rounded-circle"
-							src={`${process.env.IMAGES_URL}/6666666666.jpg`}
+							src={`/images/libeyondea.png`}
 							width={66}
 							height={66}
 							alt="Logo De4th Zone"

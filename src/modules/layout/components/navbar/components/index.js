@@ -165,7 +165,7 @@ const NavBarComponent = () => {
 						<Navbar.Brand className="d-flex align-items-center me-md-3 me-auto">
 							<CustomImage
 								className="rounded-circle"
-								src={`${process.env.IMAGES_URL}/6666666666.jpg`}
+								src={`/images/libeyondea.png`}
 								width={44}
 								height={44}
 								alt="Logo"
