@@ -97,10 +97,6 @@ npm install
 
 4. Run project
 
-Run frontend-forum-example.bat file
-
-or
-
 ```sh
 npm run dev
 ```
@@ -111,7 +107,7 @@ npm run dev
 
 ## Usage
 
-After successful installation, access the address http://localhost:999
+After successful installation, access the address http://localhost:3000
 
 _For more examples, please refer to the [Documentation](https://github.com/libeyondea/frontend-forum-example)_
 

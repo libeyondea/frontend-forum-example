@@ -12,7 +12,7 @@ module.exports = (phase) => {
 
 	const env = {
 		WEBSITE_URL: (() => {
-			if (isDev) return 'http://localhost:999';
+			if (isDev) return 'http://localhost:3000';
 			if (isProd) {
 				return 'https://frontend-forum-example.vercel.app';
 			}
@@ -20,13 +20,13 @@ module.exports = (phase) => {
 			return 'RESTURL_SPEAKERS:not (isDev,isProd && !isStaging,isProd && isStaging)';
 		})(),
 		API_URL: (() => {
-			if (isDev) return 'http://localhost:666/api';
+			if (isDev) return 'http://localhost:8000/api';
 			if (isProd) return 'https://backend-forum-example.herokuapp.com/api';
 			if (isStaging) return 'https://backend-forum-example.herokuapp.com/api';
 			return 'RESTURL_SESSIONS:not (isDev,isProd && !isStaging,isProd && isStaging)';
 		})(),
 		IMAGES_URL: (() => {
-			if (isDev) return 'http://localhost:666/images';
+			if (isDev) return 'http://localhost:8000/images-local';
 			if (isProd) return 'https://backend-forum-example.herokuapp.com/images';
 			if (isStaging) return 'https://backend-forum-example.herokuapp.com/images';
 			return 'RESTURL_SESSIONS:not (isDev,isProd && !isStaging,isProd && isStaging)';
@@ -59,7 +59,7 @@ module.exports = (phase) => {
 		env,
 		reactStrictMode: true,
 		images: {
-			domains: ['backend-forum-example.herokuapp.com']
+			domains: ['localhost', 'backend-forum-example.herokuapp.com']
 		},
 		i18n: {
 			locales: ['en', 'vi'],

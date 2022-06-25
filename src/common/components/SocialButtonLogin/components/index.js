@@ -125,8 +125,8 @@ const SocialButtonLoginComponent = ({ handleSocialLogin, handleSocialLoginFailur
 					onLoginSuccess={handleSocialLogin}
 					onLoginFailure={handleSocialLoginFailure}
 					className={`${style.github_login_button}`}
-					redirect="http://localhost:999"
-					gatekeeper="http://localhost:9999"
+					redirect="http://localhost:3000"
+					gatekeeper="http://localhost:3000"
 				>
 					<div className={`${style.body_social}`}>
 						<div className={`${style.icon_social}`}>
