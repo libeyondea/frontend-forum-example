@@ -22,7 +22,7 @@
 	<p align="center">
 		<a href="https://github.com/libeyondea/frontend-forum-example"><strong>Explore the docs »</strong></a>
 		<br />
-		<a href="https://de4thzone.com" target="_blank" rel="noopener noreferrer">View Demo</a>
+		<a href="https://frontend-forum-example.vercel.app" target="_blank" rel="noopener noreferrer">View Demo</a>
 		·
 		<a href="https://github.com/libeyondea/frontend-forum-example/issues">Report Bug</a>
 		·
@@ -131,11 +131,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Twitter - [@de4th_zone](https://twitter.com/de4th_zone)
+Twitter - [@libeyondea](https://twitter.com/libeyondea)
 
-Facebook - [Nguyễn Thức](https://www.facebook.com/d4z.d4z.d4z.d4z)
-
-Email - nguyenthucofficial@gmail.com
+Email - libeyondea@gmail.com
 
 Other Project: [https://github.com/libeyondea](https://github.com/libeyondea)
 
