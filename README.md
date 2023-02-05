@@ -15,9 +15,9 @@
 </p>
 <br />
 <p align="center">
-	<a href="https://github.com/libeyondea/frontend-forum-example">
+	<!-- <a href="https://github.com/libeyondea/frontend-forum-example">
 		<img src="https://i.imgur.com/6jxXR32.jpg" alt="De4thZone" width="166" height="166">
-	</a>
+	</a> -->
 	<h3 align="center">Frontend Forum Examples</h3>
 	<p align="center">
 		<a href="https://github.com/libeyondea/frontend-forum-example"><strong>Explore the docs »</strong></a>
