@@ -21,14 +21,14 @@ module.exports = (phase) => {
 		})(),
 		API_URL: (() => {
 			if (isDev) return 'http://localhost:8000/api';
-			if (isProd) return 'https://backend-forum-example.herokuapp.com/api';
-			if (isStaging) return 'https://backend-forum-example.herokuapp.com/api';
+			if (isProd) return 'https://backend-forum-example.onrender.com/api';
+			if (isStaging) return 'https://backend-forum-example.onrender.com/api';
 			return 'RESTURL_SESSIONS:not (isDev,isProd && !isStaging,isProd && isStaging)';
 		})(),
 		IMAGES_URL: (() => {
 			if (isDev) return 'http://localhost:8000/images-local';
-			if (isProd) return 'https://backend-forum-example.herokuapp.com/images';
-			if (isStaging) return 'https://backend-forum-example.herokuapp.com/images';
+			if (isProd) return 'https://backend-forum-example.onrender.com/images';
+			if (isStaging) return 'https://backend-forum-example.onrender.com/images';
 			return 'RESTURL_SESSIONS:not (isDev,isProd && !isStaging,isProd && isStaging)';
 		})(),
 		LIMIT_PAGE: {
@@ -59,7 +59,7 @@ module.exports = (phase) => {
 		env,
 		reactStrictMode: true,
 		images: {
-			domains: ['localhost', 'backend-forum-example.herokuapp.com']
+			domains: ['localhost', 'backend-forum-example.onrender.com']
 		},
 		i18n: {
 			locales: ['en', 'vi'],
