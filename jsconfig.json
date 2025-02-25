@@ -1,19 +1,11 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "@/common/*": [
-                "./src/common/*"
-            ],
-            "@/modules/*": [
-                "./src/modules/*"
-            ],
-            "@/styles/*": [
-                "./src/styles/*"
-            ],
-            "@/pages/*": [
-                "./src/pages/*"
-            ]
-        }
-    }
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/common/*": ["./src/common/*"],
+			"@/modules/*": ["./src/modules/*"],
+			"@/styles/*": ["./src/styles/*"],
+			"@/pages/*": ["./src/pages/*"]
+		}
+	}
 }
